@@ -147,6 +147,7 @@
   );
   //conference table//
   //site..
+  console.log('hello');
   var siteLoader = new THREE.JSONLoader();
   var siteMesh = null;
   var siteGeo = null;
