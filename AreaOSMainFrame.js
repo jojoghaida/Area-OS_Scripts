@@ -154,11 +154,11 @@
     'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/siteOutline.json',
    function ( geometry, materials ) {
      siteGeo = geometry;
-     var siteMaterial = new THREE.MeshBasicMaterial( { color: 0x0f0f0f , wireframe: false, transparent: true} );
+     var siteMaterial = new THREE.MeshBasicMaterial( { color: 0x000000 , wireframe: true, transparent: true} );
      siteMesh = new THREE.Mesh(geometry,siteMaterial);
      scene.add(siteMesh);
      renderer.render(scene,camera);
-     highlightEdges(siteGeo);
+     //highlightEdges(siteGeo);
    }
   );
   function highlightEdges(outlineThis){
