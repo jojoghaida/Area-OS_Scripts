@@ -1,7 +1,4 @@
-// <script src="https://rawgit.com/jojoghaida/Area-OS_Scripts/master/ExplodeModifier.js" type="text/javascript">//explode mesh</script>
-// <script src="https://rawgit.com/jojoghaida/Area-OS_Scripts/master/OrbitControls.js" type="text/javascript">//OrbitControls</script>
-// <script>
-// //SCENE AND CONTROLS////////////////////////////////////////////////////////////
+//SCENE AND CONTROLS////////////////////////////////////////////////////////////
   var camera, scene, controls, renderer;
   viewInit();
   orbitCam();
