@@ -170,7 +170,7 @@
     renderer.render(scene, camera);
   }
   //siteOutline
-  var siteOutlineLoader = new THREE.JSONLoader();
+  //var siteOutlineLoader = new THREE.JSONLoader();
   var siteOutlineMesh = null;
   var siteOutlineGeo = null;
   siteOutlineLoader.load(
