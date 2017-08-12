@@ -147,16 +147,14 @@
   );
   //conference table//
   //site..
-  alert('hello');
   var siteLoader = new THREE.JSONLoader();
   var siteMesh = null;
   var siteGeo = null;
   siteLoader.load(
     'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/siteOutline.json',
-  //  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/testSiteMeshGrid.json',
    function ( geometry, materials ) {
      siteGeo = geometry;
-     var siteMaterial = new THREE.MeshBasicMaterial( { color: 0xf2f2f2, wireframe: false, transparent: true} );
+     var siteMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: false, transparent: true} );
      siteMesh = new THREE.Mesh(geometry,siteMaterial);
      scene.add(siteMesh);
      renderer.render(scene,camera);
