@@ -147,15 +147,14 @@
   );
   //conference table//
   //site..
-  //var siteLoader = new THREE.JSONLoader();
+  var siteLoader = new THREE.JSONLoader();
   var siteMesh = null;
   var siteGeo = null;
   siteLoader.load(
     'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/siteOutline.json',
    function ( geometry, materials ) {
      siteGeo = geometry;
-     siteGeo.position.y = 1;
-     var siteMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: true, transparent: true} );
+     var siteMaterial = new THREE.MeshBasicMaterial( { color: 0xf2f2f2, wireframe: false, transparent: true} );
      siteMesh = new THREE.Mesh(geometry,siteMaterial);
      scene.add(siteMesh);
      renderer.render(scene,camera);
@@ -164,13 +163,13 @@
   );
   function highlightEdges(outlineThis){
     var eGeometry = new THREE.EdgesGeometry(outlineThis);
-    var eMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff, linewidth: 1 });
+    var eMaterial = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
     var edges = new THREE.LineSegments(eGeometry,eMaterial);
     scene.add(edges);
     renderer.render(scene, camera);
   }
   //siteOutline
-  //var siteOutlineLoader = new THREE.JSONLoader();
+  var siteOutlineLoader = new THREE.JSONLoader();
   var siteOutlineMesh = null;
   var siteOutlineGeo = null;
   siteOutlineLoader.load(
