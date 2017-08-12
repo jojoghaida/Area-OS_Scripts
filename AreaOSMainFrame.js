@@ -154,6 +154,7 @@
     'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/siteOutline.json',
    function ( geometry, materials ) {
      siteGeo = geometry;
+     siteGeo.position.y = 1;
      var siteMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: true, transparent: true} );
      siteMesh = new THREE.Mesh(geometry,siteMaterial);
      scene.add(siteMesh);
