@@ -146,7 +146,7 @@
     }
   );
   //conference table//
-  //site
+  //site..
   var siteLoader = new THREE.JSONLoader();
   var siteMesh = null;
   var siteGeo = null;
@@ -169,20 +169,42 @@
     scene.add(edges);
     renderer.render(scene, camera);
   }
+  //siteOutline
+  var siteOutlineLoader = new THREE.JSONLoader();
+  var siteOutlineMesh = null;
+  var siteOutlineGeo = null;
+  siteOutlineLoader.load(
+    'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/siteOutline.json',
+   function ( geometry, materials ) {
+     siteOutlineGeo = geometry;
+     var siteOutlineMaterial = new THREE.MeshBasicMaterial( { color: 0xf2f2f2, wireframe: false, transparent: true} );
+     siteOutlineMesh = new THREE.Mesh(geometry,siteOutlineMaterial);
+     scene.add(siteOutlineMesh);
+     renderer.render(scene,camera);
+     highlightEdges(siteOutlineGeo);
+   }
+  );
+  function highlightEdges(outlineThis){
+    var eGeometry = new THREE.EdgesGeometry(outlineThis);
+    var eMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff, linewidth: 1 });
+    var edges = new THREE.LineSegments(eGeometry,eMaterial);
+    scene.add(edges);
+    renderer.render(scene, camera);
+  }
   //explode site
-  function explodeSite(){
-    //alert(explodeThis);
-    var explodeModifier = new THREE.ExplodeModifier();
-//      explodeModifier.modify(siteMesh);
-    //explodeModifier.modify(siteGeo);
-    mat = new THREE.MeshBasicMaterial({color: 0x000000});
-    var testt = siteGeo.faces[9].clone()
-    var numFaces = new THREE.Mesh(testt,mat);
-    scene.add(numFaces);
-    renderer.render(scene,camera);
-    //clone
-    //alert(numFaces);
-  };
+//   function explodeSite(){
+//     //alert(explodeThis);
+//     var explodeModifier = new THREE.ExplodeModifier();
+// //      explodeModifier.modify(siteMesh);
+//     //explodeModifier.modify(siteGeo);
+//     mat = new THREE.MeshBasicMaterial({color: 0x000000});
+//     var testt = siteGeo.faces[9].clone()
+//     var numFaces = new THREE.Mesh(testt,mat);
+//     scene.add(numFaces);
+//     renderer.render(scene,camera);
+//     //clone
+//     //alert(numFaces);
+//   };
   //site//
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   function formSubmit(x,z){
