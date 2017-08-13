@@ -1,5 +1,5 @@
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
-  alert("new");
+  alert("newnew");
   var camera, scene, controls, renderer;
   viewInit();
   orbitCam();
