@@ -183,6 +183,48 @@ siteColumnsLoader.load(
    renderer.render(scene,camera);
  }
 );
+//siteWalls
+var siteWallsLoader = new THREE.JSONLoader();
+var siteWallsMesh = null;
+var siteWallsGeo = null;
+siteWallsLoader.load(
+  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/walls.json',
+ function ( geometry, materials ) {
+   siteWallsGeo = geometry;
+   var siteWallsMaterial = new THREE.MeshBasicMaterial( { color: 0xcecece, wireframe: false, transparent: true} );
+   siteWallsMesh = new THREE.Mesh(geometry,siteWallsMaterial);
+   scene.add(siteWallsMesh);
+   renderer.render(scene,camera);
+ }
+);
+//siteSection
+var siteSectionLoader = new THREE.JSONLoader();
+var siteSectionMesh = null;
+var siteSectionGeo = null;
+siteSectionLoader.load(
+  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/section.json',
+ function ( geometry, materials ) {
+   siteSectionGeo = geometry;
+   var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: false, transparent: true} );
+   siteSectionMesh = new THREE.Mesh(geometry,siteSectionMaterial);
+   scene.add(siteSectionMesh);
+   renderer.render(scene,camera);
+ }
+);
+//siteFacade
+var siteSectionLoader = new THREE.JSONLoader();
+var siteSectionMesh = null;
+var siteSectionGeo = null;
+siteSectionLoader.load(
+  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/facade.json',
+ function ( geometry, materials ) {
+   siteSectionGeo = geometry;
+   var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: false, transparent: true} );
+   siteSectionMesh = new THREE.Mesh(geometry,siteSectionMaterial);
+   scene.add(siteSectionMesh);
+   renderer.render(scene,camera);
+ }
+);
 //siteOutline
 var siteOutlineLoader = new THREE.JSONLoader();
 var siteOutlineMesh = null;
@@ -920,7 +962,7 @@ for (i = 0 ; i < shapeIndex.length; i++){
 }
 scene.add(groupShapes);
 groupShapes.rotation.x = -1.5708;
-groupShapes.translateZ(12);
+groupShapes.translateZ(.05);
 // groupShapes.children[0,1,5].translateY(150);
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
