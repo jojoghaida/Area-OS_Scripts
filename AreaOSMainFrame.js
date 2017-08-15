@@ -960,8 +960,8 @@ for (i = 0 ; i < shapeIndex.length; i++){
   var line = new THREE.Line(geometry, new THREE.LineBasicMaterial({color: "blue"}));
   groupShapes.add(line);
 }
-scene.add(groupShapes);
-groupShapes.rotation.x = -1.5708;
+// scene.add(groupShapes);
+// groupShapes.rotation.x = -1.5708;
 groupShapes.translateZ(.05);
 // groupShapes.children[0,1,5].translateY(150);
 
