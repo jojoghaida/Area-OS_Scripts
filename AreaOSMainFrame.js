@@ -233,10 +233,10 @@ siteOutlineLoader.load(
   'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/siteOutline.json',
  function ( geometry, materials ) {
    siteOutlineGeo = geometry;
-   var siteOutlineMaterial = new THREE.MeshBasicMaterial( { color: 0xf2f2f2, wireframe: false, transparent: true} );
-   siteOutlineMesh = new THREE.Mesh(geometry,siteOutlineMaterial);
-   scene.add(siteOutlineMesh);
-   renderer.render(scene,camera);
+  //  var siteOutlineMaterial = new THREE.MeshBasicMaterial( { color: 0xf2f2f2, wireframe: false, transparent: true} );
+  //  siteOutlineMesh = new THREE.Mesh(geometry,siteOutlineMaterial);
+  //  scene.add(siteOutlineMesh);
+  //  renderer.render(scene,camera);
    highlightEdges(siteOutlineGeo);
  }
 );
@@ -952,6 +952,8 @@ var shapeIndex = [linePoints0,linePoints1,linePoints2,linePoints3,linePoints4,li
 //.AOS CAD-file reader
 // var groupShapes = new THREE.Object3D();
 var groupShapes = new THREE.Group();
+var groupShapesGeo = []//new THREE.Group();
+
 for (i = 0 ; i < shapeIndex.length; i++){
   currentData = shapeIndex[i];
   var shape = new THREE.Shape(currentData);
@@ -959,14 +961,48 @@ for (i = 0 ; i < shapeIndex.length; i++){
   var geometry = shape.createPointsGeometry();
   var line = new THREE.Line(geometry, new THREE.LineBasicMaterial({color: "blue"}));
   groupShapes.add(line);
+
+  var planarSrf = new THREE.ShapeGeometry(shape);
+  planarSrf.rotateX(-1.5708)
+  // var planarMat = new THREE.MeshBasicMaterial( { color: 0xf2f2f2, wireframe: false, transparent: true } );
+  // var planarMesh = new THREE.Mesh(planarSrf,planarMat);
+  groupShapesGeo.push(planarSrf);
 }
 // scene.add(groupShapes);
-// groupShapes.rotation.x = -1.5708;
-groupShapes.translateZ(.05);
-// groupShapes.children[0,1,5].translateY(150);
+function leaseSpace(){
+  groupShapesGeo[1].merge(groupShapesGeo[2]);
+  groupShapesGeo[1].merge(groupShapesGeo[4]);
+  highlightEdges(groupShapesGeo[1]);
 
+  var planarMat = new THREE.MeshBasicMaterial( { color: 0x7ce7c9, wireframe: false, transparent: true } );
+  var planarMesh = new THREE.Mesh(groupShapesGeo[1],planarMat);
+  scene.add(planarMesh);
+}
+
+
+groupShapes.rotation.x = -1.5708;
+groupShapes.translateZ(.05);
+groupShapes.children[4].translateY(150);
+groupShapes.children[1].translateY(150);
+groupShapes.children[2].translateY(150);
+
+                                      //     .dispose ()
+                                      //     https://threejs.org/docs/#api/core/Geometry
+                                      // Removes The object from memory.
+                                      // Don't forget to call this method when you remove a geometry because it can cause memory leaks.
+                                      // #
+
+// var planarSrf = new THREE.ShapeGeometry(groupShapes.children[2]);
+// var planarMat = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: false, transparent: true } );
+// var finallyItWillMeshMaybe = new THREE.Mesh(planarSrf,planarMat);
+// finallyItWillMeshMaybe.translateY(15);
+// scene.add(finallyItWillMeshMaybe);
+
+// siteOutlineGeo = geometry;
+// var siteOutlineMaterial = new THREE.MeshBasicMaterial( { color: 0xf2f2f2, wireframe: false, transparent: true} );
+// siteOutlineMesh = new THREE.Mesh(geometry,siteOutlineMaterial);
+// scene.add(siteOutlineMesh);
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// var moveThis = scene.getObjectByName("line0");
 
 //site//
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -991,6 +1027,7 @@ function addDialog(x,z){
     document.getElementById("Q0Output").innerHTML = "In " + '<a onclick="revealQ(0)"><u>' + q0Place[z] + '</u></a>' + " I need ";
     stowAwayQ(x);
     animate(); // spin chairMesh
+    leaseSpace();
     //var numFaces = siteMesh.faces.length;
     //explodeSite();
   };
