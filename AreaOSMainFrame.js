@@ -969,13 +969,54 @@ for (i = 0 ; i < shapeIndex.length; i++){
   groupShapesGeo.push(planarSrf);
 }
 // scene.add(groupShapes);
-function leaseSpace(){
-  groupShapesGeo[1].merge(groupShapesGeo[2]);
-  groupShapesGeo[1].merge(groupShapesGeo[4]);
-  highlightEdges(groupShapesGeo[1]);
+var li = 0;
+function leaseIgnition(requestSQ){
+  var startMesh = groupShapesGeo[10];
+  leaseSpace(startMesh,requestSQ);
+}
+
+function leaseSpace(startMesh,requestSQ){
+
+
+  startMesh.merge(groupShapesGeo[li]);
+  li++
+
+  // startMesh.merge(groupShapesGeo[2]);
+  // startMesh.merge(groupShapesGeo[4]);//
+
+  // groupShapesGeo[1].merge(groupShapesGeo[5]);
+  // groupShapesGeo[1].merge(groupShapesGeo[6]);
+  // groupShapesGeo[1].merge(groupShapesGeo[7]);
+  // groupShapesGeo[1].merge(groupShapesGeo[10]);
+
+  function checkSQ(meshSQcheck){
+    var faceListSize = meshSQcheck.faces.length
+    var areaSQ = 0.00
+    for (i = 0; i < faceListSize; i++){
+    var va = meshSQcheck.vertices[meshSQcheck.faces[i].a];
+    var vb = meshSQcheck.vertices[meshSQcheck.faces[i].b];
+    var vc = meshSQcheck.vertices[meshSQcheck.faces[i].c];
+
+    var ab = vb.clone().sub(va);
+    var ac = vc.clone().sub(va);
+
+    var cross = new THREE.Vector3();
+    cross.crossVectors( ab, ac );
+
+    areaSQ += cross.length() / 2;
+    }
+    if(areaSQ<requestSQ){
+      leaseIgnition(requestSQ);
+    }else{
+      var li = 0;
+    }
+  }
+  checkSQ(startMesh);
+
+  highlightEdges(startMesh);
 
   var planarMat = new THREE.MeshBasicMaterial( { color: 0x7ce7c9, wireframe: false, transparent: true } );
-  var planarMesh = new THREE.Mesh(groupShapesGeo[1],planarMat);
+  var planarMesh = new THREE.Mesh(startMesh,planarMat);
   scene.add(planarMesh);
 }
 
@@ -1013,6 +1054,7 @@ function formSubmit(x,z){
   if (x == 1){
     var usqi = document.getElementById("inputSQFT").value;
     addDialog(x,usqi);
+    leaseIgnition(usqi);
   };
   if (x == 2){
     addDialog(x,z);
@@ -1027,7 +1069,6 @@ function addDialog(x,z){
     document.getElementById("Q0Output").innerHTML = "In " + '<a onclick="revealQ(0)"><u>' + q0Place[z] + '</u></a>' + " I need ";
     stowAwayQ(x);
     animate(); // spin chairMesh
-    leaseSpace();
     //var numFaces = siteMesh.faces.length;
     //explodeSite();
   };
