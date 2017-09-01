@@ -40,7 +40,10 @@
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
   function returnCamPlan(){
+    disableOrbitCam();
     camera.position.y = 250;
+    camera.position.x = 0;
+    camera.position.z = 0;
     camera.lookAt(new THREE.Vector3(0,0,0));
   }
   function orbitCam(){
@@ -56,6 +59,7 @@
   var topInput = document.getElementById('topInput');
   topInput.addEventListener('mousemove',disableOrbitCam);
   topInput.addEventListener('touchstart',disableOrbitCam);
+
   function disableOrbitCam(){
     controls.enabled = false
     function hideCamIcons(){
