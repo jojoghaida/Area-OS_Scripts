@@ -40,13 +40,11 @@
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
   function returnCamPlan(){
-    document.createEvent("mouseclick");
-    disableOrbitCam(); //keeps orbit click lock need to fix!
+    // disableOrbitCam(0); //keeps orbit click lock need to fix!
     camera.position.y = 250;
     camera.position.x = 0;
     camera.position.z = 0;
     camera.lookAt(new THREE.Vector3(0,0,0));
-    // enableOrbitCam(); //test
   }
   function zoom(value){
     if(value == 0){
@@ -62,6 +60,8 @@
     controls.maxPolarAngle = Math.PI/2;
     controls.addEventListener( 'change', render );
   }
+  var camControls = document.getElementsByClassName('cameraicons');
+  questionDialog.addEventListener('mousemove',disableOrbitCam(0));
   var questionDialog = document.getElementById('questionDialog');
   questionDialog.addEventListener('mousemove',disableOrbitCam);
   questionDialog.addEventListener('touchstart',disableOrbitCam);
@@ -69,7 +69,7 @@
   topInput.addEventListener('mousemove',disableOrbitCam);
   topInput.addEventListener('touchstart',disableOrbitCam);
 
-  function disableOrbitCam(){
+  function disableOrbitCam(controlsToggle){
     controls.enabled = false
     function hideCamIcons(){
       var camIcons = document.getElementsByClassName('icons');
@@ -86,7 +86,9 @@
       }
       setTimeout(offCamIcons, 1000);
     }
-    hideCamIcons();
+    if(controlsToggle != 0){
+      hideCamIcons();
+    }
   }
   function enableOrbitCam(){
     controls.enabled = true
