@@ -45,7 +45,7 @@
     camera.position.x = 0;
     camera.position.z = 0;
     camera.lookAt(new THREE.Vector3(0,0,0));
-    enableOrbitCam();
+    enableOrbitCam(); //test
   }
   function zoom(value){
     if(value == 0){
