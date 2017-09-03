@@ -60,10 +60,10 @@
     controls.maxPolarAngle = Math.PI/2;
     controls.addEventListener( 'change', render );
   }
-  
+
   //orbit activation/deactivation
   var camControls = document.getElementsByClassName('cameraicons');
-  camControls.addEventListener('mousemove',disableOrbitCam(0));
+  camControls.addEventListener('mousemove',disableOrbitCam);
   var questionDialog = document.getElementById('questionDialog');
   questionDialog.addEventListener('mousemove',disableOrbitCam);
   questionDialog.addEventListener('touchstart',disableOrbitCam);
