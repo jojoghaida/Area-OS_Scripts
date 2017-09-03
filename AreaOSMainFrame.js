@@ -60,14 +60,18 @@
     controls.maxPolarAngle = Math.PI/2;
     controls.addEventListener( 'change', render );
   }
+  
+  //orbit activation/deactivation
   var camControls = document.getElementsByClassName('cameraicons');
-  questionDialog.addEventListener('mousemove',disableOrbitCam(0));
+  camControls.addEventListener('mousemove',disableOrbitCam(0));
   var questionDialog = document.getElementById('questionDialog');
   questionDialog.addEventListener('mousemove',disableOrbitCam);
   questionDialog.addEventListener('touchstart',disableOrbitCam);
   var topInput = document.getElementById('topInput');
   topInput.addEventListener('mousemove',disableOrbitCam);
   topInput.addEventListener('touchstart',disableOrbitCam);
+  //orbit activation/deactivation
+
 
   function disableOrbitCam(controlsToggle){
     controls.enabled = false
