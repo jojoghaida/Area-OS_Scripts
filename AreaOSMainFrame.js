@@ -40,12 +40,12 @@
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
   function returnCamPlan(){
-    disableOrbitCam(); //keeps orbit click lock need to fix!
+    // disableOrbitCam(); //keeps orbit click lock need to fix!
     camera.position.y = 250;
     camera.position.x = 0;
     camera.position.z = 0;
     camera.lookAt(new THREE.Vector3(0,0,0));
-    enableOrbitCam(); //test
+    // enableOrbitCam(); //test
   }
   function zoom(value){
     if(value == 0){
