@@ -62,7 +62,7 @@
   }
 
   //orbit activation/deactivation
-  var camControls = document.getElementById('footer');
+  var camControls = document.getElementById('controlsviewportoverlay');
   camControls.addEventListener('mousemove',disableOrbitCam(0));
   var questionDialog = document.getElementById('questionDialog');
   questionDialog.addEventListener('mousemove',disableOrbitCam);
