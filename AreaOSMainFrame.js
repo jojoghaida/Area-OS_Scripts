@@ -74,6 +74,7 @@
 
 
   function disableOrbitCam(controlsToggle){
+    console.log("orbit cam diabled!");
     controls.enabled = false
     function hideCamIcons(){
       var camIcons = document.getElementsByClassName('cameraicons');
