@@ -62,8 +62,8 @@
   }
 
   //orbit activation/deactivation
-  // var camControls = document.getElementsByClassName('cameraicons');
-  // camControls.children.addEventListener('mousemove',disableOrbitCam(0));
+  var camControls = document.getElementById('footer');
+  camControls.addEventListener('mousemove',disableOrbitCam(0));
   var questionDialog = document.getElementById('questionDialog');
   questionDialog.addEventListener('mousemove',disableOrbitCam);
   questionDialog.addEventListener('touchstart',disableOrbitCam);
@@ -76,7 +76,7 @@
   function disableOrbitCam(controlsToggle){
     controls.enabled = false
     function hideCamIcons(){
-      var camIcons = document.getElementsByClassName('icons');
+      var camIcons = document.getElementsByClassName('cameraicons');
       for (i = 0; i < camIcons.length; i++){
         camIcons[i].style.transition = "opacity 2s";
         camIcons[i].style.opacity = 0;
@@ -98,7 +98,7 @@
     controls.enabled = true
     //document.getElementById('camautobutton').click();
     function showCamIcons(){
-      var camIcons = document.getElementsByClassName('icons');
+      var camIcons = document.getElementsByClassName('cameraicons');
       for (i = 0; i < camIcons.length; i++){
         camIcons[i].style.visibility = 'visible';
       }
