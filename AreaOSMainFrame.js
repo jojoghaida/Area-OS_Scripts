@@ -45,6 +45,7 @@ function returnCamPlan(){
   camera.position.x = 0;
   camera.position.z = 0;
   camera.lookAt(new THREE.Vector3(0,0,0));
+  disableOrbitCam();
 }
 function zoom(value){
   camPosition = camera.position;
