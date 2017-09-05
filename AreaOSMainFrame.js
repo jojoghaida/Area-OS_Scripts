@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
             // http://stackoverflow.com/questions/846221/logarithmic-slider
             var freq = Math.exp(minFreqLog + (forceToFreqScale * force));
             osc.frequency.value = freq;
-            freqEl.innerHTML = freq.toFixed(1);
+            // freqEl.innerHTML = freq.toFixed(1);
 
             // warm yellow to red
             btnEl.style.backgroundColor = '#' + Math.floor(0xffcc00 - ((force * 0xcc) << 8)).toString(16);
