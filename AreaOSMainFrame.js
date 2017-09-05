@@ -47,17 +47,7 @@ camera.position.z = 0;
 camera.lookAt(new THREE.Vector3(0,0,0));
 disableOrbitCam();
 }
-function zoom(value,amplitude){
-camPosition = camera.position;
-camDirection = camera.getWorldDirection();
-newPosition = new THREE.Vector3();
-console.log(camPosition);
-if(value != 0){
-  amplitude*-1;
-}
-newPosition.addVectors(camPosition,camDirection.multiplyScalar(amplitude));
-camera.position.copy(newPosition);
-}
+
 function orbitCam(){
 controls = new THREE.OrbitControls( camera,renderer.domElement );
 controls.enableZoom = true;
@@ -248,51 +238,59 @@ renderer.render(scene, camera);
 //
 // });
 
-var zoomSpeedVariable = 3;
-var zoomFactor = 0;
 
 zoomInButton = function(){
-// var pressureButton = document.getElementsByClassName('controls__btn');
-var pressureButton = document.getElementById('zoomInButton');
+  var zoomSpeedVariable = 3;
+  var zoomFactor = 0;
 
-Pressure.set(pressureButton, {
-  start: function(event){
-    // this is called on force start
-    // pressureButton[0].style.background = "red";
-    pressureButton.style.background = "red";
-    zoom(0,zoomFactor);
-    // pressureButton[0].style.background = "red";
-  },
-  end: function(){
-    // this is called on force end
-    // pressureButton[0].style.background = "blue";
-    pressureButton.style.background = "blue";
-    // pressureButton[0].style.color = "red";
-  },
-  startDeepPress: function(event){
-    // this is called on "force click" / "deep press", aka once the force is greater than 0.5
-    console.log("forceStart!")
-    zoom(0,zoomFactor);
-
-  },
-  endDeepPress: function(){
-    // this is called when the "force click" / "deep press" end
-    console.log("forceEnd!")
-  },
-  change: function(force, event){
-    // this is called every time there is a change in pressure
-    // force will always be a value from 0 to 1 on mobile and desktop
-    console.log(force);
-    zoomFactor = force*zoomSpeedVariable
-    zoom(0,zoomFactor);
-
-  },
-  unsupported: function(){
-    // NOTE: this is only called if the polyfill option is disabled!
-    // this is called once there is a touch on the element and the device or browser does not support Force or 3D touch
+  function zoom(value,amplitude){
+  camPosition = camera.position;
+  camDirection = camera.getWorldDirection();
+  newPosition = new THREE.Vector3();
+  console.log(camPosition);
+  if(value != 0){
+    amplitude*-1;
   }
-});
-}
+  newPosition.addVectors(camPosition,camDirection.multiplyScalar(amplitude));
+  camera.position.copy(newPosition);
+  }
+  var pressureButton = document.getElementById('zoomInButton');
+
+  Pressure.set(pressureButton, {
+    start: function(event){
+      // this is called on force start
+      pressureButton.style.background = "red";
+      zoom(0,zoomFactor);
+    },
+    end: function(){
+      // this is called on force end
+      pressureButton.style.background = "blue";
+    },
+    startDeepPress: function(event){
+      // this is called on "force click" / "deep press", aka once the force is greater than 0.5
+      console.log("forceStart!")
+      // setInterval(100,console.log(hi));
+      zoom(0,zoomFactor);
+
+    },
+    endDeepPress: function(){
+      // this is called when the "force click" / "deep press" end
+      console.log("forceEnd!")
+    },
+    change: function(force, event){
+      // this is called every time there is a change in pressure
+      // force will always be a value from 0 to 1 on mobile and desktop
+      console.log(force);
+      zoomFactor = force*zoomSpeedVariable
+      zoom(0,zoomFactor);
+
+    },
+    unsupported: function(){
+      // NOTE: this is only called if the polyfill option is disabled!
+      // this is called once there is a touch on the element and the device or browser does not support Force or 3D touch
+    }
+  });
+  }
 zoomInButton();
 
 //PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
