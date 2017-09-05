@@ -132,6 +132,62 @@ function swingCamAxon(){
   renderer.render(scene, camera);
 }
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
+
+//PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
+setup = function() {
+    // rootEl = document.getElementsByClassName('controls')[0];
+    btnEl = rootEl.getElementsByClassName('controls__btn')[0];
+    // freqEl = rootEl.getElementsByClassName('controls__freq-amount')[0];
+
+    Pressure.set(btnEl, {
+        change: onPressureChange,
+        start: onPressureStart,
+        end: onPressureEnd
+    });
+
+    gain = aCtx.createGain();
+    gain.gain.value = 0;
+    gain.connect(aCtx.destination);
+
+    osc = aCtx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = 440;
+    osc.connect(gain);
+    osc.start();
+},
+
+/**
+ * Pressure change handler.
+ * @param {Number} force Pressure between 0 and 1.
+ * @param {Object} e Touch event.
+ */
+onPressureChange = function(force, e) {
+    // convert linear pressure to logarithmic frequency scale
+    // http://stackoverflow.com/questions/846221/logarithmic-slider
+    var freq = Math.exp(minFreqLog + (forceToFreqScale * force));
+    osc.frequency.value = freq;
+    freqEl.innerHTML = freq.toFixed(1);
+
+    // warm yellow to red
+    btnEl.style.backgroundColor = '#' + Math.floor(0xffcc00 - ((force * 0xcc) << 8)).toString(16);
+
+    var size = 160 + (force * 100);
+    btnEl.style.height = btnEl.style.width = size + 'px';
+    btnEl.style.borderRadius = size / 2 + 'px';
+},
+
+onPressureStart = function(e) {
+    gain.gain.value = 1;
+},
+
+onPressureEnd = function(e) {
+    gain.gain.value = 0;
+};
+
+init();
+
+});
+//PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
 //MESH LIBRARY//////////////////////////////////////////////////////////////
 //swingCamAxon();
 //stage camera//
