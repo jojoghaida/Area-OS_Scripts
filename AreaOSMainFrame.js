@@ -260,11 +260,12 @@ zoomInButton = function(){
     start: function(event){
       // this is called on force start
       pressureButton.style.background = "red";
-      setInterval(function(){zoom(0,zoomFactor);},100);
+      var zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},100);
     },
     end: function(){
       // this is called on force end
       pressureButton.style.background = "blue";
+      clearInterval(zoomingInterval);
     },
     startDeepPress: function(event){
       // this is called on "force click" / "deep press", aka once the force is greater than 0.5
