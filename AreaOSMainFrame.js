@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
          */
         setup = function() {
             // rootEl = document.getElementsByClassName('controls')[0];
-            btnEl = rootEl.getElementsByClassName('controls__btn')[0];
+            btnEl = document.getElementsByClassName('controls__btn')[0];
             // freqEl = rootEl.getElementsByClassName('controls__freq-amount')[0];
 
             Pressure.set(btnEl, {
