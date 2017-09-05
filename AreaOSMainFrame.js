@@ -178,6 +178,7 @@ onPressureChange = function(force, e) {
 
 onPressureStart = function(e) {
     gain.gain.value = 1;
+    alert();
 },
 
 onPressureEnd = function(e) {
