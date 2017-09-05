@@ -131,8 +131,8 @@ function swingCamAxon(){
   camera.rotation.z += 1.01;
   renderer.render(scene, camera);
 }
-
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
+//MESH LIBRARY//////////////////////////////////////////////////////////////
 //swingCamAxon();
 //stage camera//
 //chair & chair functions
@@ -991,8 +991,12 @@ for (i = 0 ; i < shapeIndex.length; i++){
 }//end gridcell loop generation
 scene.add(groupShapes);
 groupShapes.rotateOnAxis(new THREE.Vector3(1,0,0),- Math.PI / 2);
+//MESH LIBRARY//////////////////////////////////////////////////////////////
 
 
+
+
+//RHIZOME POPULATER//////////////////////////////////////////////////////////////
 // Raycaster
 function mouseCasting(){
   mouseRay = new THREE.Raycaster();
@@ -1043,6 +1047,7 @@ mouseCasting();
 // movingRay();
 
 // SQstuff
+
 function leaseIgnition(areaRequest){
 }
 var occupy = true;
@@ -1068,7 +1073,22 @@ function checkSQ(meshToCheckSQ,requestedSQ){
   }
 }
 
-// FORMS
+function draw2ptCurve(vec1,vec2,_group){
+  geometry = new THREE.Geometry();
+  linestyle = new THREE.LineBasicMaterial({color: "red"});
+  geometry.vertices.push(vec1,vec2);
+  lineObject = new THREE.Line(geometry,linestyle);
+  scene.add(lineObject);
+  if(_group){
+    _group.add();
+  }
+}
+//test
+draw2ptCurve(new THREE.Vector3(0,0,0),new THREE.Vector3(0,0,10));
+//test!
+//RHIZOME POPULATER//////////////////////////////////////////////////////////////
+
+//FORMS//////////////////////////////////////////////////////////////
 function formSubmit(x,z){
   if (x == 0){
     addDialog(x,z);
@@ -1126,3 +1146,4 @@ var hideKeyboard = function() {
   document.activeElement.blur();
   $("input").blur();
 };
+//FORMS//////////////////////////////////////////////////////////////
