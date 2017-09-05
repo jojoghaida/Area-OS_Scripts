@@ -260,6 +260,7 @@ Pressure.set(pressureButton, {
     // this is called on force start
     // pressureButton[0].style.background = "red";
     pressureButton.style.background = "red";
+    zoom(0,zoomFactor);
     // pressureButton[0].style.background = "red";
   },
   end: function(){
