@@ -5,68 +5,65 @@ orbitCam();
 viewAnim();
 function viewInit(){
 
-  viewport = document.getElementById('areaoscanvas');
-  h = viewport.offsetHeight;
-  w = viewport.offsetWidth;
+viewport = document.getElementById('areaoscanvas');
+h = viewport.offsetHeight;
+w = viewport.offsetWidth;
 
-  scene = new THREE.Scene();
-  scene.background = new THREE.Color( 0xffffff );
+scene = new THREE.Scene();
+scene.background = new THREE.Color( 0xffffff );
 
-  camera = new THREE.PerspectiveCamera( 55, w/h, 0.1, 10000 );
-  //camera = new THREE.OrthographicCamera( w/2,w/-2,h/-2,h/2,1,500 );
-  renderer = new THREE.WebGLRenderer({antialias:true});
-  viewport.addEventListener('mousemove',enableOrbitCam);
-  viewport.addEventListener('touchstart',enableOrbitCam);
-  renderer.setSize(w, h);
-  renderer.setPixelRatio( window.devicePixelRatio );
-  viewport.appendChild(renderer.domElement);
-  camera.position.y = 250;
-  camera.lookAt(new THREE.Vector3(0,0,0));
-  window.addEventListener( 'resize', onWindowResize, false );
+camera = new THREE.PerspectiveCamera( 55, w/h, 0.1, 10000 );
+//camera = new THREE.OrthographicCamera( w/2,w/-2,h/-2,h/2,1,500 );
+renderer = new THREE.WebGLRenderer({antialias:true});
+viewport.addEventListener('mousemove',enableOrbitCam);
+viewport.addEventListener('touchstart',enableOrbitCam);
+renderer.setSize(w, h);
+renderer.setPixelRatio( window.devicePixelRatio );
+viewport.appendChild(renderer.domElement);
+camera.position.y = 250;
+camera.lookAt(new THREE.Vector3(0,0,0));
+window.addEventListener( 'resize', onWindowResize, false );
 }
 function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize( window.innerWidth, window.innerHeight );
-  render();
+camera.aspect = window.innerWidth / window.innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize( window.innerWidth, window.innerHeight );
+render();
 }
 function render(){
-  renderer.render(scene,camera);
+renderer.render(scene,camera);
 }
 function viewAnim(){
-  requestAnimationFrame(viewAnim);
-  controls.update();
+requestAnimationFrame(viewAnim);
+controls.update();
 }
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
 function returnCamPlan(){
-  // disableOrbitCam(0); //keeps orbit click lock need to fix!
-  camera.position.y = 250;
-  camera.position.x = 0;
-  camera.position.z = 0;
-  camera.lookAt(new THREE.Vector3(0,0,0));
-  disableOrbitCam();
+// disableOrbitCam(0); //keeps orbit click lock need to fix!
+camera.position.y = 250;
+camera.position.x = 0;
+camera.position.z = 0;
+camera.lookAt(new THREE.Vector3(0,0,0));
+disableOrbitCam();
 }
-function zoom(value){
-  camPosition = camera.position;
-  camDirection = camera.getWorldDirection();
-  newPosition = new THREE.Vector3();
-  console.log(camPosition);
-  if(value == 0){
-    movementSpeed = 50;
-  }else{
-    movementSpeed = -50;
-  }
-  newPosition.addVectors(camPosition,camDirection.multiplyScalar(movementSpeed));
-  camera.position.copy(newPosition);
-
+function zoom(value,amplitude){
+camPosition = camera.position;
+camDirection = camera.getWorldDirection();
+newPosition = new THREE.Vector3();
+console.log(camPosition);
+if(value != 0){
+  amplitude*-1;
+}
+newPosition.addVectors(camPosition,camDirection.multiplyScalar(amplitude));
+camera.position.copy(newPosition);
 }
 function orbitCam(){
-  controls = new THREE.OrbitControls( camera,renderer.domElement );
-  controls.enableZoom = true;
-  controls.enableKeys = false;
-  controls.maxPolarAngle = Math.PI/2;
-  controls.addEventListener( 'change', render );
+controls = new THREE.OrbitControls( camera,renderer.domElement );
+controls.enableZoom = true;
+controls.enableKeys = false;
+controls.maxPolarAngle = Math.PI/2;
+controls.addEventListener( 'change', render );
 }
 
 //orbit activation/deactivation
@@ -83,173 +80,216 @@ topInput.addEventListener('touchstart',disableOrbitCam);
 //orbit activation/deactivation
 
 function lockOrbitMaintainControls(){
-  disableOrbitCam(0);
+disableOrbitCam(0);
 }
 function disableOrbitCam(controlsToggle){
-  controls.enabled = false
-  function hideCamIcons(){
-    var camIcons = document.getElementsByClassName('cameraicons');
+controls.enabled = false
+function hideCamIcons(){
+  var camIcons = document.getElementsByClassName('cameraicons');
+  for (i = 0; i < camIcons.length; i++){
+    camIcons[i].style.transition = "opacity 2s";
+    camIcons[i].style.opacity = 0;
+  }
+  function offCamIcons(){
     for (i = 0; i < camIcons.length; i++){
-      camIcons[i].style.transition = "opacity 2s";
-      camIcons[i].style.opacity = 0;
-    }
-    function offCamIcons(){
-      for (i = 0; i < camIcons.length; i++){
-        if (camIcons[i].style.opacity == 0){
-          camIcons[i].style.visibility = 'hidden';
-          camControls.style.visibility = 'hidden';
-        }
+      if (camIcons[i].style.opacity == 0){
+        camIcons[i].style.visibility = 'hidden';
+        camControls.style.visibility = 'hidden';
       }
     }
-    setTimeout(offCamIcons, 1000);
   }
-  if(controlsToggle != 0){
-    hideCamIcons();
-  }
+  setTimeout(offCamIcons, 1000);
+}
+if(controlsToggle != 0){
+  hideCamIcons();
+}
 }
 function enableOrbitCam(){
-  controls.enabled = true
-  //document.getElementById('camautobutton').click();
-  function showCamIcons(){
-    var camIcons = document.getElementsByClassName('cameraicons');
-    for (i = 0; i < camIcons.length; i++){
-      camIcons[i].style.visibility = 'visible';
-      camControls.style.visibility = 'visible';
-    }
-    for (i = 0; i < camIcons.length; i++){
-      camIcons[i].style.transition = "opacity 2s";
-      camIcons[i].style.opacity = 1;
-    }
+controls.enabled = true
+//document.getElementById('camautobutton').click();
+function showCamIcons(){
+  var camIcons = document.getElementsByClassName('cameraicons');
+  for (i = 0; i < camIcons.length; i++){
+    camIcons[i].style.visibility = 'visible';
+    camControls.style.visibility = 'visible';
   }
-  showCamIcons();
+  for (i = 0; i < camIcons.length; i++){
+    camIcons[i].style.transition = "opacity 2s";
+    camIcons[i].style.opacity = 1;
+  }
+}
+showCamIcons();
 }
 window.onload = disableOrbitCam;
 //stage camera
 function swingCamAxon(){
-  requestAnimationFrame(swingCamAxon);
-  camera.rotation.x += 1.01;
-  camera.rotation.z += 1.01;
-  renderer.render(scene, camera);
+requestAnimationFrame(swingCamAxon);
+camera.rotation.x += 1.01;
+camera.rotation.z += 1.01;
+renderer.render(scene, camera);
 }
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
 
 //PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
-document.addEventListener('DOMContentLoaded', function(e) {
+// document.addEventListener('DOMContentLoaded', function(e) {
+//
+//     var rootEl,
+//         btnEl,
+//         freqEl,
+//         aCtx,
+//         osc,
+//         gain,
+//         minFreqLog = Math.log(50),
+//         maxFreqLog = Math.log(10000),
+//         forceToFreqScale = maxFreqLog - minFreqLog,
+//
+//         init2 = function() {
+//             window.AudioContext = window.AudioContext || window.webkitAudioContext;
+//             aCtx = new AudioContext();
+//
+//             // show click overlay on iOS devices
+//             if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+//                 var el = document.getElementById('overlay--startup');
+//                 el.addEventListener('touchend', function() {
+//                     unlockIOSAudio(this);
+//                 });
+//                 el.style.display = 'block';
+//             } else {
+//                 setup();
+//             }
+//         },
+//
+//         /**
+//          * On iOS devices the audio stream can only be activated by a user generated event.
+//          * So for iOS an overlay is shown for the user to click.
+//          * @see https://paulbakaus.com/tutorials/html5/web-audio-on-ios/
+//          */
+//         unlockIOSAudio = function(overlay) {
+//             // event listener did its job
+//             overlay.removeEventListener('touchend', unlockIOSAudio);
+//
+//             // create an empty buffer
+//             var buffer = aCtx.createBuffer(1, 1, 22050);
+//             var source = aCtx.createBufferSource();
+//             source.buffer = buffer;
+//             source.connect(aCtx.destination);
+//
+//             // play the empty buffer
+//             if (typeof source.start === 'undefined') {
+//                 source.noteOn(0);
+//             } else {
+//                 source.start(0);
+//             }
+//
+//             // setup a timeout to check that we are unlocked on the next event loop
+//             var interval = setInterval(function() {
+//                 if (aCtx.currentTime > 0) {
+//                     clearInterval(interval);
+//                     overlay.parentNode.removeChild(overlay);
+//                     setup();
+//                 }
+//             }, 100);
+//         },
+//
+//         /**
+//          * AudioContext runs, set up the app.
+//          */
+//         setup = function() {
+//             // rootEl = document.getElementsByClassName('controls')[0];
+//             btnEl = document.getElementsByClassName('controls__btn')[0];
+//             // freqEl = rootEl.getElementsByClassName('controls__freq-amount')[0];
+//
+//             Pressure.set(btnEl, {
+//                 change: onPressureChange,
+//                 start: onPressureStart,
+//                 end: onPressureEnd
+//             });
+//
+//             gain = aCtx.createGain();
+//             gain.gain.value = 0;
+//             gain.connect(aCtx.destination);
+//
+//             osc = aCtx.createOscillator();
+//             osc.type = 'sine';
+//             osc.frequency.value = 440;
+//             osc.connect(gain);
+//             osc.start();
+//         },
+//
+//         /**
+//          * Pressure change handler.
+//          * @param {Number} force Pressure between 0 and 1.
+//          * @param {Object} e Touch event.
+//          */
+//         onPressureChange = function(force, e) {
+//             // convert linear pressure to logarithmic frequency scale
+//             // http://stackoverflow.com/questions/846221/logarithmic-slider
+//             var freq = Math.exp(minFreqLog + (forceToFreqScale * force));
+//             osc.frequency.value = freq;
+//             // freqEl.innerHTML = freq.toFixed(1);
+//
+//             // warm yellow to red
+//             btnEl.style.backgroundColor = '#' + Math.floor(0xffcc00 - ((force * 0xcc) << 8)).toString(16);
+//
+//             var size = 160 + (force * 100);
+//             btnEl.style.height = btnEl.style.width = size + 'px';
+//             btnEl.style.borderRadius = size / 2 + 'px';
+//         },
+//
+//         onPressureStart = function(e) {
+//             gain.gain.value = 1;
+//         },
+//
+//         onPressureEnd = function(e) {
+//             gain.gain.value = 0;
+//         };
+//
+//     init2();
+//
+// });
 
-    var rootEl,
-        btnEl,
-        freqEl,
-        aCtx,
-        osc,
-        gain,
-        minFreqLog = Math.log(50),
-        maxFreqLog = Math.log(10000),
-        forceToFreqScale = maxFreqLog - minFreqLog,
+var zoomSpeedVariable = 3;
 
-        init2 = function() {
-            window.AudioContext = window.AudioContext || window.webkitAudioContext;
-            aCtx = new AudioContext();
+zoomInButton = function(){
+// var pressureButton = document.getElementsByClassName('controls__btn');
+var pressureButton = document.getElementById('zoomInButton');
 
-            // show click overlay on iOS devices
-            if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                var el = document.getElementById('overlay--startup');
-                el.addEventListener('touchend', function() {
-                    unlockIOSAudio(this);
-                });
-                el.style.display = 'block';
-            } else {
-                setup();
-            }
-        },
+Pressure.set(pressureButton, {
+  start: function(event){
+    // this is called on force start
+    // pressureButton[0].style.background = "red";
+    pressureButton.style.background = "red";
+    // pressureButton[0].style.background = "red";
+  },
+  end: function(){
+    // this is called on force end
+    // pressureButton[0].style.background = "blue";
+    pressureButton.style.background = "blue";
+    // pressureButton[0].style.color = "red";
+  },
+  startDeepPress: function(event){
+    // this is called on "force click" / "deep press", aka once the force is greater than 0.5
+    console.log("forceStart!")
 
-        /**
-         * On iOS devices the audio stream can only be activated by a user generated event.
-         * So for iOS an overlay is shown for the user to click.
-         * @see https://paulbakaus.com/tutorials/html5/web-audio-on-ios/
-         */
-        unlockIOSAudio = function(overlay) {
-            // event listener did its job
-            overlay.removeEventListener('touchend', unlockIOSAudio);
+  },
+  endDeepPress: function(){
+    // this is called when the "force click" / "deep press" end
+    console.log("forceEnd!")
+  },
+  change: function(force, event){
+    // this is called every time there is a change in pressure
+    // force will always be a value from 0 to 1 on mobile and desktop
+    console.log(force);
+    zoom(0,force*zoomSpeedVariable);
 
-            // create an empty buffer
-            var buffer = aCtx.createBuffer(1, 1, 22050);
-            var source = aCtx.createBufferSource();
-            source.buffer = buffer;
-            source.connect(aCtx.destination);
-
-            // play the empty buffer
-            if (typeof source.start === 'undefined') {
-                source.noteOn(0);
-            } else {
-                source.start(0);
-            }
-
-            // setup a timeout to check that we are unlocked on the next event loop
-            var interval = setInterval(function() {
-                if (aCtx.currentTime > 0) {
-                    clearInterval(interval);
-                    overlay.parentNode.removeChild(overlay);
-                    setup();
-                }
-            }, 100);
-        },
-
-        /**
-         * AudioContext runs, set up the app.
-         */
-        setup = function() {
-            // rootEl = document.getElementsByClassName('controls')[0];
-            btnEl = document.getElementsByClassName('controls__btn')[0];
-            // freqEl = rootEl.getElementsByClassName('controls__freq-amount')[0];
-
-            Pressure.set(btnEl, {
-                change: onPressureChange,
-                start: onPressureStart,
-                end: onPressureEnd
-            });
-
-            gain = aCtx.createGain();
-            gain.gain.value = 0;
-            gain.connect(aCtx.destination);
-
-            osc = aCtx.createOscillator();
-            osc.type = 'sine';
-            osc.frequency.value = 440;
-            osc.connect(gain);
-            osc.start();
-        },
-
-        /**
-         * Pressure change handler.
-         * @param {Number} force Pressure between 0 and 1.
-         * @param {Object} e Touch event.
-         */
-        onPressureChange = function(force, e) {
-            // convert linear pressure to logarithmic frequency scale
-            // http://stackoverflow.com/questions/846221/logarithmic-slider
-            var freq = Math.exp(minFreqLog + (forceToFreqScale * force));
-            osc.frequency.value = freq;
-            // freqEl.innerHTML = freq.toFixed(1);
-
-            // warm yellow to red
-            btnEl.style.backgroundColor = '#' + Math.floor(0xffcc00 - ((force * 0xcc) << 8)).toString(16);
-
-            var size = 160 + (force * 100);
-            btnEl.style.height = btnEl.style.width = size + 'px';
-            btnEl.style.borderRadius = size / 2 + 'px';
-        },
-
-        onPressureStart = function(e) {
-            gain.gain.value = 1;
-        },
-
-        onPressureEnd = function(e) {
-            gain.gain.value = 0;
-        };
-
-    init2();
-
+  },
+  unsupported: function(){
+    // NOTE: this is only called if the polyfill option is disabled!
+    // this is called once there is a touch on the element and the device or browser does not support Force or 3D touch
+  }
 });
+}
+zoomInButton();
 
 //PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
 //MESH LIBRARY//////////////////////////////////////////////////////////////
@@ -260,47 +300,47 @@ var myChairLoader = new THREE.JSONLoader();
 var chairMesh = null;
 var chairGeo = null;
 myChairLoader.load(
-  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicChair.json',
-  function (geometry, materials) {
-    chairGeo = geometry;
-    var material = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
-    chairMesh = new THREE.Mesh(geometry,material);
-    scene.add(chairMesh);
-    renderer.render(scene,camera);
-  }
+'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicChair.json',
+function (geometry, materials) {
+  chairGeo = geometry;
+  var material = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+  chairMesh = new THREE.Mesh(geometry,material);
+  scene.add(chairMesh);
+  renderer.render(scene,camera);
+}
 );
 var animate = function (){
-  requestAnimationFrame(animate);
-  if(chairMesh !== null){
-    chairMesh.rotation.y += 0.01;
-  }
-  renderer.render(scene,camera);
+requestAnimationFrame(animate);
+if(chairMesh !== null){
+  chairMesh.rotation.y += 0.01;
+}
+renderer.render(scene,camera);
 };
 var alsoChair = null;
 var copyChair = function(){
-  if(chairMesh !== null){
-    alsoChair = chairMesh.clone();
-    alsoChair.rotation.y = 1
-    scene.add(alsoChair);
-    moveChair(alsoChair);
-  }
+if(chairMesh !== null){
+  alsoChair = chairMesh.clone();
+  alsoChair.rotation.y = 1
+  scene.add(alsoChair);
+  moveChair(alsoChair);
+}
 }
 function moveChair(chairToMove){
-  chairToMove.position.z = 4;
+chairToMove.position.z = 4;
 }
 //chair & chair functions//
 //conference table
 var conferenceTableLoader = new THREE.JSONLoader();
 var conferenceTable4_6 = null;
 conferenceTableLoader.load(
-  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicConferenceTable4to6.json',
-  function (geometry, materials) {
-    var material = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
-    conferenceTable4_6 = new THREE.Mesh(geometry,material);
-    conferenceTable4_6.position.x = 3;
-    scene.add(conferenceTable4_6);
-    renderer.render(scene,camera);
-  }
+'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicConferenceTable4to6.json',
+function (geometry, materials) {
+  var material = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+  conferenceTable4_6 = new THREE.Mesh(geometry,material);
+  conferenceTable4_6.position.x = 3;
+  scene.add(conferenceTable4_6);
+  renderer.render(scene,camera);
+}
 );
 //conference table//
 //site..
@@ -330,79 +370,79 @@ var siteColumnsLoader = new THREE.JSONLoader();
 var siteColumnsMesh = null;
 var siteColumnsGeo = null;
 siteColumnsLoader.load(
-  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/siteColumns.json',
- function ( geometry, materials ) {
-   siteColumnsGeo = geometry;
-   var siteColumnsMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: false, transparent: true} );
-   siteColumnsMesh = new THREE.Mesh(geometry,siteColumnsMaterial);
-   scene.add(siteColumnsMesh);
-   renderer.render(scene,camera);
- }
+'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/siteColumns.json',
+function ( geometry, materials ) {
+ siteColumnsGeo = geometry;
+ var siteColumnsMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: false, transparent: true} );
+ siteColumnsMesh = new THREE.Mesh(geometry,siteColumnsMaterial);
+ scene.add(siteColumnsMesh);
+ renderer.render(scene,camera);
+}
 );
 //siteWalls
 var siteWallsLoader = new THREE.JSONLoader();
 var siteWallsMesh = null;
 var siteWallsGeo = null;
 siteWallsLoader.load(
-  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/walls.json',
- function ( geometry, materials ) {
-   siteWallsGeo = geometry;
-   var siteWallsMaterial = new THREE.MeshLambertMaterial( { color: 0xf2f2f2, emissive: 0xf2f2f2, emissiveIntensity: 1} );
-   siteWallsMesh = new THREE.Mesh(geometry,siteWallsMaterial);
-   scene.add(siteWallsMesh);
-   renderer.render(scene,camera);
+'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/walls.json',
+function ( geometry, materials ) {
+ siteWallsGeo = geometry;
+ var siteWallsMaterial = new THREE.MeshLambertMaterial( { color: 0xf2f2f2, emissive: 0xf2f2f2, emissiveIntensity: 1} );
+ siteWallsMesh = new THREE.Mesh(geometry,siteWallsMaterial);
+ scene.add(siteWallsMesh);
+ renderer.render(scene,camera);
 
-   var wallOutline = new THREE.Geometry();
-   wallOutline.copy(siteWallsGeo);
-   wallOutline.mergeVertices();
-   highlightEdges(wallOutline);
- }
+ var wallOutline = new THREE.Geometry();
+ wallOutline.copy(siteWallsGeo);
+ wallOutline.mergeVertices();
+ highlightEdges(wallOutline);
+}
 );
 //siteSection
 var siteSectionLoader = new THREE.JSONLoader();
 var siteSectionMesh = null;
 var siteSectionGeo = null;
 siteSectionLoader.load(
-  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/section.json',
- function ( geometry, materials ) {
-   siteSectionGeo = geometry;
-   var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: false, transparent: true} );
-   siteSectionMesh = new THREE.Mesh(geometry,siteSectionMaterial);
-   scene.add(siteSectionMesh);
-   renderer.render(scene,camera);
- }
+'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/section.json',
+function ( geometry, materials ) {
+ siteSectionGeo = geometry;
+ var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: false, transparent: true} );
+ siteSectionMesh = new THREE.Mesh(geometry,siteSectionMaterial);
+ scene.add(siteSectionMesh);
+ renderer.render(scene,camera);
+}
 );
 //siteFacade
 var siteSectionLoader = new THREE.JSONLoader();
 var siteSectionMesh = null;
 var siteSectionGeo = null;
 siteSectionLoader.load(
-  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/facade.json',
- function ( geometry, materials ) {
-   siteSectionGeo = geometry;
-   var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: false, transparent: true} );
-   siteSectionMesh = new THREE.Mesh(geometry,siteSectionMaterial);
-   scene.add(siteSectionMesh);
-   renderer.render(scene,camera);
- }
+'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/facade.json',
+function ( geometry, materials ) {
+ siteSectionGeo = geometry;
+ var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: false, transparent: true} );
+ siteSectionMesh = new THREE.Mesh(geometry,siteSectionMaterial);
+ scene.add(siteSectionMesh);
+ renderer.render(scene,camera);
+}
 );
 //siteOutline
 var siteOutlineLoader = new THREE.JSONLoader();
 var siteOutlineMesh = null;
 var siteOutlineGeo = null;
 siteOutlineLoader.load(
-  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/siteOutline.json',
- function ( geometry, materials ) {
-   siteOutlineGeo = geometry;
-   highlightEdges(siteOutlineGeo);
- }
+'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/siteOutline.json',
+function ( geometry, materials ) {
+ siteOutlineGeo = geometry;
+ highlightEdges(siteOutlineGeo);
+}
 );
 function highlightEdges(outlineThis){
-  var eGeometry = new THREE.EdgesGeometry(outlineThis);
-  var eMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff, linewidth: 1 });
-  var edges = new THREE.LineSegments(eGeometry,eMaterial);
-  scene.add(edges);
-  renderer.render(scene, camera);
+var eGeometry = new THREE.EdgesGeometry(outlineThis);
+var eMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff, linewidth: 1 });
+var edges = new THREE.LineSegments(eGeometry,eMaterial);
+scene.add(edges);
+renderer.render(scene, camera);
 }
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -1097,17 +1137,17 @@ var shapeIndex = [linePoints0,linePoints1,linePoints2,linePoints3,linePoints4,li
 var groupShapes = new THREE.Group();
 
 for (i = 0 ; i < shapeIndex.length; i++){
-  currentData = shapeIndex[i];
-  shape = new THREE.Shape(currentData);
-  shape.autoClose = true; // the shape will be closed automatically, thus we don't need to put the fifth point
-  geometry = shape.createPointsGeometry();
-  line = new THREE.Line(geometry, new THREE.LineBasicMaterial({color: "white"}));
-  planarSrf = new THREE.ShapeGeometry(shape);
-  // planarSrf.rotateX( - Math.PI / 2 );
-  smartGridMat = new THREE.MeshBasicMaterial({color:0xf2f2f2,wireframe:false,transparent:false,opacity:1});
-  createMesh = new THREE.Mesh(planarSrf,smartGridMat);
-  createMesh.doubleSided = true;
-  groupShapes.add(createMesh);
+currentData = shapeIndex[i];
+shape = new THREE.Shape(currentData);
+shape.autoClose = true; // the shape will be closed automatically, thus we don't need to put the fifth point
+geometry = shape.createPointsGeometry();
+line = new THREE.Line(geometry, new THREE.LineBasicMaterial({color: "white"}));
+planarSrf = new THREE.ShapeGeometry(shape);
+// planarSrf.rotateX( - Math.PI / 2 );
+smartGridMat = new THREE.MeshBasicMaterial({color:0xf2f2f2,wireframe:false,transparent:false,opacity:1});
+createMesh = new THREE.Mesh(planarSrf,smartGridMat);
+createMesh.doubleSided = true;
+groupShapes.add(createMesh);
 }//end gridcell loop generation
 scene.add(groupShapes);
 groupShapes.rotateOnAxis(new THREE.Vector3(1,0,0),- Math.PI / 2);
@@ -1119,27 +1159,27 @@ groupShapes.rotateOnAxis(new THREE.Vector3(1,0,0),- Math.PI / 2);
 //RHIZOME POPULATER//////////////////////////////////////////////////////////////
 // Raycaster
 function mouseCasting(){
-  mouseRay = new THREE.Raycaster();
-  mouse = new THREE.Vector2();
-  areaoscanvas.addEventListener( 'mousemove', onMouseMove, false );
+mouseRay = new THREE.Raycaster();
+mouse = new THREE.Vector2();
+areaoscanvas.addEventListener( 'mousemove', onMouseMove, false );
 
-  // rayIconGeo = new THREE.Geometry();
-  // rayIconGeo.vertices.push(new THREE.Vector3(0,0,0),new THREE.Vector3(0,10,0))
-  // rayIcon = new THREE.Line(rayIconGeo,new THREE.LineBasicMaterial({color: "red"}));
-  // scene.add(rayIcon);
-  function onMouseMove(event){
-    mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
-    mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
-    mouseRay.setFromCamera(mouse,camera);
-    rayCatch = mouseRay.intersectObjects(groupShapes.children);
-    if ( rayCatch.length > 0 ) {
-      // console.log(rayCatch[0].object.geometry.vertices[0]);
-      // rayIcon.position.set( 0, 0, 0 );
-      // rayIcon.lookAt( rayCatch[ 0 ].object.geometry.faces[0].normal);
-      // rayIcon.position.copy(new THREE.Vector3(0,0,0));
-    }
-    renderer.render(scene,camera);
+// rayIconGeo = new THREE.Geometry();
+// rayIconGeo.vertices.push(new THREE.Vector3(0,0,0),new THREE.Vector3(0,10,0))
+// rayIcon = new THREE.Line(rayIconGeo,new THREE.LineBasicMaterial({color: "red"}));
+// scene.add(rayIcon);
+function onMouseMove(event){
+  mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+  mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+  mouseRay.setFromCamera(mouse,camera);
+  rayCatch = mouseRay.intersectObjects(groupShapes.children);
+  if ( rayCatch.length > 0 ) {
+    // console.log(rayCatch[0].object.geometry.vertices[0]);
+    // rayIcon.position.set( 0, 0, 0 );
+    // rayIcon.lookAt( rayCatch[ 0 ].object.geometry.faces[0].normal);
+    // rayIcon.position.copy(new THREE.Vector3(0,0,0));
   }
+  renderer.render(scene,camera);
+}
 }
 mouseCasting();
 
@@ -1174,34 +1214,34 @@ var occupy = true;
 var onHold = []; // store annex here
 
 function checkSQ(meshToCheckSQ,requestedSQ){
-  var faceListSize = meshToCheckSQ.faces.length
-  var areaSQ = 0.00
-  for (i = 0; i < faceListSize; i++){
-  var va = meshToCheckSQ.vertices[meshToCheckSQ.faces[i].a];
-  var vb = meshToCheckSQ.vertices[meshToCheckSQ.faces[i].b];
-  var vc = meshToCheckSQ.vertices[meshToCheckSQ.faces[i].c];
-  var ab = vb.clone().sub(va);
-  var ac = vc.clone().sub(va);
-  var cross = new THREE.Vector3();
-  cross.crossVectors( ab, ac );
-  areaSQ += cross.length() / 2;
-  }
-  if(areaSQ<requestedSQ){
-  }else{
-    var li = 0;
-    occupy = false;
-  }
+var faceListSize = meshToCheckSQ.faces.length
+var areaSQ = 0.00
+for (i = 0; i < faceListSize; i++){
+var va = meshToCheckSQ.vertices[meshToCheckSQ.faces[i].a];
+var vb = meshToCheckSQ.vertices[meshToCheckSQ.faces[i].b];
+var vc = meshToCheckSQ.vertices[meshToCheckSQ.faces[i].c];
+var ab = vb.clone().sub(va);
+var ac = vc.clone().sub(va);
+var cross = new THREE.Vector3();
+cross.crossVectors( ab, ac );
+areaSQ += cross.length() / 2;
+}
+if(areaSQ<requestedSQ){
+}else{
+  var li = 0;
+  occupy = false;
+}
 }
 
 function draw2ptCurve(vec1,vec2,_group){
-  geometry = new THREE.Geometry();
-  linestyle = new THREE.LineBasicMaterial({color: "red"});
-  geometry.vertices.push(vec1,vec2);
-  lineObject = new THREE.Line(geometry,linestyle);
-  scene.add(lineObject);
-  if(_group){
-    _group.add();
-  }
+geometry = new THREE.Geometry();
+linestyle = new THREE.LineBasicMaterial({color: "red"});
+geometry.vertices.push(vec1,vec2);
+lineObject = new THREE.Line(geometry,linestyle);
+scene.add(lineObject);
+if(_group){
+  _group.add();
+}
 }
 //test
 draw2ptCurve(new THREE.Vector3(0,0,0),new THREE.Vector3(0,0,10));
@@ -1210,60 +1250,60 @@ draw2ptCurve(new THREE.Vector3(0,0,0),new THREE.Vector3(0,0,10));
 
 //FORMS//////////////////////////////////////////////////////////////
 function formSubmit(x,z){
-  if (x == 0){
-    addDialog(x,z);
-  };
-  if (x == 1){
-    var usqi = document.getElementById("inputSQFT").value;
-    addDialog(x,usqi);
-    leaseIgnition(usqi);
-  };
-  if (x == 2){
-    addDialog(x,z);
-  };
-  if (x == 3){
-    addDialog(x,z);
-  };
+if (x == 0){
+  addDialog(x,z);
+};
+if (x == 1){
+  var usqi = document.getElementById("inputSQFT").value;
+  addDialog(x,usqi);
+  leaseIgnition(usqi);
+};
+if (x == 2){
+  addDialog(x,z);
+};
+if (x == 3){
+  addDialog(x,z);
+};
 };
 function addDialog(x,z){
-  if (x == 0){
-    var q0Place = ["Tribeca","Chelsea","LES","Hell's Kitchen","Midtown","Williamsburg","Bed-Stuy","Green Point"];
-    document.getElementById("Q0Output").innerHTML = "In " + '<a onclick="revealQ(0)"><u>' + q0Place[z] + '</u></a>' + " I need ";
-    stowAwayQ(x);
-    animate(); // spin chairMesh
-    //var numFaces = siteMesh.faces.length;
-    //explodeSite();
-  };
-  if (x == 1){
-    document.getElementById("Q1Output").innerHTML = '<a onclick="revealQ(1)"><u>' + (z + "SQFT") + '</u></a>' + " for ";
-    event.preventDefault();
-    hideKeyboard();
-    stowAwayQ(x);
-  };
-  if (x == 2){
-    var q2Verb = ["crafting things","presenting things","analyzing things","writing things","doing things"];
-    document.getElementById("Q2Output").innerHTML = '<a onclick="revealQ(2)"><u>' + q2Verb[z] + '</u></a>' + " with";
-    stowAwayQ(x);
-  };
-  if (x == 3){
-    var q3Team = ["just myself.","two to four people.","five to ten people.","eleven to twenty people."];
-    document.getElementById("Q3Output").innerHTML = '<a onclick="revealQ(3)"><u>' + q3Team[z] + '</u></a>';
-    stowAwayQ(x);
-  };
+if (x == 0){
+  var q0Place = ["Tribeca","Chelsea","LES","Hell's Kitchen","Midtown","Williamsburg","Bed-Stuy","Green Point"];
+  document.getElementById("Q0Output").innerHTML = "In " + '<a onclick="revealQ(0)"><u>' + q0Place[z] + '</u></a>' + " I need ";
+  stowAwayQ(x);
+  animate(); // spin chairMesh
+  //var numFaces = siteMesh.faces.length;
+  //explodeSite();
+};
+if (x == 1){
+  document.getElementById("Q1Output").innerHTML = '<a onclick="revealQ(1)"><u>' + (z + "SQFT") + '</u></a>' + " for ";
+  event.preventDefault();
+  hideKeyboard();
+  stowAwayQ(x);
+};
+if (x == 2){
+  var q2Verb = ["crafting things","presenting things","analyzing things","writing things","doing things"];
+  document.getElementById("Q2Output").innerHTML = '<a onclick="revealQ(2)"><u>' + q2Verb[z] + '</u></a>' + " with";
+  stowAwayQ(x);
+};
+if (x == 3){
+  var q3Team = ["just myself.","two to four people.","five to ten people.","eleven to twenty people."];
+  document.getElementById("Q3Output").innerHTML = '<a onclick="revealQ(3)"><u>' + q3Team[z] + '</u></a>';
+  stowAwayQ(x);
+};
 };
 function stowAwayQ(x){
-  var hideThisQ = document.getElementById("Q"+x);
-  hideThisQ.style.display = 'none';
-  x = x+1;
-  revealQ(x);
+var hideThisQ = document.getElementById("Q"+x);
+hideThisQ.style.display = 'none';
+x = x+1;
+revealQ(x);
 };
 function revealQ(x){
-  qSelectIndex = "Q"+x;
-  var showThisQ = document.getElementById(qSelectIndex);
-  showThisQ.style.display = '';
+qSelectIndex = "Q"+x;
+var showThisQ = document.getElementById(qSelectIndex);
+showThisQ.style.display = '';
 };
 var hideKeyboard = function() {
-  document.activeElement.blur();
-  $("input").blur();
+document.activeElement.blur();
+$("input").blur();
 };
 //FORMS//////////////////////////////////////////////////////////////
