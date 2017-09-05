@@ -249,6 +249,7 @@ renderer.render(scene, camera);
 // });
 
 var zoomSpeedVariable = 3;
+var zoomFactor = 0;
 
 zoomInButton = function(){
 // var pressureButton = document.getElementsByClassName('controls__btn');
@@ -270,6 +271,7 @@ Pressure.set(pressureButton, {
   startDeepPress: function(event){
     // this is called on "force click" / "deep press", aka once the force is greater than 0.5
     console.log("forceStart!")
+    zoom(0,zoomFactor);
 
   },
   endDeepPress: function(){
@@ -280,7 +282,8 @@ Pressure.set(pressureButton, {
     // this is called every time there is a change in pressure
     // force will always be a value from 0 to 1 on mobile and desktop
     console.log(force);
-    zoom(0,force*zoomSpeedVariable);
+    zoomFactor = force*zoomSpeedVariable
+    zoom(0,zoomFactor);
 
   },
   unsupported: function(){
