@@ -121,6 +121,26 @@ renderer.render(scene, camera);
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
 
 //PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
+panCanvas = document.getElementById('areaoscanvas')
+panningMode = function(){
+  Pressure.set(panCanvas, {
+    start: function(event){
+    },
+    end: function(){
+    },
+    startDeepPress: function(event){
+      alert("PAN!");
+    },
+    endDeepPress: function(){
+    },
+    change: function(force, event){
+    },
+    unsupported: function(){
+      // NOTE: this is only called if the polyfill option is disabled!
+      // this is called once there is a touch on the element and the device or browser does not support Force or 3D touch
+    }
+  });
+}
 
 zoomInButton = function(){
   var zoomSpeedVariable = 4;
