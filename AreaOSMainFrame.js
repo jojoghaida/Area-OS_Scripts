@@ -175,21 +175,25 @@ zoomInButton = function(){
     start: function(event){
       console.log(pressureButtonZminus.value);
       pressureButtonZminus.style.background = "red";
+      zMinusEffet.style.visibility = 'visible';
       zoomingInterval = setInterval(function(){zoom(1,zoomFactor);},10);
     },
     end: function(){
       pressureButtonZminus.style.background = null;
+      zMinusEffet.style.visibility = 'hidden';
       clearInterval(zoomingInterval);
     },
     startDeepPress: function(event){
       clearInterval(zoomingInterval);
       zoomingInterval = setInterval(function(){zoom(1,zoomFactor);},10);
       pressureButtonZminus.style.background = "red";
+      zMinusEffet.style.visibility = 'visible';
     },
     endDeepPress: function(){
       console.log("forceEnd!")
       clearInterval(zoomingInterval);
       pressureButtonZminus.style.background = null;
+      zMinusEffet.style.visibility = 'hidden';
     },
     change: function(force, event){
       console.log(force);
