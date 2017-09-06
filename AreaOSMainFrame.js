@@ -129,7 +129,10 @@ panningMode = function(){
     end: function(){
     },
     startDeepPress: function(event){
+      controls.enabled = false;
       var orbitControllerToggle = 1;
+      controls.enabled = true;
+
     },
     endDeepPress: function(){
       var orbitControllerToggle = 0;
