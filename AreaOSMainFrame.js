@@ -255,37 +255,32 @@ zoomInButton = function(){
   newPosition.addVectors(camPosition,camDirection.multiplyScalar(amplitude));
   camera.position.copy(newPosition);
   }
+
   var pressureButton = document.getElementById('zoomInButton');
 
   Pressure.set(pressureButton, {
     start: function(event){
-      // this is called on force start
+      console.log(pressureButton.value);
       pressureButton.style.background = "red";
       zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},10);
     },
     end: function(){
-      // this is called on force end
       pressureButton.style.background = null;
       clearInterval(zoomingInterval);
     },
     startDeepPress: function(event){
-      // this is called on "force click" / "deep press", aka once the force is greater than 0.5
-      // clearInterval(zoomingInterval);
+      clearInterval(zoomingInterval);
       zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},10);
       pressureButton.style.background = "red";
     },
     endDeepPress: function(){
-      // this is called when the "force click" / "deep press" end
       console.log("forceEnd!")
       clearInterval(zoomingInterval);
       pressureButton.style.background = null;
     },
     change: function(force, event){
-      // this is called every time there is a change in pressure
-      // force will always be a value from 0 to 1 on mobile and desktop
       console.log(force);
       zoomFactor = force*zoomSpeedVariable
-      // zoom(0,zoomFactor);
     },
     unsupported: function(){
       // NOTE: this is only called if the polyfill option is disabled!
