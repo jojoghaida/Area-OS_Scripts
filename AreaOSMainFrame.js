@@ -272,19 +272,22 @@ zoomInButton = function(){
       // this is called on "force click" / "deep press", aka once the force is greater than 0.5
       console.log("forceStart!")
       // setInterval(100,console.log(hi));
-      zoom(0,zoomFactor);
+      zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},100);
+
 
     },
     endDeepPress: function(){
       // this is called when the "force click" / "deep press" end
       console.log("forceEnd!")
+      clearInterval(zoomingInterval);
+
     },
     change: function(force, event){
       // this is called every time there is a change in pressure
       // force will always be a value from 0 to 1 on mobile and desktop
       console.log(force);
       zoomFactor = force*zoomSpeedVariable
-      zoom(0,zoomFactor);
+      // zoom(0,zoomFactor);
 
     },
     unsupported: function(){
