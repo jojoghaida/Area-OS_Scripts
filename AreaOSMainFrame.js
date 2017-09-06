@@ -129,8 +129,10 @@ panningMode = function(){
     end: function(){
     },
     startDeepPress: function(event){
+      var orbitControllerToggle = 1;
     },
     endDeepPress: function(){
+      var orbitControllerToggle = 0;
     },
     change: function(force, event){
     },
