@@ -240,7 +240,7 @@ renderer.render(scene, camera);
 
 
 zoomInButton = function(){
-  var zoomSpeedVariable = 3;
+  var zoomSpeedVariable = 5;
   var zoomFactor = 0;
   var zoomingInterval = null;
 
@@ -272,6 +272,7 @@ zoomInButton = function(){
       // this is called on "force click" / "deep press", aka once the force is greater than 0.5
       console.log("forceStart!")
       // setInterval(100,console.log(hi));
+      clearInterval(zoomingInterval);
       zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},100);
 
 
