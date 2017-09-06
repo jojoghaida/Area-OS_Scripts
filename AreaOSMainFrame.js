@@ -242,6 +242,7 @@ renderer.render(scene, camera);
 zoomInButton = function(){
   var zoomSpeedVariable = 3;
   var zoomFactor = 0;
+  var zoomingInterval = null;
 
   function zoom(value,amplitude){
   camPosition = camera.position;
@@ -260,7 +261,7 @@ zoomInButton = function(){
     start: function(event){
       // this is called on force start
       pressureButton.style.background = "red";
-      var zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},100);
+      zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},100);
     },
     end: function(){
       // this is called on force end
