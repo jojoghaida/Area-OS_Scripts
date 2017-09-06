@@ -122,6 +122,9 @@ renderer.render(scene, camera);
 
 //PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
 panCanvas = document.getElementById('areaoscanvas')
+panControls = new THREE.PanControls( camera,renderer.domElement );
+panControls.enabled = false;
+
 panningMode = function(){
   Pressure.set(panCanvas, {
     start: function(event){
@@ -129,11 +132,12 @@ panningMode = function(){
     end: function(){
     },
     startDeepPress: function(event){
-      // controls.STATE.PAN;
-      controls.pan;
+      controls.enabled = false;
+      panControls.enabled = true;
     },
     endDeepPress: function(){
-      // controls.panEnd;
+      panControls.enabled = false;
+      controls.enabled = true;
     },
     change: function(force, event){
     },
