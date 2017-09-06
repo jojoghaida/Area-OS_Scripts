@@ -124,6 +124,8 @@ renderer.render(scene, camera);
 panCanvas = document.getElementById('areaoscanvas')
 panControls = new THREE.PanControls( camera,renderer.domElement );
 panControls.enabled = false;
+panControls.addEventListener( 'change', render );
+
 
 panningMode = function(){
   Pressure.set(panCanvas, {
