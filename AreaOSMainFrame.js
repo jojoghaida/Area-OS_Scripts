@@ -127,6 +127,7 @@ zoomInButton = function(){
   var zoomFactor = 0;
   var zoomingInterval = null;
   var zMinusEffet = document.getElementById('ZminusEffect');
+  var zPlusEffect = document.getElementById('ZplusEffect');
 
   function zoom(value,amplitude){
   camPosition = camera.position;
@@ -145,25 +146,37 @@ zoomInButton = function(){
     start: function(event){
       console.log(pressureButtonZplus.value);
       pressureButtonZplus.style.background = "red";
+      zPlusEffect.style.visibility = 'visible';
       zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},10);
     },
     end: function(){
       pressureButtonZplus.style.background = null;
+      zPlusEffect.style.visibility = 'hidden';
       clearInterval(zoomingInterval);
     },
     startDeepPress: function(event){
       clearInterval(zoomingInterval);
       zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},10);
       pressureButtonZplus.style.background = "red";
+      zPlusEffect.style.visibility = 'visible';
     },
     endDeepPress: function(){
       console.log("forceEnd!")
       clearInterval(zoomingInterval);
       pressureButtonZplus.style.background = null;
+      zPlusEffect.style.visibility = 'hidden';
+
     },
     change: function(force, event){
       console.log(force);
       zoomFactor = force*zoomSpeedVariable
+      if(force>.10){
+        zPlusEffect.style.visibility = 'visible';
+        console.log(zMinusEffet);
+        zPlusEffect.style.width = force*100 + "%";
+      }else {
+        zPlusEffect.style.visibility = 'hidden';
+      }
     },
     unsupported: function(){
       // NOTE: this is only called if the polyfill option is disabled!
