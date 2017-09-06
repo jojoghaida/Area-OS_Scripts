@@ -201,6 +201,7 @@ zoomInButton = function(){
       if(force>.10){
         zMinusEffet.style.visibility = 'visible';
         console.log(zMinusEffet);
+        zMinusEffet.style.borderWidth = force*10;
         // zMinusEffet.style;
       }else {
         zMinusEffet.style.visibility = 'hidden';
