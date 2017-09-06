@@ -195,10 +195,8 @@ zoomInButton = function(){
       console.log(force);
       zoomFactor = force*zoomSpeedVariable
       if(force>0){
-        function(){
-          zMinusEffet.style.visibility = 'visible';
-          console.log(zMinusEffet);
-        }
+        zMinusEffet.style.visibility = 'visible';
+        console.log(zMinusEffet);
         // zMinusEffet.style;
       }else {
         zMinusEffet.style.visibility = 'hidden';
