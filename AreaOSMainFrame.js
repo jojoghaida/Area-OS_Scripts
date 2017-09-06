@@ -193,6 +193,13 @@ zoomInButton = function(){
     change: function(force, event){
       console.log(force);
       zoomFactor = force*zoomSpeedVariable
+      if(force>0){
+        zMinusEffet.style.visibility = 'visible';
+        // zMinusEffet.style;
+      }else {
+        zMinusEffet.style.visibility = 'hidden';
+      }
+
     },
     unsupported: function(){
       // NOTE: this is only called if the polyfill option is disabled!
