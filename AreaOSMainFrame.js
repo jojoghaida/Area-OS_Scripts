@@ -129,10 +129,10 @@ panningMode = function(){
     end: function(){
     },
     startDeepPress: function(event){
-      controls.STATE.PAN;
+      // controls.STATE.PAN;
     },
     endDeepPress: function(){
-      controls.panEnd;
+      // controls.panEnd;
     },
     change: function(force, event){
     },
