@@ -77,7 +77,7 @@ controls.enabled = false
 function hideCamIcons(){
   var camIcons = document.getElementsByClassName('cameraicons');
   for (i = 0; i < camIcons.length; i++){
-    camIcons[i].style.transition = "opacity 2s";
+    camIcons[i].style.transition = "opacity 1s";
     camIcons[i].style.opacity = 0;
   }
   function offCamIcons(){
@@ -104,7 +104,7 @@ function showCamIcons(){
     camControls.style.visibility = 'visible';
   }
   for (i = 0; i < camIcons.length; i++){
-    camIcons[i].style.transition = "opacity 2s";
+    camIcons[i].style.transition = "opacity 1s";
     camIcons[i].style.opacity = 1;
   }
 }
