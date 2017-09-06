@@ -122,6 +122,7 @@ renderer.render(scene, camera);
 
 //PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
 panCanvas = document.getElementById('areaoscanvas')
+banner = document.getElementById('titleText');//test
 panningMode = function(){
   Pressure.set(panCanvas, {
     start: function(event){
@@ -129,13 +130,17 @@ panningMode = function(){
     end: function(){
     },
     startDeepPress: function(event){
+      console.log(orbitControllerToggle);
+      banner.style.color = "red";
       controls.enabled = false;
-      var orbitControllerToggle = 1;
+      orbitControllerToggle = 1;
       controls.enabled = true;
 
     },
     endDeepPress: function(){
-      var orbitControllerToggle = 0;
+      console.log(orbitControllerToggle);
+      banner.style.color = "blue";
+      orbitControllerToggle = 0;
     },
     change: function(force, event){
     },
