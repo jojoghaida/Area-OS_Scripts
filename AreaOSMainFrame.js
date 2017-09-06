@@ -261,7 +261,7 @@ zoomInButton = function(){
     start: function(event){
       // this is called on force start
       pressureButton.style.background = "red";
-      zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},100);
+      zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},10);
     },
     end: function(){
       // this is called on force end
@@ -273,7 +273,7 @@ zoomInButton = function(){
       console.log("forceStart!")
       // setInterval(100,console.log(hi));
       clearInterval(zoomingInterval);
-      zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},100);
+      zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},10);
 
 
     },
