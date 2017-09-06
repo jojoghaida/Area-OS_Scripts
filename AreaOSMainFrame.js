@@ -122,6 +122,7 @@ renderer.render(scene, camera);
 
 //PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
 panCanvas = document.getElementById('areaoscanvas')
+console.log(panCanvas);
 panningMode = function(){
   Pressure.set(panCanvas, {
     start: function(event){
