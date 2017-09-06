@@ -126,6 +126,7 @@ zoomInButton = function(){
   var zoomSpeedVariable = 4;
   var zoomFactor = 0;
   var zoomingInterval = null;
+  var zMinusEffet = document.getElementById('ZminusEffect');
 
   function zoom(value,amplitude){
   camPosition = camera.position;
