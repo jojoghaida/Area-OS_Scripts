@@ -133,7 +133,7 @@ zoomInButton = function(){
   newPosition = new THREE.Vector3();
   console.log(camPosition);
   if(value != 0){
-    amplitude*-1;
+    amplitude = amplitude*-1;
   }
   newPosition.addVectors(camPosition,camDirection.multiplyScalar(amplitude));
   camera.position.copy(newPosition);
