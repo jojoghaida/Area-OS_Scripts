@@ -122,7 +122,6 @@ renderer.render(scene, camera);
 
 //PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
 panCanvas = document.getElementById('areaoscanvas')
-console.log(panCanvas);
 panningMode = function(){
   Pressure.set(panCanvas, {
     start: function(event){
@@ -142,8 +141,9 @@ panningMode = function(){
     }
   });
 }
+panningMode();
 
-zoomInButton = function(){
+zoomButtons = function(){
   var zoomSpeedVariable = 4;
   var zoomFactor = 0;
   var zoomingInterval = null;
@@ -248,7 +248,7 @@ zoomInButton = function(){
     }
   });
   }
-zoomInButton();
+zoomButtons();
 
 //PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
 //MESH LIBRARY//////////////////////////////////////////////////////////////
