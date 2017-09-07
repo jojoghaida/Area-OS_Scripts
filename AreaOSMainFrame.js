@@ -130,17 +130,11 @@ panningMode = function(){
     end: function(){
     },
     startDeepPress: function(event){
-      console.log(orbitControllerToggle);
       banner.style.color = "red";
-      // controls.enabled = false;
-      orbitControllerToggle = 1;
-      // controls.enabled = true;
-
+      controls.pan(event.touches[ 0 ].pageX, event.touches[ 0 ].pageY);
     },
     endDeepPress: function(){
-      console.log(orbitControllerToggle);
       banner.style.color = "blue";
-      orbitControllerToggle = 0;
     },
     change: function(force, event){
     },
