@@ -131,7 +131,7 @@ panningMode = function(){
     },
     startDeepPress: function(event){
       banner.style.color = "red";
-      controls.pan(event.touches[ 0 ].pageX, event.touches[ 0 ].pageY);
+      controls.pan.set(event.touches[ 0 ].pageX, event.touches[ 0 ].pageY);
     },
     endDeepPress: function(){
       banner.style.color = "blue";
