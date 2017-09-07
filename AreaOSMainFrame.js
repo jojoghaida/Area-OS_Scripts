@@ -20,7 +20,7 @@ viewport.addEventListener('touchstart',enableOrbitCam);
 renderer.setSize(w, h);
 renderer.setPixelRatio( window.devicePixelRatio );
 viewport.appendChild(renderer.domElement);
-camera.position.y = 250;
+camera.position.y = 400;
 camera.lookAt(new THREE.Vector3(0,0,0));
 window.addEventListener( 'resize', onWindowResize, false );
 }
@@ -40,7 +40,6 @@ controls.update();
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
 function returnCamPlan(){
-// disableOrbitCam(0); //keeps orbit click lock need to fix!
 camera.position.y = 250;
 camera.position.x = 0;
 camera.position.z = 0;
@@ -131,7 +130,7 @@ panningMode = function(){
     },
     startDeepPress: function(event){
       banner.style.color = "red";
-      controls.pan.set(event.touches[ 0 ].pageX, event.touches[ 0 ].pageY);
+      // controls.pan.set(event.touches[ 0 ].pageX, event.touches[ 0 ].pageY);
     },
     endDeepPress: function(){
       banner.style.color = "blue";
@@ -156,6 +155,7 @@ zoomButtons = function(){
   function zoom(value,amplitude){
   camPosition = camera.position;
   camDirection = camera.getWorldDirection();
+  console.log("!!!!!!",camDirection);
   newPosition = new THREE.Vector3();
   console.log(camPosition);
   if(value != 0){
@@ -1106,7 +1106,7 @@ geometry = shape.createPointsGeometry();
 line = new THREE.Line(geometry, new THREE.LineBasicMaterial({color: "white"}));
 planarSrf = new THREE.ShapeGeometry(shape);
 // planarSrf.rotateX( - Math.PI / 2 );
-smartGridMat = new THREE.MeshBasicMaterial({color:0xf2f2f2,wireframe:false,transparent:false,opacity:1});
+smartGridMat = new THREE.MeshBasicMaterial({color:0xf2f2f2,wireframe:false,transparent:true,opacity:0});
 createMesh = new THREE.Mesh(planarSrf,smartGridMat);
 createMesh.doubleSided = true;
 groupShapes.add(createMesh);
@@ -1169,7 +1169,6 @@ mouseCasting();
 // movingRay();
 
 // SQstuff
-
 function leaseIgnition(areaRequest){
 }
 var occupy = true;
@@ -1194,20 +1193,81 @@ if(areaSQ<requestedSQ){
   occupy = false;
 }
 }
+// SQstuff
 
-function draw2ptCurve(vec1,vec2,_group){
-geometry = new THREE.Geometry();
-linestyle = new THREE.LineBasicMaterial({color: "red"});
-geometry.vertices.push(vec1,vec2);
-lineObject = new THREE.Line(geometry,linestyle);
-scene.add(lineObject);
-if(_group){
-  _group.add();
+function AnimatedCrvPropagator(){
+
+  //variables
+  var mainAxisCrv = new THREE.Line();
+  var baseCrvOffsetVec = new THREE.Vector3();
+
+  //functions
+  function twoPtCurve(vec1,vec2,_group){
+    geometry = new THREE.Geometry();
+    linestyle = new THREE.LineBasicMaterial({color: "red"});
+    geometry.vertices.push(vec1,vec2);
+    lineObject = new THREE.Line(geometry,linestyle);
+    scene.add(lineObject);
+    if(_group) {_group.add(lineObject);}
+    return(lineObject);
+  }
+  //
+  function extendCrv(crv,distance,_direction = 0){ // direction is optional, boolean value. default is 0.
+    direction = new THREE.Vector3();
+    direction.subVectors(crv.geometry.vertices[1],crv.geometry.vertices[0]).normalize();
+    newExtedPt = new THREE.Vector3();
+    newExtedPt.addVectors(crv.geometry.vertices[1],direction.multiplyScalar(distance));
+    crv.geometry.vertices[1].copy(newExtedPt);
+    crv.geometry.verticesNeedUpdate = true;
+    renderer.render(scene,camera);
+    if(_direction>0){}else{}//option to move starting point
+  }
+  //
+  function drawCrvExtension(crv,distance,_increment){
+    if(_increment){ increment = _increment } else{ increment = 0.1 };
+    framerate = distance / increment;
+    arrivalCheck = 0;
+    function runScript(){
+      if(arrivalCheck<distance){
+        extendCrv(crv,increment);
+        arrivalCheck += increment;
+      }else{
+        console.log("DONE");
+        clearInterval(extendCrvInterval);
+      }
+    }
+    var extendCrvInterval = setInterval(function(){runScript(),1;});
+  }
+  //
+  function getZoneCrvVec(base){//eventually will become more intelligent and produce several possible vectors
+    baseCrvOffsetVec.subVectors(base.geometry.vertices[1],base.geometry.vertices[0]).normalize();
+    console.log(baseCrvOffsetVec);
+    var axis = new THREE.Vector3( 0, 1, 0 );
+    var angle = Math.PI / 2;
+    baseCrvOffsetVec.applyAxisAngle( axis, angle );
+
+    console.log(baseCrvOffsetVec);
+    zoneCrv(base);
+
+  }
+  //
+  function zoneCrv(baseCrv){
+    vec1 = new THREE.Vector3();
+    vec1.copy(baseCrv.geometry.vertices[0]);
+    vec2 = new THREE.Vector3();
+    vec2.addVectors(vec1,baseCrvOffsetVec.multiplyScalar(5));
+    twoPtCurve(vec1,vec2);
+
+  }
+  //
+  //test
+  mainAxisCrv = twoPtCurve(new THREE.Vector3(-10,0,0),new THREE.Vector3(3,0,7));
+  getZoneCrvVec(mainAxisCrv);
+  drawCrvExtension(mainAxisCrv,50);
+  // test
 }
-}
-//test
-draw2ptCurve(new THREE.Vector3(0,0,0),new THREE.Vector3(0,0,10));
-//test!
+AnimatedCrvPropagator();
+
 //RHIZOME POPULATER//////////////////////////////////////////////////////////////
 
 //FORMS//////////////////////////////////////////////////////////////
