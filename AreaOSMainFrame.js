@@ -262,15 +262,16 @@ var myChairLoader = new THREE.JSONLoader();
 var chairMesh = null;
 var chairGeo = null;
 myChairLoader.load(
-'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicChair.json',
-function (geometry, materials) {
-  chairGeo = geometry;
-  var material = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
-  chairMesh = new THREE.Mesh(geometry,material);
-  scene.add(chairMesh);
-  renderer.render(scene,camera);
-}
+  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicChair.json',
+  function (geometry, materials) {
+    chairGeo = geometry;
+    var material = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+    chairMesh = new THREE.Mesh(geometry,material);
+    scene.add(chairMesh);
+    renderer.render(scene,camera);
+  }
 );
+
 var animate = function (){
 requestAnimationFrame(animate);
 if(chairMesh !== null){
@@ -278,17 +279,19 @@ if(chairMesh !== null){
 }
 renderer.render(scene,camera);
 };
+
 var alsoChair = null;
 var copyChair = function(){
-if(chairMesh !== null){
-  alsoChair = chairMesh.clone();
-  alsoChair.rotation.y = 1
-  scene.add(alsoChair);
-  moveChair(alsoChair);
+  if(chairMesh !== null){
+    alsoChair = chairMesh.clone();
+    alsoChair.rotation.y = 1
+    scene.add(alsoChair);
+    moveChair(alsoChair);
+  }
 }
-}
+
 function moveChair(chairToMove){
-chairToMove.position.z = 4;
+  chairToMove.position.z = 4;
 }
 //chair & chair functions//
 //conference table
@@ -1202,6 +1205,7 @@ function AnimatedCrvPropagator(){
   var baseCrvOffsetVec = new THREE.Vector3();
 
   //functions
+    //baseCrv
   function twoPtCurve(vec1,vec2,_group){
     geometry = new THREE.Geometry();
     linestyle = new THREE.LineBasicMaterial({color: "red"});
@@ -1238,7 +1242,8 @@ function AnimatedCrvPropagator(){
     }
     var extendCrvInterval = setInterval(function(){runScript(),1;});
   }
-  //
+    //baseCrv
+    //zonCrv
   function getZoneCrvVec(base){//eventually will become more intelligent and produce several possible vectors
     baseCrvOffsetVec.subVectors(base.geometry.vertices[1],base.geometry.vertices[0]).normalize();
     console.log(baseCrvOffsetVec);
@@ -1260,10 +1265,27 @@ function AnimatedCrvPropagator(){
 
   }
   //
+    //zonCrv
+  //
+  //furnitureFunctions
+  function dropChairs(point,direction){
+    console.log("here",chairMesh);
+    newChair = chairMesh.clone();
+    console.log(newChair,point);
+    // newChair.position.z = -15;
+    setTimeout(function(){newChair.position.copy(point)},700);
+    // newChair.position.copy(point);
+    scene.add(newChair);
+  }
+  //furnitureFunctions
   //test
   mainAxisCrv = twoPtCurve(new THREE.Vector3(-10,0,0),new THREE.Vector3(3,0,7));
-  getZoneCrvVec(mainAxisCrv);
-  drawCrvExtension(mainAxisCrv,50);
+  setTimeout(function(){
+    getZoneCrvVec(mainAxisCrv);
+    drawCrvExtension(mainAxisCrv,50);
+    dropChairs(mainAxisCrv.geometry.vertices[1]);
+  }
+    ,1000);
   // test
 }
 AnimatedCrvPropagator();
