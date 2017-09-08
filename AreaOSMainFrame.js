@@ -1209,7 +1209,7 @@ function AnimatedCrvPropagator(){
     //baseCrv
   function twoPtCurve(vec1,vec2,_group){
     geometry = new THREE.Geometry();
-    linestyle = new THREE.LineBasicMaterial({color: "red"});
+    linestyle = new THREE.LineBasicMaterial({color: 0x7ce7c9});
     geometry.vertices.push(vec1,vec2);
     lineObject = new THREE.Line(geometry,linestyle);
     scene.add(lineObject);
@@ -1244,6 +1244,11 @@ function AnimatedCrvPropagator(){
       if(arrivalCheck<distance){
         extendCrv(crv,increment,getCrvVector(crv));
         arrivalCheck += increment;
+        console.log(arrivalCheck);
+        if(arrivalCheck == 4 || arrivalCheck == 12 || arrivalCheck == 22 || arrivalCheck == 30 && crv == mainAxisCrv){
+          console.log("CHAIR!",arrivalCheck,crv);
+          dropChairs(mainAxisCrv.geometry.vertices[1],getCrvVector(mainAxisCrv));
+        }
       }else{
         console.log("DONE!");
         clearInterval(extendCrvInterval);
@@ -1255,12 +1260,9 @@ function AnimatedCrvPropagator(){
     //zonCrv
   function getZoneCrvVec(base){//eventually will become more intelligent and produce several possible vectors
     baseCrvOffsetVec.subVectors(base.geometry.vertices[1],base.geometry.vertices[0]).normalize();
-    console.log(baseCrvOffsetVec);
     var axis = new THREE.Vector3( 0, 1, 0 );
     var angle = Math.PI / 2;
     baseCrvOffsetVec.applyAxisAngle( axis, angle );
-
-    console.log(baseCrvOffsetVec);
     zoneCrv(base);
 
   }
@@ -1284,25 +1286,32 @@ function AnimatedCrvPropagator(){
     newChair.rotation.y = chairFacing.angleTo(direction)*-1;
     console.log("yo");
     newChair.position.copy(point);
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<move on sub axis
     scene.add(newChair.clone());
     renderer.render(scene,camera);
   }
   //furnitureFunctions
   //test
-  mainAxisCrv = twoPtCurve(new THREE.Vector3(-27,0,0),new THREE.Vector3(-27,0,10));
+  mainAxisCrv = twoPtCurve(new THREE.Vector3(-10,0,-50),new THREE.Vector3(0,0,-51));
+  // shortCrvVec = [mainAxisCrv.geometry.vertices[0],getCrvVector(mainAxisCrv)];
+  // console.log(shortCrvVec);
+  // scene.remove(mainAxisCrv);
+  // // mainAxisCrv = null;
+  // mainAxisCrv = twoPtCurve(shortCrvVec[0],shortCrvVec[1]);//make init crv specific size
   setTimeout(function(){
     getZoneCrvVec(mainAxisCrv);
-    drawCrvExtension(mainAxisCrv,50);
-    dropChairs(mainAxisCrv.geometry.vertices[1],getCrvVector(mainAxisCrv));
+    drawCrvExtension(mainAxisCrv,80);
+    // dropChairs(mainAxisCrv.geometry.vertices[1],getCrvVector(mainAxisCrv));
   }
     ,1000);
-    mainAxisCrv2 = twoPtCurve(new THREE.Vector3(-40,0,3),new THREE.Vector3(-2,0,13)); //test
-    setTimeout(function(){ //test
-      getZoneCrvVec(mainAxisCrv2); //test
-      drawCrvExtension(mainAxisCrv2,300); //test
-      dropChairs(mainAxisCrv2.geometry.vertices[1],getCrvVector(mainAxisCrv2)); //test
-    }
-      ,1000);
+
+    // mainAxisCrv2 = twoPtCurve(new THREE.Vector3(-40,0,3),new THREE.Vector3(-2,0,13)); //test
+    // setTimeout(function(){ //test
+    //   getZoneCrvVec(mainAxisCrv2); //test
+    //   drawCrvExtension(mainAxisCrv2,100); //test
+    //   dropChairs(mainAxisCrv2.geometry.vertices[1],getCrvVector(mainAxisCrv2)); //test
+    // }
+    //   ,1000);
   // test
 }
 AnimatedCrvPropagator();
