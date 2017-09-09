@@ -345,7 +345,7 @@ function spaceNavigator(){
 
   //functions
     //baseCrv
-  function twoPtCurve(vec1,vec2,_group){
+  function twoPtCurve(vec1,vec2,_group = null,_style){
     geometry = new THREE.Geometry();
     linestyle = new THREE.LineBasicMaterial({color: 0x7ce7c9, linewidth: 1.3});
     geometry.vertices.push(vec1,vec2);
@@ -395,8 +395,20 @@ function spaceNavigator(){
   }
   //
     //zonCrv
-  ///
-  //furnitureFunctions
+    ///anots
+  function dropCircle(point,radius = 1,_group,_style){
+    var geometry = new THREE.CircleGeometry( radius, 32 );
+    var material = new THREE.MeshBasicMaterial( { color: 0x7ce7c9 } );
+    var circle = new THREE.Mesh( geometry, material );
+    circle.position.copy(point);
+    circle.rotation.x = -Math.PI/2
+    console.log("CIRCLE!",circle);
+    scene.add( circle );
+    renderer.render(scene,camera);
+    }
+    ///anots
+
+    //furnitureFunctions
   function dropChairs(point,direction){
     newChair = new THREE.Mesh();
     newChair = chairMesh.clone();
@@ -408,8 +420,8 @@ function spaceNavigator(){
     renderer.render(scene,camera);
     return(newChair);
   }
-  //furnitureFunctions
-  //test
+    //furnitureFunctions
+    //test
   function drawCrvExtension(crv,distance,direction,increment = 0.5){
     framerate = distance / increment;
     arrivalCheck = 0;
@@ -438,6 +450,7 @@ function spaceNavigator(){
   }
   //
   p1 = new THREE.Vector3(-70,0,-5);
+  dropCircle(p1);
   p2 = pushPointDirection(p1,new THREE.Vector3(10,0,-5));
   mainAxisCrv = twoPtCurve(p1,p2);
   console.log(getOffsetDirection(mainAxisCrv));
