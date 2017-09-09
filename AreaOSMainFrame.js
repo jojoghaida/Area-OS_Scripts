@@ -347,7 +347,7 @@ function spaceNavigator(){
     //baseCrv
   function twoPtCurve(vec1,vec2,_group){
     geometry = new THREE.Geometry();
-    linestyle = new THREE.LineBasicMaterial({color: 0x7ce7c9, linewidth: 2});
+    linestyle = new THREE.LineBasicMaterial({color: 0x7ce7c9, linewidth: 1.3});
     geometry.vertices.push(vec1,vec2);
     lineObject = new THREE.Line(geometry,linestyle);
     scene.add(lineObject);
