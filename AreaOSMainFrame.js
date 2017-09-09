@@ -395,7 +395,7 @@ function spaceNavigator(){
   }
   //
     //zonCrv
-  //
+  ///
   //furnitureFunctions
   function dropChairs(point,direction){
     newChair = new THREE.Mesh();
