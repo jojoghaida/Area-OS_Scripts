@@ -373,6 +373,7 @@ function spaceNavigator(){
     // controls.update();
     //!!!!!!!!!!!
     renderer.render(scene,camera);
+    return(crv);
   }
   //
     //baseCrv
@@ -417,8 +418,17 @@ function spaceNavigator(){
         extendCrv(crv,increment,getCrvVector(crv));
         arrivalCheck += increment;
         if(arrivalCheck/4 % 1 == 0 && crv == mainAxisCrv){
-          console.log("CHAIR!",arrivalCheck,crv);
-          dropChairs(mainAxisCrv.geometry.vertices[1],getCrvVector(mainAxisCrv));
+          // console.log("CHAIR!",arrivalCheck,crv);
+          p1 = mainAxisCrv.geometry.vertices[1].clone();
+          p2 = pushPointDirection(p1,getOffsetDirection(mainAxisCrv));
+          secondaryCrv = twoPtCurve(p1,p2.multiplyScalar(1));
+
+          exVec = new THREE.Vector3();
+          exVec = getCrvVector(secondaryCrv);
+          secondaryCrv = extendCrv(secondaryCrv,5,exVec);
+          console.log(exVec);
+          // drawCrvExtension(secondaryCrv,10);
+          dropChairs(secondaryCrv.geometry.vertices[1],getCrvVector(mainAxisCrv));
         }
       }else{
         clearInterval(extendCrvInterval);
