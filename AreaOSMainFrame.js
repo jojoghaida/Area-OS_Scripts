@@ -422,7 +422,7 @@ function spaceNavigator(){
   }
     //furnitureFunctions
     //test
-  function drawCrvExtension(crv,distance,direction,increment = 0.5){
+  function drawCrvExtension(crv,distance,increment = 0.5){
     framerate = distance / increment;
     arrivalCheck = 0;
     function runScript(){
@@ -437,9 +437,9 @@ function spaceNavigator(){
 
           exVec = new THREE.Vector3();
           exVec = getCrvVector(secondaryCrv);
-          secondaryCrv = extendCrv(secondaryCrv,5,exVec);
+          secondaryCrv = extendCrv(secondaryCrv,2,exVec);
           console.log(exVec);
-          // drawCrvExtension(secondaryCrv,10);
+          drawCrvExtension2(secondaryCrv,15);
           dropChairs(secondaryCrv.geometry.vertices[1],getCrvVector(mainAxisCrv));
         }
       }else{
@@ -447,6 +447,22 @@ function spaceNavigator(){
       }
     }
     var extendCrvInterval = setInterval(function(){runScript(),4000;});
+  }
+  function drawCrvExtension2(crv,distance,increment = 0.5){
+    framerate = distance / increment;
+    arrivalCheck = 0;
+    function runScript(){
+      if(arrivalCheck<distance){
+        extendCrv(crv,increment,getCrvVector(crv));
+        arrivalCheck += increment;
+        if(arrivalCheck/4 % 1 == 0){
+          dropChairs(crv.geometry.vertices[1],getCrvVector(mainAxisCrv));
+        }
+      }else{
+        clearInterval(extendCrvInterval2);
+      }
+    }
+    var extendCrvInterval2 = setInterval(function(){runScript(),1000;});
   }
   //
   p1 = new THREE.Vector3(-70,0,-5);
