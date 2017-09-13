@@ -536,7 +536,7 @@ function spaceNavigator(){
     }
     loopExt();
   }
-  newStepExt(newMainAxisCrv,80);
+  setTimeout(function(){newStepExt(newMainAxisCrv,80)},3000);
 // test2
 }
 // test 1
