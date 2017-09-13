@@ -423,15 +423,33 @@ function spaceNavigator(){
   //
     //zonCrv
     ///anots
-  function dropCircle(point,radius = 1,_group,_style){
-    var geometry = new THREE.CircleGeometry( radius, 32 );
-    var material = new THREE.MeshBasicMaterial( { color: 0x7ce7c9 } );
-    var circle = new THREE.Mesh( geometry, material );
-    circle.position.copy(point);
-    circle.rotation.x = -Math.PI/2
-    scene.add( circle );
-    renderer.render(scene,camera);
+    function dropCircle(point,radius = 1,_group,_style){
+      var geometry = new THREE.CircleGeometry( radius, 32 );
+      var material = new THREE.MeshBasicMaterial( { color: 0x26D8A5/*0x7ce7c9*/ } );
+      var circle = new THREE.Mesh( geometry, material );
+      circle.position.copy(point);
+      circle.rotation.x = -Math.PI/2
+      scene.add( circle );
+      renderer.render(scene,camera);
+      }
+
+    function dropTriangle(a,b,c){
+      var geometry = new THREE.Geometry();
+      // a = new THREE.Vector3(30,0,30);
+      // b = new THREE.Vector3(30,0,0);
+      // c = new THREE.Vector3(0,0,0);
+      geometry.vertices.push(c);
+      geometry.vertices.push(b);
+      geometry.vertices.push(a);
+
+      geometry.faces.push(new THREE.Face3(2,1,0));
+      geometry.computeFaceNormals();
+      var material = new THREE.MeshBasicMaterial({color: 0x26D8A5});
+      var triangle = new THREE.Mesh(geometry, material);
+      scene.add(triangle);
+      renderer.render(scene,camera);
     }
+
     ///anots
 
     //furnitureFunctions
@@ -467,6 +485,7 @@ function spaceNavigator(){
           p1 = crv.geometry.vertices[1].clone();
           p2 = pushPointDirection(p1,getOffsetDirection(crv));
           secondaryCrv = twoPtCurve(p1,p2.multiplyScalar(1));
+          dropTriangle(p1.clone(),pushPointDirection(p1,getCrvVector(crv)),p2.clone());
           function inceptiveCrv(crv2,distance,increment2 = 1,passDistance){
             realCrvLength2 = getCrvLength(crv2)
             extLength2+=increment2 ;
@@ -484,12 +503,12 @@ function spaceNavigator(){
           }
           var extLength2 = 0; // tracks the extension ammount while looping
           inceptiveCrv(secondaryCrv,15,1,distance);
-        }else{setTimeout(loopExt,10);}
+        }else{setTimeout(loopExt,1);}
       }
     }
     loopExt();
   }
-  setTimeout(function(){newStepExt(newMainAxisCrv,80)},5000);
+  setTimeout(function(){newStepExt(newMainAxisCrv,80)},2000);
 // test2
 }
 // test 1
