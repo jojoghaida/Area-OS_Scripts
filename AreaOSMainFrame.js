@@ -352,6 +352,8 @@ function spaceNavigator(){
     lineObject = new THREE.Line(geometry,linestyle);
     scene.add(lineObject);
     if(_group) {_group.add(lineObject);}
+    console.log("here",getCrvLength(lineObject));
+
     return(lineObject);
   }
   //
@@ -361,9 +363,15 @@ function spaceNavigator(){
     return(direction);
   }
   //
+  function twoPtUnitVec(pt1,pt2){
+    unitVector = new THREE.Vector3();
+    unitVector.subVectors(pt1,pt2).normalize();
+    return(unitVector);
+  }
+  //
   function extendCrv(crv,distance,direction){
     newExtedPt = new THREE.Vector3();
-    newExtedPt.addVectors(crv.geometry.vertices[1],direction.multiplyScalar(distance));
+    newExtedPt.addVectors(crv.geometry.vertices[1],direction/*.multiplyScalar(distance)*/);
     crv.geometry.vertices[1].copy(newExtedPt);
     crv.geometry.verticesNeedUpdate = true;
     //!!!!!!!!!!!
@@ -373,6 +381,7 @@ function spaceNavigator(){
     // controls.update();
     //!!!!!!!!!!!
     renderer.render(scene,camera);
+    console.log("here here",getCrvLength(crv));
     return(crv);
   }
   //
@@ -401,10 +410,15 @@ function spaceNavigator(){
   }
   //
   function pushPointDirection(point,direction){
+    console.log(direction);
     direction.normalize();
+    console.log(direction);
+    console.log(direction.multiplyScalar(1));
     pushedPoint = new THREE.Vector3();
-    pushedPoint.addVectors(point,direction.multiplyScalar(1));
+    pushedPoint.addVectors(point,direction);
     return(pushedPoint);
+
+    //You compute the direction vector by subtracting one line segment endpoint from the other, and then normalizing.
   }
   //
     //zonCrv
@@ -425,7 +439,7 @@ function spaceNavigator(){
     newChair = new THREE.Mesh();
     newChair = chairMesh.clone();
     chairFacing = new THREE.Vector3(1,0,0);
-    newChair.rotation.y = chairFacing.angleTo(direction)*1;
+    newChair.rotation.y = chairFacing.angleTo(direction)*-1;
     newChair.position.copy(point);
     scene.add(newChair.clone());
     renderer.render(scene,camera);
@@ -433,110 +447,49 @@ function spaceNavigator(){
   }
     //furnitureFunctions
 
-
-    //test
-  function drawCrvExtension(crv,distance,increment = 0.5){
-    framerate = distance / increment;
-    arrivalCheck = 0;
-    function runScript(){
-      // console.log("arrivalCheck",arrivalCheck);
-      // console.log("distance",distance);
-      if(arrivalCheck<distance){
-        extendCrv(crv,increment,getCrvVector(crv));
-        arrivalCheck += increment;
-        if(arrivalCheck/4 % 1 == 0 && crv == mainAxisCrv){
-          p1 = mainAxisCrv.geometry.vertices[1].clone();
-          p2 = pushPointDirection(p1,getOffsetDirection(mainAxisCrv));
-          secondaryCrv = twoPtCurve(p1,p2.multiplyScalar(1));
-
-          exVec = new THREE.Vector3();
-          exVec = getCrvVector(secondaryCrv);
-          secondaryCrv = extendCrv(secondaryCrv,2,exVec);
-          drawCrvExtension2(secondaryCrv,15);
-          dropChairs(secondaryCrv.geometry.vertices[1],getCrvVector(mainAxisCrv));
-        }
-      }else{
-        clearInterval(extendCrvInterval);
-        getCrvLength(crv);
-      }
-    }
-    var extendCrvInterval = setInterval(function(){runScript(),4000;});
-  }
-  function drawCrvExtension2(crv2,distance2,increment2 = 0.5){
-    framerate2 = distance2 / increment2;
-    arrivalCheck2 = 0;
-    function runScript(){
-      if(arrivalCheck2<distance2){
-        extendCrv(crv2,increment2,getCrvVector(crv2));
-        arrivalCheck2 += increment2;
-        if(arrivalCheck2/4 % 1 == 0){
-          dropChairs(crv2.geometry.vertices[1],getCrvVector(mainAxisCrv));
-        }
-      }else{
-        clearInterval(extendCrvInterval2);
-      }
-    }
-    var extendCrvInterval2 = setInterval(function(){runScript(),1000;});
-  }
-  //
-  p1 = new THREE.Vector3(-70,0,-5);
-  dropCircle(p1);
-  p2 = pushPointDirection(p1,new THREE.Vector3(1,0,-1));
-  mainAxisCrv = twoPtCurve(p1,p2);
-  p1 = mainAxisCrv.geometry.vertices[0].clone();
-  p2 = pushPointDirection(p1,getOffsetDirection(mainAxisCrv));
-  secondaryCrv = twoPtCurve(p1,p2);
-  // setTimeout(function(){
-    // drawCrvExtension(mainAxisCrv,80);
-    // drawCrvExtension(secondaryCrv,5);
-  // }
-    // ,1000);
-
     // test2
-  newP1 = new THREE.Vector3(35,0,10);
+  newP1 = new THREE.Vector3(40,0,-100);
   // newP2 = new THREE.Vector3(47,0,7);
-  newP2 = pushPointDirection(newP1,new THREE.Vector3(.4,0,-.8));
-  newMainAxisCrv = twoPtCurve(newP1, newP2);
+  newP2 = new THREE.Vector3(45,0,-99);
+  newMainAxisCrv = twoPtCurve(newP1, pushPointDirection(newP1,twoPtUnitVec(newP2,newP1)));
   dropCircle(newP1);
 
   function newStepExt(crv,distance,increment = 0.5){
+    extLength = 1;
     function loopExt(){
-      curveLength = getCrvLength(crv);
-      if(curveLength >= distance){console.log("done!");}else{
+      realCrvLength = getCrvLength(crv);
+      extLength+= increment;
+      if(realCrvLength >= distance){console.log("done!");}else{
         // console.log("extending curve",increment,"feet.");
         extendCrv(crv,increment,getCrvVector(crv));
-        if(curveLength/4 % 1 < 0.01){
-          // console.log(curveLength);
+        if(extLength/4 % 1 == 0){
+          // console.log(extLength);
           p1 = crv.geometry.vertices[1].clone();
           p2 = pushPointDirection(p1,getOffsetDirection(crv));
           secondaryCrv = twoPtCurve(p1,p2.multiplyScalar(1));
           function inceptiveCrv(crv2,distance,increment2 = 1,passDistance){
-            curveLength2 = getCrvLength(crv2);
-            // console.log(curveLength2);
-            if(curveLength2>=distance){
+            realCrvLength2 = getCrvLength(crv2)
+            extLength2+=increment2 ;
+            // console.log(extLength2);
+            if(realCrvLength2>=distance){
               // callback
               newStepExt(crv,passDistance,.5)
             }else{
             extendCrv(crv2,increment2,getCrvVector(crv2));
-            if(curveLength2/5 % 1 < .5){
-              // p1s2 = crv2.geometry.vertices[1].clone();
-              // p2s2 = pushPointDirection(p1s2,getOffsetDirection(crv2));
-              // console.log("chair!");
+            if(extLength2/2 % 1 == 0){
               dropChairs(crv2.geometry.vertices[1],getCrvVector(crv));
             }
             setTimeout(function(){inceptiveCrv(crv2,distance,increment2,passDistance)},10);
             }
           }
-          console.log(curveLength);
-          console.log(distance - curveLength);
+          var extLength2 = 0; // tracks the extension ammount while looping
           inceptiveCrv(secondaryCrv,15,1,distance);
-          // make callback here<
         }else{setTimeout(loopExt,10);}
       }
     }
     loopExt();
   }
-  setTimeout(function(){newStepExt(newMainAxisCrv,80)},3000);
+  setTimeout(function(){newStepExt(newMainAxisCrv,80)},5000);
 // test2
 }
 // test 1
