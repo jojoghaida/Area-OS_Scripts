@@ -531,7 +531,7 @@ function spaceNavigator(){
           console.log(distance - curveLength);
           inceptiveCrv(secondaryCrv,15,1,distance);
           // make callback here<
-        }else{setTimeout(loopExt,1);}
+        }else{setTimeout(loopExt,10);}
       }
     }
     loopExt();
