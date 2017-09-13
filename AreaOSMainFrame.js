@@ -466,9 +466,9 @@ function spaceNavigator(){
     //furnitureFunctions
 
     // test2
-  newP1 = new THREE.Vector3(40,0,-100);
+  newP1 = new THREE.Vector3(-30,0,-50);
   // newP2 = new THREE.Vector3(47,0,7);
-  newP2 = new THREE.Vector3(45,0,-99);
+  newP2 = new THREE.Vector3(31,0,-39);
   newMainAxisCrv = twoPtCurve(newP1, pushPointDirection(newP1,twoPtUnitVec(newP2,newP1)));
   dropCircle(newP1);
 
@@ -480,6 +480,7 @@ function spaceNavigator(){
       if(realCrvLength >= distance){console.log("done!");}else{
         // console.log("extending curve",increment,"feet.");
         extendCrv(crv,increment,getCrvVector(crv));
+        crv.geometry.computeBoundingSphere()
         if(extLength/4 % 1 == 0){
           // console.log(extLength);
           p1 = crv.geometry.vertices[1].clone();
