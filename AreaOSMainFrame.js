@@ -524,13 +524,18 @@ function dropPoints(coord){
   scene.add(point);
   renderer.render(scene,camera);
 }
-dropPoints(new THREE.Vector3(-10,0,0));
+dropPoints(new THREE.Vector3(-20,0,0));
 
-function dropText(text,font){
-  var geometry = new THREE.TextGeometry( "text", {font: font, size: 1, height: 0, curveSegments: 100, bevelEnabled: false, bevelThickness: 10, bevelSize: 8, bevelSegments: 5});
+function dropText(text,pos,font){
+  var geometry = new THREE.TextGeometry( text, {font: font, size: 5, height: 0, curveSegments: 30, bevelEnabled: false, bevelThickness: 10, bevelSize: 8, bevelSegments: 5});
   var material = new THREE.MeshBasicMaterial({color: 0x26D8A5});
   var text = new THREE.Mesh(geometry, material);
-  scene.add(text);
+  textobject = new THREE.Object3D();
+  textobject.add(text);
+  console.log(textobject);
+  scene.add(textobject);
+  textobject.position.x = pos;
+  textobject.rotation.x = -Math.PI/2;
   renderer.render(scene,camera);
 
 }
@@ -546,8 +551,9 @@ function loadKarla(){
 loadKarla();
 //////
 setTimeout(function () {
-  dropText("hey!",fontKarla_Reg);
+  dropText("hey!",-20,fontKarla_Reg);
 }, 2000);
+
 
 spaceNavigator();
 function fieldVectorizer(){
