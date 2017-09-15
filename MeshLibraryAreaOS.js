@@ -1,4 +1,13 @@
 //MESH LIBRARY//////////////////////////////////////////////////////////////
+// fonts
+fontKarla_Reg = undefined;
+function loadKarla(){
+  var loader = new THREE.FontLoader();
+  				loader.load("https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/5dd63395077414af139378bb31fb7f05cc471884/Karla_Regular.json", function ( response ) {
+  					fontKarla_Reg = response;} );
+}
+loadKarla();
+// fonts
 //swingCamAxon();
 //stage camera//
 //chair & chair functions

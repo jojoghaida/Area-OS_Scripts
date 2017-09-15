@@ -352,7 +352,6 @@ function spaceNavigator(){
     lineObject = new THREE.Line(geometry,linestyle);
     scene.add(lineObject);
     if(_group) {_group.add(lineObject);}
-    console.log("here",getCrvLength(lineObject));
 
     return(lineObject);
   }
@@ -381,7 +380,6 @@ function spaceNavigator(){
     // controls.update();
     //!!!!!!!!!!!
     renderer.render(scene,camera);
-    console.log("here here",getCrvLength(crv));
     return(crv);
   }
   //
@@ -410,10 +408,7 @@ function spaceNavigator(){
   }
   //
   function pushPointDirection(point,direction){
-    console.log(direction);
     direction.normalize();
-    console.log(direction);
-    console.log(direction.multiplyScalar(1));
     pushedPoint = new THREE.Vector3();
     pushedPoint.addVectors(point,direction);
     return(pushedPoint);
@@ -515,16 +510,25 @@ function spaceNavigator(){
 // test2
 }
 // test 1
-function dropPoints(coord){
+function dropPoints(coord,color = "red"){
   geometry = new THREE.Geometry();
   geometry.vertices.push(coord);
-  material = new THREE.PointsMaterial({color: "red"});
+  material = new THREE.PointsMaterial({color: color});
   point = new THREE.Points(geometry, material);
   // points.size(.5);
   scene.add(point);
   renderer.render(scene,camera);
+  return(point);
 }
-dropPoints(new THREE.Vector3(-20,0,0));
+a = dropPoints(new THREE.Vector3(-20,0,-10));
+b = dropPoints(new THREE.Vector3(-20,0,0));
+c = dropPoints(new THREE.Vector3(-10,0,0));
+d = dropPoints(new THREE.Vector3(-10,0,-10));
+e = dropPoints(new THREE.Vector3(-5,0,-5),"blue");
+f = dropPoints(new THREE.Vector3(-15,0,-5),"green");
+
+checkPts = [a,b,c,d];
+
 
 function dropText(text,pos,font){
   var geometry = new THREE.TextGeometry( text, {font: font, size: 5, height: 0, curveSegments: 30, bevelEnabled: false, bevelThickness: 10, bevelSize: 8, bevelSegments: 5});
@@ -532,9 +536,11 @@ function dropText(text,pos,font){
   var text = new THREE.Mesh(geometry, material);
   textobject = new THREE.Object3D();
   textobject.add(text);
-  console.log(textobject);
   scene.add(textobject);
-  textobject.position.x = pos;
+  textobject.position.x = pos[0];
+  textobject.position.y = pos[1];
+  textobject.position.z = pos[2];
+
   textobject.rotation.x = -Math.PI/2;
   renderer.render(scene,camera);
 
@@ -542,16 +548,10 @@ function dropText(text,pos,font){
 // dropText();
 
 //////
-fontKarla_Reg = undefined;
-function loadKarla(){
-  var loader = new THREE.FontLoader();
-  				loader.load("https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/5dd63395077414af139378bb31fb7f05cc471884/Karla_Regular.json", function ( response ) {
-  					fontKarla_Reg = response;} );
-}
-loadKarla();
+
 //////
 setTimeout(function () {
-  dropText("hey!",-20,fontKarla_Reg);
+  dropText("test!",[-20,0,-20],fontKarla_Reg);
 }, 2000);
 
 
