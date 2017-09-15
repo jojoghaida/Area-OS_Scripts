@@ -509,7 +509,7 @@ function spaceNavigator(){
     }
     loopExt();
   }
-  // window.onload(newStepExt(newMainAxisCrv,80)); //!!!!!!!!
+  window.onload(newStepExt(newMainAxisCrv,80)); //!!!!!!!!
 
   // setTimeout(function(){newStepExt(newMainAxisCrv,80)},2000);
 // test2
