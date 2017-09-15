@@ -499,7 +499,7 @@ function spaceNavigator(){
             if(extLength2/2 % 1 == 0){
               dropChairs(crv2.geometry.vertices[1],getCrvVector(crv));
             }
-            setTimeout(function(){inceptiveCrv(crv2,distance,increment2,passDistance)},10);
+            setTimeout(function(){inceptiveCrv(crv2,distance,increment2,passDistance)},1);
             }
           }
           var extLength2 = 0; // tracks the extension ammount while looping
@@ -509,11 +509,45 @@ function spaceNavigator(){
     }
     loopExt();
   }
-  setTimeout(function(){newStepExt(newMainAxisCrv,80)},2000);
+  // window.onload(newStepExt(newMainAxisCrv,80)); //!!!!!!!!
+
+  // setTimeout(function(){newStepExt(newMainAxisCrv,80)},2000);
 // test2
 }
 // test 1
+function dropPoints(coord){
+  geometry = new THREE.Geometry();
+  geometry.vertices.push(coord);
+  material = new THREE.PointsMaterial({color: "red"});
+  point = new THREE.Points(geometry, material);
+  // points.size(.5);
+  scene.add(point);
+  renderer.render(scene,camera);
+}
+dropPoints(new THREE.Vector3(-10,0,0));
 
+function dropText(text,font){
+  var geometry = new THREE.TextGeometry( "text", {font: font, size: 1, height: 0, curveSegments: 100, bevelEnabled: false, bevelThickness: 10, bevelSize: 8, bevelSegments: 5});
+  var material = new THREE.MeshBasicMaterial({color: 0x26D8A5});
+  var text = new THREE.Mesh(geometry, material);
+  scene.add(text);
+  renderer.render(scene,camera);
+
+}
+// dropText();
+
+//////
+fontKarla_Reg = undefined;
+function loadKarla(){
+  var loader = new THREE.FontLoader();
+  				loader.load("https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/5dd63395077414af139378bb31fb7f05cc471884/Karla_Regular.json", function ( response ) {
+  					fontKarla_Reg = response;} );
+}
+loadKarla();
+//////
+setTimeout(function () {
+  dropText("hey!",fontKarla_Reg);
+}, 2000);
 
 spaceNavigator();
 function fieldVectorizer(){
