@@ -18,7 +18,7 @@ myChairLoader.load(
   'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicChair.json',
   function (geometry, materials) {
     chairGeo = geometry;
-    var material = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+    var material = new THREE.MeshBasicMaterial( { color: "blue" } );
     chairMesh = new THREE.Mesh(geometry,material);
     scene.add(chairMesh);
     renderer.render(scene,camera);

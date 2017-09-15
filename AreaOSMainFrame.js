@@ -47,6 +47,9 @@ camera.lookAt(new THREE.Vector3(0,0,0));
 disableOrbitCam();
 }
 
+var resetCamButton = document.getElementById("resetCamButton");
+resetCamButton.addEventListener('click', returnCamPlan);
+
 function orbitCam(){
 controls = new THREE.OrbitControls( camera,renderer.domElement );
 controls.enableZoom = true;
@@ -504,9 +507,9 @@ function spaceNavigator(){
     }
     loopExt();
   }
-  window.onload(newStepExt(newMainAxisCrv,80)); //!!!!!!!!
+  // window.onload(newStepExt(newMainAxisCrv,80)); //!!!!!!!!
 
-  // setTimeout(function(){newStepExt(newMainAxisCrv,80)},2000);
+  setTimeout(function(){newStepExt(newMainAxisCrv,80)},2000);
 // test2
 }
 // test 1
