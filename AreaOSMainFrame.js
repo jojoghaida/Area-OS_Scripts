@@ -40,7 +40,12 @@ controls.update();
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
 function returnCamPlan(){
-camera.position.y = 250;
+  // if(camera.position.y <350){
+  //   camera.position.y = camera.position.y++;
+  //   requestAnimationFrame(viewAnim);
+  // }
+camera.position.y = 350;
+// console.log(camera.position.y);
 camera.position.x = 0;
 camera.position.z = 0;
 camera.lookAt(new THREE.Vector3(0,0,0));
