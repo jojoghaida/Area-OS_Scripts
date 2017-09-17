@@ -27,6 +27,7 @@ window.addEventListener("orientationchange", onWindowResize);
 }
 function onWindowResize() {
 camera.aspect = window.innerWidth / window.innerHeight;
+alert(window.innerWidth);
 camera.updateProjectionMatrix();
 renderer.setSize( window.innerWidth, window.innerHeight );
 render();
