@@ -18,7 +18,7 @@ myChairLoader.load(
   'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicChair.json',
   function (geometry, materials) {
     chairGeo = geometry;
-    var material = new THREE.MeshBasicMaterial( { color: "blue" } );
+    var material = new THREE.MeshBasicMaterial( { color: "black" } );
     chairMesh = new THREE.Mesh(geometry,material);
     scene.add(chairMesh);
     renderer.render(scene,camera);
@@ -53,7 +53,7 @@ var conferenceTable4_6 = null;
 conferenceTableLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicConferenceTable4to6.json',
 function (geometry, materials) {
-  var material = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+  var material = new THREE.MeshBasicMaterial( { color: "black" } );
   conferenceTable4_6 = new THREE.Mesh(geometry,material);
   conferenceTable4_6.position.x = 3;
   scene.add(conferenceTable4_6);
@@ -91,7 +91,7 @@ siteColumnsLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/siteColumns.json',
 function ( geometry, materials ) {
  siteColumnsGeo = geometry;
- var siteColumnsMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: false, transparent: true} );
+ var siteColumnsMaterial = new THREE.MeshBasicMaterial( { color: "black", wireframe: false, transparent: true} );
  siteColumnsMesh = new THREE.Mesh(geometry,siteColumnsMaterial);
  scene.add(siteColumnsMesh);
  renderer.render(scene,camera);
@@ -124,7 +124,7 @@ siteSectionLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/section.json',
 function ( geometry, materials ) {
  siteSectionGeo = geometry;
- var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: false, transparent: true} );
+ var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: "black", wireframe: false, transparent: true} );
  siteSectionMesh = new THREE.Mesh(geometry,siteSectionMaterial);
  scene.add(siteSectionMesh);
  renderer.render(scene,camera);
@@ -138,7 +138,7 @@ siteSectionLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/facade.json',
 function ( geometry, materials ) {
  siteSectionGeo = geometry;
- var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: false, transparent: true} );
+ var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: "black", wireframe: false, transparent: true} );
  siteSectionMesh = new THREE.Mesh(geometry,siteSectionMaterial);
  scene.add(siteSectionMesh);
  renderer.render(scene,camera);
@@ -157,7 +157,7 @@ function ( geometry, materials ) {
 );
 function highlightEdges(outlineThis){
 var eGeometry = new THREE.EdgesGeometry(outlineThis);
-var eMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff, linewidth: 1 });
+var eMaterial = new THREE.LineBasicMaterial({ color: "black", linewidth: 1 });
 var edges = new THREE.LineSegments(eGeometry,eMaterial);
 scene.add(edges);
 renderer.render(scene, camera);
