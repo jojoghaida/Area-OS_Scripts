@@ -22,12 +22,11 @@ renderer.setPixelRatio( window.devicePixelRatio );
 viewport.appendChild(renderer.domElement);
 camera.position.y = 400;
 camera.lookAt(new THREE.Vector3(0,0,0));
-window.addEventListener( 'resize', onWindowResize, false );
-window.addEventListener("orientationchange", onWindowResize);
+viewport.addEventListener( 'resize', onWindowResize, false );
+// window.addEventListener("orientationchange", onWindowResize);
 }
 function onWindowResize() {
 camera.aspect = window.innerWidth / window.innerHeight;
-alert(window.innerWidth);
 camera.updateProjectionMatrix();
 renderer.setSize( window.innerWidth, window.innerHeight );
 render();
