@@ -32,10 +32,13 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 render();
 }
 function onWindowRotate() {
-camera.aspect = window.innerHeight / window.innerWidth;
-camera.updateProjectionMatrix();
-renderer.setSize( window.innerHeight, window.innerWidth );
-render();
+  function rotateView(){
+    camera.aspect = window.innerHeight / window.innerWidth;
+    camera.updateProjectionMatrix();
+    renderer.setSize( window.innerHeight, window.innerWidth );
+    render();
+  }
+  setTimeout(rotateView, 1000);
 }
 function render(){
 renderer.render(scene,camera);
