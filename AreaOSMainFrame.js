@@ -33,9 +33,9 @@ render();
 }
 function onWindowRotate() {
   function rotateView(){
-    camera.aspect = window.innerHeight / window.innerWidth;
+    camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize( window.innerHeight, window.innerWidth );
+    renderer.setSize( window.innerWidth, window.innerHeight );
     render();
   }
   setTimeout(rotateView, 1000);
