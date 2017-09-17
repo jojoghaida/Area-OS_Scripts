@@ -22,8 +22,8 @@ renderer.setPixelRatio( window.devicePixelRatio );
 viewport.appendChild(renderer.domElement);
 camera.position.y = 400;
 camera.lookAt(new THREE.Vector3(0,0,0));
-viewport.addEventListener( 'resize', onWindowResize, false );
-// window.addEventListener("orientationchange", onWindowResize);
+window.addEventListener( 'resize', onWindowResize, false );
+window.addEventListener("orientationchange", function(){setTimeout(WindowResize,100);});
 }
 function onWindowResize() {
 camera.aspect = window.innerWidth / window.innerHeight;
