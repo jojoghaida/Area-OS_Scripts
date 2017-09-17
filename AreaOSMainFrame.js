@@ -23,12 +23,18 @@ viewport.appendChild(renderer.domElement);
 camera.position.y = 400;
 camera.lookAt(new THREE.Vector3(0,0,0));
 window.addEventListener( 'resize', onWindowResize, false );
-window.addEventListener("orientationchange", function(){setTimeout(WindowResize,100);});
+window.addEventListener("orientationchange", onWindowRotate});
 }
 function onWindowResize() {
 camera.aspect = window.innerWidth / window.innerHeight;
 camera.updateProjectionMatrix();
 renderer.setSize( window.innerWidth, window.innerHeight );
+render();
+}
+function onWindowRotate() {
+camera.aspect = window.innerHeight / window.innerWidth;
+camera.updateProjectionMatrix();
+renderer.setSize( window.innerHeight, window.innerWidth );
 render();
 }
 function render(){
