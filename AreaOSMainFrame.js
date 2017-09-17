@@ -23,7 +23,7 @@ viewport.appendChild(renderer.domElement);
 camera.position.y = 400;
 camera.lookAt(new THREE.Vector3(0,0,0));
 window.addEventListener( 'resize', onWindowResize, false );
-// window.addEventListener("orientationchange", onWindowResize);
+window.addEventListener("orientationchange", onWindowResize);
 }
 function onWindowResize() {
 camera.aspect = window.innerWidth / window.innerHeight;
