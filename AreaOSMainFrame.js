@@ -1,12 +1,12 @@
 //app UI
 resetButton = document.getElementById('resetButton');
 function refreshPage(){
-  alert("refresh");
+  location.reload();
 }
 resetButton.addEventListener('click',refreshPage);
 aboutButton = document.getElementById('aboutButton');
 function launchAbout(){
-  alert("about");
+  window.location.href = 'https://www.joeghaida.com/design/areaos-about';
 }
 aboutButton.addEventListener('click',launchAbout);
 
