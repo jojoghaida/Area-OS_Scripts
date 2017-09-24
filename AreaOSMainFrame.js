@@ -1,8 +1,14 @@
 //app UI
 resetButton = document.getElementById('resetButton');
-// resetButton.addEventListener('click',alert());
+function refreshPage(){
+  alert(refresh);
+}
+resetButton.addEventListener('click',refreshPage);
 aboutButton = document.getElementById('aboutButton');
-// aboutButton.addEventListener('click',alert());
+function launchAbout(){
+  alert(about?);
+}
+aboutButton.addEventListener('click',launchAbout);
 
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 var camera, scene, controls, renderer;
