@@ -1,12 +1,12 @@
 //app UI
 resetButton = document.getElementById('resetButton');
 function refreshPage(){
-  alert(refresh);
+  alert("refresh");
 }
 resetButton.addEventListener('click',refreshPage);
 aboutButton = document.getElementById('aboutButton');
 function launchAbout(){
-  alert(about?);
+  alert("about");
 }
 aboutButton.addEventListener('click',launchAbout);
 
