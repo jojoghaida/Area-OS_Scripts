@@ -12,7 +12,8 @@ aboutText = document.getElementById('aboutText');
 function launchAbout(){
   aboutText.style.color = "blue";
   aboutButton.style.borderWidth = "1px";
-  window.location.href = 'https://www.joeghaida.com/design/areaos-about';
+  setTimeout(function(){window.location.href = 'https://www.joeghaida.com/design/areaos-about';},1000);
+
 }
 aboutButton.addEventListener('click',launchAbout);
 
