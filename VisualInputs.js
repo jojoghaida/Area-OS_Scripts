@@ -12,11 +12,25 @@ var two = new Two(params).appendTo(inputsTwoScene);
 // var rectangle = two.makeRectangle(0,0,sW,-sH);
 // rectangle.fill = 'green';
 
-colorStyle = "red";
+var colorStyle = "orange";
+var tickQuan = 50;
+var bigTick = 5;
+var tickSpan = 5;
+
 
 var line = two.makeLine(0,sH*.8,sW,sH*.8);
 line.linewidth = 2;
 line.stroke = colorStyle;
 
+//extLength/4 % 1 == 0
+for(i=0;i<tickQuan;i++){
+  if(i/bigTick % 1 == 0){
+    tick = two.makeLine(i*tickSpan,sH*.8,i*tickSpan,sH*.8+5);
+    line.stroke = colorStyle;
+  }else{
+    tick = two.makeLine(i*tickSpan,sH*.8,i*tickSpan,sH*.8+3);
+    line.stroke = colorStyle;
+  }
+}
 
 two.update();
