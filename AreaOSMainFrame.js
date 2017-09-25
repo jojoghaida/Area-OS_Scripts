@@ -4,7 +4,7 @@ viewInit();
 orbitCam();
 viewAnim();
 function viewInit(){
-alert();
+alert("updated!");
 viewport = document.getElementById('areaoscanvas');
 h = viewport.offsetHeight;
 w = viewport.offsetWidth;
