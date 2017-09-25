@@ -77,10 +77,10 @@ function handleTouchMove(evt) {
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
         if ( xDiff > 0 ) {
             /* left swipe */
-            inputSliderGroup.translation.set(xDiff,0);
-            console.log(xDiff);
+            inputSliderGroup.translation.x = xDiff;
         } else {
             /* right swipe */
+            inputSliderGroup.translation.x = xDiff;
         }
     } else {
         if ( yDiff > 0 ) {
