@@ -57,7 +57,7 @@ function onWindowRotate() {
     renderer.setSize( window.innerWidth, window.innerHeight );
     render();
   }
-  setTimeout(rotateView, 100);
+  setTimeout(rotateView, 300);
 }
 function render(){
 renderer.render(scene,camera);
