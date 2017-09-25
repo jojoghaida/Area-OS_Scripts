@@ -11,7 +11,8 @@ var two = new Two(params).appendTo(inputsTwoScene);
 inputsTwoScene.addEventListener('mousemove',disableOrbitCam);
 
 //touch gestures*
-inputsTwoScene.addEventListener('touchstart',disableOrbitCam, handleTouchStart);
+inputsTwoScene.addEventListener('touchstart',disableOrbitCam);
+inputsTwoScene.addEventListener('touchstart', handleTouchStart, false);
 inputsTwoScene.addEventListener('touchmove', handleTouchMove, false);
 
 //standard input
@@ -82,7 +83,6 @@ function handleTouchMove(evt) {
         } else {
             /* down swipe */
             alert("down!");
-
         }
     }
     /* reset values */
