@@ -28,6 +28,8 @@ var selector = two.makeStar(5*tickSpan,sH*.5,10,null,3);
 selector.noStroke();
 selector.fill = colorStyle;
 
+var tickerGroup = []
+
 var line = two.makeLine(0,sH,sW,sH);
 line.linewidth = 3;
 line.stroke = colorStyle;
@@ -38,11 +40,15 @@ for(i=0;i<tickQuan;i++){
     tick.stroke = colorStyle;
     integer = two.makeText(i,i*tickSpan,sH-25);
     integer.fill = colorStyle;
+    tickerGroup.push(tick,integer);
   }else{
     tick = two.makeLine(i*tickSpan,sH,i*tickSpan,sH-10);
     tick.stroke = colorStyle;
+    tickerGroup.push(tick);
   }
 }
+
+var inputSliderGroup = two.makeGroup(tickerGroup);
 
 two.update();
 
@@ -71,18 +77,14 @@ function handleTouchMove(evt) {
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
         if ( xDiff > 0 ) {
             /* left swipe */
-            alert(xDiff);
         } else {
             /* right swipe */
-            alert(xDiff);
         }
     } else {
         if ( yDiff > 0 ) {
             /* up swipe */
-            alert("up!");
         } else {
             /* down swipe */
-            alert("down!");
         }
     }
     /* reset values */
