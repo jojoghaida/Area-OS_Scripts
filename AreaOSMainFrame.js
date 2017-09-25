@@ -17,13 +17,15 @@ function launchAbout(){
 }
 aboutButton.addEventListener('click',launchAbout);
 
+alert("updated!");
+
+
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 var camera, scene, controls, renderer;
 viewInit();
 orbitCam();
 viewAnim();
 function viewInit(){
-alert("updated!");
 viewport = document.getElementById('areaoscanvas');
 h = viewport.offsetHeight;
 w = viewport.offsetWidth;
