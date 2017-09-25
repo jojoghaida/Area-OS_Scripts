@@ -8,5 +8,5 @@ var params = {width: sW, height: sH};
 var two = new Two(params).appendTo(inputsTwoScene);
 
 
-var line = two.makeLine(0,sH/1.5,sW,sH/1.5);
+var line = two.makeLine(0,sH*.10,sW,sH*.10);
 two.update();
