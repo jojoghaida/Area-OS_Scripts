@@ -59,8 +59,8 @@ two.update();
 // var yDown = null;
 
 function handleTouchStart(evt) {
-    var xDown = evt.touches[0].clientX;
-    var yDown = evt.touches[0].clientY;
+    window.xDown = evt.touches[0].clientX;
+    window.yDown = evt.touches[0].clientY;
 };
 
 function handleTouchMove(evt) {
