@@ -59,14 +59,8 @@ two.update();
 // var yDown = null;
 
 function handleTouchStart(evt) {
-  if (typeof xDown && yDown !== 'undefined') {
-    // the variable is defined
-    xDown += evt.touches[0].clientX;
-    yDown += evt.touches[0].clientY;
-  }else{
     window.xDown = evt.touches[0].clientX;
     window.yDown = evt.touches[0].clientY;
-  }
 };
 
 function handleTouchMove(evt) {
