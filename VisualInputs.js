@@ -7,7 +7,7 @@ var params = {width: sW, height: sH};
 
 var two = new Two(params).appendTo(inputsTwoScene);
 
-var rectangle = two.makeRectangle(0,0,-sW,-sH);
+var rectangle = two.makeRectangle(0,0,sW,-sH);
 rectangle.fill = 'green';
 
 var line = two.makeLine(0,sH,sW,sH);
