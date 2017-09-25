@@ -71,7 +71,7 @@ function handleTouchMove(evt) {
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
         if ( xDiff > 0 ) {
             /* left swipe */
-            alert("left!");
+            alert("left!",xDiff);
         } else {
             /* right swipe */
             alert("right!");
