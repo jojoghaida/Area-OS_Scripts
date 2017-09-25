@@ -18,7 +18,7 @@ function launchAbout(){
 aboutButton.addEventListener('click',launchAbout);
 
 alert("updated!");
-alert("yes");
+alert("yoo0 kitties");
 
 
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
