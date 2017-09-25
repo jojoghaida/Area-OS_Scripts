@@ -17,7 +17,7 @@ var tickQuan = 150;
 var bigTick = 5;
 var tickSpan = 10;
 
-var selector = two.makeStar(sW*.15,sH*.25,10,null,3);
+var selector = two.makeStar(5*tickSpan,sH*.25,10,null,3);
 selector.noStroke();
 selector.fill = colorStyle;
 
