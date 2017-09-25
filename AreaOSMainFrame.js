@@ -1,3 +1,22 @@
+//app UI
+resetButton = document.getElementById('resetButton');
+resetText = document.getElementById('resetText');
+function refreshPage(){
+  resetText.style.color = "blue";
+  resetButton.style.borderWidth = "1px";
+  setTimeout(function(){location.reload();},500);
+}
+resetButton.addEventListener('click',refreshPage);
+aboutButton = document.getElementById('aboutButton');
+aboutText = document.getElementById('aboutText');
+function launchAbout(){
+  aboutText.style.color = "blue";
+  aboutButton.style.borderWidth = "1px";
+  setTimeout(function(){window.location.href = 'https://www.joeghaida.com/design/areaos-about';},500);
+
+}
+aboutButton.addEventListener('click',launchAbout);
+
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 var camera, scene, controls, renderer;
 viewInit();
