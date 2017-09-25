@@ -17,9 +17,6 @@ function launchAbout(){
 }
 aboutButton.addEventListener('click',launchAbout);
 
-alert("updated!");
-alert("yoo0 kitties");
-
 
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 var camera, scene, controls, renderer;
@@ -32,7 +29,7 @@ h = viewport.offsetHeight;
 w = viewport.offsetWidth;
 
 scene = new THREE.Scene();
-scene.background = new THREE.Color( 0xffffff );
+scene.background = new THREE.Color( 0x0851a4 ); 0xffffff
 
 camera = new THREE.PerspectiveCamera( 55, w/h, 0.1, 10000 );
 //camera = new THREE.OrthographicCamera( w/2,w/-2,h/-2,h/2,1,500 );
