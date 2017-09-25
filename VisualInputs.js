@@ -55,12 +55,15 @@ two.update();
 
 //gesture effects*
 
-// var xDown = null;
-// var yDown = null;
+var xDown = null;
+var yDown = null; // may need later
+
+var xAbsPos = 0;
+var yAbsPos = 0; // may need later
 
 function handleTouchStart(evt) {
-    window.xDown = evt.touches[0].clientX;
-    window.yDown = evt.touches[0].clientY;
+    xDown = evt.touches[0].clientX;
+    yDown = evt.touches[0].clientY;
 };
 
 function handleTouchMove(evt) {
@@ -77,11 +80,13 @@ function handleTouchMove(evt) {
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
         if ( xDiff > 0 ) {
             /* left swipe */
-            inputSliderGroup.translation.x = -xDiff;
+            xAbsPos += -xDiff;
+            inputSliderGroup.translation.x = xAbsPos;
             two.update();
         } else {
             /* right swipe */
-            inputSliderGroup.translation.x = -xDiff;
+            xAbsPos += -xDiff;
+            inputSliderGroup.translation.x = xAbsPos;
             two.update();
         }
     } else {
