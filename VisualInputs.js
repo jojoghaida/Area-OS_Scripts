@@ -12,10 +12,10 @@ var two = new Two(params).appendTo(inputsTwoScene);
 // var rectangle = two.makeRectangle(0,0,sW,-sH);
 // rectangle.fill = 'green';
 
-var colorStyle = "orange";
+var colorStyle = "0x26D8A5";
 var tickQuan = 150;
 var bigTick = 5;
-var tickSpan = 5;
+var tickSpan = 10;
 
 
 var line = two.makeLine(0,sH*.8,sW,sH*.8);
