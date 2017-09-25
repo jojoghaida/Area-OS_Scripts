@@ -12,7 +12,7 @@ var two = new Two(params).appendTo(inputsTwoScene);
 // var rectangle = two.makeRectangle(0,0,sW,-sH);
 // rectangle.fill = 'green';
 
-var colorStyle = 0x26D8A5;
+var colorStyle = 'blue';
 var tickQuan = 150;
 var bigTick = 5;
 var tickSpan = 10;
