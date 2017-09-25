@@ -55,12 +55,12 @@ two.update();
 
 //gesture effects*
 
-var xDown = null;
-var yDown = null;
+// var xDown = null;
+// var yDown = null;
 
 function handleTouchStart(evt) {
-    xDown = evt.touches[0].clientX;
-    yDown = evt.touches[0].clientY;
+    var xDown = evt.touches[0].clientX;
+    var yDown = evt.touches[0].clientY;
 };
 
 function handleTouchMove(evt) {
