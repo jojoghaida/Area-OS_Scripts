@@ -13,7 +13,7 @@ var two = new Two(params).appendTo(inputsTwoScene);
 // rectangle.fill = 'green';
 
 var colorStyle = "orange";
-var tickQuan = 50;
+var tickQuan = 150;
 var bigTick = 5;
 var tickSpan = 5;
 
@@ -25,11 +25,11 @@ line.stroke = colorStyle;
 //extLength/4 % 1 == 0
 for(i=0;i<tickQuan;i++){
   if(i/bigTick % 1 == 0){
-    tick = two.makeLine(i*tickSpan,sH*.8,i*tickSpan,sH*.8+5);
-    line.stroke = colorStyle;
+    tick = two.makeLine(i*tickSpan,sH*.8,i*tickSpan,-(sH*.8+15));
+    tick.stroke = colorStyle;
   }else{
-    tick = two.makeLine(i*tickSpan,sH*.8,i*tickSpan,sH*.8+3);
-    line.stroke = colorStyle;
+    tick = two.makeLine(i*tickSpan,sH*.8,i*tickSpan,-(sH*.8+10));
+    tick.stroke = colorStyle;
   }
 }
 
