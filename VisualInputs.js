@@ -30,6 +30,7 @@ for(i=0;i<tickQuan;i++){
     tick = two.makeLine(i*tickSpan,sH,i*tickSpan,sH-15);
     tick.stroke = colorStyle;
     integer = two.makeText(i,i*tickSpan,sH-25);
+    integer.fill = colorStyle;
   }else{
     tick = two.makeLine(i*tickSpan,sH,i*tickSpan,sH-10);
     tick.stroke = colorStyle;
