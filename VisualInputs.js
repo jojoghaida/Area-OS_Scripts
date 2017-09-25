@@ -12,7 +12,7 @@ var two = new Two(params).appendTo(inputsTwoScene);
 // var rectangle = two.makeRectangle(0,0,sW,-sH);
 // rectangle.fill = 'green';
 
-var selector = two.makeStar(sW*.25,sH*.25,15,15,3);
+var selector = two.makeStar(sW*.15,sH*.25,15,null,3);
 
 
 var colorStyle = 'blue';
