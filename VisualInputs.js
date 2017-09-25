@@ -12,13 +12,14 @@ var two = new Two(params).appendTo(inputsTwoScene);
 // var rectangle = two.makeRectangle(0,0,sW,-sH);
 // rectangle.fill = 'green';
 
-var selector = two.makeStar(sW*.15,sH*.25,15,null,3);
-
-
 var colorStyle = 'blue';
 var tickQuan = 150;
 var bigTick = 5;
 var tickSpan = 10;
+
+var selector = two.makeStar(sW*.15,sH*.25,15,null,3);
+selector.noStroke();
+selector.fill = colorStyle;
 
 var line = two.makeLine(0,sH*.8,sW,sH*.8);
 line.linewidth = 2;
