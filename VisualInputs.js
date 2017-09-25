@@ -8,7 +8,7 @@ var params = {width: sW, height: sH};
 var two = new Two(params).appendTo(inputsTwoScene);
 
 
-inputsTwoScene.addEventListener('mousemove',disableOrbitCam; alert('yea'););
+inputsTwoScene.addEventListener('mousemove',disableOrbitCam, alert('yea'));
 inputsTwoScene.addEventListener('touchstart',disableOrbitCam);
 
 //standard input
