@@ -8,6 +8,9 @@ var params = {width: sW, height: sH};
 var two = new Two(params).appendTo(inputsTwoScene);
 
 
+inputsTwoScene.addEventListener('mousemove',disableOrbitCam);
+inputsTwoScene.addEventListener('touchstart',disableOrbitCam);
+
 //standard input
 // var rectangle = two.makeRectangle(0,0,sW,-sH);
 // rectangle.fill = 'green';
@@ -17,7 +20,7 @@ var tickQuan = 150;
 var bigTick = 5;
 var tickSpan = 10;
 
-var selector = two.makeStar(5*tickSpan,sH*.25,10,null,3);
+var selector = two.makeStar(5*tickSpan,sH*.5,10,null,3);
 selector.noStroke();
 selector.fill = colorStyle;
 
