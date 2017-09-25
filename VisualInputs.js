@@ -49,7 +49,6 @@ for(i=0;i<tickQuan;i++){
 }
 
 var inputSliderGroup = two.makeGroup(tickerGroup);
-var vectorPt = two.makeVector(sW/2,sH/2);
 
 two.update();
 
