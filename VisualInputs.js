@@ -29,7 +29,7 @@ for(i=0;i<tickQuan;i++){
   if(i/bigTick % 1 == 0){
     tick = two.makeLine(i*tickSpan,sH,i*tickSpan,sH-15);
     tick.stroke = colorStyle;
-    integer = two.makeText(i,i*tickSpan,sH*.8-25);
+    integer = two.makeText(i,i*tickSpan,sH-25);
   }else{
     tick = two.makeLine(i*tickSpan,sH,i*tickSpan,sH-10);
     tick.stroke = colorStyle;
