@@ -6,5 +6,5 @@ var params = {width: inputsTwoScene.offsetWidth, height: inputsTwoScene.offsetHe
 var two = new Two(params).appendTo(inputsTwoScene);
 
 
-var line = two.makeLine(0,0,15,15);
+var line = two.makeLine(0,50,100,50);
 two.update();
