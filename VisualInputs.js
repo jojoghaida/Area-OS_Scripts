@@ -78,9 +78,11 @@ function handleTouchMove(evt) {
         if ( xDiff > 0 ) {
             /* left swipe */
             inputSliderGroup.translation.x = xDiff;
+            two.update();
         } else {
             /* right swipe */
             inputSliderGroup.translation.x = xDiff;
+            two.update();
         }
     } else {
         if ( yDiff > 0 ) {
