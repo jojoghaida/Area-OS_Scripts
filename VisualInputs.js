@@ -1,6 +1,6 @@
 //two js form inputs
 
 var inputsTwoScene = document.getElementById('inputCanvas');
-var params.fullscreen //= {width: 50, height: 50};
+var params = {width: inputsTwoScene.offsetWidth, height: inputsTwoScene.offsetHeight};
 
 var two = new Two(params).appendTo(elem);
