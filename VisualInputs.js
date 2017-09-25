@@ -49,6 +49,7 @@ for(i=0;i<tickQuan;i++){
 }
 
 var inputSliderGroup = two.makeGroup(tickerGroup);
+var vectorPt = two.makeVector(sW/2,sH/2);
 
 two.update();
 
@@ -77,11 +78,11 @@ function handleTouchMove(evt) {
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
         if ( xDiff > 0 ) {
             /* left swipe */
-            inputSliderGroup.translation.x = xDiff;
+            inputSliderGroup.translation.x = -xDiff;
             two.update();
         } else {
             /* right swipe */
-            inputSliderGroup.translation.x = xDiff;
+            inputSliderGroup.translation.x = -xDiff;
             two.update();
         }
     } else {
