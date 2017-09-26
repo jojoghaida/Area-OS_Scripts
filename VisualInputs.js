@@ -25,6 +25,9 @@ var tickQuan = 150;
 var bigTick = 5;
 var tickSpan = 10;
 
+var inputLabel = two.makeText('chair(s)',sH*.75,sH*.5);
+inputLabel.fill = colorStyle;
+inputLabel.size = 24;
 var selectorText = two.makeText(0,sH*.5,sH*.25);
 selectorText.fill = colorStyle;
 selectorText.size = 18;
