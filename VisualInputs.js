@@ -35,7 +35,8 @@ window.onload = function(){
   glyph = two.interpret(getSVG);
   console.log(glyph);
   // glyph.linewidth = 200;
-  glyph.translation.y = 100;
+  glyph.translation.y = -100;
+  glyph.scale = 5;
   two.update();
 
 }
