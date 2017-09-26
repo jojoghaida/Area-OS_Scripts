@@ -25,12 +25,14 @@ var tickQuan = 150;
 var bigTick = 5;
 var tickSpan = 10;
 
+
+var glyph = null;
 window.onload = function(){
   var svg = document.getElementById('basicChairGlyph');
   var getSVG = svg.getElementsByTagName('svg')[0];
   console.log(svg);
   console.log(getSVG);
-  var glyph = two.interpret(getSVG);
+  glyph = two.interpret(getSVG);
   console.log(glyph);
   two.update();
 }
