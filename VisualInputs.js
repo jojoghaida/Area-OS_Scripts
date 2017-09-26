@@ -35,11 +35,11 @@ var line = two.makeLine(0,sH,sW,sH);
 line.linewidth = 3;
 line.stroke = colorStyle;
 
-for(i=5;i<tickQuan;i++){
+for(i=0;i<tickQuan;i++){
   if(i/bigTick % 1 == 0){
     tick = two.makeLine(i*tickSpan,sH,i*tickSpan,sH-15);
     tick.stroke = colorStyle;
-    integer = two.makeText(i-tickSpan,i*tickSpan,sH-25);
+    integer = two.makeText(i,i*tickSpan+5,sH-25);
     integer.fill = colorStyle;
     tickerGroup.push(tick,integer);
   }else{
