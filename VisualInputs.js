@@ -30,7 +30,7 @@ window.onload = function(){
   var getSVG = svg.getElementsByTagName('svg')[0];
   console.log(svg);
   console.log(getSVG);
-  var glyph = two.interpret(getSVG);
+  var glyph = two.interpret('<svg src="https://raw.githubusercontent.com/jojoghaida/Area-OS_SVGs/master/basicChair.svg?token=Ab29f7atuktrNpUsE8-NSqiTXKkQ4ZyBks5Z0-nJwA%3D%3D" width="50px" height="50px"></svg>'/*getSVG*/);
   console.log(glyph);
   two.update();
 }
