@@ -14,6 +14,7 @@ inputsTwoScene.addEventListener('mousemove',disableOrbitCam);
 inputsTwoScene.addEventListener('touchstart',disableOrbitCam);
 inputsTwoScene.addEventListener('touchstart', handleTouchStart, false);
 inputsTwoScene.addEventListener('touchmove', handleTouchMove, false);
+inputsTwoScene.addEventListener('touchend', handleTouchEnd, false);
 
 //standard input
 // var rectangle = two.makeRectangle(0,0,sW,-sH);
@@ -57,7 +58,7 @@ two.update();
 
 var xDown = null;
 var yDown = null; // may need later
-
+var backPedalX = 0;
 var xAbsPos = 0;
 var yAbsPos = 0; // may need later
 
@@ -80,17 +81,20 @@ function handleTouchMove(evt) {
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
         if ( xDiff > 0 ) {
             /* left swipe */
-            console.log(xDiff);
-            xAbsPos += -(xDiff/8);
+            if(xDiff>backPedalX){xAbsPos += -1});}//else{Math.abs(xDiff - backPedalX)}
+
             if(xAbsPos<-1500){xAbsPos=-1500;}
             inputSliderGroup.translation.x = xAbsPos;
+            backPedalX = xDiff;
             two.update();
         } else {
             /* right swipe */
-            console.log(xDiff);
+
             xAbsPos += -(xDiff/8);
+
             if(xAbsPos>0){xAbsPos=0;}
             inputSliderGroup.translation.x = xAbsPos;
+            backPedalX = xDiff;
             two.update();
         }
     } else {
@@ -103,4 +107,8 @@ function handleTouchMove(evt) {
     /* reset values */
     // xDown = null;
     // yDown = null;
+};
+
+function handleTouchEnd(evt){
+  backPedalX = 0;
 };
