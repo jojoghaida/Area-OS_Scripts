@@ -90,7 +90,7 @@ function handleTouchMove(evt) {
         } else {
             /* right swipe */
 
-            xAbsPos += -(xDiff/8);
+            if(xDiff>backPedalX){xAbsPos += Math.abs(xDiff-backPedalX);}else{xAbsPos += -(Math.abs(xDiff-backPedalX));}
 
             if(xAbsPos>0){xAbsPos=0;}
             inputSliderGroup.translation.x = xAbsPos;
