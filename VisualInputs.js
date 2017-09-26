@@ -85,21 +85,18 @@ function handleTouchMove(evt) {
         if ( xDiff > 0 ) {
             /* left swipe */
             if(xDiff>backPedalX){xAbsPos += -(Math.abs(xDiff-backPedalX));}else{xAbsPos += Math.abs(xDiff-backPedalX);}
-
             if(xAbsPos<-1500){xAbsPos=-1500;}
             inputSliderGroup.translation.x = xAbsPos;
             backPedalX = xDiff;
+            selectorText.value = xAbsPos;
             two.update();
         } else {
             /* right swipe */
-
             if(xDiff<backPedalX){xAbsPos += Math.abs(xDiff-backPedalX);}else{xAbsPos += -(Math.abs(xDiff-backPedalX));}
-
-            // xAbsPos += -(xDiff/8);
-
             if(xAbsPos>0){xAbsPos=0;}
             inputSliderGroup.translation.x = xAbsPos;
             backPedalX = xDiff;
+            selectorText.value = xAbsPos;
             two.update();
         }
     } else {
