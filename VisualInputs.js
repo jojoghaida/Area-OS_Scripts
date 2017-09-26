@@ -115,7 +115,7 @@ function handleTouchEnd(evt){
 function alignSlider(){
   console.log(xAbsPos);
   correctDifference = (xAbsPos/tickSpan % 1)*tickSpan;
-  if(correctDifference>=tickSpan/2){
+  if(correctDifference*-1>=tickSpan/2){
     correctDifference += tickSpan-correctDifference;
   }else{
     correctDifference *= -1;
