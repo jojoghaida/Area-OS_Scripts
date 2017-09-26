@@ -81,7 +81,7 @@ function handleTouchMove(evt) {
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
         if ( xDiff > 0 ) {
             /* left swipe */
-            if(xDiff>backPedalX){xAbsPos += -1;}//else{Math.abs(xDiff - backPedalX)}
+            if(xDiff>backPedalX){xAbsPos += -(Math.abs(xDiff-backPedalX));}//else{Math.abs(xDiff - backPedalX)}
 
             if(xAbsPos<-1500){xAbsPos=-1500;}
             inputSliderGroup.translation.x = xAbsPos;
