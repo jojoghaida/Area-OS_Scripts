@@ -25,13 +25,12 @@ var tickQuan = 150;
 var bigTick = 5;
 var tickSpan = 10;
 
-var svg = document.getElementById('basicChairGlyph');
-svg.onload = function(){
+window.onload = function(){
+  var svg = document.getElementById('basicChairGlyph');
   var glyph = two.interpret(svg);
   console.log(glyph);
   two.update();
 }
-
 
 var inputLabel = two.makeText('chair(s)',sH*1.2,sH*.35);
 inputLabel.fill = colorStyle;
