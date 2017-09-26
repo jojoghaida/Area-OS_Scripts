@@ -27,7 +27,7 @@ var tickSpan = 10;
 
 var svg = document.getElementById('basicChairGlyph');
 var glyph = two.interpret(svg);
-console.log(loglyphgo);
+console.log(glyph);
 
 var inputLabel = two.makeText('chair(s)',sH*1.2,sH*.35);
 inputLabel.fill = colorStyle;
