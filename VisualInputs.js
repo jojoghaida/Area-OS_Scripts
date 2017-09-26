@@ -41,7 +41,7 @@ window.onload = function(){
 
 }
 
-var inputLabel = two.makeText('chair(s)',sH*1.2,sH*.35);
+var inputLabel = two.makeText('chair(s)',sH*1.8,sH*.35);
 inputLabel.fill = colorStyle;
 inputLabel.size = 24;
 var selectorText = two.makeText(0,sH*.5,sH*.25);
