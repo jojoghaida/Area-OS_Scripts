@@ -39,7 +39,7 @@ for(i=5;i<tickQuan;i++){
   if(i/bigTick % 1 == 0){
     tick = two.makeLine(i*tickSpan,sH,i*tickSpan,sH-15);
     tick.stroke = colorStyle;
-    integer = two.makeText(i,i*tickSpan,sH-25);
+    integer = two.makeText(i-tickSpan,i*tickSpan,sH-25);
     integer.fill = colorStyle;
     tickerGroup.push(tick,integer);
   }else{
