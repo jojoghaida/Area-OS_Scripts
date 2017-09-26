@@ -34,7 +34,9 @@ window.onload = function(){
   console.log(getSVG);
   glyph = two.interpret(getSVG);
   console.log(glyph);
+  glyph.linewidth = 200;
   two.update();
+
 }
 
 var inputLabel = two.makeText('chair(s)',sH*1.2,sH*.35);
