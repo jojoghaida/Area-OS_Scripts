@@ -77,7 +77,6 @@ function handleTouchMove(evt) {
 
     var xUp = evt.touches[0].clientX;
     var yUp = evt.touches[0].clientY;
-
     var xDiff = xDown - xUp;
     var yDiff = yDown - yUp;
 
@@ -88,16 +87,18 @@ function handleTouchMove(evt) {
             if(xAbsPos<-1500){xAbsPos=-1500;}
             inputSliderGroup.translation.x = xAbsPos;
             backPedalX = xDiff;
-            selectorText.value = Math.round(Math.abs(xAbsPos/tickSpan));
+            selectorText.value = xAbsPos/tickSpan; //Math.round(Math.abs(xAbsPos/tickSpan));
             two.update();
+            setTimeout(alignSlider,1000);
         } else {
             /* right swipe */
             if(xDiff<backPedalX){xAbsPos += Math.abs(xDiff-backPedalX);}else{xAbsPos += -(Math.abs(xDiff-backPedalX));}
             if(xAbsPos>0){xAbsPos=0;}
             inputSliderGroup.translation.x = xAbsPos;
             backPedalX = xDiff;
-            selectorText.value = Math.round(Math.abs(xAbsPos/tickSpan));
+            selectorText.value = xAbsPos/tickSpan; //Math.round(Math.abs(xAbsPos/tickSpan));
             two.update();
+            setTimeout(alignSlider,1000);
         }
     } else {
         if ( yDiff > 0 ) {
@@ -106,11 +107,16 @@ function handleTouchMove(evt) {
             /* down swipe */
         }
     }
-    /* reset values */
-    // xDown = null;
-    // yDown = null;
 };
 
 function handleTouchEnd(evt){
   backPedalX = 0;
 };
+
+function alignSlider(){
+  correctDifference = xAbsPos-Math.round(xAbsPos);
+  xAbsPos += correctDifference;
+  inputSliderGroup.translation.x = xAbsPos;
+  two.update();
+
+}
