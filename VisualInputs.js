@@ -35,7 +35,7 @@ var line = two.makeLine(0,sH,sW,sH);
 line.linewidth = 3;
 line.stroke = colorStyle;
 
-for(i=0;i<tickQuan;i++){
+for(i=5;i<tickQuan;i++){
   if(i/bigTick % 1 == 0){
     tick = two.makeLine(i*tickSpan,sH,i*tickSpan,sH-15);
     tick.stroke = colorStyle;
