@@ -80,13 +80,13 @@ function handleTouchMove(evt) {
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
         if ( xDiff > 0 ) {
             /* left swipe */
-            xAbsPos += -(xDiff/2);
-            if(xAbsPos>0){xAbsPos=0;}
+            xAbsPos += -(xDiff/4);
+            if(xAbsPos<-300){xAbsPos=0;}
             inputSliderGroup.translation.x = xAbsPos;
             two.update();
         } else {
             /* right swipe */
-            xAbsPos += -(xDiff/2);
+            xAbsPos += -(xDiff/4);
             if(xAbsPos>0){xAbsPos=0;}
             inputSliderGroup.translation.x = xAbsPos;
             two.update();
