@@ -87,7 +87,7 @@ function handleTouchMove(evt) {
             if(xAbsPos<-1500){xAbsPos=-1500;}
             inputSliderGroup.translation.x = xAbsPos;
             backPedalX = xDiff;
-            selectorText.value = xAbsPos/tickSpan; //Math.round(Math.abs(xAbsPos/tickSpan));
+            selectorText.value = Math.round(Math.abs(xAbsPos/tickSpan));
             two.update();
         } else {
             /* right swipe */
@@ -95,7 +95,7 @@ function handleTouchMove(evt) {
             if(xAbsPos>0){xAbsPos=0;}
             inputSliderGroup.translation.x = xAbsPos;
             backPedalX = xDiff;
-            selectorText.value = xAbsPos/tickSpan; //Math.round(Math.abs(xAbsPos/tickSpan));
+            selectorText.value = Math.round(Math.abs(xAbsPos/tickSpan));
             two.update();
         }
     } else {
@@ -109,7 +109,7 @@ function handleTouchMove(evt) {
 
 function handleTouchEnd(evt){
   backPedalX = 0;
-  setTimeout(alignSlider,1000);
+  // setTimeout(alignSlider,1000);
 };
 
 function alignSlider(){
