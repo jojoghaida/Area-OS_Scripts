@@ -125,5 +125,6 @@ function alignSlider(){
   console.log(xAbsPos);
   inputSliderGroup.translation.x = xAbsPos;
   two.update();
+  selectorText.value = xAbsPos/tickSpan; // delete
 
 }
