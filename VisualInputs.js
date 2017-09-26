@@ -27,10 +27,7 @@ var tickSpan = 10;
 
 window.onload = function(){
   var svg = document.getElementById('basicChairGlyph');
-  console.log(svg);
-  svgsvg = svg.getElementsByTagName('svg')[0];
-  console.log(svgsvg);
-  var glyph = two.interpret(svgsvg);
+  var glyph = two.interpret(svg);
   console.log(glyph);
   two.update();
 }
