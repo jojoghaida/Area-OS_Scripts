@@ -37,13 +37,13 @@ line.stroke = colorStyle;
 
 for(i=0;i<tickQuan;i++){
   if(i/bigTick % 1 == 0){
-    tick = two.makeLine(i*tickSpan,sH,i*tickSpan,sH-15);
+    tick = two.makeLine(i*tickSpan+50,sH,i*tickSpan+50,sH-15);
     tick.stroke = colorStyle;
-    integer = two.makeText(i,i*tickSpan+5,sH-25);
+    integer = two.makeText(i,i*tickSpan+50,sH-25);
     integer.fill = colorStyle;
     tickerGroup.push(tick,integer);
   }else{
-    tick = two.makeLine(i*tickSpan,sH,i*tickSpan,sH-10);
+    tick = two.makeLine(i*tickSpan+50,sH,i*tickSpan+50,sH-10);
     tick.stroke = colorStyle;
     tickerGroup.push(tick);
   }
