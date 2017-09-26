@@ -25,7 +25,7 @@ var tickQuan = 150;
 var bigTick = 5;
 var tickSpan = 10;
 
-var selectorText = two.makeText(100,sH*.5,sH*.3);
+var selectorText = two.makeText(0,sH*.5,sH*.25);
 selectorText.fill = colorStyle;
 selectorText.size = 18;
 var selector = two.makeStar(5*tickSpan,sH*.5,10,null,3);
@@ -88,7 +88,7 @@ function handleTouchMove(evt) {
             if(xAbsPos<-1500){xAbsPos=-1500;}
             inputSliderGroup.translation.x = xAbsPos;
             backPedalX = xDiff;
-            selectorText.value = xAbsPos;
+            selectorText.value = Math.abs(xAbsPos)/tickSpan;
             two.update();
         } else {
             /* right swipe */
@@ -96,7 +96,7 @@ function handleTouchMove(evt) {
             if(xAbsPos>0){xAbsPos=0;}
             inputSliderGroup.translation.x = xAbsPos;
             backPedalX = xDiff;
-            selectorText.value = xAbsPos;
+            selectorText.value = Math.abs(xAbsPos)/tickSpan;
             two.update();
         }
     } else {
