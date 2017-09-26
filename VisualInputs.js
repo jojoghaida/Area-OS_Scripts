@@ -25,10 +25,9 @@ var tickQuan = 150;
 var bigTick = 5;
 var tickSpan = 10;
 
-var svg = 'https://raw.githubusercontent.com/jojoghaida/Area-OS_SVGs/b340eaf4f869a50a7d64912a47b0df934499beb9/basicChair.svg?token=Ab29f7M7sIn9-ZP6lf-V_G4kR4MnRaWHks5Z0zcPwA%3D%3D';
-var glyph = new Two();
-var logo = glyph.interpret(svg);
-console.log(logo);
+var svg = document.getElementById('basicChairGlyph');
+var glyph = two.interpret(svg);
+console.log(loglyphgo);
 
 var inputLabel = two.makeText('chair(s)',sH*1.2,sH*.35);
 inputLabel.fill = colorStyle;
