@@ -25,12 +25,13 @@ var tickQuan = 150;
 var bigTick = 5;
 var tickSpan = 10;
 
-// window.onload = function(){
-//   var svg = null;
-//   var glyph = two.interpret(svg);
-//   console.log(glyph);
-//   two.update();
-// }
+window.onload = function(){
+  var svg = document.getElementById('basicChairGlyph');
+  console.log(svg);
+  var glyph = two.interpret(svg);
+  console.log(glyph);
+  two.update();
+}
 
 var inputLabel = two.makeText('chair(s)',sH*1.2,sH*.35);
 inputLabel.fill = colorStyle;
@@ -123,16 +124,13 @@ function handleTouchEnd(evt){
 };
 
 function alignSlider(){
-  console.log(xAbsPos);
   correctDifference = (xAbsPos/tickSpan % 1)*tickSpan;
   if(correctDifference*-1>=tickSpan/2){
     correctDifference = tickSpan-correctDifference;
   }else{
     correctDifference *= -1;
   }
-  console.log(correctDifference);
   xAbsPos += correctDifference;
-  console.log(xAbsPos);
   inputSliderGroup.translation.x = xAbsPos;
   two.update();
   selectorText.value = xAbsPos/tickSpan; // delete
