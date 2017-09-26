@@ -89,7 +89,6 @@ function handleTouchMove(evt) {
             backPedalX = xDiff;
             selectorText.value = xAbsPos/tickSpan; //Math.round(Math.abs(xAbsPos/tickSpan));
             two.update();
-            setTimeout(alignSlider,1000);
         } else {
             /* right swipe */
             if(xDiff<backPedalX){xAbsPos += Math.abs(xDiff-backPedalX);}else{xAbsPos += -(Math.abs(xDiff-backPedalX));}
@@ -98,7 +97,6 @@ function handleTouchMove(evt) {
             backPedalX = xDiff;
             selectorText.value = xAbsPos/tickSpan; //Math.round(Math.abs(xAbsPos/tickSpan));
             two.update();
-            setTimeout(alignSlider,1000);
         }
     } else {
         if ( yDiff > 0 ) {
@@ -111,6 +109,7 @@ function handleTouchMove(evt) {
 
 function handleTouchEnd(evt){
   backPedalX = 0;
+  setTimeout(alignSlider,1000);
 };
 
 function alignSlider(){
