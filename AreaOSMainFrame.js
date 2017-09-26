@@ -96,9 +96,9 @@ controls.addEventListener( 'change', render );
 var camControls = document.getElementById('controlsviewportoverlay');
 camControls.addEventListener('mousemove',lockOrbitMaintainControls);//disableOrbitCam(0));
 
-var questionDialog = document.getElementById('questionDialog');
-questionDialog.addEventListener('mousemove',disableOrbitCam);
-questionDialog.addEventListener('touchstart',disableOrbitCam);
+// var questionDialog = document.getElementById('questionDialog');
+// questionDialog.addEventListener('mousemove',disableOrbitCam);
+// questionDialog.addEventListener('touchstart',disableOrbitCam);
 
 var topInput = document.getElementById('topInput');
 topInput.addEventListener('mousemove',disableOrbitCam);
