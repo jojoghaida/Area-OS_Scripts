@@ -90,7 +90,7 @@ function handleTouchMove(evt) {
         } else {
             /* right swipe */
 
-            if(xDiff>backPedalX){xAbsPos += Math.abs(-xDiff-backPedalX);}else{xAbsPos += -(Math.abs(-xDiff-backPedalX));}
+            if(xDiff<backPedalX){xAbsPos += Math.abs(xDiff-backPedalX);}else{xAbsPos += -(Math.abs(xDiff-backPedalX));}
 
             // xAbsPos += -(xDiff/8);
 
