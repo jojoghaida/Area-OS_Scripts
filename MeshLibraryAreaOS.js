@@ -18,7 +18,7 @@ myChairLoader.load(
   'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicChair.json',
   function (geometry, materials) {
     chairGeo = geometry;
-    var material = new THREE.MeshBasicMaterial( { color: "black" } );
+    var material = new THREE.MeshBasicMaterial( { color: "blue" } );
     chairMesh = new THREE.Mesh(geometry,material);
     scene.add(chairMesh);
     renderer.render(scene,camera);
@@ -53,7 +53,7 @@ var conferenceTable4_6 = null;
 conferenceTableLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicConferenceTable4to6.json',
 function (geometry, materials) {
-  var material = new THREE.MeshBasicMaterial( { color: "black" } );
+  var material = new THREE.MeshBasicMaterial( { color: "blue" } );
   conferenceTable4_6 = new THREE.Mesh(geometry,material);
   conferenceTable4_6.position.x = 3;
   scene.add(conferenceTable4_6);
