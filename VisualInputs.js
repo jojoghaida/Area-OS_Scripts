@@ -23,20 +23,20 @@ var bigTick = 5;
 var tickSpan = 10;
 
 
-// var glyph = null;
-// window.onload = function(){
-//   var svg = document.getElementById('basicChairGlyph');
-//   var getSVG = svg.getElementsByTagName('svg')[0];
-//   console.log(svg);
-//   console.log(getSVG);
-//   glyph = two.interpret(getSVG);
-//   console.log(glyph);
-//   // glyph.linewidth = 200;
-//   glyph.translation.y = -100;
-//   glyph.scale = 5;
-//   two.update();
-//
-// }
+var glyph = null;
+window.onload = function(){
+  var svg = document.getElementById('basicChairGlyph');
+  var getSVG = svg.getElementsByTagName('svg')[0];
+  console.log(svg);
+  console.log(getSVG);
+  glyph = two.interpret(getSVG);
+  console.log(glyph);
+  // glyph.linewidth = 200;
+  glyph.translation.y = -100;
+  glyph.scale = 5;
+  two.update();
+
+}
 
 // var swipeUpTxt = two.makeText('swipe up to submit*', sW, 20);
 // swipeUpTxt.fill = colorStyle;
