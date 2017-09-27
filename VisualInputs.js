@@ -47,7 +47,7 @@ swipeUpTxt.alignment = 'center';
 var swipeUpGlyph = two.makeStar(sW-10,50,5,null,3);
 swipeUpGlyph.noStroke();
 swipeUpGlyph.fill = colorStyle;
-swipeUpGlyph.rotation = 180/π;
+swipeUpGlyph.rotation = 180/Math.PI;
 
 // var swipeUpGradient = new Two.linearGradient();
 
