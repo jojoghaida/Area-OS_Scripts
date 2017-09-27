@@ -504,6 +504,15 @@ function spaceNavigator(){
   newMainAxisCrv = twoPtCurve(newP1, pushPointDirection(newP1,twoPtUnitVec(newP2,newP1)));
   dropCircle(newP1);
 
+  // trivial variables for live preview
+  var stPt = new THREE.Vector3(0,0,7);
+  dropCircle(stPt);
+  // trivial variables for live preview
+
+  function livePreview(furnitureElement,ammountOfFurnishings){
+
+  }
+
   function newStepExt(crv,distance,increment = 0.5){
     extLength = 1;
     function loopExt(){
@@ -512,7 +521,7 @@ function spaceNavigator(){
       if(realCrvLength >= distance){console.log("done!");}else{
         // console.log("extending curve",increment,"feet.");
         extendCrv(crv,increment,getCrvVector(crv));
-        crv.geometry.computeBoundingSphere()
+        crv.geometry.computeBoundingSphere();
         if(extLength/4 % 1 == 0){
           // console.log(extLength);
           p1 = crv.geometry.vertices[1].clone();
