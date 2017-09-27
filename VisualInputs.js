@@ -43,7 +43,7 @@ window.onload = function(){
 
 var leftWhiteSpace = 50;
 
-var inputLabel = two.makeText('chair(s)',leftWhiteSpace+50,sH*.37);
+var inputLabel = two.makeText('chair(s)',leftWhiteSpace+60,sH*.37); //get glyph size to get y-value
 inputLabel.fill = colorStyle;
 inputLabel.size = 24;
 inputLabel.family = 'Karla';
