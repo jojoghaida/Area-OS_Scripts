@@ -17,33 +17,36 @@ inputsTwoScene.addEventListener('touchmove', handleTouchMove, false);
 inputsTwoScene.addEventListener('touchend', handleTouchEnd, false);
 
 //standard input
-// var rectangle = two.makeRectangle(0,0,sW,-sH);
-// rectangle.fill = 'green';
-
 var colorStyle = 'blue';
 var tickQuan = 150;
 var bigTick = 5;
 var tickSpan = 10;
 
 
-var glyph = null;
-window.onload = function(){
-  var svg = document.getElementById('basicChairGlyph');
-  var getSVG = svg.getElementsByTagName('svg')[0];
-  console.log(svg);
-  console.log(getSVG);
-  glyph = two.interpret(getSVG);
-  console.log(glyph);
-  // glyph.linewidth = 200;
-  glyph.translation.y = -100;
-  glyph.scale = 5;
-  two.update();
+// var glyph = null;
+// window.onload = function(){
+//   var svg = document.getElementById('basicChairGlyph');
+//   var getSVG = svg.getElementsByTagName('svg')[0];
+//   console.log(svg);
+//   console.log(getSVG);
+//   glyph = two.interpret(getSVG);
+//   console.log(glyph);
+//   // glyph.linewidth = 200;
+//   glyph.translation.y = -100;
+//   glyph.scale = 5;
+//   two.update();
+//
+// }
 
-}
+var swipeUpTxt = two.makeText('swipe up to submit*', sW, 20);
+swipeUpTxt.fill = colorStyle;
+swipeUpTxt.size = 12;
+swipeUpTxt.family = 'Karla';
+swipeUpTxt.alignment = 'right';
 
 var leftWhiteSpace = 50;
 
-var inputLabel = two.makeText('Chair(s)',leftWhiteSpace+65,sH*.37); //get glyph size to get y-value
+var inputLabel = two.makeText('Chair(s)',leftWhiteSpace+60,sH*.37); //get glyph size to get y-value
 inputLabel.fill = colorStyle;
 inputLabel.size = 24;
 inputLabel.family = 'Karla';
