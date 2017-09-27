@@ -38,11 +38,15 @@ var tickSpan = 10;
 //
 // }
 
-var swipeUpTxt = two.makeText('swipe up to submit*', sW-10, 20);
+var swipeUpTxt = two.makeText('submit', sW-10, 20);
 swipeUpTxt.fill = colorStyle;
 swipeUpTxt.size = 12;
 swipeUpTxt.family = 'Karla';
 swipeUpTxt.alignment = 'right';
+
+var swipeUpGlyph = two.makeStar(sW-10,20,5,null,3);
+
+// var swipeUpGradient = new Two.linearGradient();
 
 var leftWhiteSpace = 50;
 
@@ -58,9 +62,9 @@ selectorText.fill = colorStyle;
 selectorText.size = 18;
 selectorText.family = 'Karla';
 
-var selector = two.makeStar(5*tickSpan,leftWhiteSpace,10,null,3);
-selector.noStroke();
-selector.fill = colorStyle;
+var selectorGlyph = two.makeStar(5*tickSpan,leftWhiteSpace,10,null,3);
+selectorGlyph.noStroke();
+selectorGlyph.fill = colorStyle;
 
 var tickerGroup = []
 
