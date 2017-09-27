@@ -22,7 +22,6 @@ var tickQuan = 150;
 var bigTick = 5;
 var tickSpan = 10;
 
-two.update();
 
 // var glyph = null;
 // window.onload = function(){
@@ -118,7 +117,6 @@ function handleTouchMove(evt) {
             if(xDiff>backPedalX){xAbsPos += -(Math.abs(xDiff-backPedalX));}else{xAbsPos += Math.abs(xDiff-backPedalX);}
             if(xAbsPos<-1500){xAbsPos=-1500;}
             inputSliderGroup.translation.x = xAbsPos;
-            glyph.translation.x = xAbsPos;
             backPedalX = xDiff;
             selectorText.value = Math.round(Math.abs(xAbsPos/tickSpan));
             two.update();
@@ -127,7 +125,6 @@ function handleTouchMove(evt) {
             if(xDiff<backPedalX){xAbsPos += Math.abs(xDiff-backPedalX);}else{xAbsPos += -(Math.abs(xDiff-backPedalX));}
             if(xAbsPos>0){xAbsPos=0;}
             inputSliderGroup.translation.x = xAbsPos;
-            glyph.translation.x = xAbsPos;
             backPedalX = xDiff;
             selectorText.value = Math.round(Math.abs(xAbsPos/tickSpan));
             two.update();
