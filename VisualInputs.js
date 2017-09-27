@@ -38,7 +38,7 @@ var tickSpan = 10;
 //
 // }
 
-var swipeUpTxt = two.makeText('swipe up to submit*', sW, 20);
+var swipeUpTxt = two.makeText('swipe up to submit*', sW-10, 20);
 swipeUpTxt.fill = colorStyle;
 swipeUpTxt.size = 12;
 swipeUpTxt.family = 'Karla';
