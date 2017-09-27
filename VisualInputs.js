@@ -105,7 +105,7 @@ swipeUpTxt.family = 'Karla';
 swipeUpTxt.alignment = 'center';
 
 var clrStop1 = new Two.Stop(1,'white',0);
-var clrStop2 = new Two.Stop(.1,colorStyle,1);
+var clrStop2 = new Two.Stop(0,colorStyle,1);
 var clrStop3 = new Two.Stop(.75,colorStyle,1);
 var swipeUpGradient = two.makeLinearGradient(sW,-sH/2,sW,sH/2,clrStop1,clrStop2);
 var submitRec = two.makeRectangle(sW/2,sH/2,sW,sH);
@@ -158,8 +158,8 @@ function handleTouchMove(evt) {
     } else {
         if ( yDiff > 0 ) {
             /* up swipe */
-            clrStop1.offset = 1-(yDiff/submitThreshold);
-            clrStop2.offset = yDiff/submitThreshold;
+            clrStop2.offset = 1-(yDiff/submitThreshold);
+            clrStop1.offset = yDiff/submitThreshold;
             console.log(clrStop1.offset);
             console.log(clrStop2.offset);
             // console.log(yDiff/submitThreshold);
