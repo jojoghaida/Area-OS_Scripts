@@ -566,14 +566,14 @@ function dropPoints(coord,color = "red"){
   renderer.render(scene,camera);
   return(point);
 }
-a = dropPoints(new THREE.Vector3(-20,0,-10));
-b = dropPoints(new THREE.Vector3(-20,0,0));
-c = dropPoints(new THREE.Vector3(-10,0,0));
-d = dropPoints(new THREE.Vector3(-10,0,-10));
-e = dropPoints(new THREE.Vector3(-5,0,-5),"blue");
-f = dropPoints(new THREE.Vector3(-15,0,-5),"green");
-
-checkPts = [a,b,c,d];
+// a = dropPoints(new THREE.Vector3(-20,0,-10));
+// b = dropPoints(new THREE.Vector3(-20,0,0));
+// c = dropPoints(new THREE.Vector3(-10,0,0));
+// d = dropPoints(new THREE.Vector3(-10,0,-10));
+// e = dropPoints(new THREE.Vector3(-5,0,-5),"blue");
+// f = dropPoints(new THREE.Vector3(-15,0,-5),"green");
+//
+// checkPts = [a,b,c,d];
 
 
 function dropText(text,pos,font){
@@ -593,12 +593,9 @@ function dropText(text,pos,font){
 }
 // dropText();
 
-//////
-
-//////
-setTimeout(function () {
-  dropText("test!",[-20,0,-20],fontKarla_Reg);
-}, 2000);
+// setTimeout(function () {
+//   dropText("test!",[-20,0,-20],fontKarla_Reg);
+// }, 2000);
 
 
 spaceNavigator();
