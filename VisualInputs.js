@@ -43,7 +43,7 @@ window.onload = function(){
 
 var leftWhiteSpace = 50;
 
-var inputLabel = two.makeText('chair(s)',sH*1.52,sH*.37);
+var inputLabel = two.makeText('chair(s)',leftWhiteSpace+50,sH*.37);
 inputLabel.fill = colorStyle;
 inputLabel.size = 24;
 inputLabel.family = 'Karla';
