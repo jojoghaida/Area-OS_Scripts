@@ -38,16 +38,16 @@ var tickSpan = 10;
 //
 // }
 
-var swipeUpTxt = two.makeText('submit',sW-30,30);
+var swipeUpGlyph = two.makeStar(sW-40,15,5,null,3);
+swipeUpGlyph.noStroke();
+swipeUpGlyph.fill = colorStyle;
+swipeUpGlyph.rotation = 3.14159;
+
+var swipeUpTxt = two.makeText('submit',sW-40,30);
 swipeUpTxt.fill = colorStyle;
 swipeUpTxt.size = 12;
 swipeUpTxt.family = 'Karla';
 swipeUpTxt.alignment = 'center';
-
-var swipeUpGlyph = two.makeStar(sW-30,15,5,null,3);
-swipeUpGlyph.noStroke();
-swipeUpGlyph.fill = colorStyle;
-swipeUpGlyph.rotation = 3.14159;
 
 // var swipeUpGradient = new Two.linearGradient();
 
