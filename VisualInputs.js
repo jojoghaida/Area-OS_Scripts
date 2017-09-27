@@ -50,7 +50,8 @@ swipeUpTxt.family = 'Karla';
 swipeUpTxt.alignment = 'center';
 
 var clrStop1 = new Two.Stop(.5,colorStyle,1);
-var swipeUpGradient = two.makeLinearGradient(0,0,sW,sH,clrStop1);
+var swipeUpGradient = two.makeLinearGradient(sW/2,sH/2,sW,sH,clrStop1);
+
 var submitRec = two.makeRectangle(0,0,sW,sH);
 submitRec.fill = swipeUpGradient;
 submitRec.stroke = 'red';
