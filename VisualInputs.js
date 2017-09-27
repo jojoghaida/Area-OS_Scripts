@@ -157,7 +157,7 @@ function handleTouchMove(evt) {
     } else {
         if ( yDiff > 0 ) {
             /* up swipe */
-            clrStop1.offset = yDiff/submitThreshold;
+            clrStop1.offset = (yDiff/submitThreshold)-1;
             console.log(yDiff/submitThreshold);
             two.update();
             if(yDiff>submitThreshold){ //submitThreshold<<
