@@ -53,6 +53,7 @@ var clrStop1 = new Two.Stop(.5,colorStyle,1);
 var swipeUpGradient = two.makeLinearGradient(0,0,sW,sH,clrStop1);
 var submitRec = two.makeRectangle(0,0,sW,sH);
 submitRec.fill = swipeUpGradient;
+submitRec.stroke = colorStyle;
 
 var leftWhiteSpace = 50;
 
