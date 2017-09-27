@@ -50,7 +50,7 @@ swipeUpTxt.family = 'Karla';
 swipeUpTxt.alignment = 'center';
 
 var clrStop1 = new Two.Stop(.5,colorStyle,1);
-var swipeUpGradient = two.makeLinearGradient(sW/2,-sH/2,sW/2,sH/2,clrStop1);
+var swipeUpGradient = two.makeLinearGradient(sW/2,sH/2,sW,sH,clrStop1);
 
 // two.width / 2, - two.height / 2, two.width / 2, two.height / 2,
 
