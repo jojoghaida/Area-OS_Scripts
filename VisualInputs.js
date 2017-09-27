@@ -177,7 +177,7 @@ function handleTouchMove(evt) {
 function handleTouchEnd(evt){
   backPedalX = 0;
   // setTimeout(alignSlider,1000);
-  ungrade = setInterval(unGradient,100);
+  ungrade = setInterval(unGradient,10);
 };
 
 function unGradient(){
