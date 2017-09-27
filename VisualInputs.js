@@ -27,10 +27,6 @@ function removeInputListeners(){
 
 
 //standard input
-var colorStyle = 'blue';
-var tickQuan = 150;
-var bigTick = 5;
-var tickSpan = 10;
 
 
 // var glyph = null;
@@ -48,6 +44,8 @@ var tickSpan = 10;
 //
 // }
 
+// submit styles
+var submitThreshold = 200;
 var swipeUpGlyph = two.makeStar(sW-40,15,5,null,3);
 swipeUpGlyph.noStroke();
 swipeUpGlyph.fill = colorStyle;
@@ -62,18 +60,15 @@ swipeUpTxt.alignment = 'center';
 var clrStop1 = new Two.Stop(1,'white',0);
 var clrStop2 = new Two.Stop(0,colorStyle,1);
 var clrStop3 = new Two.Stop(.75,colorStyle,1);
-
 var swipeUpGradient = two.makeLinearGradient(sW,-sH/2,sW,sH/2,clrStop1,clrStop2);
-
-// function test(){
-//   clrStop2.offset = .5;
-//   two.update();
-// }
-// setTimeout(test,1000);
-
 var submitRec = two.makeRectangle(sW/2,sH/2,sW,sH);
 submitRec.fill = swipeUpGradient;
 
+// slider styles
+var colorStyle = 'blue';
+var tickQuan = 150;
+var bigTick = 5;
+var tickSpan = 10;
 var leftWhiteSpace = 50;
 
 var inputLabel = two.makeText('Chair(s)',leftWhiteSpace+60,sH*.37); //get glyph size to get y-value
@@ -162,8 +157,8 @@ function handleTouchMove(evt) {
     } else {
         if ( yDiff > 0 ) {
             /* up swipe */
-            if(yDiff>150){ //submitThreshold<<
-              //remove listners
+            clrStop1.offset = yDiff/submitThreshold;
+            if(yDiff>submitThreshold){ //submitThreshold<<
               removeInputListeners();
               clrStop1.offset = 0;
               clrStop2.offset = 1;
