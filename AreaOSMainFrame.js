@@ -362,7 +362,7 @@ if(areaSQ<requestedSQ){
 }
 // SQstuff
 
-function spaceNavigator(){
+// function spaceNavigator(){ //!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   //variables
   var mainAxis = new THREE.Vector3();
@@ -511,7 +511,7 @@ function spaceNavigator(){
       extendCrv(inputMainCrv,ammountOfFurnishings,getCrvVector(inputMainCrv));
     }
   }
-  
+
   function newStepExt(crv,distance,increment = 0.5){
     extLength = 1;
     function loopExt(){
@@ -586,7 +586,7 @@ function dropText(text,pos,font){
   textobject.rotation.x = -Math.PI/2;
   renderer.render(scene,camera);
 
-}
+// } //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // dropText();
 
 // setTimeout(function () {
@@ -594,7 +594,7 @@ function dropText(text,pos,font){
 // }, 2000);
 
 
-spaceNavigator();
+// spaceNavigator(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function fieldVectorizer(){
 
 }
