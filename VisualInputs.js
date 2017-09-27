@@ -153,7 +153,7 @@ function handleTouchMove(evt) {
         if ( yDiff > 0 ) {
             /* up swipe */
             if(yDiff>50){
-              clrStop2.offset = .5;
+              clrStop2.offset = 1;
               two.update();
             }
         } else {
