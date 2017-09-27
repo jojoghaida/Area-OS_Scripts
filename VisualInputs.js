@@ -148,6 +148,7 @@ function handleTouchMove(evt) {
             inputSliderGroup.translation.x = xAbsPos;
             backPedalX = xDiff;
             selectorText.value = Math.round(Math.abs(xAbsPos/tickSpan));
+            livePreview(null,selectorText.value);
             two.update();
         } else {
             /* right swipe */

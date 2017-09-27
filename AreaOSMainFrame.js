@@ -394,7 +394,7 @@ function spaceNavigator(){
     return(unitVector);
   }
   //
-  function extendCrv(crv,distance,direction){
+  function extendCrv(crv,distance,direction){ //fix distance and direction
     newExtedPt = new THREE.Vector3();
     newExtedPt.addVectors(crv.geometry.vertices[1],direction/*.multiplyScalar(distance)*/);
     crv.geometry.vertices[1].copy(newExtedPt);
@@ -504,9 +504,14 @@ function spaceNavigator(){
 
   function livePreview(furnitureElement,ammountOfFurnishings){
     console.log(furnitureGroup.children.length);
-
+    if(ammountOfFurnishings > getCrvLength(inputMainCrv)){
+      extendCrv(inputMainCrv,ammountOfFurnishings,getCrvVector(inputMainCrv));
+    }
+    if(ammountOfFurnishings < getCrvLength(inputMainCrv)){
+      extendCrv(inputMainCrv,ammountOfFurnishings,getCrvVector(inputMainCrv));
+    }
   }
-  livePreview();
+  
   function newStepExt(crv,distance,increment = 0.5){
     extLength = 1;
     function loopExt(){
