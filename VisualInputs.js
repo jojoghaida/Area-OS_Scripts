@@ -166,7 +166,7 @@ function handleTouchMove(evt) {
             if(yDiff>submitThreshold){ //submitThreshold<<
               clrStop1.offset = 0;
               removeInputListeners();
-              sendInput = setInterval(submital,1);
+              sendInput = setInterval(submital,10);
             }
         } else {
             /* down swipe */
