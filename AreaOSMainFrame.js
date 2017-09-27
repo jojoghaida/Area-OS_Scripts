@@ -550,7 +550,7 @@ if(areaSQ<requestedSQ){
 
   setTimeout(function(){newStepExt(newMainAxisCrv,80)},2000);
 // test2
-}
+// }
 // test 1
 function dropPoints(coord,color = "red"){
   geometry = new THREE.Geometry();
@@ -586,7 +586,7 @@ function dropText(text,pos,font){
   textobject.rotation.x = -Math.PI/2;
   renderer.render(scene,camera);
 
-// } //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+}
 // dropText();
 
 // setTimeout(function () {
