@@ -44,25 +44,6 @@ function removeInputListeners(){
 //
 // }
 
-// submit styles
-var submitThreshold = 200;
-var swipeUpGlyph = two.makeStar(sW-40,15,5,null,3);
-swipeUpGlyph.noStroke();
-swipeUpGlyph.fill = colorStyle;
-swipeUpGlyph.rotation = 3.14159;
-
-var swipeUpTxt = two.makeText('submit',sW-40,30);
-swipeUpTxt.fill = colorStyle;
-swipeUpTxt.size = 12;
-swipeUpTxt.family = 'Karla';
-swipeUpTxt.alignment = 'center';
-
-var clrStop1 = new Two.Stop(1,'white',0);
-var clrStop2 = new Two.Stop(.1,colorStyle,1);
-var clrStop3 = new Two.Stop(.75,colorStyle,1);
-var swipeUpGradient = two.makeLinearGradient(sW,-sH/2,sW,sH/2,clrStop1,clrStop2);
-var submitRec = two.makeRectangle(sW/2,sH/2,sW,sH);
-submitRec.fill = swipeUpGradient;
 
 // slider styles
 var colorStyle = 'blue';
@@ -109,6 +90,26 @@ for(i=0;i<tickQuan;i++){
 }
 
 var inputSliderGroup = two.makeGroup(tickerGroup);
+
+// submit styles
+var submitThreshold = 200;
+var swipeUpGlyph = two.makeStar(sW-40,15,5,null,3);
+swipeUpGlyph.noStroke();
+swipeUpGlyph.fill = colorStyle;
+swipeUpGlyph.rotation = 3.14159;
+
+var swipeUpTxt = two.makeText('submit',sW-40,30);
+swipeUpTxt.fill = colorStyle;
+swipeUpTxt.size = 12;
+swipeUpTxt.family = 'Karla';
+swipeUpTxt.alignment = 'center';
+
+var clrStop1 = new Two.Stop(1,'white',0);
+var clrStop2 = new Two.Stop(.1,colorStyle,1);
+var clrStop3 = new Two.Stop(.75,colorStyle,1);
+var swipeUpGradient = two.makeLinearGradient(sW,-sH/2,sW,sH/2,clrStop1,clrStop2);
+var submitRec = two.makeRectangle(sW/2,sH/2,sW,sH);
+submitRec.fill = swipeUpGradient;
 
 two.update();
 
