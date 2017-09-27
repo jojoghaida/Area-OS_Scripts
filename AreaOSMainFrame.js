@@ -499,12 +499,14 @@ function spaceNavigator(){
   var mainTrajectory = new THREE.Vector3(1,0,0); //
   var endPt = pushPointDirection(stPt,mainTrajectory);
   var inputMainCrv = twoPtCurve(stPt,endPt);
+  var furnitureGroup = new THREE.Group();
   // trivial variables for live preview
 
   function livePreview(furnitureElement,ammountOfFurnishings){
+    console.log(furnitureGroup.children.length);
 
   }
-
+  livePreview();
   function newStepExt(crv,distance,increment = 0.5){
     extLength = 1;
     function loopExt(){
