@@ -41,15 +41,17 @@ window.onload = function(){
 
 }
 
+var leftWhiteSpace = 50;
+
 var inputLabel = two.makeText('chair(s)',sH*1.52,sH*.37);
 inputLabel.fill = colorStyle;
 inputLabel.size = 24;
 
-var selectorText = two.makeText(0,50,sH*.25);
+var selectorText = two.makeText(0,leftWhiteSpace,sH*.25);
 selectorText.fill = colorStyle;
 selectorText.size = 18;
 
-var selector = two.makeStar(5*tickSpan,sH*.5,10,null,3);
+var selector = two.makeStar(5*tickSpan,leftWhiteSpace,10,null,3);
 selector.noStroke();
 selector.fill = colorStyle;
 
@@ -61,13 +63,13 @@ line.stroke = colorStyle;
 
 for(i=0;i<tickQuan;i++){
   if(i/bigTick % 1 == 0){
-    tick = two.makeLine(i*tickSpan+50,sH,i*tickSpan+50,sH-15);
+    tick = two.makeLine(i*tickSpan+leftWhiteSpace,sH,i*tickSpan+leftWhiteSpace,sH-15);
     tick.stroke = colorStyle;
-    integer = two.makeText(i,i*tickSpan+50,sH-25);
+    integer = two.makeText(i,i*tickSpan+leftWhiteSpace,sH-25);
     integer.fill = colorStyle;
     tickerGroup.push(tick,integer);
   }else{
-    tick = two.makeLine(i*tickSpan+50,sH,i*tickSpan+50,sH-10);
+    tick = two.makeLine(i*tickSpan+leftWhiteSpace,sH,i*tickSpan+leftWhiteSpace,sH-10);
     tick.stroke = colorStyle;
     tickerGroup.push(tick);
   }
