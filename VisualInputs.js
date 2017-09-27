@@ -38,13 +38,16 @@ var tickSpan = 10;
 //
 // }
 
-var swipeUpTxt = two.makeText('submit', sW-10, 20);
+var swipeUpTxt = two.makeText('submit', sW-15, 50);
 swipeUpTxt.fill = colorStyle;
 swipeUpTxt.size = 12;
 swipeUpTxt.family = 'Karla';
-swipeUpTxt.alignment = 'right';
+swipeUpTxt.alignment = 'center';
 
-var swipeUpGlyph = two.makeStar(sW-10,20,5,null,3);
+var swipeUpGlyph = two.makeStar(sW-10,50,5,null,3);
+swipeUpGlyph.noStroke();
+swipeUpGlyph.fill = colorStyle;
+swipeUpGlyph.rotation = 180/π;
 
 // var swipeUpGradient = new Two.linearGradient();
 
