@@ -193,6 +193,7 @@ function submital(){
     two.update();
   }else{
     initInputTouchListeners();
+    clearInterval(sendInput);
   }
 }
 
