@@ -50,6 +50,7 @@ inputLabel.size = 24;
 var selectorText = two.makeText(0,leftWhiteSpace,sH*.25);
 selectorText.fill = colorStyle;
 selectorText.size = 18;
+selectorText.family = 'Karla_Regular'
 
 var selector = two.makeStar(5*tickSpan,leftWhiteSpace,10,null,3);
 selector.noStroke();
