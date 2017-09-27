@@ -497,7 +497,8 @@ function spaceNavigator(){
   var stPt = new THREE.Vector3(-40,0,0); // init for populator
   dropCircle(stPt); // style init position
   var mainTrajectory = new THREE.Vector3(1,0,0); //
-  pushPointDirection(stPt,mainTrajectory);
+  var endPt = pushPointDirection(stPt,mainTrajectory);
+  var inputMainCrv = twoPtCurve(stPt,endPt);
   // trivial variables for live preview
 
   function livePreview(furnitureElement,ammountOfFurnishings){
