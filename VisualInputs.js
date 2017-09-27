@@ -111,6 +111,8 @@ var swipeUpGradient = two.makeLinearGradient(sW,-sH/2,sW,sH/2,clrStop1,clrStop2)
 var submitRec = two.makeRectangle(sW/2,sH/2,sW,sH);
 submitRec.fill = swipeUpGradient;
 
+var ungrade = null;
+
 two.update();
 
 
@@ -158,11 +160,7 @@ function handleTouchMove(evt) {
     } else {
         if ( yDiff > 0 ) {
             /* up swipe */
-            // clrStop2.offset = 1-(yDiff/submitThreshold);
             clrStop1.offset = .9-(yDiff/submitThreshold);
-            console.log(clrStop1.offset);
-            console.log(clrStop2.offset);
-            // console.log(yDiff/submitThreshold);
             two.update();
             if(yDiff>submitThreshold){ //submitThreshold<<
               removeInputListeners();
@@ -179,9 +177,15 @@ function handleTouchMove(evt) {
 function handleTouchEnd(evt){
   backPedalX = 0;
   // setTimeout(alignSlider,1000);
-
+  ungrade = setInterval(unGradient,100);
 };
 
+function unGradient(){
+  if(clrStop1.offset < .9){
+    clrStop1.offset -= .01;
+    two.update();
+  }else{clearInterval(ungrade);}
+}
 function alignSlider(){
   correctDifference = (xAbsPos/tickSpan % 1)*tickSpan;
   if(correctDifference*-1>=tickSpan/2){
