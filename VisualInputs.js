@@ -55,12 +55,11 @@ var clrStop3 = new Two.Stop(.75,colorStyle,1);
 
 var swipeUpGradient = two.makeLinearGradient(sW,-sH/2,sW,sH/2,clrStop1,clrStop2);
 
-function test(){
-  clrStop2.offset = .5;
-  two.update();
-}
-setTimeout(test,1000);
-// two.width / 2, - two.height / 2, two.width / 2, two.height / 2,
+// function test(){
+//   clrStop2.offset = .5;
+//   two.update();
+// }
+// setTimeout(test,1000);
 
 var submitRec = two.makeRectangle(sW/2,sH/2,sW,sH);
 submitRec.fill = swipeUpGradient;
@@ -153,6 +152,10 @@ function handleTouchMove(evt) {
     } else {
         if ( yDiff > 0 ) {
             /* up swipe */
+            if(yDiff>50){
+              clrStop2.offset = .5;
+              two.update();
+            }
         } else {
             /* down swipe */
         }
