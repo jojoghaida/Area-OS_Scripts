@@ -44,9 +44,11 @@ window.onload = function(){
 var inputLabel = two.makeText('chair(s)',sH*1.52,sH*.37);
 inputLabel.fill = colorStyle;
 inputLabel.size = 24;
-var selectorText = two.makeText(0,sH*.5,sH*.25);
+
+var selectorText = two.makeText(0,50,sH*.25);
 selectorText.fill = colorStyle;
 selectorText.size = 18;
+
 var selector = two.makeStar(5*tickSpan,sH*.5,10,null,3);
 selector.noStroke();
 selector.fill = colorStyle;
