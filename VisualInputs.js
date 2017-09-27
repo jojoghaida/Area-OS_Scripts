@@ -47,6 +47,7 @@ var inputLabel = two.makeText('chair(s)',sH*1.52,sH*.37);
 inputLabel.fill = colorStyle;
 inputLabel.size = 24;
 inputLabel.family = 'Karla';
+inputLabel.alignment = 'left';
 
 
 var selectorText = two.makeText(0,leftWhiteSpace,sH*.25);
