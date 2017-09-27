@@ -182,7 +182,7 @@ function handleTouchEnd(evt){
 
 function unGradient(){
   if(clrStop1.offset < .9){
-    clrStop1.offset -= .01;
+    clrStop1.offset += .01;
     two.update();
   }else{clearInterval(ungrade);}
 }
