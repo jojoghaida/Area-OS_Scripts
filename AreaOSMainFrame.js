@@ -74,7 +74,6 @@ function returnCamPlan(){
   //   requestAnimationFrame(viewAnim);
   // }
 camera.position.y = 350;
-// console.log(camera.position.y);
 camera.position.x = 0;
 camera.position.z = 0;
 camera.lookAt(new THREE.Vector3(0,0,0));
@@ -192,9 +191,7 @@ zoomButtons = function(){
   function zoom(value,amplitude){
   camPosition = camera.position;
   camDirection = camera.getWorldDirection();
-  console.log("!!!!!!",camDirection);
   newPosition = new THREE.Vector3();
-  console.log(camPosition);
   if(value != 0){
     amplitude = amplitude*-1;
   }
@@ -205,7 +202,6 @@ zoomButtons = function(){
   var pressureButtonZplus = document.getElementById('zoomInButton');
   Pressure.set(pressureButtonZplus, {
     start: function(event){
-      console.log(pressureButtonZplus.value);
       pressureButtonZplus.style.background = "red";
       zPlusEffect.style.visibility = 'visible';
       zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},10);
@@ -222,18 +218,15 @@ zoomButtons = function(){
       zPlusEffect.style.visibility = 'visible';
     },
     endDeepPress: function(){
-      console.log("forceEnd!")
       clearInterval(zoomingInterval);
       pressureButtonZplus.style.background = null;
       zPlusEffect.style.visibility = 'hidden';
 
     },
     change: function(force, event){
-      console.log(force);
       zoomFactor = force*zoomSpeedVariable
       if(force>.10){
         zPlusEffect.style.visibility = 'visible';
-        console.log(zMinusEffet);
         zPlusEffect.style.width = force*100 + "%";
       }else {
         zPlusEffect.style.visibility = 'hidden';
@@ -247,7 +240,6 @@ zoomButtons = function(){
   var pressureButtonZminus = document.getElementById('zoomOutButton');
   Pressure.set(pressureButtonZminus, {
     start: function(event){
-      console.log(pressureButtonZminus.value);
       pressureButtonZminus.style.background = "red";
       zMinusEffet.style.visibility = 'visible';
       zoomingInterval = setInterval(function(){zoom(1,zoomFactor);},10);
@@ -264,17 +256,14 @@ zoomButtons = function(){
       zMinusEffet.style.visibility = 'visible';
     },
     endDeepPress: function(){
-      console.log("forceEnd!")
       clearInterval(zoomingInterval);
       pressureButtonZminus.style.background = null;
       zMinusEffet.style.visibility = 'hidden';
     },
     change: function(force, event){
-      console.log(force);
       zoomFactor = force*zoomSpeedVariable
       if(force>.10){
         zMinusEffet.style.visibility = 'visible';
-        console.log(zMinusEffet);
         zMinusEffet.style.width = force*100 + "%";
         // zMinusEffet.style;
       }else {
@@ -505,8 +494,10 @@ function spaceNavigator(){
   dropCircle(newP1);
 
   // trivial variables for live preview
-  var stPt = new THREE.Vector3(0,0,7);
-  dropCircle(stPt);
+  var stPt = new THREE.Vector3(-40,0,0); // init for populator
+  dropCircle(stPt); // style init position
+  var mainTrajectory = new THREE.Vector3(1,0,0); //
+  pushPointDirection(stPt,mainTrajectory);
   // trivial variables for live preview
 
   function livePreview(furnitureElement,ammountOfFurnishings){
@@ -519,11 +510,9 @@ function spaceNavigator(){
       realCrvLength = getCrvLength(crv);
       extLength+= increment;
       if(realCrvLength >= distance){console.log("done!");}else{
-        // console.log("extending curve",increment,"feet.");
         extendCrv(crv,increment,getCrvVector(crv));
         crv.geometry.computeBoundingSphere();
         if(extLength/4 % 1 == 0){
-          // console.log(extLength);
           p1 = crv.geometry.vertices[1].clone();
           p2 = pushPointDirection(p1,getOffsetDirection(crv));
           secondaryCrv = twoPtCurve(p1,p2.multiplyScalar(1));
@@ -531,7 +520,6 @@ function spaceNavigator(){
           function inceptiveCrv(crv2,distance,increment2 = 1,passDistance){
             realCrvLength2 = getCrvLength(crv2)
             extLength2+=increment2 ;
-            // console.log(extLength2);
             if(realCrvLength2>=distance){
               // callback
               newStepExt(crv,passDistance,.5)
