@@ -11,10 +11,20 @@ var two = new Two(params).appendTo(inputsTwoScene);
 inputsTwoScene.addEventListener('mousemove',disableOrbitCam);
 
 //touch gestures*
-inputsTwoScene.addEventListener('touchstart',disableOrbitCam);
-inputsTwoScene.addEventListener('touchstart', handleTouchStart, false);
-inputsTwoScene.addEventListener('touchmove', handleTouchMove, false);
-inputsTwoScene.addEventListener('touchend', handleTouchEnd, false);
+function initInputTouchListeners(){
+  inputsTwoScene.addEventListener('touchstart',disableOrbitCam);
+  inputsTwoScene.addEventListener('touchstart', handleTouchStart, false);
+  inputsTwoScene.addEventListener('touchmove', handleTouchMove, false);
+  inputsTwoScene.addEventListener('touchend', handleTouchEnd, false);
+}
+initInputTouchListeners();
+function removeInputListeners(){
+  inputsTwoScene.removeEventListener('touchstart',disableOrbitCam);
+  inputsTwoScene.removeEventListener('touchstart', handleTouchStart, false);
+  inputsTwoScene.removeEventListener('touchmove', handleTouchMove, false);
+  inputsTwoScene.removeEventListener('touchend', handleTouchEnd, false);
+}
+
 
 //standard input
 var colorStyle = 'blue';
@@ -152,7 +162,9 @@ function handleTouchMove(evt) {
     } else {
         if ( yDiff > 0 ) {
             /* up swipe */
-            if(yDiff>50){
+            if(yDiff>150){ //submitThreshold<<
+              //remove listners
+              removeInputListeners();
               clrStop1.offset = 0;
               clrStop2.offset = 1;
               two.update();
@@ -166,6 +178,7 @@ function handleTouchMove(evt) {
 function handleTouchEnd(evt){
   backPedalX = 0;
   // setTimeout(alignSlider,1000);
+
 };
 
 function alignSlider(){
