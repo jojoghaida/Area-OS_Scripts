@@ -112,6 +112,7 @@ var submitRec = two.makeRectangle(sW/2,sH/2,sW,sH);
 submitRec.fill = swipeUpGradient;
 
 var ungrade = null;
+var sendInput = null;
 
 two.update();
 
@@ -163,10 +164,9 @@ function handleTouchMove(evt) {
             clrStop1.offset = .9-(yDiff/submitThreshold);
             two.update();
             if(yDiff>submitThreshold){ //submitThreshold<<
-              removeInputListeners();
               clrStop1.offset = 0;
-              clrStop2.offset = 1;
-              two.update();
+              removeInputListeners();
+              sendInput = setInterval(submital,1);
             }
         } else {
             /* down swipe */
@@ -176,7 +176,6 @@ function handleTouchMove(evt) {
 
 function handleTouchEnd(evt){
   backPedalX = 0;
-  // setTimeout(alignSlider,1000);
   ungrade = setInterval(unGradient,10);
 };
 
@@ -186,16 +185,26 @@ function unGradient(){
     two.update();
   }else{clearInterval(ungrade);}
 }
-function alignSlider(){
-  correctDifference = (xAbsPos/tickSpan % 1)*tickSpan;
-  if(correctDifference*-1>=tickSpan/2){
-    correctDifference = tickSpan-correctDifference;
-  }else{
-    correctDifference *= -1;
-  }
-  xAbsPos += correctDifference;
-  inputSliderGroup.translation.x = xAbsPos;
-  two.update();
-  selectorText.value = xAbsPos/tickSpan; // delete
 
+function submital(){
+  if(clrStop2.offset > 0){
+    clrStop2.offset -= .1;
+    two.update();
+  }else{
+    initInputTouchListeners();
+  }
 }
+
+// function alignSlider(){
+//   correctDifference = (xAbsPos/tickSpan % 1)*tickSpan;
+//   if(correctDifference*-1>=tickSpan/2){
+//     correctDifference = tickSpan-correctDifference;
+//   }else{
+//     correctDifference *= -1;
+//   }
+//   xAbsPos += correctDifference;
+//   inputSliderGroup.translation.x = xAbsPos;
+//   two.update();
+//   selectorText.value = xAbsPos/tickSpan; // delete
+//
+// }
