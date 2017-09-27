@@ -46,11 +46,13 @@ var leftWhiteSpace = 50;
 var inputLabel = two.makeText('chair(s)',sH*1.52,sH*.37);
 inputLabel.fill = colorStyle;
 inputLabel.size = 24;
+inputLabel.family = 'Karla';
+
 
 var selectorText = two.makeText(0,leftWhiteSpace,sH*.25);
 selectorText.fill = colorStyle;
 selectorText.size = 18;
-selectorText.family = 'Karla'
+selectorText.family = 'Karla';
 
 var selector = two.makeStar(5*tickSpan,leftWhiteSpace,10,null,3);
 selector.noStroke();
@@ -68,6 +70,7 @@ for(i=0;i<tickQuan;i++){
     tick.stroke = colorStyle;
     integer = two.makeText(i,i*tickSpan+leftWhiteSpace,sH-25);
     integer.fill = colorStyle;
+    integer.family = 'Karla';
     tickerGroup.push(tick,integer);
   }else{
     tick = two.makeLine(i*tickSpan+leftWhiteSpace,sH,i*tickSpan+leftWhiteSpace,sH-10);
