@@ -537,7 +537,7 @@ if(areaSQ<requestedSQ){
       // extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv));
       editMainCrv = setInterval(function(){
         extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
-        if(Number(getCrvLength(inputMainCrv).toFixed(2))/5 /*<<<spacing tempo*/ % 1 == 0){
+        if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){
           console.log("little crv drop");
 
           /////
@@ -551,7 +551,7 @@ if(areaSQ<requestedSQ){
           //set bool to secondary crv
           /////
           editSecCrv = setInterval(function(){
-            if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))<10){
+            if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))<15){
               extendCrv(inputSecondaryCrv, inputMainCrvGrowthInterval, getCrvVector(inputSecondaryCrv));
               if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 % 1 == 0){
                 dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv));
