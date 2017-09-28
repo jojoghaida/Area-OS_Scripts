@@ -523,6 +523,7 @@ if(areaSQ<requestedSQ){
 
   var secondaryConCrvs = new THREE.Group();
   var secondaryConCrvsGrothInterval = .1;
+  var editSecCrv = null;
 
   var furnitureGroup = new THREE.Group();
   // trivial variables for live preview \\
