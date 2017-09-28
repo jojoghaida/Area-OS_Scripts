@@ -556,6 +556,9 @@ if(areaSQ<requestedSQ){
               if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 % 1 == 0){
                 dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv));
               }
+            }else{
+              livePreview(null,selectorText.value);
+              clearInterval(editSecCrv);
             }
           },1);
 
