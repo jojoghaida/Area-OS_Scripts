@@ -538,6 +538,11 @@ if(areaSQ<requestedSQ){
         extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/5/*<<<spacing tempo*/ % 1 == 0){
           console.log("little crv drop");
+          clearInterval(editMainCrv);
+          a = inputMainCrv.geometry.vertices[1].clone();
+          bD = getOffsetDirection(inputMainCrv);
+          b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
+          inputSecondaryCrv = twoPtCurve(a,b);
         }
       },1);
       if(secondaryConCrvs.children.length == 0){
