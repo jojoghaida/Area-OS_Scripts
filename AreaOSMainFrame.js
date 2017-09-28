@@ -401,7 +401,8 @@ if(areaSQ<requestedSQ){
     a = crv.geometry.vertices[1].clone();
     b = direction.clone();
     b = b.setLength(distance);
-    newExtedPt.addVectors(a,b); // not so accurate <<<<<<
+    combine = a.add(b); // not so accurate <<<<<<
+    newExtedPt.set(combine.x,combine.y,combine.z);
     newExtedPt = cleanVector(newExtedPt);
     console.log(newExtedPt);
     crv.geometry.vertices[1].copy(newExtedPt);
