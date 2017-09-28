@@ -399,6 +399,7 @@ if(areaSQ<requestedSQ){
     newExtedPt.addVectors(crv.geometry.vertices[1],direction.normalize(distance));
     crv.geometry.vertices[1].copy(newExtedPt);
     crv.geometry.verticesNeedUpdate = true;
+    crv.geometry.computeBoundingSphere();
     //!!!!!!!!!!!
     // camera.position.set(newExtedPt.toArray());
     // controls.target.set(newExtedPt.toArray());
