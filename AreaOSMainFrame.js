@@ -468,7 +468,7 @@ if(areaSQ<requestedSQ){
     console.log(v);
     x = v.x.toFixed(2); y = v.y.toFixed(2); z = v.z.toFixed(2);
     console.log(v);
-    v.set(x,y,z);
+    v.set(Number(x),Number(y),Number(z));
     console.log(v);
     return(v);
   }
