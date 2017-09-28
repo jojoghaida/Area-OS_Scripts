@@ -564,7 +564,6 @@ if(areaSQ<requestedSQ){
             }else{
               extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
               livePreview(null,selectorText.value);
-              clear();
             }
           },1);
         }else{
@@ -580,10 +579,6 @@ if(areaSQ<requestedSQ){
     }
   }
 
-  function clear(){
-    clearInterval(editSecCrv);
-    editSecCrv = null;
-  }
 
 
   function newStepExt(crv,distance,increment = 0.5){
