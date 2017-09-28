@@ -387,23 +387,18 @@ if(areaSQ<requestedSQ){
   function getCrvVector(crv){
     direction = new THREE.Vector3();
     direction.subVectors(crv.geometry.vertices[1],crv.geometry.vertices[0]).normalize();
-    direction = cleanVector(direction);
     return(direction);
   }
   //
   function twoPtUnitVec(pt1,pt2){
     unitVector = new THREE.Vector3();
     unitVector.subVectors(pt1,pt2).normalize();
-    unitVector = cleanVector(unitVector);
     return(unitVector);
   }
   //
   function extendCrv(crv,distance,direction){ //fix distance and direction
     newExtedPt = new THREE.Vector3();
-    a = crv.geometry.vertices[1].clone();
-    b = direction.multiplyScalar(distance);
-    newExtedPt.addVectors(a,b); // not so accurate <<<<<<
-    // newExtedPt = cleanVector(newExtedPt);
+    newExtedPt.addVectors(crv.geometry.vertices[1],direction.setLength(distance)); // not so accurate <<<<<<
     crv.geometry.vertices[1].copy(newExtedPt);
     crv.geometry.verticesNeedUpdate = true;
     crv.geometry.computeBoundingSphere();
@@ -425,7 +420,6 @@ if(areaSQ<requestedSQ){
     var axis = new THREE.Vector3( 0, 1, 0 );
     var angle = Math.PI / 2;
     zoneCrvVec.applyAxisAngle(axis,angle);
-    zoneCrvVec = cleanVector(zoneCrvVec);
     return(zoneCrvVec);
   }
   //
@@ -446,7 +440,7 @@ if(areaSQ<requestedSQ){
     direction.normalize();
     pushedPoint = new THREE.Vector3();
     pushedPoint.addVectors(point,direction);
-    pushedPoint = cleanVector(pushedPoint);
+
     return(pushedPoint);
 
     //You compute the direction vector by subtracting one line segment endpoint from the other, and then normalizing.
@@ -455,10 +449,8 @@ if(areaSQ<requestedSQ){
   function cleanVector(v){
     x = v.x.toFixed(2); y = v.y.toFixed(2); z = v.z.toFixed(2);
     v.set(x,y,z);
-    console.log(v);
     return(v);
   }
-  cleanVector(new THREE.Vector3(0,0,0));
   //
     //zonCrv
     ///anots
@@ -588,7 +580,7 @@ if(areaSQ<requestedSQ){
   }
   // window.onload(newStepExt(newMainAxisCrv,80)); //!!!!!!!!
 
-  // setTimeout(function(){newStepExt(newMainAxisCrv,80)},2000);
+  setTimeout(function(){newStepExt(newMainAxisCrv,80)},2000);
 // test2
 // }
 // test 1
