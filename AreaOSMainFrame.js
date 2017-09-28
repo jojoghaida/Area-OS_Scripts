@@ -415,7 +415,7 @@ if(areaSQ<requestedSQ){
     // camera.position.y = 45;
     // controls.update();
     //!!!!!!!!!!!
-    // renderer.render(scene,camera);
+    renderer.render(scene,camera);
     return(crv);
   }
   //
@@ -550,7 +550,7 @@ if(areaSQ<requestedSQ){
           /////
           editSecCrv = setInterval(function(){
             if(Number(getCrvLength(inputMainCrv).toFixed(2))<10){
-              requestAnimationFrame(extendCrv(inputSecondaryCrv, inputMainCrvGrowthInterval, getCrvVector(inputSecondaryCrv)));
+              extendCrv(inputSecondaryCrv, inputMainCrvGrowthInterval, getCrvVector(inputSecondaryCrv));
             }
           },1);
 
