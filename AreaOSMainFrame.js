@@ -386,7 +386,7 @@ if(areaSQ<requestedSQ){
   //
   function getCrvVector(crv){
     direction = new THREE.Vector3();
-    direction.subVectors(crv.geometry.vertices[1],crv.geometry.vertices[0]).setLength();
+    direction.subVectors(crv.geometry.vertices[1],crv.geometry.vertices[0]).normalize();
     return(direction);
   }
   //
