@@ -397,7 +397,7 @@ if(areaSQ<requestedSQ){
   }
   //
   function extendCrv(crv,distance,direction){ //fix distance and direction
-    newExtedPt = new THREE.Vector3();
+    newExtedPt = new THREE.Vector3(0,0,0);
     a = crv.geometry.vertices[1].clone();
     b = direction.clone();
     console.log("a",a);
