@@ -453,6 +453,7 @@ if(areaSQ<requestedSQ){
   function cleanVector(v){
     x = v.x.toFixed(2); y = v.y.toFixed(2); z = v.z.toFixed(2);
     v.set(x,y,z);
+    console.log(v);
     return(v);
   }
   cleanVector(new THREE.Vector3(0,0,0));
