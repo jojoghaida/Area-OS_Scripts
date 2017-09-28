@@ -379,6 +379,7 @@ if(areaSQ<requestedSQ){
     geometry.vertices.push(vec1,vec2);
     lineObject = new THREE.Line(geometry,linestyle);
     scene.add(lineObject);
+    renderer.render(scene,camera);
     if(_group) {_group.add(lineObject);}
 
     return(lineObject);
