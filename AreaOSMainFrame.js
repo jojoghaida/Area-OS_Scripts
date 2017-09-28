@@ -400,7 +400,10 @@ if(areaSQ<requestedSQ){
     newExtedPt = new THREE.Vector3();
     a = crv.geometry.vertices[1].clone();
     b = direction.clone();
+    console.log("a",a);
+    console.log("b",b);
     b = b.setLength(distance);
+    console.log("b",b);
     combine = a.add(b); // not so accurate <<<<<<
     newExtedPt.set(combine.x,combine.y,combine.z);
     newExtedPt = cleanVector(newExtedPt);
