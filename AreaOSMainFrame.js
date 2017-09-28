@@ -518,7 +518,7 @@ if(areaSQ<requestedSQ){
       clearInterval(editMainCrv);
       editMainCrv = null;
     }
-    if(furnishRequest < furnitureGroup.children.length){
+    if(furnishRequest > furnitureGroup.children.length){
       // extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv));
       editMainCrv = setInterval(function(){
         extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv));
@@ -531,7 +531,7 @@ if(areaSQ<requestedSQ){
         // extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv));
       }
     }
-    if(furnishRequest > furnitureGroup.children.length){
+    if(furnishRequest < furnitureGroup.children.length){
       editMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},10);
     }
   }
