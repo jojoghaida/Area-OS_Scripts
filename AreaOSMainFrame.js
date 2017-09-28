@@ -400,16 +400,9 @@ if(areaSQ<requestedSQ){
     newExtedPt = new THREE.Vector3(0,0,0);
     a = crv.geometry.vertices[1].clone();
     b = direction.clone();
-    // console.log("a",a);
-    // console.log("b",b);
     b = b.setLength(distance);
-    // console.log("b",b);
     combine = a.add(b); // not so accurate <<<<<<
-
     newExtedPt.set(combine.x,combine.y,combine.z);
-    // newExtedPt.set(Number(combine.x),Number(combine.y),Number(combine.z));
-
-
     newExtedPt = cleanVector(newExtedPt);
     console.log(newExtedPt);
     crv.geometry.vertices[1].copy(newExtedPt);
@@ -433,6 +426,7 @@ if(areaSQ<requestedSQ){
     var axis = new THREE.Vector3( 0, 1, 0 );
     var angle = Math.PI / 2;
     zoneCrvVec.applyAxisAngle(axis,angle);
+    cleanVector(zoneCrvVec);
     return(zoneCrvVec);
   }
   //
@@ -453,18 +447,15 @@ if(areaSQ<requestedSQ){
     direction.normalize();
     pushedPoint = new THREE.Vector3();
     pushedPoint.addVectors(point,direction);
-
+    cleanVector(pushedPoint);
     return(pushedPoint);
 
     //You compute the direction vector by subtracting one line segment endpoint from the other, and then normalizing.
   }
 
   function cleanVector(v){
-    console.log(v);
     x = v.x.toFixed(2); y = v.y.toFixed(2); z = v.z.toFixed(2);
-    console.log(v);
     v.set(Number(x),Number(y),Number(z));
-    console.log(v);
     return(v);
   }
   //
