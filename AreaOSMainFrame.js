@@ -403,7 +403,7 @@ if(areaSQ<requestedSQ){
     a = crv.geometry.vertices[1].clone();
     b = direction.multiplyScalar(distance);
     newExtedPt.addVectors(a,b); // not so accurate <<<<<<
-    newExtedPt = cleanVector(newExtedPt);
+    // newExtedPt = cleanVector(newExtedPt);
     crv.geometry.vertices[1].copy(newExtedPt);
     crv.geometry.verticesNeedUpdate = true;
     crv.geometry.computeBoundingSphere();
