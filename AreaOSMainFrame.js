@@ -408,7 +408,9 @@ if(areaSQ<requestedSQ){
 
     console.log(combine.x);
     console.log(Number(combine.x));
-    newExtedPt.set(combine.x,combine.y,combine.z);
+
+    newExtedPt.x = combine.x; newExtedPt.y = 0 ; newExtedPt.z = combine.y;
+    // newExtedPt.set(combine.x,combine.y,combine.z);
     // newExtedPt.set(Number(combine.x),Number(combine.y),Number(combine.z));
 
 
