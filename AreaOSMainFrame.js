@@ -512,7 +512,7 @@ if(areaSQ<requestedSQ){
   dropCircle(newP1);
 
   // trivial variables for live preview
-  var stPt = new THREE.Vector3(-40,0,0); // init for populator
+  var stPt = new THREE.Vector3(-40,0,20); // init for populator
   dropCircle(stPt); // style init position
   var mainTrajectory = new THREE.Vector3(1,0,0); //
   var endPt = pushPointDirection(stPt,mainTrajectory);
@@ -537,13 +537,14 @@ if(areaSQ<requestedSQ){
       // extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv));
       editMainCrv = setInterval(function(){
         extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
-        if(Number(getCrvLength(inputMainCrv).toFixed(2))/5/*<<<spacing tempo*/ % 1 == 0){
+        if(Number(getCrvLength(inputMainCrv).toFixed(2))/5 /*<<<spacing tempo*/ % 1 == 0){
           console.log("little crv drop");
           clearInterval(editMainCrv);
           a = inputMainCrv.geometry.vertices[1].clone();
           bD = getOffsetDirection(inputMainCrv);
           b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
           inputSecondaryCrv = twoPtCurve(a,b);
+
         }
       },1);
       if(secondaryConCrvs.children.length == 0){
