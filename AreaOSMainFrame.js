@@ -534,7 +534,6 @@ if(areaSQ<requestedSQ){
       editMainCrv = null;
     }
     if(furnishRequest > furnitureGroup.children.length){
-      // extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv));
       editMainCrv = setInterval(function(){
         extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){
@@ -561,8 +560,8 @@ if(areaSQ<requestedSQ){
               clearInterval(editSecCrv);
             }
           },1);
-
-
+        }else{
+          extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
         }
       },1);
       if(secondaryConCrvs.children.length == 0){
@@ -570,7 +569,7 @@ if(areaSQ<requestedSQ){
       }
     }
     if(furnishRequest < furnitureGroup.children.length){
-      editMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},1);
+      // editMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},1);
     }
   }
 
