@@ -511,7 +511,11 @@ if(areaSQ<requestedSQ){
   // trivial variables for live preview
 
   function livePreview(furnitureElement,furnishRequest){
-    console.log(furnitureGroup.children.length);
+    //clear any existing intervals
+    if(growMainCrv != null){
+      clearInterval(growMainCrv);
+      growMainCrv = null;
+    }
     if(furnishRequest > furnitureGroup.children.length){
       // extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv));
       if(secondaryConCrvs.children.length == 0){
