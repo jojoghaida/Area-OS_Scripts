@@ -533,6 +533,10 @@ if(areaSQ<requestedSQ){
       clearInterval(editMainCrv);
       editMainCrv = null;
     }
+    if(editSecCrv != null){
+      clearInterval(editSecCrv);
+      editSecCrv = null;
+    }
     if(furnishRequest > furnitureGroup.children.length){
       editMainCrv = setInterval(function(){
         // extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
@@ -577,6 +581,7 @@ if(areaSQ<requestedSQ){
 
   function clear(){
     clearInterval(editSecCrv);
+    editSecCrv = null;
   }
 
 
