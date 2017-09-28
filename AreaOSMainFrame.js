@@ -549,7 +549,7 @@ if(areaSQ<requestedSQ){
           //set bool to secondary crv
           /////
           editSecCrv = setInterval(function(){
-            if(Number(getCrvLength(inputMainCrv).toFixed(2))<10){
+            if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))<10){
               extendCrv(inputSecondaryCrv, inputMainCrvGrowthInterval, getCrvVector(inputSecondaryCrv));
             }
           },1);
