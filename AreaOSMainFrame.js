@@ -550,8 +550,7 @@ if(areaSQ<requestedSQ){
           /////
           editSecCrv = setInterval(function(){
             if(Number(getCrvLength(inputMainCrv).toFixed(2))<10){
-              extendCrv(inputSecondaryCrv, inputMainCrvGrowthInterval, getCrvVector(inputSecondaryCrv));
-              requestAnimationFrame();
+              requestAnimationFrame(extendCrv(inputSecondaryCrv, inputMainCrvGrowthInterval, getCrvVector(inputSecondaryCrv)));
             }
           },1);
 
