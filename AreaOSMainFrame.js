@@ -561,7 +561,7 @@ if(areaSQ<requestedSQ){
             }
           },1);
         }else{
-          console.log(getCrvLength(inputSecondaryCrv).toFixed(2));
+          console.log(getCrvLength(inputMainCrv).toFixed(2));
           extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
         }
       },1);
