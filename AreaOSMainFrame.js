@@ -517,11 +517,11 @@ if(areaSQ<requestedSQ){
   var endPt = pushPointDirection(stPt,mainTrajectory);
 
   var inputMainCrv = twoPtCurve(stPt,endPt);
-  var inputMainCrvGrowthInterval = .01;
+  var inputMainCrvGrowthInterval = .1;
   var editMainCrv = null;
 
   var secondaryConCrvs = new THREE.Group();
-  var secondaryConCrvsGrothInterval = .01;
+  var secondaryConCrvsGrothInterval = .1;
 
   var furnitureGroup = new THREE.Group();
   // trivial variables for live preview \\
@@ -539,13 +539,13 @@ if(areaSQ<requestedSQ){
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/5/*<<<spacing tempo*/ % 1 == 0){
           console.log("little crv drop");
         }
-      },.1);
+      },1);
       if(secondaryConCrvs.children.length == 0){
         // extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv));
       }
     }
     if(furnishRequest < furnitureGroup.children.length){
-      editMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},.1);
+      editMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},1);
     }
   }
 
