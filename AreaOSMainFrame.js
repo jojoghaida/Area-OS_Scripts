@@ -589,7 +589,7 @@ if(areaSQ<requestedSQ){
   }
   // window.onload(newStepExt(newMainAxisCrv,80)); //!!!!!!!!
 
-  setTimeout(function(){newStepExt(newMainAxisCrv,80)},2000);
+  // setTimeout(function(){newStepExt(newMainAxisCrv,80)},2000);
 // test2
 // }
 // test 1
