@@ -509,7 +509,7 @@ if(areaSQ<requestedSQ){
       extendCrv(inputMainCrv,ammountOfFurnishings/*<fix*/,getCrvVector(inputMainCrv));
     }
     if(ammountOfFurnishings < getCrvLength(inputMainCrv)){
-      extendCrv(inputMainCrv,ammountOfFurnishings/*<fix*/,getCrvVector(inputMainCrv));
+      extendCrv(inputMainCrv,-ammountOfFurnishings/*<fix*/,getCrvVector(inputMainCrv));
     }
   }
 
