@@ -387,6 +387,7 @@ if(areaSQ<requestedSQ){
   function getCrvVector(crv){
     direction = new THREE.Vector3();
     direction.subVectors(crv.geometry.vertices[1],crv.geometry.vertices[0]).normalize();
+    cleanVector(direction);
     return(direction);
   }
   //
@@ -404,7 +405,6 @@ if(areaSQ<requestedSQ){
     combine = a.add(b); // not so accurate <<<<<<
     newExtedPt.set(combine.x,combine.y,combine.z);
     newExtedPt = cleanVector(newExtedPt);
-    console.log(newExtedPt);
     crv.geometry.vertices[1].copy(newExtedPt);
     crv.geometry.verticesNeedUpdate = true;
     crv.geometry.computeBoundingSphere();
