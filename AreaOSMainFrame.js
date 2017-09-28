@@ -401,7 +401,7 @@ if(areaSQ<requestedSQ){
   function extendCrv(crv,distance,direction){ //fix distance and direction
     newExtedPt = new THREE.Vector3();
     newExtedPt.addVectors(crv.geometry.vertices[1],direction.setLength(distance)); // not so accurate <<<<<<
-    // newExtedPt = cleanVector(newExtedPt);
+    newExtedPt = cleanVector(newExtedPt);
     crv.geometry.vertices[1].copy(newExtedPt);
     crv.geometry.verticesNeedUpdate = true;
     crv.geometry.computeBoundingSphere();
@@ -455,6 +455,7 @@ if(areaSQ<requestedSQ){
     v.set(x,y,z);
     return(v);
   }
+  cleanVector(new THREE.Vector3(0,0,0));
   //
     //zonCrv
     ///anots
