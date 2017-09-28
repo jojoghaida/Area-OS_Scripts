@@ -523,7 +523,7 @@ if(areaSQ<requestedSQ){
       }
     }
     if(furnishRequest < getCrvLength(inputMainCrv)){
-      growMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},100);
+      growMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},1);
     }
   }
 
