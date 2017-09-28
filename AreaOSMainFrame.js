@@ -398,7 +398,7 @@ if(areaSQ<requestedSQ){
   //
   function extendCrv(crv,distance,direction){ //fix distance and direction
     newExtedPt = new THREE.Vector3();
-    newExtedPt.addVectors(crv.geometry.vertices[1],direction.setLength(distance));
+    newExtedPt.addVectors(crv.geometry.vertices[1],direction.setLength(distance)); // not so accurate <<<<<<
     crv.geometry.vertices[1].copy(newExtedPt);
     crv.geometry.verticesNeedUpdate = true;
     crv.geometry.computeBoundingSphere();
@@ -499,10 +499,10 @@ if(areaSQ<requestedSQ){
   // trivial variables for live preview
   var stPt = new THREE.Vector3(-40,0,0); // init for populator
   dropCircle(stPt); // style init position
-  var mainTrajectory = new THREE.Vector3(1,0,0); //
+  var mainTrajectory = new THREE.Vector3(-39,0,0); //
   var endPt = pushPointDirection(stPt,mainTrajectory);
 
-  var inputMainCrv = twoPtCurve(stPt,endPt);
+  var inputMainCrv = twoPtCurve(stPt,mainTrajectory);
   var inputMainCrvGrowthInterval = .01;
   var editMainCrv = null;
 
