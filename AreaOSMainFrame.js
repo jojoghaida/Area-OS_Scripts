@@ -556,9 +556,9 @@ if(areaSQ<requestedSQ){
                 dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv));
               }
             }else{
+              clearInterval(editSecCrv);
               extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
               livePreview(null,selectorText.value);
-              clearInterval(editSecCrv);
             }
           },1);
         }else{
