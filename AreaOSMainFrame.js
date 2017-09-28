@@ -559,7 +559,7 @@ if(areaSQ<requestedSQ){
             if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))<15){
               extendCrv(inputSecondaryCrv, inputMainCrvGrowthInterval, getCrvVector(inputSecondaryCrv));
               if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 % 1 == 0){
-                dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv));
+                furnitureGroup.add(dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv)));
               }
             }else{
               extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
