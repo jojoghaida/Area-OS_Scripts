@@ -546,6 +546,8 @@ if(areaSQ<requestedSQ){
           bD = getOffsetDirection(inputMainCrv);
           b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
           inputSecondaryCrv = twoPtCurve(a,b);
+          dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone());
+        
           //set bool to secondary crv
           /////
           editSecCrv = setInterval(function(){
