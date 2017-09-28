@@ -536,8 +536,8 @@ if(areaSQ<requestedSQ){
       // extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv));
       editMainCrv = setInterval(function(){
         extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
-        console.log(getCrvLength(inputMainCrv).toFixed(2));
-        if(getCrvLength(inputMainCrv)/5/*<<<spacing tempo*/ % 1 == 0){
+        console.log(getCrvLength(inputMainCrv));
+        if(getCrvLength(inputMainCrv).toFixed(2)/5/*<<<spacing tempo*/ % 1 == 0){
           console.log("little crv drop");
         }
       },10);
