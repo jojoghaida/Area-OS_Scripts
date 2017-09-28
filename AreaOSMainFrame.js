@@ -539,7 +539,7 @@ if(areaSQ<requestedSQ){
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/5/*<<<spacing tempo*/ % 1 == 0){
           console.log("little crv drop");
         }
-      },10);
+      },1);
       if(secondaryConCrvs.children.length == 0){
         // extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv));
       }
