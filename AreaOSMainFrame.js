@@ -547,12 +547,15 @@ if(areaSQ<requestedSQ){
           b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
           inputSecondaryCrv = twoPtCurve(a,b);
           dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone());
-        
+
           //set bool to secondary crv
           /////
           editSecCrv = setInterval(function(){
             if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))<10){
               extendCrv(inputSecondaryCrv, inputMainCrvGrowthInterval, getCrvVector(inputSecondaryCrv));
+              if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 % 1 == 0){
+                dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv));
+              }
             }
           },1);
 
