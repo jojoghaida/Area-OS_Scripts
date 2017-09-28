@@ -556,12 +556,12 @@ if(areaSQ<requestedSQ){
                 dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv));
               }
             }else{
+              extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
               livePreview(null,selectorText.value);
               clearInterval(editSecCrv);
             }
           },1);
         }else{
-          console.log(getCrvLength(inputMainCrv).toFixed(2));
           extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
         }
       },1);
