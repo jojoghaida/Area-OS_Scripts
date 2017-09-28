@@ -444,6 +444,14 @@ if(areaSQ<requestedSQ){
 
     //You compute the direction vector by subtracting one line segment endpoint from the other, and then normalizing.
   }
+
+  function cleanVector(v){
+    x = v.x.toFixed(2); y = v.y.toFixed(2); z = v.z.toFixed(2);
+    v.set(x,y,z);
+    console.log(v);
+    return(v);
+  }
+  cleanVector(new THREE.Vector3(.989,.989,.989));
   //
     //zonCrv
     ///anots
