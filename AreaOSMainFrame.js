@@ -1,3 +1,5 @@
+//* Copyright (c) 2016 - 2018 joeghaida / http://joeghaida.com
+
 //app UI
 resetButton = document.getElementById('resetButton');
 resetText = document.getElementById('resetText');
@@ -501,29 +503,30 @@ if(areaSQ<requestedSQ){
   var endPt = pushPointDirection(stPt,mainTrajectory);
 
   var inputMainCrv = twoPtCurve(stPt,endPt);
-  var inputMainCrvGrowthInterval = .1;
-  var growMainCrv = null;
+  var inputMainCrvGrowthInterval = .01;
+  var editMainCrv = null;
 
   var secondaryConCrvs = new THREE.Group();
-  var secondaryConCrvsGrothInterval = .1;
+  var secondaryConCrvsGrothInterval = .01;
 
   var furnitureGroup = new THREE.Group();
-  // trivial variables for live preview
+  // trivial variables for live preview \\
 
   function livePreview(furnitureElement,furnishRequest){
     //clear any existing intervals
-    if(growMainCrv != null){
-      clearInterval(growMainCrv);
-      growMainCrv = null;
+    if(editMainCrv != null){
+      clearInterval(editMainCrv);
+      editMainCrv = null;
     }
     if(furnishRequest > furnitureGroup.children.length){
       // extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv));
+      editMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},10);
       if(secondaryConCrvs.children.length == 0){
-        extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv));
+        // extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv));
       }
     }
-    if(furnishRequest < getCrvLength(inputMainCrv)){
-      growMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},1);
+    if(furnishRequest < furnitureGroup.children.length){
+      editMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},10);
     }
   }
 
