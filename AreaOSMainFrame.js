@@ -499,19 +499,30 @@ if(areaSQ<requestedSQ){
   dropCircle(stPt); // style init position
   var mainTrajectory = new THREE.Vector3(1,0,0); //
   var endPt = pushPointDirection(stPt,mainTrajectory);
+
   var inputMainCrv = twoPtCurve(stPt,endPt);
+  var inputMainCrvGrowthInterval = .1;
+  var growMainCrv = null;
+
+  var secondaryConCrvs = new THREE.Group();
+  var secondaryConCrvsGrothInterval = .1;
+
   var furnitureGroup = new THREE.Group();
   // trivial variables for live preview
 
-  function livePreview(furnitureElement,ammountOfFurnishings){
+  function livePreview(furnitureElement,furnishRequest){
     console.log(furnitureGroup.children.length);
-    if(ammountOfFurnishings > getCrvLength(inputMainCrv)){
-      extendCrv(inputMainCrv,ammountOfFurnishings/*<fix*/,getCrvVector(inputMainCrv));
+    if(furnishRequest > furnitureGroup.children.length){
+      // extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv));
+      if(secondaryConCrvs.children.length == 0){
+        extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv));
+      }
     }
-    if(ammountOfFurnishings < getCrvLength(inputMainCrv)){
-      extendCrv(inputMainCrv,-ammountOfFurnishings/*<fix*/,getCrvVector(inputMainCrv));
+    if(furnishRequest < getCrvLength(inputMainCrv)){
+      growMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},100);
     }
   }
+
 
   function newStepExt(crv,distance,increment = 0.5){
     extLength = 1;
