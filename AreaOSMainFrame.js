@@ -396,7 +396,7 @@ if(areaSQ<requestedSQ){
   //
   function extendCrv(crv,distance,direction){ //fix distance and direction
     newExtedPt = new THREE.Vector3();
-    newExtedPt.addVectors(crv.geometry.vertices[1],direction.multiplyScalar(distance));
+    newExtedPt.addVectors(crv.geometry.vertices[1],direction.normalize(distance));
     crv.geometry.vertices[1].copy(newExtedPt);
     crv.geometry.verticesNeedUpdate = true;
     //!!!!!!!!!!!
@@ -505,10 +505,10 @@ if(areaSQ<requestedSQ){
   function livePreview(furnitureElement,ammountOfFurnishings){
     console.log(furnitureGroup.children.length);
     if(ammountOfFurnishings > getCrvLength(inputMainCrv)){
-      extendCrv(inputMainCrv,ammountOfFurnishings,getCrvVector(inputMainCrv));
+      extendCrv(inputMainCrv,ammountOfFurnishings/*<fix*/,getCrvVector(inputMainCrv));
     }
     if(ammountOfFurnishings < getCrvLength(inputMainCrv)){
-      extendCrv(inputMainCrv,ammountOfFurnishings,getCrvVector(inputMainCrv));
+      extendCrv(inputMainCrv,ammountOfFurnishings/*<fix*/,getCrvVector(inputMainCrv));
     }
   }
 
