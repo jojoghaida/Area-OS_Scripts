@@ -197,6 +197,8 @@ function submital(){
     clearInterval(sendInput);
     two.update();
   }
+  clearInterval(editMainCrv); // temporary for testing; stops propogation
+  editMainCrv = null; // temporary for testing; stops propogation
 }
 
 // function alignSlider(){

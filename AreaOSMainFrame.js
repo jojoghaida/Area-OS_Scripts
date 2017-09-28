@@ -518,14 +518,19 @@ if(areaSQ<requestedSQ){
       clearInterval(editMainCrv);
       editMainCrv = null;
     }
-    if(furnishRequest > furnitureGroup.children.length){
+    if(furnishRequest < furnitureGroup.children.length){
       // extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv));
-      editMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},10);
+      editMainCrv = setInterval(function(){
+        extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv));
+        if(inputMainCrv/5/*<<<spacing tempo*/ % 1 == 0){
+          console.log("little crv drop");
+        }
+      },10);
       if(secondaryConCrvs.children.length == 0){
         // extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv));
       }
     }
-    if(furnishRequest < furnitureGroup.children.length){
+    if(furnishRequest > furnitureGroup.children.length){
       editMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},10);
     }
   }
