@@ -521,7 +521,7 @@ if(areaSQ<requestedSQ){
     if(furnishRequest > furnitureGroup.children.length){
       // extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv));
       editMainCrv = setInterval(function(){
-        extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv));
+        extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
         console.log(getCrvLength(inputMainCrv));
         if(getCrvLength(inputMainCrv)/5/*<<<spacing tempo*/ % 1 == 0){
           console.log("little crv drop");
@@ -573,7 +573,8 @@ if(areaSQ<requestedSQ){
   }
   // window.onload(newStepExt(newMainAxisCrv,80)); //!!!!!!!!
 
-  setTimeout(function(){newStepExt(newMainAxisCrv,80)},2000);
+  // setTimeout(function(){newStepExt(newMainAxisCrv,80)},2000);
+  
 // test2
 // }
 // test 1
