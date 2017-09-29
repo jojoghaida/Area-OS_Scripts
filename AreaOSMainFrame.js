@@ -566,7 +566,7 @@ if(areaSQ<requestedSQ){
                 extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
                 livePreview(null,selectorText.value);
               }
-            }
+            }else{editSecCrv = null;}
           },1);
         }else{
           extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
