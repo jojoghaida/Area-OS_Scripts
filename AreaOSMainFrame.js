@@ -556,14 +556,16 @@ if(areaSQ<requestedSQ){
           //set bool to secondary crv
           /////
           editSecCrv = setInterval(function(){
-            if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))<15){
-              extendCrv(inputSecondaryCrv, inputMainCrvGrowthInterval, getCrvVector(inputSecondaryCrv));
-              if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 % 1 == 0){
-                furnitureGroup.add(dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv)));
+            if(furnishRequest > furnitureGroup.children.length){
+              if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))<15){
+                extendCrv(inputSecondaryCrv, inputMainCrvGrowthInterval, getCrvVector(inputSecondaryCrv));
+                if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 % 1 == 0){
+                  furnitureGroup.add(dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv)));
+                }
+              }else{
+                extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
+                livePreview(null,selectorText.value);
               }
-            }else{
-              extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
-              livePreview(null,selectorText.value);
             }
           },1);
         }else{
