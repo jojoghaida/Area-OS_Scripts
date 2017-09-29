@@ -528,7 +528,7 @@ if(areaSQ<requestedSQ){
   var furnitureGroup = new THREE.Group();
   // trivial variables for live preview \\
 
-  function livePreview(furnitureElement,furnishRequest){
+  function clearMyIntervals(){
     //clear any existing intervals
     if(editMainCrv != null){
       clearInterval(editMainCrv);
@@ -538,6 +538,9 @@ if(areaSQ<requestedSQ){
       clearInterval(editSecCrv);
       editSecCrv = null;
     }
+  }
+  function livePreview(furnitureElement,furnishRequest){
+    clearMyIntervals();
     if(furnishRequest > furnitureGroup.children.length){
       editMainCrv = setInterval(function(){
         // extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
@@ -566,7 +569,7 @@ if(areaSQ<requestedSQ){
                 extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
                 livePreview(null,selectorText.value);
               }
-            }else{editSecCrv = null;}
+            }else{clearMyIntervals()}
           },1);
         }else{
           extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
