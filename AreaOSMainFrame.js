@@ -535,8 +535,10 @@ if(areaSQ<requestedSQ){
     if(request>furnitureGroup.children.length){ /*addition*/
       if(on2nd==false){ /*curve2 addition*/
         extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve extension. new distance =",getCrvLength(inputMainCrv));};
-        
-        if(request<furnitureGroup.children.length){}/*REBOOT~~*/
+        if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){ if(logDrawF==true){console.log("producing new trajectory curve.");};
+
+        }
+        if(request<furnitureGroup.children.length){drawElements(testVariable)}/*REBOOT~~*/
       }/*curve2 addition end*/else{//main curve addition
       }//main curve addition end*\
     }//addition end*\
@@ -550,7 +552,9 @@ if(areaSQ<requestedSQ){
     }//reduction end*\
 
   }//drawElements end*\
-drawElements(1);
+var testVariable = 10
+drawElements(testVariable);
+
 
 
 
