@@ -536,9 +536,11 @@ if(areaSQ<requestedSQ){
       if(on2nd==false){ /*curve2 addition*/
         extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve extension. new distance =",getCrvLength(inputMainCrv));};
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){ if(logDrawF==true){console.log("producing new trajectory curve.");};
-
+          //test
+          furnitureGroup.add(dropChairs(new THREE.Vector3(-20,0,0),new THREE.Vector3(0,0,0)));
+          //test
         }
-        if(request>testVariable){drawElements(testVariable)}/*REBOOT~~*/
+        if(request>furnitureGroup.children.length){drawElements(selectorText.value)}/*REBOOT~~*/
       }/*curve2 addition end*/else{//main curve addition
       }//main curve addition end*\
     }//addition end*\
@@ -552,8 +554,6 @@ if(areaSQ<requestedSQ){
     }//reduction end*\
 
   }//drawElements end*\
-var testVariable = 10
-drawElements(testVariable);
 
 
 

@@ -63,6 +63,7 @@ var selectorText = two.makeText(0,leftWhiteSpace,sH*.25);
 selectorText.fill = colorStyle;
 selectorText.size = 18;
 selectorText.family = 'Karla';
+selectorText.value = 0;
 
 var selectorGlyph = two.makeStar(5*tickSpan,leftWhiteSpace,10,null,3);
 selectorGlyph.noStroke();
@@ -148,7 +149,7 @@ function handleTouchMove(evt) {
             inputSliderGroup.translation.x = xAbsPos;
             backPedalX = xDiff;
             selectorText.value = Math.round(Math.abs(xAbsPos/tickSpan));
-            livePreview(null,selectorText.value);
+            drawElements(selectorText.value);
             two.update();
         } else {
             /* right swipe */
