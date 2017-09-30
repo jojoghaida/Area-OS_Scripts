@@ -537,7 +537,7 @@ if(areaSQ<requestedSQ){
         extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve extension. new distance =",getCrvLength(inputMainCrv));};
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){ if(logDrawF==true){console.log("producing new trajectory curve.");};
           //test
-          furnitureGroup.add(dropChairs(new THREE.Vector3(-20,0,selectorText.value),new THREE.Vector3(0,0,0)));
+          furnitureGroup.add(dropChairs(inputMainCrv.geometry.vertices[1],getCrvVector(inputMainCrv)));
           renderer.render(scene,camera);
           //test
         }
