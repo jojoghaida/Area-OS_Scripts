@@ -521,6 +521,7 @@ if(areaSQ<requestedSQ){
   var inputMainCrvGrowthInterval = .1;
   var editMainCrv = null;
 
+  var on2nd = false;
   var secondaryConCrvs = new THREE.Group();
   var secondaryConCrvsGrothInterval = .1;
   var editSecCrv = null;
@@ -543,11 +544,10 @@ if(areaSQ<requestedSQ){
     clearMyIntervals();
     if(furnishRequest > furnitureGroup.children.length){
       editMainCrv = setInterval(function(){
-        extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
+        // extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
         console.log(getCrvLength(inputMainCrv).toFixed(2));
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){
           console.log("little crv drop");
-
           /////
           clearInterval(editMainCrv);
           a = inputMainCrv.geometry.vertices[1].clone();
@@ -555,8 +555,7 @@ if(areaSQ<requestedSQ){
           b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
           inputSecondaryCrv = twoPtCurve(a,b);
           dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone());
-
-          //set bool to secondary crv
+          on2nd = true;//set bool to secondary crv
           /////
           editSecCrv = setInterval(function(){
             if(furnishRequest > furnitureGroup.children.length){
