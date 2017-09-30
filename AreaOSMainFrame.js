@@ -530,7 +530,7 @@ if(areaSQ<requestedSQ){
   // trivial variables for live preview \\
 
   var logDrawF = true;
-  function drawElements(){ //design to be looped live
+  function drawElements(request){ //design to be looped live
 
     if(request>furnitureGroup.children.length){ //addition
       if(on2nd==false){ //curve2 addition
@@ -549,7 +549,7 @@ if(areaSQ<requestedSQ){
     }//reduction end*\
 
   }//drawElements end*\
-drawElements();
+drawElements(1);
 
 
 
