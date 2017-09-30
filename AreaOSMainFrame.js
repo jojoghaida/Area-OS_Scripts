@@ -65,7 +65,7 @@ function render(){
 renderer.render(scene,camera);
 }
 function viewAnim(){
-selectorText.valueAnimationFrame(viewAnim);
+requestAnimationFrame(viewAnim);
 controls.update();
 }
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
@@ -73,7 +73,7 @@ controls.update();
 function returnCamPlan(){
   // if(camera.position.y <350){
   //   camera.position.y = camera.position.y++;
-  //   selectorText.valueAnimationFrame(viewAnim);
+  //   requestAnimationFrame(viewAnim);
   // }
 camera.position.y = 350;
 camera.position.x = 0;
@@ -150,7 +150,7 @@ showCamIcons();
 window.onload = disableOrbitCam;
 //stage camera
 function swingCamAxon(){
-selectorText.valueAnimationFrame(swingCamAxon);
+requestAnimationFrame(swingCamAxon);
 camera.rotation.x += 1.01;
 camera.rotation.z += 1.01;
 renderer.render(scene, camera);
@@ -338,12 +338,12 @@ mouseCasting();
 // movingRay();
 
 // SQstuff
-function leaseIgnition(areaselectorText.value){
+function leaseIgnition(areaRequest){
 }
 var occupy = true;
 var onHold = []; // store annex here
 
-function checkSQ(meshToCheckSQ,selectorText.valueedSQ){
+function checkSQ(meshToCheckSQ,requestedSQ){
 var faceListSize = meshToCheckSQ.faces.length
 var areaSQ = 0.00
 for (i = 0; i < faceListSize; i++){
@@ -356,7 +356,7 @@ var cross = new THREE.Vector3();
 cross.crossVectors( ab, ac );
 areaSQ += cross.length() / 2;
 }
-if(areaSQ<selectorText.valueedSQ){
+if(areaSQ<requestedSQ){
 }else{
   var li = 0;
   occupy = false;
@@ -530,7 +530,7 @@ if(areaSQ<selectorText.valueedSQ){
   // trivial variables for live preview \\
 
   var logDrawF = true;
-  function drawElements(){ /*design to be looped live*/ if(logDrawF==true){console.log("drawElements() is running. selectorText.value is =",selectorText.value);};
+  function drawElements(){ /*design to be looped live*/ if(logDrawF==true){console.log("drawElements() is running. Request is =",selectorText.value);};
 
     if(selectorText.value>furnitureGroup.children.length){ /*addition*/
       if(on2nd==false){ /*curve2 addition*/
@@ -540,7 +540,7 @@ if(areaSQ<selectorText.valueedSQ){
           furnitureGroup.add(dropChairs(new THREE.Vector3(-20,0,0),new THREE.Vector3(0,0,0)));
           //test
         }
-        if(selectorText.value>furnitureGroup.children.length){setTimeout(drawElements,10)}/*REBOOT~~*/
+        if(selectorText.value>furnitureGroup.children.length){setTimeout(drawElements(selectorText.value),10)}/*REBOOT~~*/
       }/*curve2 addition end*/else{//main curve addition
       }//main curve addition end*\
     }//addition end*\
@@ -569,9 +569,9 @@ if(areaSQ<selectorText.valueedSQ){
   //     editSecCrv = null;
   //   }
   // }
-  // function livePreview(furnitureElement,furnishselectorText.value){
+  // function livePreview(furnitureElement,furnishRequest){
   //   clearMyIntervals();
-  //   if(furnishselectorText.value > furnitureGroup.children.length){
+  //   if(furnishRequest > furnitureGroup.children.length){
   //     editMainCrv = setInterval(function(){
   //       // extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
   //       console.log(getCrvLength(inputMainCrv).toFixed(2));
@@ -589,7 +589,7 @@ if(areaSQ<selectorText.valueedSQ){
   //           /////
   //         }
   //         editSecCrv = setInterval(function(){
-  //           if(furnishselectorText.value > furnitureGroup.children.length){
+  //           if(furnishRequest > furnitureGroup.children.length){
   //             if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))<15){
   //               extendCrv(inputSecondaryCrv, inputMainCrvGrowthInterval, getCrvVector(inputSecondaryCrv));
   //               if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 % 1 == 0){
@@ -610,8 +610,8 @@ if(areaSQ<selectorText.valueedSQ){
   //       // extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv));
   //     }
   //   }
-  //   if(furnishselectorText.value < furnitureGroup.children.length){
-  //     // editMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishselectorText.value/*<fix*/,getCrvVector(inputMainCrv))},1);
+  //   if(furnishRequest < furnitureGroup.children.length){
+  //     // editMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},1);
   //   }
   // }
 
