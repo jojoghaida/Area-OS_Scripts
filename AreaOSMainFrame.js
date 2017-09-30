@@ -534,9 +534,10 @@ if(areaSQ<requestedSQ){
 
     if(request>furnitureGroup.children.length){ /*addition*/
       if(on2nd==false){ /*curve2 addition*/
+        extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve extension. new distance =",getCrvLength(inputMainCrv));};
+        
         if(request<furnitureGroup.children.length){}/*REBOOT~~*/
       }/*curve2 addition end*/else{//main curve addition
-        extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve extension. new distance =",getCrvLength(inputMainCrv));};
       }//main curve addition end*\
     }//addition end*\
 
