@@ -529,62 +529,86 @@ if(areaSQ<requestedSQ){
   var furnitureGroup = new THREE.Group();
   // trivial variables for live preview \\
 
-  function clearMyIntervals(){
-    //clear any existing intervals
-    if(editMainCrv != null){
-      clearInterval(editMainCrv);
-      editMainCrv = null;
-    }
-    if(editSecCrv != null){
-      clearInterval(editSecCrv);
-      editSecCrv = null;
-    }
-  }
-  function livePreview(furnitureElement,furnishRequest){
-    clearMyIntervals();
-    if(furnishRequest > furnitureGroup.children.length){
-      editMainCrv = setInterval(function(){
-        // extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
-        console.log(getCrvLength(inputMainCrv).toFixed(2));
-        if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){
-          if(on2nd == false){
-            console.log("little crv drop");
-            /////
-            clearInterval(editMainCrv);
-            a = inputMainCrv.geometry.vertices[1].clone();
-            bD = getOffsetDirection(inputMainCrv);
-            b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
-            inputSecondaryCrv = twoPtCurve(a,b);
-            dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone());
-            on2nd = true;//set bool to secondary crv
-            /////
-          }
-          editSecCrv = setInterval(function(){
-            if(furnishRequest > furnitureGroup.children.length){
-              if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))<15){
-                extendCrv(inputSecondaryCrv, inputMainCrvGrowthInterval, getCrvVector(inputSecondaryCrv));
-                if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 % 1 == 0){
-                  furnitureGroup.add(dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv)));
-                }
-              }else{
-                on2nd = false;
-                extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
-                livePreview(null,selectorText.value);
-              }
-            }else{clearMyIntervals()}
-          },1);
-        }else{
-          extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
-        }
-      },1);
-      if(secondaryConCrvs.children.length == 0){
-        // extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv));
-      }
-    }
-    if(furnishRequest < furnitureGroup.children.length){
-      // editMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},1);
-    }
-  }
+  var logDrawF = true;
+  function drawElements(){ //design to be looped live
+
+    if(request>furnitureGroup.children.length){ //addition
+      if(on2nd==false){ //curve2 addition
+        if(request<furnitureGroup.children.length){}//REBOOT~~
+      }/*curve2 addition end*/else{//main curve addition
+        extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve extension. new distance =",getCrvLength(inputMainCrv));};
+      }//main curve addition end*\
+    }//addition end*\
+
+    if(request<furnitureGroup.children.length){ //reduction
+      if(on2nd==false){ //curve2 reduction
+        if(request>furnitureGroup.children.length){}//REBOOT~~
+      }/*curve2 reduction end*/else{//main curve reduction
+
+      }//main curve reduction end*\
+    }//reduction end*\
+
+  }//drawElements end*\
+drawElements();
+
+
+
+  // function clearMyIntervals(){
+  //   //clear any existing intervals
+  //   if(editMainCrv != null){
+  //     clearInterval(editMainCrv);
+  //     editMainCrv = null;
+  //   }
+  //   if(editSecCrv != null){
+  //     clearInterval(editSecCrv);
+  //     editSecCrv = null;
+  //   }
+  // }
+  // function livePreview(furnitureElement,furnishRequest){
+  //   clearMyIntervals();
+  //   if(furnishRequest > furnitureGroup.children.length){
+  //     editMainCrv = setInterval(function(){
+  //       // extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
+  //       console.log(getCrvLength(inputMainCrv).toFixed(2));
+  //       if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){
+  //         if(on2nd == false){
+  //           console.log("little crv drop");
+  //           /////
+  //           clearInterval(editMainCrv);
+  //           a = inputMainCrv.geometry.vertices[1].clone();
+  //           bD = getOffsetDirection(inputMainCrv);
+  //           b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
+  //           inputSecondaryCrv = twoPtCurve(a,b);
+  //           dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone());
+  //           on2nd = true;//set bool to secondary crv
+  //           /////
+  //         }
+  //         editSecCrv = setInterval(function(){
+  //           if(furnishRequest > furnitureGroup.children.length){
+  //             if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))<15){
+  //               extendCrv(inputSecondaryCrv, inputMainCrvGrowthInterval, getCrvVector(inputSecondaryCrv));
+  //               if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 % 1 == 0){
+  //                 furnitureGroup.add(dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv)));
+  //               }
+  //             }else{
+  //               on2nd = false;
+  //               extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
+  //               livePreview(null,selectorText.value);
+  //             }
+  //           }else{clearMyIntervals()}
+  //         },1);
+  //       }else{
+  //         extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
+  //       }
+  //     },1);
+  //     if(secondaryConCrvs.children.length == 0){
+  //       // extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv));
+  //     }
+  //   }
+  //   if(furnishRequest < furnitureGroup.children.length){
+  //     // editMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},1);
+  //   }
+  // }
 
 
 
