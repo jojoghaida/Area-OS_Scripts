@@ -530,11 +530,11 @@ if(areaSQ<requestedSQ){
   // trivial variables for live preview \\
 
   var logDrawF = true;
-  function drawElements(request){ //design to be looped live
+  function drawElements(request){ /*design to be looped live*/ if(logDrawF==true){console.log("drawElements() is running. Request is =",request);};
 
-    if(request>furnitureGroup.children.length){ //addition
-      if(on2nd==false){ //curve2 addition
-        if(request<furnitureGroup.children.length){}//REBOOT~~
+    if(request>furnitureGroup.children.length){ /*addition*/
+      if(on2nd==false){ /*curve2 addition*/
+        if(request<furnitureGroup.children.length){}/*REBOOT~~*/
       }/*curve2 addition end*/else{//main curve addition
         extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve extension. new distance =",getCrvLength(inputMainCrv));};
       }//main curve addition end*\
