@@ -65,7 +65,7 @@ function render(){
 renderer.render(scene,camera);
 }
 function viewAnim(){
-requestAnimationFrame(viewAnim);
+selectorText.valueAnimationFrame(viewAnim);
 controls.update();
 }
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
@@ -73,7 +73,7 @@ controls.update();
 function returnCamPlan(){
   // if(camera.position.y <350){
   //   camera.position.y = camera.position.y++;
-  //   requestAnimationFrame(viewAnim);
+  //   selectorText.valueAnimationFrame(viewAnim);
   // }
 camera.position.y = 350;
 camera.position.x = 0;
@@ -150,7 +150,7 @@ showCamIcons();
 window.onload = disableOrbitCam;
 //stage camera
 function swingCamAxon(){
-requestAnimationFrame(swingCamAxon);
+selectorText.valueAnimationFrame(swingCamAxon);
 camera.rotation.x += 1.01;
 camera.rotation.z += 1.01;
 renderer.render(scene, camera);
@@ -338,12 +338,12 @@ mouseCasting();
 // movingRay();
 
 // SQstuff
-function leaseIgnition(areaRequest){
+function leaseIgnition(areaselectorText.value){
 }
 var occupy = true;
 var onHold = []; // store annex here
 
-function checkSQ(meshToCheckSQ,requestedSQ){
+function checkSQ(meshToCheckSQ,selectorText.valueedSQ){
 var faceListSize = meshToCheckSQ.faces.length
 var areaSQ = 0.00
 for (i = 0; i < faceListSize; i++){
@@ -356,7 +356,7 @@ var cross = new THREE.Vector3();
 cross.crossVectors( ab, ac );
 areaSQ += cross.length() / 2;
 }
-if(areaSQ<requestedSQ){
+if(areaSQ<selectorText.valueedSQ){
 }else{
   var li = 0;
   occupy = false;
@@ -530,9 +530,9 @@ if(areaSQ<requestedSQ){
   // trivial variables for live preview \\
 
   var logDrawF = true;
-  function drawElements(request){ /*design to be looped live*/ if(logDrawF==true){console.log("drawElements() is running. Request is =",request);};
+  function drawElements(){ /*design to be looped live*/ if(logDrawF==true){console.log("drawElements() is running. selectorText.value is =",selectorText.value);};
 
-    if(request>furnitureGroup.children.length){ /*addition*/
+    if(selectorText.value>furnitureGroup.children.length){ /*addition*/
       if(on2nd==false){ /*curve2 addition*/
         extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve extension. new distance =",getCrvLength(inputMainCrv));};
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){ if(logDrawF==true){console.log("producing new trajectory curve.");};
@@ -540,14 +540,14 @@ if(areaSQ<requestedSQ){
           furnitureGroup.add(dropChairs(new THREE.Vector3(-20,0,0),new THREE.Vector3(0,0,0)));
           //test
         }
-        if(request>furnitureGroup.children.length){drawElements(selectorText.value)}/*REBOOT~~*/
+        if(selectorText.value>furnitureGroup.children.length){setTimeout(drawElements,10)}/*REBOOT~~*/
       }/*curve2 addition end*/else{//main curve addition
       }//main curve addition end*\
     }//addition end*\
 
-    if(request<furnitureGroup.children.length){ //reduction
+    if(selectorText.value<furnitureGroup.children.length){ //reduction
       if(on2nd==false){ //curve2 reduction
-        if(request<furnitureGroup.children.length){}//REBOOT~~
+        if(selectorText.value<furnitureGroup.children.length){}//REBOOT~~
       }/*curve2 reduction end*/else{//main curve reduction
 
       }//main curve reduction end*\
@@ -569,9 +569,9 @@ if(areaSQ<requestedSQ){
   //     editSecCrv = null;
   //   }
   // }
-  // function livePreview(furnitureElement,furnishRequest){
+  // function livePreview(furnitureElement,furnishselectorText.value){
   //   clearMyIntervals();
-  //   if(furnishRequest > furnitureGroup.children.length){
+  //   if(furnishselectorText.value > furnitureGroup.children.length){
   //     editMainCrv = setInterval(function(){
   //       // extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
   //       console.log(getCrvLength(inputMainCrv).toFixed(2));
@@ -589,7 +589,7 @@ if(areaSQ<requestedSQ){
   //           /////
   //         }
   //         editSecCrv = setInterval(function(){
-  //           if(furnishRequest > furnitureGroup.children.length){
+  //           if(furnishselectorText.value > furnitureGroup.children.length){
   //             if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))<15){
   //               extendCrv(inputSecondaryCrv, inputMainCrvGrowthInterval, getCrvVector(inputSecondaryCrv));
   //               if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 % 1 == 0){
@@ -610,8 +610,8 @@ if(areaSQ<requestedSQ){
   //       // extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv));
   //     }
   //   }
-  //   if(furnishRequest < furnitureGroup.children.length){
-  //     // editMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},1);
+  //   if(furnishselectorText.value < furnitureGroup.children.length){
+  //     // editMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishselectorText.value/*<fix*/,getCrvVector(inputMainCrv))},1);
   //   }
   // }
 
