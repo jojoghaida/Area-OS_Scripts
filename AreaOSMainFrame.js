@@ -543,7 +543,7 @@ if(areaSQ<requestedSQ){
     clearMyIntervals();
     if(furnishRequest > furnitureGroup.children.length){
       editMainCrv = setInterval(function(){
-        // extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
+        extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
         console.log(getCrvLength(inputMainCrv).toFixed(2));
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){
           console.log("little crv drop");
