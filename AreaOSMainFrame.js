@@ -538,14 +538,14 @@ if(areaSQ<requestedSQ){
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){ if(logDrawF==true){console.log("producing new trajectory curve.");};
 
         }
-        if(request<furnitureGroup.children.length){drawElements(testVariable)}/*REBOOT~~*/
+        if(request>furnitureGroup.children.length){drawElements(testVariable)}/*REBOOT~~*/
       }/*curve2 addition end*/else{//main curve addition
       }//main curve addition end*\
     }//addition end*\
 
     if(request<furnitureGroup.children.length){ //reduction
       if(on2nd==false){ //curve2 reduction
-        if(request>furnitureGroup.children.length){}//REBOOT~~
+        if(request<furnitureGroup.children.length){}//REBOOT~~
       }/*curve2 reduction end*/else{//main curve reduction
 
       }//main curve reduction end*\
