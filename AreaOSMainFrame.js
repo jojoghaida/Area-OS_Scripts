@@ -547,16 +547,18 @@ if(areaSQ<requestedSQ){
         // extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
         console.log(getCrvLength(inputMainCrv).toFixed(2));
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){
-          console.log("little crv drop");
-          /////
-          clearInterval(editMainCrv);
-          a = inputMainCrv.geometry.vertices[1].clone();
-          bD = getOffsetDirection(inputMainCrv);
-          b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
-          inputSecondaryCrv = twoPtCurve(a,b);
-          dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone());
-          on2nd = true;//set bool to secondary crv
-          /////
+          if(on2nd == false){
+            console.log("little crv drop");
+            /////
+            clearInterval(editMainCrv);
+            a = inputMainCrv.geometry.vertices[1].clone();
+            bD = getOffsetDirection(inputMainCrv);
+            b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
+            inputSecondaryCrv = twoPtCurve(a,b);
+            dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone());
+            on2nd = true;//set bool to secondary crv
+            /////
+          }
           editSecCrv = setInterval(function(){
             if(furnishRequest > furnitureGroup.children.length){
               if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))<15){
@@ -565,6 +567,7 @@ if(areaSQ<requestedSQ){
                   furnitureGroup.add(dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv)));
                 }
               }else{
+                on2nd = false;
                 extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
                 livePreview(null,selectorText.value);
               }
