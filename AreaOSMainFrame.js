@@ -538,7 +538,7 @@ if(areaSQ<requestedSQ){
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){ if(logDrawF==true){console.log("producing new trajectory curve.");};
 
         }
-        if(request>furnitureGroup.children.length){drawElements(testVariable)}/*REBOOT~~*/
+        if(request>testVariable){drawElements(testVariable)}/*REBOOT~~*/
       }/*curve2 addition end*/else{//main curve addition
       }//main curve addition end*\
     }//addition end*\
