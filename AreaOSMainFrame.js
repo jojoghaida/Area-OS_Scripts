@@ -518,7 +518,7 @@ if(areaSQ<requestedSQ){
   var endPt = pushPointDirection(stPt,mainTrajectory);
 
   var inputMainCrv = twoPtCurve(stPt,endPt);
-  var inputMainCrvGrowthInterval = .1;
+  var inputMainCrvGrowthInterval = .2;
   var editMainCrv = null;
 
   var on2nd = false;
