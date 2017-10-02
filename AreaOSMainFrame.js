@@ -530,9 +530,12 @@ if(areaSQ<requestedSQ){
   // trivial variables for live preview \\
 
   var logDrawF = true;
+  var drawBool = false;
+
   function drawElements(){ /*design to be looped live*/ if(logDrawF==true){console.log("drawElements() is running. Request is =",selectorText.value);};
 
     if(selectorText.value>furnitureGroup.children.length){ /*addition*/
+      drawBool = true;
       if(on2nd==false){ /*curve2 addition*/
         extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve extension. new distance =",getCrvLength(inputMainCrv));};
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){ if(logDrawF==true){console.log("producing new trajectory curve.");};
@@ -542,19 +545,29 @@ if(areaSQ<requestedSQ){
           //test
         }
         if(selectorText.value>furnitureGroup.children.length){drawElements()}/*REBOOT~~*/
-      }/*curve2 addition end*/else{//main curve addition
-      }//main curve addition end*\
+      }/*curve2 addition end*/else{//second curve addition
+
+      }//second curve addition end*\
     }//addition end*\
 
     if(selectorText.value<furnitureGroup.children.length){ //reduction
+      // drawBool = true;
       if(on2nd==false){ //curve2 reduction
         if(selectorText.value<furnitureGroup.children.length){}//REBOOT~~
-      }/*curve2 reduction end*/else{//main curve reduction
+      }/*curve2 reduction end*/else{//second curve reduction
 
-      }//main curve reduction end*\
+      }//second curve reduction end*\
     }//reduction end*\
 
+    if(selectorText.value == furnitureGroup.children.length){ //stop; switch bool off
+      drawBool = false;
+    }
+
   }//drawElements end*\
+
+  function cahceElements(){ /*installs elements on load*/
+
+  }
 
 
 
