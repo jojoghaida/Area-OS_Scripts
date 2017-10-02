@@ -537,7 +537,7 @@ if(areaSQ<requestedSQ){
     if(selectorText.value>furnitureGroup.children.length){ /*addition*/
       drawBool = true;
       if(on2nd==false){ /*curve2 addition*/
-        extendCrv(inputMainCrv,4,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve extension. new distance =",getCrvLength(inputMainCrv));};
+        extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve extension. new distance =",getCrvLength(inputMainCrv));};
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){ if(logDrawF==true){console.log("producing new trajectory curve.");};
           //test
           furnitureGroup.add(dropChairs(inputMainCrv.geometry.vertices[1],getCrvVector(inputMainCrv))); if(logDrawF==true){console.log(furnitureGroup.children.length,"chairs");}
