@@ -552,7 +552,7 @@ if(areaSQ<requestedSQ){
         }
       }/*first addition end*/else{//second curve addition
         extendCrv(inputSecondaryCrv,secondaryConCrvsGrothInterval,getCrvVector(inputSecondaryCrv));
-        if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){
+        if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 /*<<<spacing tempo*/ % 1 == 0){
           furnitureGroup.add(dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv)));
         }
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) >= 15){
