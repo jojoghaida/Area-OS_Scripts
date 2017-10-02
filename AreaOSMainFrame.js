@@ -523,7 +523,7 @@ if(areaSQ<requestedSQ){
 
   var on2nd = false;
   var secondaryConCrvs = new THREE.Group();
-  var secondaryConCrvsGrothInterval = .1;
+  var secondaryConCrvsGrothInterval = .2;
   var editSecCrv = null;
 
   var furnitureGroup = new THREE.Group();
@@ -536,18 +536,30 @@ if(areaSQ<requestedSQ){
 
     if(selectorText.value>furnitureGroup.children.length){ /*addition*/
       drawBool = true;
-      if(on2nd==false){ /*curve2 addition*/
+      if(on2nd==false){ /*first addition*/
         extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve extension. new distance =",getCrvLength(inputMainCrv));};
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){ if(logDrawF==true){console.log("producing new trajectory curve.");};
           //test
-          furnitureGroup.add(dropChairs(inputMainCrv.geometry.vertices[1],getCrvVector(inputMainCrv))); if(logDrawF==true){console.log(furnitureGroup.children.length,"chairs");}
+          on2nd = true; //@@@
+          a = inputMainCrv.geometry.vertices[1].clone();
+          bD = getOffsetDirection(inputMainCrv);
+          b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
+          inputSecondaryCrv = twoPtCurve(a,b);
+          dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone());
+          // furnitureGroup.add(dropChairs(inputMainCrv.geometry.vertices[1],getCrvVector(inputMainCrv))); if(logDrawF==true){console.log(furnitureGroup.children.length,"chairs");}
           renderer.render(scene,camera);
           //test
         }
-        if(selectorText.value>furnitureGroup.children.length){setTimeout(drawElements,.1)}/*REBOOT~~*/
-      }/*curve2 addition end*/else{//second curve addition
-
+      }/*first addition end*/else{//second curve addition
+        extendCrv(inputSecondaryCrv,secondaryConCrvsGrothInterval,getCrvVector(inputSecondaryCrv));
+        if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){
+          furnitureGroup.add(dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputSecondaryCrv)));
+        }
+        if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) >= 15){
+          on2nd = false;
+        }
       }//second curve addition end*\
+      if(selectorText.value>furnitureGroup.children.length){setTimeout(drawElements,.1)}/*REBOOT~~*/
     }//addition end*\
 
     if(selectorText.value<furnitureGroup.children.length){ //reduction
