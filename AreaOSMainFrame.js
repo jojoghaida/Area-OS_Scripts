@@ -544,7 +544,7 @@ if(areaSQ<requestedSQ){
           renderer.render(scene,camera);
           //test
         }
-        if(selectorText.value>furnitureGroup.children.length){drawElements()}/*REBOOT~~*/
+        if(selectorText.value>furnitureGroup.children.length){setTimeout(drawElements,1)}/*REBOOT~~*/
       }/*curve2 addition end*/else{//second curve addition
 
       }//second curve addition end*\
