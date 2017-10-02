@@ -518,12 +518,12 @@ if(areaSQ<requestedSQ){
   var endPt = pushPointDirection(stPt,mainTrajectory);
 
   var inputMainCrv = twoPtCurve(stPt,endPt);
-  var inputMainCrvGrowthInterval = .2;
+  var inputMainCrvGrowthInterval = .5;
   var editMainCrv = null;
 
   var on2nd = false;
   var secondaryConCrvs = new THREE.Group();
-  var secondaryConCrvsGrothInterval = .2;
+  var secondaryConCrvsGrothInterval = .5;
   var editSecCrv = null;
 
   var furnitureGroup = new THREE.Group();
