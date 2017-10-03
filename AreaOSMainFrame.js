@@ -545,6 +545,7 @@ if(areaSQ<requestedSQ){
           bD = getOffsetDirection(inputMainCrv);
           b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
           inputSecondaryCrv = twoPtCurve(a,b);
+          secondaryConCrvs.add(inputSecondaryCrv);
           dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone());
           // furnitureGroup.add(dropChairs(inputMainCrv.geometry.vertices[1],getCrvVector(inputMainCrv))); if(logDrawF==true){console.log(furnitureGroup.children.length,"chairs");}
           renderer.render(scene,camera);
@@ -557,7 +558,7 @@ if(areaSQ<requestedSQ){
         }
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) >= 15){
           on2nd = false;
-          dropText("!",inputSecondaryCrv.geometry.vertices[1].clone(),fontKarla_Reg); console.log("yeah");
+          dropText(secondaryConCrvs.children.length,inputSecondaryCrv.geometry.vertices[1].clone(),fontKarla_Reg); console.log("yeah");
         }
       }//second curve addition end*\
       if(selectorText.value>furnitureGroup.children.length){setTimeout(drawElements,.1)}/*REBOOT~~*/
