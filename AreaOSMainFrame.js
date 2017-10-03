@@ -710,9 +710,9 @@ function dropText(text,pos,font,just,size = 1){
   var material = new THREE.MeshBasicMaterial({color: 0x26D8A5});
   var text = new THREE.Mesh(geometry, material);
   textObject = new THREE.Object3D();
-  textObject.center();
   textObject.add(text);
   scene.add(textObject);
+  textObject.center();
   // textObject.position.x = pos[0];
   // textObject.position.y = pos[1];
   // textObject.position.z = pos[2];
