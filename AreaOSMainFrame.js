@@ -557,7 +557,7 @@ if(areaSQ<requestedSQ){
         }
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) >= 15){
           on2nd = false;
-          dropText("!!!!!!!!!!!!!!!!!!!",pushPointDirection(inputSecondaryCrv.geometry.vertices[1].clone(),getCrvVector(inputSecondaryCrv)),fontKarla_Reg); console.log("yeah");
+          dropText("!!!!!!!!!!!!!!!!!!!",inputSecondaryCrv.geometry.vertices[1].clone(),fontKarla_Reg); console.log("yeah");
         }
       }//second curve addition end*\
       if(selectorText.value>furnitureGroup.children.length){setTimeout(drawElements,.1)}/*REBOOT~~*/
