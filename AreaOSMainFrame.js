@@ -705,19 +705,20 @@ function dropPoints(coord,color = "red"){
 // checkPts = [a,b,c,d];
 
 
-function dropText(text,pos,font){
-  var geometry = new THREE.TextGeometry( text, {font: font, size: 5, height: 0, curveSegments: 30, bevelEnabled: false, bevelThickness: 10, bevelSize: 8, bevelSegments: 5});
+function dropText(text,pos,font,just,size = 1){
+  var geometry = new THREE.TextGeometry( text, {font: font, size: size, height: 0, curveSegments: 30, bevelEnabled: false, bevelThickness: 10, bevelSize: 8, bevelSegments: 5});
   var material = new THREE.MeshBasicMaterial({color: 0x26D8A5});
   var text = new THREE.Mesh(geometry, material);
-  textobject = new THREE.Object3D();
-  textobject.add(text);
-  scene.add(textobject);
-  // textobject.position.x = pos[0];
-  // textobject.position.y = pos[1];
-  // textobject.position.z = pos[2];
-  textobject.position.set(pos.x,pos.y,pos.z);
+  textObject = new THREE.Object3D();
+  textObject.center();
+  textObject.add(text);
+  scene.add(textObject);
+  // textObject.position.x = pos[0];
+  // textObject.position.y = pos[1];
+  // textObject.position.z = pos[2];
+  textObject.position.set(pos.x,pos.y,pos.z);
 
-  textobject.rotation.x = -Math.PI/2;
+  textObject.rotation.x = -Math.PI/2;
   renderer.render(scene,camera);
 
 }
