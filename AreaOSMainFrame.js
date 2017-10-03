@@ -712,7 +712,7 @@ function dropText(text,pos,font,just,size = 1){
   textObject = new THREE.Object3D();
   textObject.add(text);
   scene.add(textObject);
-  textObject.center();
+  // textObject.center();
   // textObject.position.x = pos[0];
   // textObject.position.y = pos[1];
   // textObject.position.z = pos[2];
