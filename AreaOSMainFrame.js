@@ -714,7 +714,7 @@ function dropText(text,pos,font){
   // textobject.position.x = pos[0];
   // textobject.position.y = pos[1];
   // textobject.position.z = pos[2];
-  textobject.position = pos;
+  textobject.position.set(pos);
 
   textobject.rotation.x = -Math.PI/2;
   renderer.render(scene,camera);
