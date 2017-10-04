@@ -392,6 +392,13 @@ if(areaSQ<requestedSQ){
     return(direction);
   }
   //
+  function reverseUnitVector(unitV){
+    angle = Math.PI;
+    v.applyAxisAngle(unitV,angle);
+    cleanVector(unitV);
+    return(unitV);
+  }
+  //
   function twoPtUnitVec(pt1,pt2){
     unitVector = new THREE.Vector3();
     unitVector.subVectors(pt1,pt2).normalize();
@@ -540,7 +547,7 @@ if(areaSQ<requestedSQ){
         extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve extension. new distance =",getCrvLength(inputMainCrv));};
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){ if(logDrawF==true){console.log("producing new trajectory curve.");};
           //test
-          on2nd = true; //@@@
+          on2nd = true;
           a = inputMainCrv.geometry.vertices[1].clone();
           bD = getOffsetDirection(inputMainCrv);
           b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
@@ -552,7 +559,7 @@ if(areaSQ<requestedSQ){
           //test
         }
       }/*first addition end*/else{//second curve addition
-        extendCrv(inputSecondaryCrv,secondaryConCrvsGrothInterval,getCrvVector(inputSecondaryCrv));
+        extendCrv(inputSecondaryCrv,secondaryConCrvsGrothInterval,getCrvVector(inputSecondaryCrv));// may have to change set up here so that max length is checked before extending curve
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 /*<<<spacing tempo*/ % 1 == 0){
           furnitureGroup.add(dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv)));
         }
@@ -565,12 +572,27 @@ if(areaSQ<requestedSQ){
     }//addition end*\
 
     if(selectorText.value<furnitureGroup.children.length){ //reduction
-      // drawBool = true;
-      if(on2nd==false){ //curve2 reduction
-        if(selectorText.value<furnitureGroup.children.length){}//REBOOT~~
+      drawBool = true;
+      if(on2nd==false){ //curve1 reduction
+        extendCrv(inputMainCrv,inputMainCrvGrowthInterval,reverseUnitVector(getCrvVector(inputMainCrv)));
+        if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){
+          on2nd = true;
+          inputSecondaryCrv = secondaryConCrvs[secondaryConCrvs.length - 1];
+        }
+        if(selectorText.value<furnitureGroup.children.length){setTimeout(drawElements,.1)}//REBOOT~~
       }/*curve2 reduction end*/else{//second curve reduction
-
+        extendCrv(inputSecondaryCrv,secondaryConCrvsGrothInterval,reverseUnitVector(getCrvVector(inputSecondaryCrv)));
+        if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 /*<<<spacing tempo*/ % 1 == 0){
+          furnitureGroup.children[furnitureGroup.children.length - 1].dispose();
+          renderer.render(scene,camera);
+        }
+        if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) <= secondaryConCrvsGrothInterval){
+          inputSecondaryCrv.dispose();
+          renderer.render(scene,camera);
+          on2nd = false;
+        }
       }//second curve reduction end*\
+      if(selectorText.value<furnitureGroup.children.length){setTimeout(drawElements,.1)}/*REBOOT~~*/
     }//reduction end*\
 
     if(selectorText.value == furnitureGroup.children.length){ //stop; switch bool off
@@ -705,7 +727,7 @@ function dropPoints(coord,color = "red"){
 // checkPts = [a,b,c,d];
 
 
-function dropText(text,pos,font,just,size = 1){
+function dropText(text,pos,font = fontKarla_Reg,just=0,size=1){
   var geometry = new THREE.TextGeometry( text, {font: font, size: size, height: 0, curveSegments: 30, bevelEnabled: false, bevelThickness: 10, bevelSize: 8, bevelSegments: 5});
   var material = new THREE.MeshBasicMaterial({color: 0x3d9675});
   var text = new THREE.Mesh(geometry, material);
