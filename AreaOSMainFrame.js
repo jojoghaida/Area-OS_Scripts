@@ -545,7 +545,7 @@ if(areaSQ<requestedSQ){
           bD = getOffsetDirection(inputMainCrv);
           b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
           inputSecondaryCrv = twoPtCurve(a,b);
-          secondaryConCrvs.add(inputSecondaryCrv);
+          // secondaryConCrvs.add(inputSecondaryCrv);
           dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone());
           // furnitureGroup.add(dropChairs(inputMainCrv.geometry.vertices[1],getCrvVector(inputMainCrv))); if(logDrawF==true){console.log(furnitureGroup.children.length,"chairs");}
           renderer.render(scene,camera);
