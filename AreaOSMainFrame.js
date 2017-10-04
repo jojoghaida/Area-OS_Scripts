@@ -394,7 +394,7 @@ if(areaSQ<requestedSQ){
   //
   function reverseUnitVector(unitV){
     angle = Math.PI;
-    v.applyAxisAngle(unitV,angle);
+    unitV.applyAxisAngle(unitV,angle);
     cleanVector(unitV);
     return(unitV);
   }
