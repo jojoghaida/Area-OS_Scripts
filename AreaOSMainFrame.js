@@ -583,7 +583,8 @@ if(areaSQ<requestedSQ){
       }/*curve2 reduction end*/else{//second curve reduction
         extendCrv(inputSecondaryCrv,secondaryConCrvsGrothInterval,reverseUnitVector(getCrvVector(inputSecondaryCrv)));
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 /*<<<spacing tempo*/ % 1 == 0){
-          furnitureGroup.children[furnitureGroup.children.length - 1].dispose();
+          removeElement = furnitureGroup.children[furnitureGroup.children.length - 1];
+          removeElement.dispose();
           renderer.render(scene,camera);
         }
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) <= secondaryConCrvsGrothInterval){
@@ -594,7 +595,6 @@ if(areaSQ<requestedSQ){
       }//second curve reduction end*\
       if(selectorText.value<furnitureGroup.children.length){setTimeout(drawElements,.1)}/*REBOOT~~*/
     }//reduction end*\
-
     if(selectorText.value == furnitureGroup.children.length){ //stop; switch bool off
       drawBool = false;
     }
