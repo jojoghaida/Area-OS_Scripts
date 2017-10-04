@@ -522,7 +522,7 @@ if(areaSQ<requestedSQ){
   var editMainCrv = null;
 
   var on2nd = false;
-  var secondaryConCrvs = new THREE.Group();
+  var secondaryConCrvs = [];
   var secondaryConCrvsGrothInterval = .5;
   var editSecCrv = null;
 
@@ -545,7 +545,7 @@ if(areaSQ<requestedSQ){
           bD = getOffsetDirection(inputMainCrv);
           b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
           inputSecondaryCrv = twoPtCurve(a,b);
-          // secondaryConCrvs.add(inputSecondaryCrv);
+          secondaryConCrvs.push(inputSecondaryCrv);
           dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone());
           // furnitureGroup.add(dropChairs(inputMainCrv.geometry.vertices[1],getCrvVector(inputMainCrv))); if(logDrawF==true){console.log(furnitureGroup.children.length,"chairs");}
           renderer.render(scene,camera);
