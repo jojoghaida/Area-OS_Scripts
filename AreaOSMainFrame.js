@@ -584,7 +584,7 @@ if(areaSQ<requestedSQ){
         extendCrv(inputSecondaryCrv,secondaryConCrvsGrothInterval,reverseUnitVector(getCrvVector(inputSecondaryCrv)));
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 /*<<<spacing tempo*/ % 1 == 0){
           removeElement = furnitureGroup.children[furnitureGroup.children.length - 1];
-          removeElement.dispose();
+          removeElement.remove();
           renderer.render(scene,camera);
         }
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) <= secondaryConCrvsGrothInterval){
