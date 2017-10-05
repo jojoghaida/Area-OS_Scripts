@@ -574,7 +574,7 @@ if(areaSQ<requestedSQ){
     if(selectorText.value<furnitureGroup.children.length){ /*reduction*/ if(logDrawF==true){console.log("Reduction");};
       drawBool = true;
       if(on2nd==false){ //curve1 reduction
-        extendCrv(inputMainCrv,-inputMainCrvGrowthInterval,getCrvVector(inputMainCrv));
+        extendCrv(inputMainCrv,-inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve reduction. new distance =",getCrvLength(inputMainCrv));};
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){
           on2nd = true;
           inputSecondaryCrv = secondaryConCrvs[secondaryConCrvs.length - 1];
