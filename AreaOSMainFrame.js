@@ -574,14 +574,14 @@ if(areaSQ<requestedSQ){
     if(selectorText.value<furnitureGroup.children.length){ //reduction
       drawBool = true;
       if(on2nd==false){ //curve1 reduction
-        extendCrv(inputMainCrv,inputMainCrvGrowthInterval,reverseUnitVector(getCrvVector(inputMainCrv)));
+        extendCrv(inputMainCrv,-inputMainCrvGrowthInterval,getCrvVector(inputMainCrv));
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){
           on2nd = true;
           inputSecondaryCrv = secondaryConCrvs[secondaryConCrvs.length - 1];
         }
         if(selectorText.value<furnitureGroup.children.length){setTimeout(drawElements,.1)}//REBOOT~~
       }/*curve2 reduction end*/else{//second curve reduction
-        extendCrv(inputSecondaryCrv,secondaryConCrvsGrothInterval,reverseUnitVector(getCrvVector(inputSecondaryCrv)));
+        extendCrv(inputSecondaryCrv,-secondaryConCrvsGrothInterval,getCrvVector(inputSecondaryCrv));
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 /*<<<spacing tempo*/ % 1 == 0){
           removal = furnitureGroup.remove(furnitureGroup.children[furnitureGroup.children.length - 1]);
           scene.remove(removal);
@@ -604,17 +604,6 @@ if(areaSQ<requestedSQ){
   function cahceElements(){ /*installs elements on load*/
 
   }
-
-  function manLine(){
-    a = new THREE.Vector3(-50,0,0);
-    b = new THREE.Vector3(-20,0,0);
-    dropPoints(a,"red");
-    dropPoints(b,"blue");
-    line = twoPtCurve(a,b);
-    extendCrv(line,-15,getCrvVector(line));
-    // extendCrv(line,15,reverseUnitVector(getCrvVector(line)));
-  }
-  manLine();
 
 
 
