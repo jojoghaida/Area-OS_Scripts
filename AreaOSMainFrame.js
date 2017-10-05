@@ -610,7 +610,8 @@ if(areaSQ<requestedSQ){
     b = new THREE.Vector3(-20,0,0);
     dropPoints(a,"red");
     dropPoints(b,"blue");
-    twoPtCurve(a,b);
+    line = twoPtCurve(a,b);
+    extendCrv(line,15,getCrvVector(line));
   }
   manLine();
 
