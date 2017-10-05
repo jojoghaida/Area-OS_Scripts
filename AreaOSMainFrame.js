@@ -606,7 +606,11 @@ if(areaSQ<requestedSQ){
   }
 
   function manLine(){
-    twoPtCurve(new THREE.Vector3(-50,0,0),new THREE.Vector3(-20,0,0));
+    a = new THREE.Vector3(-50,0,0);
+    b = new THREE.Vector3(-20,0,0);
+    dropPoints(a,"red");
+    dropPoints(b,"blue");
+    twoPtCurve(a,b);
   }
   manLine();
 
