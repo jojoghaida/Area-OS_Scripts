@@ -611,8 +611,8 @@ if(areaSQ<requestedSQ){
     dropPoints(a,"red");
     dropPoints(b,"blue");
     line = twoPtCurve(a,b);
-    extendCrv(line,15,getCrvVector(line));
-    extendCrv(line,15,reverseUnitVector(getCrvVector(line)));
+    extendCrv(line,-15,getCrvVector(line));
+    // extendCrv(line,15,reverseUnitVector(getCrvVector(line)));
   }
   manLine();
 
