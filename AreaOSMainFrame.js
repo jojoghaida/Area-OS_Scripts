@@ -494,6 +494,7 @@ if(areaSQ<requestedSQ){
       var triangle = new THREE.Mesh(geometry, material);
       scene.add(triangle);
       renderer.render(scene,camera);
+      return(triangle);
     }
 
     ///anots
