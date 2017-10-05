@@ -539,7 +539,7 @@ if(areaSQ<requestedSQ){
   var logDrawF = true;
   var drawBool = false;
 
-  function drawElements(){ /*design to be looped live*/ if(logDrawF==true){console.log("drawElements() is running. Request is =",selectorText.value);};
+  function drawElements(){ /*design to be looped live*/ //if(logDrawF==true){console.log("drawElements() is running. Request is =",selectorText.value);};
 
     drawBool = true;
 
