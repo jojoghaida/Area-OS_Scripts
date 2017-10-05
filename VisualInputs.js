@@ -158,6 +158,7 @@ function handleTouchMove(evt) {
             inputSliderGroup.translation.x = xAbsPos;
             backPedalX = xDiff;
             selectorText.value = Math.round(Math.abs(xAbsPos/tickSpan));
+            if(drawBool == false){drawElements();}
             two.update();
         }
     } else {
