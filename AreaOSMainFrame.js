@@ -605,6 +605,10 @@ if(areaSQ<requestedSQ){
 
   }
 
+  function manLine(){
+    twoPtCurve(new THREE.Vector3(-50,0,0),new THREE.Vector3(-20,0,0));
+  }
+  manLine();
 
 
 
