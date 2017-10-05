@@ -579,7 +579,7 @@ if(areaSQ<requestedSQ){
         extendCrv(inputMainCrv,-inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve reduction. new distance =",getCrvLength(inputMainCrv));};
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){ if(logDrawF==true){console.log("reducing new trajectory curve.");};
           on2nd = true;
-          inputSecondaryCrv = secondaryConCrvs[secondaryConCrvs.length - 1];
+          inputSecondaryCrv = secondaryConCrvs[secondaryConCrvs.length - 1]; if(logDrawF==true){console.log("secondaryConCrvs.length =.",secondaryConCrvs.length);};
         }
         // if(selectorText.value<furnitureGroup.children.length){setTimeout(drawElements,.1)}//REBOOT~~
       }/*curve2 reduction end*/else{//second curve reduction
