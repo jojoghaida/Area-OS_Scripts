@@ -506,7 +506,7 @@ if(areaSQ<requestedSQ){
     chairFacing = new THREE.Vector3(1,0,0);
     newChair.rotation.y = chairFacing.angleTo(direction)*-1;
     newChair.position.copy(point);
-    scene.add(newChair.clone());
+    scene.add(newChair);
     renderer.render(scene,camera);
     return(newChair);
   }
