@@ -588,7 +588,7 @@ if(areaSQ<requestedSQ){
           renderer.render(scene,camera);
         }
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) <= secondaryConCrvsGrothInterval){
-          inputSecondaryCrv.dispose();
+          scene.remove(inputSecondaryCrv);
           renderer.render(scene,camera);
           on2nd = false;
         }
