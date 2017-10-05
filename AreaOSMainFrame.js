@@ -534,7 +534,7 @@ if(areaSQ<requestedSQ){
   var secondaryConCrvsGrothInterval = .5;
   var editSecCrv = null;
 
-  var furnitureGroup = new THREE.Group();
+  var furnitureGroup = [];
   var annotationGroup = [];
   // trivial variables for live preview \\
 
@@ -545,7 +545,7 @@ if(areaSQ<requestedSQ){
 
     drawBool = true;
 
-    if(selectorText.value>furnitureGroup.children.length){ /*addition*/
+    if(selectorText.value>furnitureGroup.length){ /*addition*/
       drawBool = true;
       if(on2nd==false){ /*first addition*/
         extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve extension. new distance =",getCrvLength(inputMainCrv));};
@@ -566,7 +566,7 @@ if(areaSQ<requestedSQ){
       }/*first addition end*/else{//second curve addition
         extendCrv(inputSecondaryCrv,secondaryConCrvsGrothInterval,getCrvVector(inputSecondaryCrv));// may have to change set up here so that max length is checked before extending curve
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 /*<<<spacing tempo*/ % 1 == 0){
-          furnitureGroup.add(dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv)));
+          furnitureGroup.push(dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv)));
         }
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) >= 15){
           on2nd = false;
@@ -574,10 +574,10 @@ if(areaSQ<requestedSQ){
           dropText(secondaryConCrvs.length,inputSecondaryCrv.geometry.vertices[1].clone(),fontKarla_Reg);
         }
       }//second curve addition end*\
-      if(selectorText.value>furnitureGroup.children.length){setTimeout(drawElements,.1)}/*REBOOT~~*/
+      if(selectorText.value>furnitureGroup.length){setTimeout(drawElements,.1)}/*REBOOT~~*/
     }//addition end*\
 
-    if(selectorText.value<furnitureGroup.children.length){ /*reduction*/ if(logDrawF==true){console.log("Reduction");};
+    if(selectorText.value<furnitureGroup.length){ /*reduction*/ if(logDrawF==true){console.log("Reduction");};
       drawBool = true;
       if(on2nd==false){ //curve1 reduction
         extendCrv(inputMainCrv,-inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve reduction. new distance =",getCrvLength(inputMainCrv));};
@@ -589,7 +589,7 @@ if(areaSQ<requestedSQ){
       }/*curve2 reduction end*/else{//second curve reduction
         extendCrv(inputSecondaryCrv,-secondaryConCrvsGrothInterval,getCrvVector(inputSecondaryCrv));
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 /*<<<spacing tempo*/ % 1 == 0){
-          removal = furnitureGroup.remove(furnitureGroup.children[furnitureGroup.children.length - 1]);
+          removal = furnitureGroup.pop();
           scene.remove(removal);
           renderer.render(scene,camera);
         }
@@ -600,10 +600,10 @@ if(areaSQ<requestedSQ){
           on2nd = false;
         }
       }//second curve reduction end*\
-      if(selectorText.value<furnitureGroup.children.length){setTimeout(drawElements,.1)}/*REBOOT~~*/
+      if(selectorText.value<furnitureGroup.length){setTimeout(drawElements,.1)}/*REBOOT~~*/
     }//reduction end*\
 
-    if(selectorText.value == furnitureGroup.children.length){ //stop; switch bool off
+    if(selectorText.value == furnitureGroup.length){ //stop; switch bool off
       drawBool = false;
     }
 
