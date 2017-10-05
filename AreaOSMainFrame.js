@@ -534,6 +534,7 @@ if(areaSQ<requestedSQ){
   var editSecCrv = null;
 
   var furnitureGroup = new THREE.Group();
+  var annotationGroup = new THREE.Group();
   // trivial variables for live preview \\
 
   var logDrawF = true;
@@ -555,7 +556,7 @@ if(areaSQ<requestedSQ){
           b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
           inputSecondaryCrv = twoPtCurve(a,b);
           // secondaryConCrvs.push(inputSecondaryCrv);
-          dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone());
+          annotationGroup.add(dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone()));
           // furnitureGroup.add(dropChairs(inputMainCrv.geometry.vertices[1],getCrvVector(inputMainCrv))); if(logDrawF==true){console.log(furnitureGroup.children.length,"chairs");}
           renderer.render(scene,camera);
           //test
@@ -592,6 +593,7 @@ if(areaSQ<requestedSQ){
         }
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) <= secondaryConCrvsGrothInterval){ if(logDrawF==true){console.log("removing trajectory curve");};
           scene.remove(inputSecondaryCrv);
+          scene.remove(annotationGroup.pop());
           renderer.render(scene,camera);
           on2nd = false;
         }
