@@ -541,6 +541,8 @@ if(areaSQ<requestedSQ){
 
   function drawElements(){ /*design to be looped live*/ if(logDrawF==true){console.log("drawElements() is running. Request is =",selectorText.value);};
 
+    drawBool = true;
+
     if(selectorText.value>furnitureGroup.children.length){ /*addition*/
       drawBool = true;
       if(on2nd==false){ /*first addition*/
