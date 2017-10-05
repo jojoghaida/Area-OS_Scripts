@@ -535,7 +535,7 @@ if(areaSQ<requestedSQ){
   var editSecCrv = null;
 
   var furnitureGroup = new THREE.Group();
-  var annotationGroup = new THREE.Group();
+  var annotationGroup = [];
   // trivial variables for live preview \\
 
   var logDrawF = true;
@@ -558,7 +558,7 @@ if(areaSQ<requestedSQ){
           inputSecondaryCrv = twoPtCurve(a,b);
           // secondaryConCrvs.push(inputSecondaryCrv);
           triangle = dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone());
-          // annotationGroup.add(triangle);
+          annotationGroup.push(triangle);
           // furnitureGroup.add(dropChairs(inputMainCrv.geometry.vertices[1],getCrvVector(inputMainCrv))); if(logDrawF==true){console.log(furnitureGroup.children.length,"chairs");}
           renderer.render(scene,camera);
           //test
