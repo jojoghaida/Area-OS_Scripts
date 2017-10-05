@@ -565,13 +565,13 @@ if(areaSQ<requestedSQ){
         }
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) >= 15){
           on2nd = false;
-          dropText(secondaryConCrvs.length,inputSecondaryCrv.geometry.vertices[1].clone(),fontKarla_Reg); console.log("yeah");
+          dropText(secondaryConCrvs.length,inputSecondaryCrv.geometry.vertices[1].clone(),fontKarla_Reg);
         }
       }//second curve addition end*\
       if(selectorText.value>furnitureGroup.children.length){setTimeout(drawElements,.1)}/*REBOOT~~*/
     }//addition end*\
 
-    if(selectorText.value<furnitureGroup.children.length){ //reduction
+    if(selectorText.value<furnitureGroup.children.length){ /*reduction*/ if(logDrawF==true){console.log("Reduction");};
       drawBool = true;
       if(on2nd==false){ //curve1 reduction
         extendCrv(inputMainCrv,-inputMainCrvGrowthInterval,getCrvVector(inputMainCrv));
