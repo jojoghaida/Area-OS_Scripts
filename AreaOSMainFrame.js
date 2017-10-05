@@ -575,11 +575,11 @@ if(areaSQ<requestedSQ){
       drawBool = true;
       if(on2nd==false){ //curve1 reduction
         extendCrv(inputMainCrv,-inputMainCrvGrowthInterval,getCrvVector(inputMainCrv)); if(logDrawF==true){console.log("main curve reduction. new distance =",getCrvLength(inputMainCrv));};
-        if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){
+        if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){ if(logDrawF==true){console.log("reducing new trajectory curve.");};
           on2nd = true;
           inputSecondaryCrv = secondaryConCrvs[secondaryConCrvs.length - 1];
         }
-        if(selectorText.value<furnitureGroup.children.length){setTimeout(drawElements,.1)}//REBOOT~~
+        // if(selectorText.value<furnitureGroup.children.length){setTimeout(drawElements,.1)}//REBOOT~~
       }/*curve2 reduction end*/else{//second curve reduction
         extendCrv(inputSecondaryCrv,-secondaryConCrvsGrothInterval,getCrvVector(inputSecondaryCrv));
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 /*<<<spacing tempo*/ % 1 == 0){
@@ -595,6 +595,7 @@ if(areaSQ<requestedSQ){
       }//second curve reduction end*\
       if(selectorText.value<furnitureGroup.children.length){setTimeout(drawElements,.1)}/*REBOOT~~*/
     }//reduction end*\
+
     if(selectorText.value == furnitureGroup.children.length){ //stop; switch bool off
       drawBool = false;
     }
