@@ -572,7 +572,7 @@ if(areaSQ<requestedSQ){
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) >= 15){
           on2nd = false;
           secondaryConCrvs.push(inputSecondaryCrv);
-          annot_txt_G.push(dropText(secondaryConCrvs.length,inputSecondaryCrv.geometry.vertices[1].clone(),fontKarla_Reg));
+          annot_txt_G.push(dropText(secondaryConCrvs.length,pushPointDirection(inputSecondaryCrv.geometry.vertices[1].clone(),getCrvVector(inputSecondaryCrv)),fontKarla_Reg));
         }
       }//second curve addition end*\
       if(selectorText.value>furnitureGroup.length){setTimeout(drawElements,.1)}/*REBOOT~~*/
