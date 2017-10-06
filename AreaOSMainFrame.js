@@ -38,7 +38,7 @@ scene = new THREE.Scene();
 scene.background = new THREE.Color(0xffffff ); //0x0851a4
 
 // camera = new THREE.PerspectiveCamera( 55, w/h, 0.1, 10000 );
-camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 2000 );
+camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, -5000, 5000 );
 renderer = new THREE.WebGLRenderer({antialias:true});
 viewport.addEventListener('mousemove',enableOrbitCam);
 viewport.addEventListener('touchstart',enableOrbitCam);
@@ -203,6 +203,7 @@ zoomButtons = function(){
       amplitude = amplitude*-1;
     }
     aspect = window.innerWidth / window.innerHeight;
+    frustumSize += amplitude
   	camera.left   = - frustumSize * aspect / 2;
   	camera.right  =   frustumSize * aspect / 2;
   	camera.top    =   frustumSize / 2;
@@ -217,7 +218,7 @@ zoomButtons = function(){
     start: function(event){
       pressureButtonZplus.style.background = "red";
       zPlusEffect.style.visibility = 'visible';
-      zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},10);
+      zoomingInterval = setInterval(function(){zoom(1,zoomFactor);},10);
     },
     end: function(){
       pressureButtonZplus.style.background = null;
@@ -226,7 +227,7 @@ zoomButtons = function(){
     },
     startDeepPress: function(event){
       clearInterval(zoomingInterval);
-      zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},10);
+      zoomingInterval = setInterval(function(){zoom(1,zoomFactor);},10);
       pressureButtonZplus.style.background = "red";
       zPlusEffect.style.visibility = 'visible';
     },
@@ -255,7 +256,7 @@ zoomButtons = function(){
     start: function(event){
       pressureButtonZminus.style.background = "red";
       zMinusEffet.style.visibility = 'visible';
-      zoomingInterval = setInterval(function(){zoom(1,zoomFactor);},10);
+      zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},10);
     },
     end: function(){
       pressureButtonZminus.style.background = null;
@@ -264,7 +265,7 @@ zoomButtons = function(){
     },
     startDeepPress: function(event){
       clearInterval(zoomingInterval);
-      zoomingInterval = setInterval(function(){zoom(1,zoomFactor);},10);
+      zoomingInterval = setInterval(function(){zoom(0,zoomFactor);},10);
       pressureButtonZminus.style.background = "red";
       zMinusEffet.style.visibility = 'visible';
     },
