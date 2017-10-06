@@ -43,6 +43,7 @@ renderer.setPixelRatio( window.devicePixelRatio );
 viewport.appendChild(renderer.domElement);
 camera.position.y = 100;
 camera.lookAt(new THREE.Vector3(0,0,0));
+camera.zoom(3);
 window.addEventListener( 'resize', onWindowResize, false );
 window.addEventListener("orientationchange", onWindowRotate);
 }
