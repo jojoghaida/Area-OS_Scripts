@@ -710,7 +710,8 @@ if(areaSQ<requestedSQ){
             }else{
             extendCrv(crv2,increment2,getCrvVector(crv2));
             if(extLength2/2 % 1 == 0){
-              dropChairs(crv2.geometry.vertices[1],getCrvVector(crv));
+              c = dropChairs(crv2.geometry.vertices[1],getCrvVector(crv));
+              c.material.color.set("red");
             }
             setTimeout(function(){inceptiveCrv(crv2,distance,increment2,passDistance)},1);
             }
