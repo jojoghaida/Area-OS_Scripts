@@ -97,6 +97,22 @@ function ( geometry, materials ) {
  renderer.render(scene,camera);
 }
 );
+//siteSlab
+var siteSlabLoader = new THREE.JSONLoader();
+var siteSlabMesh = null;
+var siteSlabGeo = null;
+siteSlabLoader.load(
+  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/972736a9914d68084ee617bab4bd9f299c2fabcb/slab.json',
+  function(geometry, materials){
+      siteSlabGeo = geometry;
+      var siteSlabMaterial = new THREE.MeshBasicMaterial( { color: "black", wireframe: false, transparent: true} );
+      siteSlabMesh = new THREE.Mesh(geometry, siteSlabMaterial);
+      scene.add(siteSlabMesh);
+      renderer.render(scene,camera);
+  }
+);
+
+//siteSlab
 //siteWalls
 var siteWallsLoader = new THREE.JSONLoader();
 var siteWallsMesh = null;
