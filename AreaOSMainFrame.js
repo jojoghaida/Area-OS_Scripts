@@ -738,7 +738,7 @@ function dropPoints(coord,color = "red"){
 
 function dropText(text,pos,font = fontKarla_Reg,just=0,size=1){
   var geometry = new THREE.TextGeometry( text, {font: font, size: size, height: 0, curveSegments: 30, bevelEnabled: false, bevelThickness: 10, bevelSize: 8, bevelSegments: 5});
-  var material = new THREE.MeshBasicMaterial({color: 0x3d9675});
+  var material = new THREE.MeshBasicMaterial({color: "black"});
   var text = new THREE.Mesh(geometry, material);
   textObject = new THREE.Object3D();
   textObject.add(text);
