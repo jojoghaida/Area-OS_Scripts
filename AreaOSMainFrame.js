@@ -22,6 +22,8 @@ aboutButton.addEventListener('click',launchAbout);
 
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 var camera, scene, controls, renderer;
+var frustumSize = 1000;
+
 viewInit();
 orbitCam();
 viewAnim();
@@ -30,11 +32,13 @@ viewport = document.getElementById('areaoscanvas');
 h = viewport.offsetHeight;
 w = viewport.offsetWidth;
 
+var aspect = window.innerWidth / window.innerHeight;
+
 scene = new THREE.Scene();
 scene.background = new THREE.Color(0xffffff ); //0x0851a4
 
 // camera = new THREE.PerspectiveCamera( 55, w/h, 0.1, 10000 );
-camera = new THREE.OrthographicCamera( w/-2,w/2,h/2,h/-2,1,500 );
+camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 2000 );
 renderer = new THREE.WebGLRenderer({antialias:true});
 viewport.addEventListener('mousemove',enableOrbitCam);
 viewport.addEventListener('touchstart',enableOrbitCam);
@@ -43,25 +47,28 @@ renderer.setPixelRatio( window.devicePixelRatio );
 viewport.appendChild(renderer.domElement);
 camera.position.y = 100;
 camera.lookAt(new THREE.Vector3(0,0,0));
-camera.zoom(3);
 window.addEventListener( 'resize', onWindowResize, false );
-window.addEventListener("orientationchange", onWindowRotate);
+// window.addEventListener("orientationchange", onWindowRotate);
 }
 function onWindowResize() {
-camera.aspect = window.innerWidth / window.innerHeight;
-camera.updateProjectionMatrix();
-renderer.setSize( window.innerWidth, window.innerHeight );
-render();
+  aspect = window.innerWidth / window.innerHeight;
+	camera.left   = - frustumSize * aspect / 2;
+	camera.right  =   frustumSize * aspect / 2;
+	camera.top    =   frustumSize / 2;
+	camera.bottom = - frustumSize / 2;
+	camera.updateProjectionMatrix();
+	renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.render(scene,camera);
 }
-function onWindowRotate() {
-  function rotateView(){
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize( window.innerWidth, window.innerHeight );
-    render();
-  }
-  setTimeout(rotateView, 300);
-}
+// function onWindowRotate() {
+//   function rotateView(){
+//     camera.aspect = window.innerWidth / window.innerHeight;
+//     camera.updateProjectionMatrix();
+//     renderer.setSize( window.innerWidth, window.innerHeight );
+//     render();
+//   }
+//   setTimeout(rotateView, 300);
+// }
 function render(){
 renderer.render(scene,camera);
 }
@@ -192,14 +199,17 @@ zoomButtons = function(){
   var zPlusEffect = document.getElementById('ZplusEffect');
 
   function zoom(value,amplitude){
-  camPosition = camera.position;
-  camDirection = camera.getWorldDirection();
-  newPosition = new THREE.Vector3();
-  if(value != 0){
-    amplitude = amplitude*-1;
-  }
-  newPosition.addVectors(camPosition,camDirection.multiplyScalar(amplitude));
-  camera.position.copy(newPosition);
+    if(value != 0){
+      amplitude = amplitude*-1;
+    }
+    aspect = window.innerWidth / window.innerHeight;
+  	camera.left   = - frustumSize * aspect / 2;
+  	camera.right  =   frustumSize * aspect / 2;
+  	camera.top    =   frustumSize / 2;
+  	camera.bottom = - frustumSize / 2;
+  	camera.updateProjectionMatrix();
+  	renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.render(scene,camera);
   }
 
   var pressureButtonZplus = document.getElementById('zoomInButton');
@@ -293,7 +303,7 @@ zoomButtons();
 function mouseCasting(){
 mouseRay = new THREE.Raycaster();
 mouse = new THREE.Vector2();
-areaoscanvas.addEventListener( 'mousemove', onMouseMove, false );
+// areaoscanvas.addEventListener( 'mousemove', onMouseMove, false );
 
 // rayIconGeo = new THREE.Geometry();
 // rayIconGeo.vertices.push(new THREE.Vector3(0,0,0),new THREE.Vector3(0,10,0))
@@ -303,7 +313,7 @@ function onMouseMove(event){
   mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
   mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
   mouseRay.setFromCamera(mouse,camera);
-  rayCatch = mouseRay.intersectObjects(groupShapes.children);
+  // rayCatch = mouseRay.intersectObjects(groupShapes.children);
   if ( rayCatch.length > 0 ) {
     // console.log(rayCatch[0].object.geometry.vertices[0]);
     // rayIcon.position.set( 0, 0, 0 );
@@ -313,7 +323,7 @@ function onMouseMove(event){
   renderer.render(scene,camera);
 }
 }
-mouseCasting();
+// mouseCasting();
 
 // //MovingRay
 // function movingRay(){
