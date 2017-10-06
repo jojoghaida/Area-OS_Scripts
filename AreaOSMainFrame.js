@@ -22,7 +22,7 @@ aboutButton.addEventListener('click',launchAbout);
 
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 var camera, scene, controls, renderer;
-var frustumSize = 1000;
+var frustumSize = 500;
 
 viewInit();
 orbitCam();
