@@ -95,6 +95,7 @@ function ( geometry, materials ) {
  siteColumnsMesh = new THREE.Mesh(geometry,siteColumnsMaterial);
  scene.add(siteColumnsMesh);
  renderer.render(scene,camera);
+ lowerFloors(siteColumnsMesh);
 }
 );
 //siteSlab
@@ -105,10 +106,11 @@ siteSlabLoader.load(
   'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/972736a9914d68084ee617bab4bd9f299c2fabcb/slab.json',
   function(geometry, materials){
       siteSlabGeo = geometry;
-      var siteSlabMaterial = new THREE.MeshBasicMaterial( { color: "black", wireframe: false, transparent: true} );
+      var siteSlabMaterial = new THREE.MeshBasicMaterial( { color: "white", wireframe: false, transparent: true, side: THREE.DoubleSide} );
       siteSlabMesh = new THREE.Mesh(geometry, siteSlabMaterial);
       scene.add(siteSlabMesh);
       renderer.render(scene,camera);
+      lowerFloors(siteSlabMesh);
   }
 );
 
@@ -125,6 +127,7 @@ function ( geometry, materials ) {
  siteWallsMesh = new THREE.Mesh(geometry,siteWallsMaterial);
  scene.add(siteWallsMesh);
  renderer.render(scene,camera);
+ lowerFloors(siteWallsMesh);
 
  var wallOutline = new THREE.Geometry();
  wallOutline.copy(siteWallsGeo);
@@ -148,35 +151,45 @@ function ( geometry, materials ) {
 );
 //siteFacade
 var siteSectionLoader = new THREE.JSONLoader();
-var siteSectionMesh = null;
+var siteFacadeMesh = null;
 var siteSectionGeo = null;
 siteSectionLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/facade.json',
 function ( geometry, materials ) {
  siteSectionGeo = geometry;
  var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: "black", wireframe: false, transparent: true} );
- siteSectionMesh = new THREE.Mesh(geometry,siteSectionMaterial);
- scene.add(siteSectionMesh);
+ siteFacadeMesh = new THREE.Mesh(geometry,siteSectionMaterial);
+ scene.add(siteFacadeMesh);
  renderer.render(scene,camera);
+ lowerFloors(siteFacadeMesh);
 }
 );
 //siteOutline
-var siteOutlineLoader = new THREE.JSONLoader();
-var siteOutlineMesh = null;
-var siteOutlineGeo = null;
-siteOutlineLoader.load(
-'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/siteOutline.json',
-function ( geometry, materials ) {
- siteOutlineGeo = geometry;
- highlightEdges(siteOutlineGeo);
-}
-);
+// var siteOutlineLoader = new THREE.JSONLoader();
+// var siteOutlineMesh = null;
+// var siteOutlineGeo = null;
+// siteOutlineLoader.load(
+// 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/siteOutline.json',
+// function ( geometry, materials ) {
+//  siteOutlineGeo = geometry;
+//  highlightEdges(siteOutlineGeo);
+// }
+// );
 function highlightEdges(outlineThis){
 var eGeometry = new THREE.EdgesGeometry(outlineThis);
 var eMaterial = new THREE.LineBasicMaterial({ color: "black", linewidth: 1 });
 var edges = new THREE.LineSegments(eGeometry,eMaterial);
 scene.add(edges);
-renderer.render(scene, camera);
+renderer.render(scene,camera);
+}
+
+function lowerFloors(mesh,arrayCount = 15, floorHeight = 15){
+  for(i=0;i<arrayCount;i++){
+    a = mesh.clone();
+    a.position.y = (i+1)*-floorHeight;
+    scene.add(a);
+    renderer.render(scene,camera);
+  }
 }
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -868,21 +881,20 @@ var shapeIndex = [linePoints0,linePoints1,linePoints2,linePoints3,linePoints4,li
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //.AOS CAD-file reader
 // var groupShapes = new THREE.Object3D();
-var groupShapes = new THREE.Group();
-
-for (i = 0 ; i < shapeIndex.length; i++){
-currentData = shapeIndex[i];
-shape = new THREE.Shape(currentData);
-shape.autoClose = true; // the shape will be closed automatically, thus we don't need to put the fifth point
-geometry = shape.createPointsGeometry();
-line = new THREE.Line(geometry, new THREE.LineBasicMaterial({color: "white"}));
-planarSrf = new THREE.ShapeGeometry(shape);
-// planarSrf.rotateX( - Math.PI / 2 );
-smartGridMat = new THREE.MeshBasicMaterial({color:0xf2f2f2,wireframe:false,transparent:true,opacity:0});
-createMesh = new THREE.Mesh(planarSrf,smartGridMat);
-createMesh.doubleSided = true;
-groupShapes.add(createMesh);
-}//end gridcell loop generation
-scene.add(groupShapes);
-groupShapes.rotateOnAxis(new THREE.Vector3(1,0,0),- Math.PI / 2);
+// var groupShapes = new THREE.Group();
+//
+// for (i = 0 ; i < shapeIndex.length; i++){
+// currentData = shapeIndex[i];
+// shape = new THREE.Shape(currentData);
+// shape.autoClose = true; // the shape will be closed automatically, thus we don't need to put the fifth point
+// geometry = shape.createPointsGeometry();
+// line = new THREE.Line(geometry, new THREE.LineBasicMaterial({color: "white"}));
+// planarSrf = new THREE.ShapeGeometry(shape);
+// smartGridMat = new THREE.MeshBasicMaterial({color:0xf2f2f2,wireframe:false,transparent:true,opacity:0});
+// createMesh = new THREE.Mesh(planarSrf,smartGridMat);
+// createMesh.doubleSided = true;
+// groupShapes.add(createMesh);
+// }//end gridcell loop generation
+// scene.add(groupShapes);
+// groupShapes.rotateOnAxis(new THREE.Vector3(1,0,0),- Math.PI / 2);
 //MESH LIBRARY//////////////////////////////////////////////////////////////
