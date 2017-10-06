@@ -585,7 +585,6 @@ if(areaSQ<requestedSQ){
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){ if(logDrawF==true){console.log("reducing new trajectory curve.");};
           on2nd = true;
           inputSecondaryCrv = secondaryConCrvs.pop(); if(logDrawF==true){console.log("secondaryConCrvs.length =",secondaryConCrvs.length);};
-          annot_txt_G.pop();
         }
         // if(selectorText.value<furnitureGroup.children.length){setTimeout(drawElements,.1)}//REBOOT~~
       }/*curve2 reduction end*/else{//second curve reduction
@@ -598,6 +597,7 @@ if(areaSQ<requestedSQ){
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) <= secondaryConCrvsGrothInterval){ if(logDrawF==true){console.log("removing trajectory curve");};
           scene.remove(inputSecondaryCrv);
           scene.remove(anmot_tri_G.pop());
+          scene.remove(annot_txt_G.pop());
           renderer.render(scene,camera);
           on2nd = false;
         }
