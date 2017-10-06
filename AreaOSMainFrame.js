@@ -535,7 +535,8 @@ if(areaSQ<requestedSQ){
   var editSecCrv = null;
 
   var furnitureGroup = [];
-  var annotationGroup = [];
+  var anmot_tri_G = [];
+  var annot_txt_G = [];
   // trivial variables for live preview \\
 
   var logDrawF = true;
@@ -558,7 +559,7 @@ if(areaSQ<requestedSQ){
           inputSecondaryCrv = twoPtCurve(a,b);
           // secondaryConCrvs.push(inputSecondaryCrv);
           triangle = dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone());
-          annotationGroup.push(triangle);
+          anmot_tri_G.push(triangle);
           // furnitureGroup.add(dropChairs(inputMainCrv.geometry.vertices[1],getCrvVector(inputMainCrv))); if(logDrawF==true){console.log(furnitureGroup.children.length,"chairs");}
           renderer.render(scene,camera);
           //test
@@ -571,7 +572,7 @@ if(areaSQ<requestedSQ){
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) >= 15){
           on2nd = false;
           secondaryConCrvs.push(inputSecondaryCrv);
-          dropText(secondaryConCrvs.length,inputSecondaryCrv.geometry.vertices[1].clone(),fontKarla_Reg);
+          annot_txt_G.push(dropText(secondaryConCrvs.length,inputSecondaryCrv.geometry.vertices[1].clone(),fontKarla_Reg));
         }
       }//second curve addition end*\
       if(selectorText.value>furnitureGroup.length){setTimeout(drawElements,.1)}/*REBOOT~~*/
@@ -584,6 +585,7 @@ if(areaSQ<requestedSQ){
         if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){ if(logDrawF==true){console.log("reducing new trajectory curve.");};
           on2nd = true;
           inputSecondaryCrv = secondaryConCrvs.pop(); if(logDrawF==true){console.log("secondaryConCrvs.length =",secondaryConCrvs.length);};
+          annot_txt_G.pop();
         }
         // if(selectorText.value<furnitureGroup.children.length){setTimeout(drawElements,.1)}//REBOOT~~
       }/*curve2 reduction end*/else{//second curve reduction
@@ -595,7 +597,7 @@ if(areaSQ<requestedSQ){
         }
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) <= secondaryConCrvsGrothInterval){ if(logDrawF==true){console.log("removing trajectory curve");};
           scene.remove(inputSecondaryCrv);
-          scene.remove(annotationGroup.pop());
+          scene.remove(anmot_tri_G.pop());
           renderer.render(scene,camera);
           on2nd = false;
         }
@@ -749,6 +751,7 @@ function dropText(text,pos,font = fontKarla_Reg,just=0,size=1){
 
   textObject.rotation.x = -Math.PI/2;
   renderer.render(scene,camera);
+  return(textObject);
 
 }
 // dropText();
