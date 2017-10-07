@@ -22,7 +22,7 @@ aboutButton.addEventListener('click',launchAbout);
 
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 var camera, scene, controls, renderer;
-var frustumSize = 350;
+var frustumSize = 550;
 
 viewInit();
 orbitCam();
@@ -45,7 +45,9 @@ viewport.addEventListener('touchstart',enableOrbitCam);
 renderer.setSize(w, h);
 renderer.setPixelRatio( window.devicePixelRatio );
 viewport.appendChild(renderer.domElement);
-camera.position.y = 100;
+camera.position.y = 200;
+camera.position.x = -200;
+camera.position.z = -200;
 scene.add(camera); //!!!!!<<<<<<<<<<<<<<<<<<<<<<<<<<
 camera.lookAt(new THREE.Vector3(0,0,0));
 window.addEventListener( 'resize', onWindowResize, false );
