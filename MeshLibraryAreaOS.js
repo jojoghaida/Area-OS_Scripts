@@ -147,7 +147,7 @@ function ( geometry, materials ) {
  siteSectionMesh = new THREE.Mesh(geometry,siteSectionMaterial);
  scene.add(siteSectionMesh);
  renderer.render(scene,camera);
- highlightEdges(siteSectionGeo,2);
+ highlightEdges(siteSectionGeo,1.2);
 }
 );
 //siteFacade
