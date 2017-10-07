@@ -143,7 +143,7 @@ siteSectionLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/section.json',
 function ( geometry, materials ) {
  siteSectionGeo = geometry;
- var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: "black", wireframe: false, transparent: true} );
+ var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: 0xf2f2f2, wireframe: false, transparent: true} );
  siteSectionMesh = new THREE.Mesh(geometry,siteSectionMaterial);
  scene.add(siteSectionMesh);
  renderer.render(scene,camera);
@@ -172,7 +172,7 @@ siteGlazingLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/228311d405f510829733751fd4ef7bd704faafba/glass.json',
 function ( geometry, materials ) {
  siteGlazingGeo = geometry;
- var siteGlazingMaterial = new THREE.MeshPhongMaterial( { color: 0x26D8A5, wireframe: false, transparent: true, opacity:.1, side: THREE.DoubleSide, reflectivity: 1, shininess: 150} );
+ var siteGlazingMaterial = new THREE.MeshBasicMaterial( { color: 0x26D8A5, wireframe: false, transparent: true,  opacity:.1, side: THREE.DoubleSide} );//new THREE.MeshPhongMaterial( { color: 0x26D8A5, wireframe: false, transparent: true, opacity:.1, side: THREE.DoubleSide, reflectivity: 1, shininess: 150} );
  siteGlazingMesh = new THREE.Mesh(geometry,siteGlazingMaterial);
  scene.add(siteGlazingMesh);
  renderer.render(scene,camera);
