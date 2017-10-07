@@ -132,7 +132,7 @@ function ( geometry, materials ) {
  var wallOutline = new THREE.Geometry();
  wallOutline.copy(siteWallsGeo);
  wallOutline.mergeVertices();
- highlightEdges(wallOutline);
+ lowerFloors(highlightEdges(wallOutline));
 }
 );
 //siteSection
@@ -164,6 +164,21 @@ function ( geometry, materials ) {
  lowerFloors(siteFacadeMesh);
 }
 );
+//site glazing
+var siteGlazingLoader = new THREE.JSONLoader();
+var siteGlazingMesh = null;
+var siteGlazingGeo = null;
+siteGlazingLoader.load(
+'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/228311d405f510829733751fd4ef7bd704faafba/glass.json',
+function ( geometry, materials ) {
+ siteGlazingGeo = geometry;
+ var siteGlazingMaterial = new THREE.MeshPhongMaterial( { color: 0x26D8A5, wireframe: false, transparent: true, opacity:.1, side: THREE.DoubleSide, reflectivity: 1, shininess: 150} );
+ siteGlazingMesh = new THREE.Mesh(geometry,siteGlazingMaterial);
+ scene.add(siteGlazingMesh);
+ renderer.render(scene,camera);
+ lowerFloors(siteGlazingMesh);
+}
+);
 //siteOutline
 // var siteOutlineLoader = new THREE.JSONLoader();
 // var siteOutlineMesh = null;
@@ -181,6 +196,7 @@ var eMaterial = new THREE.LineBasicMaterial({ color: "black", linewidth: 1 });
 var edges = new THREE.LineSegments(eGeometry,eMaterial);
 scene.add(edges);
 renderer.render(scene,camera);
+return(edges);
 }
 
 function lowerFloors(mesh,arrayCount = 15, floorHeight = 15){
