@@ -103,7 +103,7 @@ var siteSlabLoader = new THREE.JSONLoader();
 var siteSlabMesh = null;
 var siteSlabGeo = null;
 siteSlabLoader.load(
-  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/972736a9914d68084ee617bab4bd9f299c2fabcb/slab.json',
+  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/4933405f4866468cc224e06b5d0d3ce796da7dbe/slab.json',
   function(geometry, materials){
       siteSlabGeo = geometry;
       var siteSlabMaterial = new THREE.MeshBasicMaterial( { color: "white", wireframe: false, transparent: true, side: THREE.DoubleSide} );
