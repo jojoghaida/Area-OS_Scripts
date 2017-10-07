@@ -86,7 +86,8 @@ function returnCamPlan(){
 camera.position.y = 350;
 camera.position.x = 0;
 camera.position.z = 0;
-camera.lookAt(0,0,0);
+look = new THREE.Vector3(0,0,0);
+camera.lookAt(look);
 disableOrbitCam();
 }
 
