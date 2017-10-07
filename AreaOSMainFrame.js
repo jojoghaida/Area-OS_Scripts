@@ -35,7 +35,7 @@ w = viewport.offsetWidth;
 var aspect = window.innerWidth / window.innerHeight;
 
 scene = new THREE.Scene();
-scene.background = new THREE.Color(0xffffff ); //0x0851a4
+scene.background = new THREE.Color(0xffffff); //0x0851a4
 
 // camera = new THREE.PerspectiveCamera( 55, w/h, 0.1, 10000 );
 camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, -5000, 5000 );
@@ -86,7 +86,7 @@ function returnCamPlan(){
 camera.position.y = 350;
 camera.position.x = 0;
 camera.position.z = 0;
-camera.lookAt(new THREE.Vector3(0,0,0));
+camera.lookAt(0,0,0);
 disableOrbitCam();
 }
 
@@ -100,6 +100,14 @@ controls.enableKeys = false;
 controls.maxPolarAngle = Math.PI/2;
 controls.addEventListener( 'change', render );
 }
+
+// var fog = new THREE.Fog(0xffffff, 5, 500);
+// scene.add(fog);
+// renderer.render(scene,camera);
+
+// scene.fog = new THREE.FogExp2(0xffffff, 0.0045,20);
+renderer.render(scene,camera);
+
 
 //orbit activation/deactivation
 var camControls = document.getElementById('controlsviewportoverlay');
