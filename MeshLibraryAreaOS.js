@@ -201,9 +201,18 @@ return(edges);
 }
 
 function lowerFloors(mesh,arrayCount = 15, floorHeight = 15){
+  console.log(mesh);
+  material = mesh.material.clone();
+  material.transparent = true;
+  console.log(material.opacity);
   for(i=0;i<arrayCount;i++){
     a = mesh.clone();
+
+    baseOpacity = a.material.opacity;
     a.position.y = (i+1)*-floorHeight;
+    a.material = material.clone();
+    a.material.opacity = baseOpacity - ((i + 1)/arrayCount)*baseOpacity;
+
     scene.add(a);
     renderer.render(scene,camera);
   }
