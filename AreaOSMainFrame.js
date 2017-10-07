@@ -46,6 +46,7 @@ renderer.setSize(w, h);
 renderer.setPixelRatio( window.devicePixelRatio );
 viewport.appendChild(renderer.domElement);
 camera.position.y = 100;
+scene.add(camera); //!!!!!<<<<<<<<<<<<<<<<<<<<<<<<<<
 camera.lookAt(new THREE.Vector3(0,0,0));
 window.addEventListener( 'resize', onWindowResize, false );
 // window.addEventListener("orientationchange", onWindowRotate);
@@ -87,7 +88,7 @@ camera.position.y = 350;
 camera.position.x = 0;
 camera.position.z = 0;
 look = new THREE.Vector3(0,0,0);
-camera.lookAt();
+camera.lookAt(look);
 disableOrbitCam();
 }
 
