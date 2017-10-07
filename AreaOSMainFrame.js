@@ -4,7 +4,7 @@
 resetButton = document.getElementById('resetButton');
 resetText = document.getElementById('resetText');
 function refreshPage(){
-  resetText.style.color = "blue";
+  resetText.style.color = "0851a4";
   resetButton.style.borderWidth = "1px";
   setTimeout(function(){location.reload();},500);
 }
@@ -12,7 +12,7 @@ resetButton.addEventListener('click',refreshPage);
 aboutButton = document.getElementById('aboutButton');
 aboutText = document.getElementById('aboutText');
 function launchAbout(){
-  aboutText.style.color = "blue";
+  aboutText.style.color = "0851a4";
   aboutButton.style.borderWidth = "1px";
   setTimeout(function(){window.location.href = 'https://www.joeghaida.com/design/areaos-about';},500);
 
