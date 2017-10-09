@@ -138,9 +138,13 @@ siteEgressLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/70a73598111b4631a829e5fd735fb8c4d2867c0d/egress.json',
 function ( geometry, materials ) {
  siteEgressGeo = geometry;
- var siteEgressMaterial = new THREE.MeshBasicMaterial( { color: "yellow", wireframe: false, transparent: true, opacity: .5, side: THREE.DoubleSide} );
+ var siteEgressMaterial = new THREE.MeshBasicMaterial( { color: "yellow", wireframe: false, transparent: true, opacity: 1, side: THREE.DoubleSide} );
  siteEgressMesh = new THREE.Mesh(geometry,siteEgressMaterial);
  scene.add(siteEgressMesh);
+ var egressOutline = new THREE.Geometry();
+ egressOutline.copy(siteEgressGeo);
+ egressOutline.mergeVertices();
+ highlightEdges(egressOutline);
  renderer.render(scene,camera);
 }
 );
