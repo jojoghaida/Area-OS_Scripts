@@ -4,7 +4,7 @@
 resetButton = document.getElementById('resetButton');
 resetText = document.getElementById('resetText');
 function refreshPage(){
-  resetText.style.color = "0851a4";
+  resetText.style.color = "#0851a4";
   resetButton.style.borderWidth = "1px";
   setTimeout(function(){location.reload();},500);
 }
@@ -12,7 +12,7 @@ resetButton.addEventListener('click',refreshPage);
 aboutButton = document.getElementById('aboutButton');
 aboutText = document.getElementById('aboutText');
 function launchAbout(){
-  aboutText.style.color = "0851a4";
+  aboutText.style.color = "#0851a4";
   aboutButton.style.borderWidth = "1px";
   setTimeout(function(){window.location.href = 'https://www.joeghaida.com/design/areaos-about';},500);
 
@@ -81,18 +81,40 @@ controls.update();
 }
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
-function returnCamPlan(){
-  // if(camera.position.y <350){
-  //   camera.position.y = camera.position.y++;
-  //   requestAnimationFrame(viewAnim);
-  // }
-camera.position.y = 350;
-camera.position.x = 0;
-camera.position.z = 0;
-look = new THREE.Vector3(0,0,0);
-// camera.lookAt(look.x,look.y,look.z);
-controls.target.set(0,0,0);
-disableOrbitCam();
+function returnCamPlan(mC=[0,350,0],tC=[0,0,0]){
+  disableOrbitCam();
+  steps = 10;
+  currentPos = [camera.position.x, camera.position.y, camera.position.z];
+  console.log(currentPos);
+  currentTarget = controls.target;
+  cameraPosIncrements = [(currentPos[0] - 0)/-10, (currentPos[1] - 350)/10, (currentPos[2] - 0)/-10];
+  cameraTarIncrements = [(currentTarget.x - tC[0]/-steps), (currentTarget.y - tC[1]/-steps), (currentTarget.z - tC[2]/-steps)];
+  console.log(cameraTarIncrements);
+
+  function dollyCam(){
+    console.log("dolly");
+    if(camera.position.x != 0 && camera.position.y != 350 && camera.position.z != 0){
+      console.log("posityion");
+      console.log(camera.position);
+      camera.position.x += cameraPosIncrements[0];
+      camera.position.y += cameraPosIncrements[1];
+      camera.position.z += cameraPosIncrements[2];
+      setTimeout(dollyCam,1);
+    }
+    if(controls.target.x != tC[0] && controls.target.y != tC[1] && controls.target.z != tC[2]){
+      console.log("controls");
+      controls.target.x += cameraTarIncrements[0];
+      controls.target.y += cameraTarIncrements[1];
+      controls.target.z += cameraTarIncrements[2];
+      setTimeout(dollyCam,1);
+    }
+    renderer.render(scene,camera);
+  }
+  // dollyCam();
+  camera.position.y = 350;
+  camera.position.x = 0;
+  camera.position.z = 0;
+  controls.target.set(0,0,0);
 }
 
 var resetCamButton = document.getElementById("resetCamButton");
