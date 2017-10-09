@@ -91,7 +91,7 @@ siteColumnsLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/siteColumns.json',
 function ( geometry, materials ) {
  siteColumnsGeo = geometry;
- var siteColumnsMaterial = new THREE.MeshBasicMaterial( { color: "black", wireframe: false, transparent: true} );
+ var siteColumnsMaterial = new THREE.MeshBasicMaterial( { color: "white", wireframe: false, transparent: true} );
  siteColumnsMesh = new THREE.Mesh(geometry,siteColumnsMaterial);
  scene.add(siteColumnsMesh);
  renderer.render(scene,camera);
