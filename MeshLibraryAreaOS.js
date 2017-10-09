@@ -121,7 +121,7 @@ siteSlabPhongLoader.load(
   'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/eb383d3afb11d6184d1b9ea9f45a62c2b9a27e04/slabPhong.json',
   function(geometry, materials){
       siteSlabPhongGeo = geometry;
-      var siteSlabPhongMaterial = new THREE.MeshPhongMaterial({color: "white", side: THREE.DoubleSide});
+      var siteSlabPhongMaterial = new THREE.MeshPhongMaterial({color: "white", side: THREE.BackSide});
       siteSlabPhongMesh = new THREE.Mesh(geometry, siteSlabPhongMaterial);
       siteSlabPhongMesh.position.y = -.1;
       scene.add(siteSlabPhongMesh);
