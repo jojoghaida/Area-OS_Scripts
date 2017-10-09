@@ -498,8 +498,11 @@ if(areaSQ<requestedSQ){
     return(crvLength);
   }
   //
-  function pushPointDirection(point,direction){
+  function pushPointDirection(point, direction, amplitude = null){
     direction.normalize();
+    if(amplitude != null){
+      direction.setLength(amplitude);
+    }
     pushedPoint = new THREE.Vector3();
     pushedPoint.addVectors(point,direction);
     cleanVector(pushedPoint);
@@ -602,7 +605,7 @@ if(areaSQ<requestedSQ){
           on2nd = true;
           a = inputMainCrv.geometry.vertices[1].clone();
           bD = getOffsetDirection(inputMainCrv);
-          b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
+          b = pushPointDirection(a,bD);
           inputSecondaryCrv = twoPtCurve(a,b);
           // secondaryConCrvs.push(inputSecondaryCrv);
           triangle = dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone());
@@ -808,6 +811,45 @@ function dropText(text,pos,font = fontKarla_Reg,just=0,size=1){
 //   dropText("test!",[-20,0,-20],fontKarla_Reg);
 // }, 2000);
 
+function dropPtLight(point){
+  light1 = new THREE.PointLight(0x26D8A5, .7, 10000);
+  lightLocation = point.geometry.vertices[0].clone();
+  lightLocation.y = 2;
+  light1.position.set(lightLocation.x,lightLocation.y,lightLocation.z);
+  scene.add(light1);
+}
+
+function dropPtLight2(point){
+  light1 = new THREE.PointLight("red", .2, 10000);
+  lightLocation = point;
+  lightLocation.y = 2;
+  light1.position.set(lightLocation.x,lightLocation.y,lightLocation.z);
+  scene.add(light1);
+}
+
+function divideCrv(crv,divisions = 10){
+
+  pointList = [];
+  direction = getCrvVector(crv);
+  distance = getCrvLength(crv);
+  for(i=0; i < divisions; i++){
+    point = crv.geometry.vertices[0].clone();
+    if(i==0){check = point.clone()}else{
+      check = pushPointDirection(point.clone(),direction,(distance/divisions)*i);
+    }
+    pointList.push(new THREE.Vector3());
+    pointList[i].set(check.x,check.y,check.z);
+    dropPoints(pointList[i]);
+    console.log(pointList[i]);
+  }
+  for(i=0; i < pointList.length; i++){
+    dropPtLight2(pointList[i]);
+  }
+  // pushPointDirection();
+  return(pointList);
+
+}
+divideCrv(twoPtCurve(new THREE.Vector3(-15,0,-10),new THREE.Vector3(15,0,0)));
 
 // spaceNavigator(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function fieldVectorizer(){
@@ -821,7 +863,7 @@ function fieldVectorizer(){
   ptColor = new THREE.PointsMaterial({color: "white" /*, specular: "white",shininess: 0*/})
   a = openPlanGridPts[2];
   b = openPlanGridPts[100];
-  c = openPlanGridPts[350];
+  c = openPlanGridPts[349];
 
   a.material = ptColor;
   b.material = ptColor;
@@ -830,14 +872,6 @@ function fieldVectorizer(){
   dropCircle(a.geometry.vertices[0]);
   dropCircle(b.geometry.vertices[0]);
   dropCircle(c.geometry.vertices[0]);
-
-  function dropPtLight(point){
-    light1 = new THREE.PointLight(0x26D8A5, 1, 10000);
-    lightLocation = point.geometry.vertices[0].clone();
-    lightLocation.y = 1;
-    light1.position.set(lightLocation.x,lightLocation.y,lightLocation.z);
-    scene.add(light1);
-  }
 
   dropPtLight(a);
   dropPtLight(b);
