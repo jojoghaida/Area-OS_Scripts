@@ -811,19 +811,31 @@ function dropText(text,pos,font = fontKarla_Reg,just=0,size=1){
 
 // spaceNavigator(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function fieldVectorizer(){
+
+  var testsurface = siteSlabMesh.clone();
+  testsurface.position.y = .1;
+  testsurface.material = testsurface.material.clone();
+  testsurface.material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
+  scene.add(testsurface);
+
   ptColor = new THREE.PointsMaterial({color: "red"})
   a = openPlanGridPts[2];
   b = openPlanGridPts[100];
   c = openPlanGridPts[350];
+
   a.material = ptColor;
   b.material = ptColor;
   c.material = ptColor;
+
   dropCircle(a.geometry.vertices[0]);
   dropCircle(b.geometry.vertices[0]);
   dropCircle(c.geometry.vertices[0]);
+
+  light1 = new THREE.PointLight(0x0851a4, 1, 15, 1);
+  light1.position.set(a.geometry.vertices[0]);
+
   crv = twoPtCurve(a.geometry.vertices[0],b.geometry.vertices[0]);
   crv = twoPtCurve(b.geometry.vertices[0],c.geometry.vertices[0]);
-  console.log(crv);
 }
 setTimeout(fieldVectorizer,1000);
 //RHIZOME POPULATER//////////////////////////////////////////////////////////////
