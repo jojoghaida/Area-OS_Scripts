@@ -812,11 +812,11 @@ function dropText(text,pos,font = fontKarla_Reg,just=0,size=1){
 // spaceNavigator(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function fieldVectorizer(){
 
-  var testsurface = siteSlabMesh.clone();
-  testsurface.position.y = .1;
-  testsurface.material = testsurface.material.clone();
-  testsurface.material = new THREE.MeshPhongMaterial({color: "white", side: THREE.DoubleSide});
-  scene.add(testsurface);
+  // var testsurface = siteSlabMesh.clone();
+  // testsurface.position.y = .1;
+  // testsurface.material = testsurface.material.clone();
+  // testsurface.material = new THREE.MeshPhongMaterial({color: "white", side: THREE.DoubleSide});
+  // scene.add(testsurface);
 
   ptColor = new THREE.PointsMaterial({color: "white" /*, specular: "white",shininess: 0*/})
   a = openPlanGridPts[2];
@@ -832,9 +832,9 @@ function fieldVectorizer(){
   dropCircle(c.geometry.vertices[0]);
 
   function dropPtLight(point){
-    light1 = new THREE.PointLight(0x26D8A5, .5, 10000);
+    light1 = new THREE.PointLight(0x26D8A5, 1, 10000);
     lightLocation = point.geometry.vertices[0].clone();
-    lightLocation.y = 0;
+    lightLocation.y = 1;
     light1.position.set(lightLocation.x,lightLocation.y,lightLocation.z);
     scene.add(light1);
   }

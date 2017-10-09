@@ -114,6 +114,20 @@ siteSlabLoader.load(
   }
 );
 
+var siteSlabPhongLoader = new THREE.JSONLoader();
+var siteSlabPhongMesh = null;
+var siteSlabPhongGeo = null;
+siteSlabLoader.load(
+  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/eb383d3afb11d6184d1b9ea9f45a62c2b9a27e04/slabPhong.json',
+  function(geometry, materials){
+      siteSlabPhongGeo = geometry;
+      var siteSlabPhongMaterial = new THREE.MeshPhongMaterial({color: "white", side: THREE.DoubleSide});
+      siteSlabPhongMesh = new THREE.Mesh(geometry, siteSlabPhongMaterial);
+      siteSlabPhongMesh.position.y = -.1;
+      scene.add(siteSlabPhongMesh);
+      renderer.render(scene,camera);
+  }
+);
 //siteSlab
 //siteWalls
 var siteWallsLoader = new THREE.JSONLoader();
