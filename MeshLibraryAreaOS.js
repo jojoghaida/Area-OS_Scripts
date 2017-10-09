@@ -117,7 +117,7 @@ siteSlabLoader.load(
 var siteSlabPhongLoader = new THREE.JSONLoader();
 var siteSlabPhongMesh = null;
 var siteSlabPhongGeo = null;
-siteSlabLoader.load(
+siteSlabPhongLoader.load(
   'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/eb383d3afb11d6184d1b9ea9f45a62c2b9a27e04/slabPhong.json',
   function(geometry, materials){
       siteSlabPhongGeo = geometry;
@@ -129,6 +129,22 @@ siteSlabLoader.load(
   }
 );
 //siteSlab
+//siteEgress
+
+var siteEgressLoader = new THREE.JSONLoader();
+var siteEgressMesh = null;
+var siteEgressGeo = null;
+siteEgressLoader.load(
+'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/70a73598111b4631a829e5fd735fb8c4d2867c0d/egress.json',
+function ( geometry, materials ) {
+ siteEgressGeo = geometry;
+ var siteEgressMaterial = new THREE.MeshBasicMaterial( { color: "orange", wireframe: true, transparent: true, opacity: .5, side: THREE.DoubleSide} );
+ siteEgressMesh = new THREE.Mesh(geometry,siteEgressMaterial);
+ scene.add(siteEgressMesh);
+ renderer.render(scene,camera);
+}
+);
+
 //siteWalls
 var siteWallsLoader = new THREE.JSONLoader();
 var siteWallsMesh = null;
@@ -1559,5 +1575,4 @@ for(i=0;i<openPlanGridImport.length;i++){
   point = new THREE.Points(geometry, ptDefaultMaterial);
   openPlanGridPts.push(point);
   scene.add(point);
-
 }
