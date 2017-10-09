@@ -201,7 +201,6 @@ return(edges);
 }
 
 function lowerFloors(mesh,arrayCount = 15, floorHeight = 15){
-  console.log(mesh);
   material = mesh.material.clone();
   material.transparent = true;
   console.log(material.opacity);
@@ -926,7 +925,7 @@ var shapeIndex = [linePoints0,linePoints1,linePoints2,linePoints3,linePoints4,li
 //MESH LIBRARY//////////////////////////////////////////////////////////////
 
 
-var openPlanGrid = [
+var openPlanGridImport = [
   new THREE.Vector3(-81.37,0.0,-65.18),
   new THREE.Vector3(-75.95,0.0,-65.18),
   new THREE.Vector3(-70.52,0.0,-65.18),
@@ -1538,13 +1537,13 @@ var openPlanGrid = [
 
 var ptDefaultMaterial = new THREE.PointsMaterial({color: "green"});
 
-myPoints = [];
+var openPlanGridPts = [];
 
-for(i=0;i<openPlanGrid.length;i++){
+for(i=0;i<openPlanGridImport.length;i++){
   geometry = new THREE.Geometry();
-  geometry.vertices.push(openPlanGrid[i]);
+  geometry.vertices.push(openPlanGridImport[i]);
   point = new THREE.Points(geometry, ptDefaultMaterial);
-  myPoints.push();
+  openPlanGridPts.push(point);
   scene.add(point);
 
 }
