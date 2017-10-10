@@ -249,7 +249,6 @@ zoomButtons = function(){
   	camera.updateProjectionMatrix();
   	renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.render(scene,camera);
-    console.log(camera.frustum);
   }
 
   var pressureButtonZplus = document.getElementById('zoomInButton');
@@ -882,11 +881,11 @@ function extrudeStraightLine( crv, depth ) {
   }
   geometry.verticesNeedUpdate;
   geometry.computeFaceNormals;
-  material = new THREE.MeshStandardMaterial({color: "white", side: THREE.DoubleSide});
+  material = new THREE.MeshLambertMaterial({color: "red", emissive: "red", side: THREE.DoubleSide});
   mesh = new THREE.Mesh(geometry, material);
   mesh.castShadow = true; // shadows!
-  mesh.position.z = 1; // shadows!
-  mesh.position.y = -2; // shadows!
+  mesh.position.z = -2; // shadows!
+  mesh.position.y = -.1; // shadows!
 
   scene.add(mesh);
   return geometry;
@@ -905,7 +904,7 @@ var testDivideCrv = twoPtCurve(new THREE.Vector3(15,0,0),new THREE.Vector3(30,0,
 divideCrv(testDivideCrv);
 forBlocker = testDivideCrv.clone();
 forBlocker.position.y = -.1;
-var blocker = extrudeStraightLine(forBlocker,15);
+var blocker = extrudeStraightLine(forBlocker,20);
 
 
 // function dropSpotLight(){

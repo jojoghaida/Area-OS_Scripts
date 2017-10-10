@@ -196,7 +196,7 @@ function ( geometry, materials ) {
  siteSectionMesh = new THREE.Mesh(geometry,siteSectionMaterial);
  scene.add(siteSectionMesh);
  renderer.render(scene,camera);
- highlightEdges(siteSectionGeo,1);
+ highlightEdges(siteSectionGeo,.5);
 }
 );
 //siteFacade
@@ -240,7 +240,7 @@ function ( geometry, materials ) {
 //  highlightEdges(siteOutlineGeo);
 // }
 // );
-function highlightEdges(outlineThis, lineW = .5){
+function highlightEdges(outlineThis, lineW = .2){
 var eGeometry = new THREE.EdgesGeometry(outlineThis);
 var eMaterial = new THREE.LineBasicMaterial({ color: "black", linewidth: lineW });
 var edges = new THREE.LineSegments(eGeometry,eMaterial);
