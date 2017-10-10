@@ -93,6 +93,7 @@ function ( geometry, materials ) {
  siteColumnsGeo = geometry;
  var siteColumnsMaterial = new THREE.MeshBasicMaterial( { color: "white", wireframe: false, transparent: true} );
  siteColumnsMesh = new THREE.Mesh(geometry,siteColumnsMaterial);
+ // siteColumnsMesh.castShadow = true;
  scene.add(siteColumnsMesh);
  renderer.render(scene,camera);
  lowerFloors(siteColumnsMesh);
@@ -121,8 +122,21 @@ siteSlabPhongLoader.load(
   'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/eb383d3afb11d6184d1b9ea9f45a62c2b9a27e04/slabPhong.json',
   function(geometry, materials){
       siteSlabPhongGeo = geometry;
-      var siteSlabPhongMaterial = new THREE.MeshPhongMaterial({color: "white", side: THREE.BackSide});
+      var siteSlabPhongMaterial = new THREE.MeshPhongMaterial({color: "white"});
       siteSlabPhongMesh = new THREE.Mesh(geometry, siteSlabPhongMaterial);
+      ///
+      siteSlabPhongMesh.geometry.dynamic = true
+      siteSlabPhongMesh.geometry.__dirtyVertices = true;
+      siteSlabPhongMesh.geometry.__dirtyNormals = true;
+      siteSlabPhongMesh.flipSided = true;
+      for(var i = 0; i<siteSlabPhongMesh.geometry.faces.length; i++) {
+          siteSlabPhongMesh.geometry.faces[i].normal.x = -1*siteSlabPhongMesh.geometry.faces[i].normal.x;
+          siteSlabPhongMesh.geometry.faces[i].normal.y = -1*siteSlabPhongMesh.geometry.faces[i].normal.y;
+          siteSlabPhongMesh.geometry.faces[i].normal.z = -1*siteSlabPhongMesh.geometry.faces[i].normal.z;
+      }
+      siteSlabPhongMesh.geometry.computeVertexNormals();
+      siteSlabPhongMesh.geometry.computeFaceNormals();
+      ///
       siteSlabPhongMesh.position.y = -.1;
       siteSlabPhongMesh.receiveShadow = true; // shadows!
       scene.add(siteSlabPhongMesh);

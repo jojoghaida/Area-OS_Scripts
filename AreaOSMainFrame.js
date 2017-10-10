@@ -45,16 +45,21 @@ viewport.addEventListener('touchstart',enableOrbitCam);
 renderer.setSize(w, h);
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.shadowMap.enabled; // shadows!
-renderer.shadowMap.type = THREE.PCFSoftShadowMap; // shadows!
+renderer.shadowMap.type = THREE.BasicShadowMap; // shadows!
+renderer.shadowMap.renderReverseSided; // shadows!
+// renderer.shadowMap.type = THREE.PCFSoftShadowMap; // shadows!
 viewport.appendChild(renderer.domElement);
+
+camera.castShadow = true;
 camera.position.y = 200;
 camera.position.x = -200;
 camera.position.z = -200;
 scene.add(camera); //!!!!!<<<<<<<<<<<<<<<<<<<<<<<<<<
 camera.lookAt(new THREE.Vector3(0,0,0));
 window.addEventListener( 'resize', onWindowResize, false );
-// window.addEventListener("orientationchange", onWindowRotate);
+window.addEventListener("orientationchange", onWindowResize);
 }
+
 function onWindowResize() {
   aspect = window.innerWidth / window.innerHeight;
 	camera.left   = - frustumSize * aspect / 2;
@@ -65,6 +70,7 @@ function onWindowResize() {
 	renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.render(scene,camera);
 }
+
 // function onWindowRotate() {
 //   function rotateView(){
 //     camera.aspect = window.innerWidth / window.innerHeight;
@@ -74,13 +80,16 @@ function onWindowResize() {
 //   }
 //   setTimeout(rotateView, 300);
 // }
+
 function render(){
-renderer.render(scene,camera);
+  renderer.render(scene,camera);
 }
+
 function viewAnim(){
-requestAnimationFrame(viewAnim);
-controls.update();
+  requestAnimationFrame(viewAnim);
+  controls.update();
 }
+
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
 function returnCamPlan(mC=[0,350,0],tC=[0,0,0]){
@@ -130,14 +139,6 @@ controls.maxPolarAngle = Math.PI/2;
 controls.addEventListener( 'change', render );
 }
 
-// var fog = new THREE.Fog(0xffffff, 5, 500);
-// scene.add(fog);
-// renderer.render(scene,camera);
-
-// scene.fog = new THREE.FogExp2(0xffffff, 0.0045,20);
-renderer.render(scene,camera);
-
-
 //orbit activation/deactivation
 var camControls = document.getElementById('controlsviewportoverlay');
 camControls.addEventListener('mousemove',lockOrbitMaintainControls);//disableOrbitCam(0));
@@ -177,28 +178,28 @@ if(controlsToggle != 0){
 }
 }
 function enableOrbitCam(){
-controls.enabled = true
-//document.getElementById('camautobutton').click();
-function showCamIcons(){
-  var camIcons = document.getElementsByClassName('cameraicons');
-  for (i = 0; i < camIcons.length; i++){
-    camIcons[i].style.visibility = 'visible';
-    camControls.style.visibility = 'visible';
-  }
-  for (i = 0; i < camIcons.length; i++){
-    camIcons[i].style.transition = "opacity 1s";
-    camIcons[i].style.opacity = 1;
-  }
+  controls.enabled = true
+  //document.getElementById('camautobutton').click();
+  function showCamIcons(){
+    var camIcons = document.getElementsByClassName('cameraicons');
+    for (i = 0; i < camIcons.length; i++){
+      camIcons[i].style.visibility = 'visible';
+      camControls.style.visibility = 'visible';
+    }
+    for (i = 0; i < camIcons.length; i++){
+      camIcons[i].style.transition = "opacity 1s";
+      camIcons[i].style.opacity = 1;
+    }
 }
 showCamIcons();
 }
 window.onload = disableOrbitCam;
 //stage camera
 function swingCamAxon(){
-requestAnimationFrame(swingCamAxon);
-camera.rotation.x += 1.01;
-camera.rotation.z += 1.01;
-renderer.render(scene, camera);
+  requestAnimationFrame(swingCamAxon);
+  camera.rotation.x += 1.01;
+  camera.rotation.z += 1.01;
+  renderer.render(scene, camera);
 }
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
 
@@ -248,6 +249,7 @@ zoomButtons = function(){
   	camera.updateProjectionMatrix();
   	renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.render(scene,camera);
+    console.log(camera.frustum);
   }
 
   var pressureButtonZplus = document.getElementById('zoomInButton');
@@ -904,6 +906,24 @@ divideCrv(testDivideCrv);
 forBlocker = testDivideCrv.clone();
 forBlocker.position.y = -.1;
 var blocker = extrudeStraightLine(forBlocker,15);
+
+
+// function dropSpotLight(){
+//   var sL = new THREE.SpotLight( 0xffffff );
+//   sL.position.set(0,35,-15);
+//   sL.castShadow = true;
+//   sL.shadow.mapSize.width = 1024;
+//   sL.shadow.mapSize.height = 1024;
+//
+//   sL.shadow.camera.near = 0;
+//   sL.shadow.camera.far = 500;
+//   sL.shadow.camera.fov = 50;
+//
+//   scene.add(sL);
+// }
+// dropSpotLight();
+
+
 
 // spaceNavigator(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function fieldVectorizer(){
