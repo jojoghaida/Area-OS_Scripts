@@ -849,7 +849,50 @@ function divideCrv(crv,divisions = 10){
   return(pointList);
 
 }
-divideCrv(twoPtCurve(new THREE.Vector3(-15,0,-10),new THREE.Vector3(15,0,0)));
+
+function extrudeStraightLine( crv, depth ) {
+  var geometry = new THREE.Geometry();
+  var vertices = crv.geometry.vertices;
+  console.log(vertices);
+
+  for (i = 0; i < vertices.length; i++) {
+    a = vertices[i].clone();
+    geometry.vertices.push(a);
+    b = a.clone();
+    b.y = depth;
+    geometry.vertices.push(b);
+    if(i+1 < vertices.length){
+      c = vertices[i+1].clone();
+      geometry.vertices.push(c);
+      geometry.faces.push(new THREE.Face3(i, i+1, i+2));
+    }else{
+      c = vertices[i-1];
+      geometry.vertices.push(c);
+      geometry.faces.push(new THREE.Face3(i-1, i, i+1));
+    }
+  }
+  geometry.verticesNeedUpdate;
+  geometry.computeFaceNormals;
+  console.log("geo",geometry);
+  material = new THREE.MeshBasicMaterial({color: "red", side: THREE.DoubleSide});
+  mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+  console.log(mesh);
+  return geometry;
+}
+
+// var extrudeSettings = {
+// 	steps: 1,
+// 	amount: 16,
+// 	bevelEnabled: true,
+// 	bevelThickness: 1,
+// 	bevelSize: 1,
+// 	bevelSegments: 1
+// };
+
+var testDivideCrv = twoPtCurve(new THREE.Vector3(-15,0,-10),new THREE.Vector3(15,0,0));
+divideCrv(testDivideCrv);
+var blocker = extrudeStraightLine(testDivideCrv.clone(),15);
 
 // spaceNavigator(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function fieldVectorizer(){
