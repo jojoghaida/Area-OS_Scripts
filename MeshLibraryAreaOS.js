@@ -172,7 +172,7 @@ siteWallsLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/walls.json',
 function ( geometry, materials ) {
  siteWallsGeo = geometry;
- var siteWallsMaterial = new THREE.MeshLambertMaterial( { color: 0xf2f2f2, emissive: 0xf2f2f2, emissiveIntensity: 1} );
+ var siteWallsMaterial = new THREE.MeshBasicMaterial( { color: 0xf2f2f2} );
  siteWallsMesh = new THREE.Mesh(geometry,siteWallsMaterial);
  scene.add(siteWallsMesh);
  renderer.render(scene,camera);
