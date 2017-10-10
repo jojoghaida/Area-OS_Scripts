@@ -44,6 +44,8 @@ viewport.addEventListener('mousemove',enableOrbitCam);
 viewport.addEventListener('touchstart',enableOrbitCam);
 renderer.setSize(w, h);
 renderer.setPixelRatio( window.devicePixelRatio );
+renderer.shadowMap.enabled; // shadows!
+renderer.shadowMap.type = THREE.PCFSoftShadowMap; // shadows!
 viewport.appendChild(renderer.domElement);
 camera.position.y = 200;
 camera.position.x = -200;
@@ -814,7 +816,7 @@ function dropText(text,pos,font = fontKarla_Reg,just=0,size=1){
 function dropPtLight(point){
   light1 = new THREE.PointLight(0x26D8A5, .7, 10000);
   lightLocation = point.geometry.vertices[0].clone();
-  lightLocation.y = 2;
+  lightLocation.y = 5;
   light1.position.set(lightLocation.x,lightLocation.y,lightLocation.z);
   scene.add(light1);
 }
@@ -824,8 +826,20 @@ function dropPtLight2(point){
   lightLocation = point;
   lightLocation.y = 2;
   light1.position.set(lightLocation.x,lightLocation.y,lightLocation.z);
+  light1.castShadow = true; // shadows!
+  light1.shadow.mapSize.width = 500000;  // default
+  light1.shadow.mapSize.height = 500000; // default
+  light1.shadow.camera.near = 0.5;       // default
+  light1.shadow.camera.far = 50000;
+  // light1.shadowDarkness = .5; // shadows!
+  // light1.shadowCameraVisible = true; // shadows!
+  // light1.camera;
+  // var helper = new THREE.CameraHelper( light1.shadow.camera ); // shadows!
+  // scene.add( helper ); // shadows!
   scene.add(light1);
 }
+
+
 
 function divideCrv(crv,divisions = 10){
 
@@ -843,9 +857,9 @@ function divideCrv(crv,divisions = 10){
     console.log(pointList[i]);
   }
   for(i=0; i < pointList.length; i++){
-    dropPtLight2(pointList[i]);
+    move = pushPointDirection(pointList[i],getOffsetDirection(crv));
+    dropPtLight2(move);
   }
-  // pushPointDirection();
   return(pointList);
 
 }
@@ -866,8 +880,12 @@ function extrudeStraightLine( crv, depth ) {
   }
   geometry.verticesNeedUpdate;
   geometry.computeFaceNormals;
-  material = new THREE.MeshBasicMaterial({color: "red", side: THREE.DoubleSide});
+  material = new THREE.MeshStandardMaterial({color: "white", side: THREE.DoubleSide});
   mesh = new THREE.Mesh(geometry, material);
+  mesh.castShadow = true; // shadows!
+  mesh.position.z = 1; // shadows!
+  mesh.position.y = -2; // shadows!
+
   scene.add(mesh);
   return geometry;
 }
@@ -881,9 +899,11 @@ function extrudeStraightLine( crv, depth ) {
 // 	bevelSegments: 1
 // };
 
-var testDivideCrv = twoPtCurve(new THREE.Vector3(-15,0,-10),new THREE.Vector3(15,0,0));
+var testDivideCrv = twoPtCurve(new THREE.Vector3(15,0,0),new THREE.Vector3(30,0,0));
 divideCrv(testDivideCrv);
-var blocker = extrudeStraightLine(testDivideCrv.clone(),15);
+forBlocker = testDivideCrv.clone();
+forBlocker.position.y = -.1;
+var blocker = extrudeStraightLine(forBlocker,15);
 
 // spaceNavigator(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function fieldVectorizer(){

@@ -124,6 +124,7 @@ siteSlabPhongLoader.load(
       var siteSlabPhongMaterial = new THREE.MeshPhongMaterial({color: "white", side: THREE.BackSide});
       siteSlabPhongMesh = new THREE.Mesh(geometry, siteSlabPhongMaterial);
       siteSlabPhongMesh.position.y = -.1;
+      siteSlabPhongMesh.receiveShadow = true; // shadows!
       scene.add(siteSlabPhongMesh);
       renderer.render(scene,camera);
   }
