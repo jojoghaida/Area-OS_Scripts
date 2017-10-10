@@ -861,23 +861,14 @@ function extrudeStraightLine( crv, depth ) {
     b = a.clone();
     b.y = depth;
     geometry.vertices.push(b);
-    if(i+1 < vertices.length){
-      c = vertices[i+1].clone();
-      geometry.vertices.push(c);
-      geometry.faces.push(new THREE.Face3(i, i+1, i+2));
-    }else{
-      c = vertices[i-1];
-      geometry.vertices.push(c);
-      geometry.faces.push(new THREE.Face3(i-1, i, i+1));
-    }
+    geometry.faces.push(new THREE.Face3(i, i+1, i+2));
+    console.log(geometry.vertices);
   }
   geometry.verticesNeedUpdate;
   geometry.computeFaceNormals;
-  console.log("geo",geometry);
   material = new THREE.MeshBasicMaterial({color: "red", side: THREE.DoubleSide});
   mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
-  console.log(mesh);
   return geometry;
 }
 
