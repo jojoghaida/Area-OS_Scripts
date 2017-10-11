@@ -15,14 +15,14 @@ var aOS_DashedLineStyles = {
     dashedRedLine: new THREE.LineBasicMaterial({}),
     dashedYellowLine: new THREE.LineBasicMaterial({}),
     dashedGreenLine: new THREE.LineBasicMaterial({}),
-  }
+  },
 
   normal: {
     dashedBlueLine: new THREE.LineBasicMaterial({}),
     dashedRedLine: new THREE.LineBasicMaterial({}),
     dashedYellowLine: new THREE.LineBasicMaterial({}),
     dashedGreenLine: new THREE.LineBasicMaterial({}),
-  }
+  },
 
 };
 
