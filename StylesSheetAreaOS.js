@@ -4,9 +4,29 @@
 var aOS_LineStyles = {
   blueLine: new THREE.LineBasicMaterial({}),
   redLine: new THREE.LineBasicMaterial({}),
+  yellowLine: new THREE.LineBasicMaterial({}),
+  greenLine: new THREE.LineBasicMaterial({}),
+};
+
+var aOS_DashedLineStyles = {
+  var thin = {
+    dashedBlueLine: new THREE.LineBasicMaterial({}),
+    dashedRedLine: new THREE.LineBasicMaterial({}),
+    dashedYellowLine: new THREE.LineBasicMaterial({}),
+    dashedGreenLine: new THREE.LineBasicMaterial({}),
+  };
+  var normal = {
+    dashedBlueLine: new THREE.LineBasicMaterial({}),
+    dashedRedLine: new THREE.LineBasicMaterial({}),
+    dashedYellowLine: new THREE.LineBasicMaterial({}),
+    dashedGreenLine: new THREE.LineBasicMaterial({}),
+  };
 };
 
 //mesh Styles
 var aOS_MeshStyles = {
-  blueMesh: new THEE.MeshBasicMaterial({}),
+  blueMeshBasic: new THREE.MeshBasicMaterial({}),
+  redMeshBasic: new THREE.MeshBasicMaterial({}),
+  yellowMeshBasic: new THREE.MeshBasicMaterial({}),
+  greenMeshBasic: new THREE.MeshBasicMaterial({}),
 };
