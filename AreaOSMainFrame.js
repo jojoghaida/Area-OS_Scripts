@@ -22,7 +22,8 @@ aboutButton.addEventListener('click',launchAbout);
 
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 var camera, scene, controls, renderer;
-var frustumSize = 550;
+// var frustumSize = 550;
+var frustumSize = 300;
 
 viewInit();
 orbitCam();
@@ -49,11 +50,16 @@ renderer.shadowMap.type = THREE.BasicShadowMap; // shadows!
 renderer.shadowMap.renderReverseSided; // shadows!
 // renderer.shadowMap.type = THREE.PCFSoftShadowMap; // shadows!
 viewport.appendChild(renderer.domElement);
-
 camera.castShadow = true;
-camera.position.y = 200;
-camera.position.x = -200;
-camera.position.z = -200;
+
+// camera.position.y = 200;
+// camera.position.x = -200;
+// camera.position.z = -200;
+
+camera.position.y = 350;
+camera.position.x = 0;
+camera.position.z = 0;
+
 scene.add(camera); //!!!!!<<<<<<<<<<<<<<<<<<<<<<<<<<
 camera.lookAt(new THREE.Vector3(0,0,0));
 window.addEventListener( 'resize', onWindowResize, false );
@@ -92,6 +98,12 @@ function viewAnim(){
 
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
+function returnCamAxon(){
+  camera.position.y = 200;
+  camera.position.x = -200;
+  camera.position.z = -200;
+  controls.target.set(0,0,0);
+}
 function returnCamPlan(mC=[0,350,0],tC=[0,0,0]){
   disableOrbitCam();
   steps = 10;
@@ -129,7 +141,7 @@ function returnCamPlan(mC=[0,350,0],tC=[0,0,0]){
 }
 
 var resetCamButton = document.getElementById("resetCamButton");
-resetCamButton.addEventListener('click', returnCamPlan);
+resetCamButton.addEventListener('click', returnCamAxon);
 
 function orbitCam(){
 controls = new THREE.OrbitControls( camera,renderer.domElement );
@@ -926,12 +938,6 @@ var blocker = extrudeStraightLine(forBlocker,20);
 
 // spaceNavigator(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function fieldVectorizer(){
-
-  // var testsurface = siteSlabMesh.clone();
-  // testsurface.position.y = .1;
-  // testsurface.material = testsurface.material.clone();
-  // testsurface.material = new THREE.MeshPhongMaterial({color: "white", side: THREE.DoubleSide});
-  // scene.add(testsurface);
 
   ptColor = new THREE.PointsMaterial({color: "white" /*, specular: "white",shininess: 0*/})
   a = openPlanGridPts[2];
