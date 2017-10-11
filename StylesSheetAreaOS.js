@@ -9,13 +9,13 @@ var aOS_LineStyles = {
 };
 
 var aOS_DashedLineStyles = {
-  var thin = {
+  thin = {
     dashedBlueLine: new THREE.LineBasicMaterial({}),
     dashedRedLine: new THREE.LineBasicMaterial({}),
     dashedYellowLine: new THREE.LineBasicMaterial({}),
     dashedGreenLine: new THREE.LineBasicMaterial({}),
   };
-  var normal = {
+  normal = {
     dashedBlueLine: new THREE.LineBasicMaterial({}),
     dashedRedLine: new THREE.LineBasicMaterial({}),
     dashedYellowLine: new THREE.LineBasicMaterial({}),
