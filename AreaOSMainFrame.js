@@ -968,10 +968,10 @@ function fieldVectorizer(){
   crv = twoPtCurve(a.geometry.vertices[0],b.geometry.vertices[0]);
   crv = twoPtCurve(b.geometry.vertices[0],c.geometry.vertices[0]);
 }
-setTimeout(fieldVectorizer,1000);
+// setTimeout(fieldVectorizer,1000);
 
 function crawler(initPt){
-  // dropPtLight(initPt)
+  dropPtLight(initPt)
   a = Number(initPt.name[0]); //need to translate
   b = Number(initPt.name[2]);
 
@@ -992,14 +992,12 @@ function crawler(initPt){
       nA = getRandomInt(stepPt[0] - 1, stepPt[0] + 2);
       nB = getRandomInt(stepPt[1] - 1, stepPt[1] + 2);
       n = scene.getObjectByName(nA + "," + nB);
-      if(n == undefined){console.log("no good");
-      }else{
+      if(n == undefined){}else{
         drawCrvB = n.geometry.vertices[0];
         twoPtCurve(drawCrvA,drawCrvB);
         stepPt = [nA,nB];
         // dropPtLight(n);
         si++
-        console.log(si);
       }
       setTimeout(function(){actionCrawler(ss,si)},100);
     }
