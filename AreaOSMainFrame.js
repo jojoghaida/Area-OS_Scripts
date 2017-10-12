@@ -971,7 +971,7 @@ function fieldVectorizer(){
 setTimeout(fieldVectorizer,1000);
 
 function crawler(initPt){
-  dropPtLight(initPt)
+  // dropPtLight(initPt)
   a = Number(initPt.name[0]); //need to translate
   b = Number(initPt.name[2]);
 
