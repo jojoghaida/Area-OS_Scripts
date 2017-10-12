@@ -141,7 +141,7 @@ function returnCamPlan(mC=[0,350,0],tC=[0,0,0]){
 }
 
 var resetCamButton = document.getElementById("resetCamButton");
-resetCamButton.addEventListener('click', returnCamAxon);
+resetCamButton.addEventListener('click', returnCamPlan);
 
 function orbitCam(){
 controls = new THREE.OrbitControls( camera,renderer.domElement );
@@ -1050,16 +1050,16 @@ function crawler(initPt, color = "blue"){
 setTimeout(
   function (){
     crawler(scene.getObjectByName("13,25"));
-  },1000);
+  },3000);
 
 setTimeout(
   function (){
     crawler(scene.getObjectByName("9,0"));
-  },2000);
+  },5000);
 
 setTimeout(
   function (){
     crawler(scene.getObjectByName("0,15"));
-  },3000);
+  },7000);
 
 //RHIZOME POPULATER//////////////////////////////////////////////////////////////
