@@ -827,8 +827,8 @@ function dropText(text,pos,font = fontKarla_Reg,just=0,size=1){
 //   dropText("test!",[-20,0,-20],fontKarla_Reg);
 // }, 2000);
 
-function dropPtLight(point){
-  light1 = new THREE.PointLight(0x26D8A5, .7, 10000);
+function dropPtLight(point, color = 0x26D8A5){
+  light1 = new THREE.PointLight(color, .7, 10000);
   lightLocation = point.geometry.vertices[0].clone();
   lightLocation.y = 1;
   light1.position.set(lightLocation.x,lightLocation.y,lightLocation.z);
@@ -970,10 +970,38 @@ function fieldVectorizer(){
 }
 // setTimeout(fieldVectorizer,1000);
 
-function crawler(initPt){
-  dropPtLight(initPt)
-  a = Number(initPt.name[0]); //need to translate
-  b = Number(initPt.name[2]);
+function crawler(initPt, color = "blue"){
+  dropPtLight(initPt,color);
+
+  pointCoordinates = [];
+  store = null;
+  unit2Bool = false;
+
+  for(i = 0; i < initPt.name.length; i++){
+    alphabet = initPt.name[i];
+    if(i == 0){
+      store = alphabet;
+    }else if (alphabet != ",") {
+
+      if(store != null){
+        store += alphabet;
+      }else{
+        store = alphabet;
+      }
+    }
+    if(alphabet == ","){
+      pointCoordinates.push(store);
+      store = null;
+    }
+    if(i == initPt.name.length - 1){
+      pointCoordinates.push(store);
+      store = null;
+      console.log(pointCoordinates);
+    }
+  }
+
+  a = Number(pointCoordinates[0]); //need to translate
+  b = Number(pointCoordinates[1]);
 
   function getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -1009,7 +1037,7 @@ function crawler(initPt){
 
 setTimeout(
   function (){
-    crawler(scene.getObjectByName("9,1"));
+    crawler(scene.getObjectByName("13,25"));
   },1000);
 
 setTimeout(
@@ -1019,7 +1047,7 @@ setTimeout(
 
 setTimeout(
   function (){
-    crawler(scene.getObjectByName("0,0"));
+    crawler(scene.getObjectByName("0,15"));
   },3000);
 
 //RHIZOME POPULATER//////////////////////////////////////////////////////////////
