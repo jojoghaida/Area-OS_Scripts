@@ -1017,11 +1017,11 @@ setTimeout(
 setTimeout(
   function (){
     crawler(scene.getObjectByName("9,0"));
-  },1000);
+  },2000);
 
 setTimeout(
   function (){
     crawler(scene.getObjectByName("0,0"));
-  },1000);
+  },3000);
 
 //RHIZOME POPULATER//////////////////////////////////////////////////////////////
