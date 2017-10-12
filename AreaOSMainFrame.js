@@ -22,8 +22,8 @@ aboutButton.addEventListener('click',launchAbout);
 
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 var camera, scene, controls, renderer;
-// var frustumSize = 550;
-var frustumSize = 300;
+var frustumSize = 550;
+// var frustumSize = 300;
 
 viewInit();
 orbitCam();
@@ -52,13 +52,13 @@ renderer.shadowMap.renderReverseSided; // shadows!
 viewport.appendChild(renderer.domElement);
 camera.castShadow = true;
 
-// camera.position.y = 200;
-// camera.position.x = -200;
-// camera.position.z = -200;
+camera.position.y = 200;
+camera.position.x = -200;
+camera.position.z = -200;
 
-camera.position.y = 350;
-camera.position.x = 0;
-camera.position.z = 0;
+// camera.position.y = 350;
+// camera.position.x = 0;
+// camera.position.z = 0;
 
 scene.add(camera); //!!!!!<<<<<<<<<<<<<<<<<<<<<<<<<<
 camera.lookAt(new THREE.Vector3(0,0,0));
@@ -437,7 +437,7 @@ if(areaSQ<requestedSQ){
     //baseCrv
   function twoPtCurve(vec1,vec2,_group = null,_style){
     geometry = new THREE.Geometry();
-    linestyle = new THREE.LineBasicMaterial({color: 0x7ce7c9, linewidth: 1.3});
+    linestyle = new THREE.LineBasicMaterial({color: 0x7ce7c9, linewidth: .5});
     geometry.vertices.push(vec1,vec2);
     lineObject = new THREE.Line(geometry,linestyle);
     scene.add(lineObject);
@@ -868,7 +868,6 @@ function divideCrv(crv,divisions = 10){
     pointList.push(new THREE.Vector3());
     pointList[i].set(check.x,check.y,check.z);
     dropPoints(pointList[i]);
-    console.log(pointList[i]);
   }
   for(i=0; i < pointList.length; i++){
     move = pushPointDirection(pointList[i],getOffsetDirection(crv));
@@ -881,7 +880,6 @@ function divideCrv(crv,divisions = 10){
 function extrudeStraightLine( crv, depth ) {
   var geometry = new THREE.Geometry();
   var vertices = crv.geometry.vertices;
-  console.log(vertices);
 
   for (i = 0; i < vertices.length; i++) {
     a = vertices[i].clone();
@@ -890,7 +888,6 @@ function extrudeStraightLine( crv, depth ) {
     b.y = depth;
     geometry.vertices.push(b);
     geometry.faces.push(new THREE.Face3(i, i+1, i+2));
-    console.log(geometry.vertices);
   }
   geometry.verticesNeedUpdate;
   geometry.computeFaceNormals;
@@ -996,7 +993,6 @@ function crawler(initPt, color = "blue"){
     if(i == initPt.name.length - 1){
       pointCoordinates.push(store);
       store = null;
-      console.log(pointCoordinates);
     }
   }
 
@@ -1010,16 +1006,32 @@ function crawler(initPt, color = "blue"){
   }
 
   var stepPt = [a,b];
-  var steps = 200;
+  var steps = 1000;
   var stepInc = 0;
+  var occupiedPts = [];
 
   function actionCrawler(ss,si){
     if(si < ss){
-      drawCrvA = scene.getObjectByName(stepPt[0]+","+stepPt[1]).geometry.vertices[0];
 
-      nA = getRandomInt(stepPt[0] - 1, stepPt[0] + 2);
-      nB = getRandomInt(stepPt[1] - 1, stepPt[1] + 2);
+      drawCrvA = scene.getObjectByName(stepPt[0]+","+stepPt[1]).geometry.vertices[0];
+      foundBool = false;
+
+      while(foundBool == false){
+        nA = getRandomInt(stepPt[0] - 1, stepPt[0] + 2);
+        nB = getRandomInt(stepPt[1] - 1, stepPt[1] + 2);
+        if(occupiedPts.length > 0){
+          for(i = 0; i < occupiedPts.length; i++){
+            if(occupiedPts[i] != nA + "," + nB){
+              foundBool = true;
+              occupiedPts.push(nA + "," + nB);
+              console.log(occupiedPts);
+            }
+          }
+        }else{foundBool = true;}
+      }
+
       n = scene.getObjectByName(nA + "," + nB);
+
       if(n == undefined){}else{
         drawCrvB = n.geometry.vertices[0];
         twoPtCurve(drawCrvA,drawCrvB);
@@ -1027,7 +1039,7 @@ function crawler(initPt, color = "blue"){
         // dropPtLight(n);
         si++
       }
-      setTimeout(function(){actionCrawler(ss,si)},100);
+      setTimeout(function(){actionCrawler(ss,si)},1);
     }
   }
   actionCrawler(steps,stepInc);
