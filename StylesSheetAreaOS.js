@@ -2,10 +2,34 @@
 
 //line Styles
 var aOS_LineStyles = {
-  blueLine: new THREE.LineBasicMaterial({}),
-  redLine: new THREE.LineBasicMaterial({}),
-  yellowLine: new THREE.LineBasicMaterial({}),
-  greenLine: new THREE.LineBasicMaterial({}),
+
+    thin: {
+      blueLine: new THREE.LineBasicMaterial({}),
+      redLine: new THREE.LineBasicMaterial({}),
+      yellowLine: new THREE.LineBasicMaterial({}),
+      greenLine: new THREE.LineBasicMaterial({}),
+    },
+
+    normal: {
+      blueLine: new THREE.LineBasicMaterial({}),
+      redLine: new THREE.LineBasicMaterial({}),
+      yellowLine: new THREE.LineBasicMaterial({}),
+      greenLine: new THREE.LineBasicMaterial({}),
+    },
+
+    thick: {
+      blueLine: new THREE.LineBasicMaterial({}),
+      redLine: new THREE.LineBasicMaterial({}),
+      yellowLine: new THREE.LineBasicMaterial({}),
+      greenLine: new THREE.LineBasicMaterial({}),
+    },
+
+    thickest: {
+      blueLine: new THREE.LineBasicMaterial({}),
+      redLine: new THREE.LineBasicMaterial({}),
+      yellowLine: new THREE.LineBasicMaterial({}),
+      greenLine: new THREE.LineBasicMaterial({}),
+    }
 };
 
 var aOS_DashedLineStyles = {
@@ -23,6 +47,20 @@ var aOS_DashedLineStyles = {
     dashedYellowLine: new THREE.LineBasicMaterial({}),
     dashedGreenLine: new THREE.LineBasicMaterial({}),
   },
+
+  thick: {
+    dashedBlueLine: new THREE.LineBasicMaterial({}),
+    dashedRedLine: new THREE.LineBasicMaterial({}),
+    dashedYellowLine: new THREE.LineBasicMaterial({}),
+    dashedGreenLine: new THREE.LineBasicMaterial({}),
+  },
+
+  thickest: {
+    dashedBlueLine: new THREE.LineBasicMaterial({}),
+    dashedRedLine: new THREE.LineBasicMaterial({}),
+    dashedYellowLine: new THREE.LineBasicMaterial({}),
+    dashedGreenLine: new THREE.LineBasicMaterial({}),
+  }
 
 };
 

@@ -578,11 +578,10 @@ if(areaSQ<requestedSQ){
     //furnitureFunctions
 
     // test2
-  newP1 = new THREE.Vector3(-30,0,-50);
-  // newP2 = new THREE.Vector3(47,0,7);
-  newP2 = new THREE.Vector3(31,0,-39);
-  newMainAxisCrv = twoPtCurve(newP1, pushPointDirection(newP1,twoPtUnitVec(newP2,newP1)));
-  dropCircle(newP1);
+  // newP1 = new THREE.Vector3(-30,0,-50);
+  // newP2 = new THREE.Vector3(31,0,-39);
+  // newMainAxisCrv = twoPtCurve(newP1, pushPointDirection(newP1,twoPtUnitVec(newP2,newP1)));
+  // dropCircle(newP1);
 
   // trivial variables for live preview
   var stPt = new THREE.Vector3(-40,0,35); // init for populator
@@ -778,7 +777,9 @@ if(areaSQ<requestedSQ){
   }
   // window.onload(newStepExt(newMainAxisCrv,80)); //!!!!!!!!
 
-  setTimeout(function(){newStepExt(newMainAxisCrv,80)},2000);
+  // setTimeout(function(){newStepExt(newMainAxisCrv,80)},2000);
+
+
 // test2
 // }
 // test 1
@@ -829,7 +830,7 @@ function dropText(text,pos,font = fontKarla_Reg,just=0,size=1){
 function dropPtLight(point){
   light1 = new THREE.PointLight(0x26D8A5, .7, 10000);
   lightLocation = point.geometry.vertices[0].clone();
-  lightLocation.y = 5;
+  lightLocation.y = 1;
   light1.position.set(lightLocation.x,lightLocation.y,lightLocation.z);
   scene.add(light1);
 }
@@ -939,10 +940,10 @@ var blocker = extrudeStraightLine(forBlocker,20);
 // spaceNavigator(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function fieldVectorizer(){
 
-  ptColor = new THREE.PointsMaterial({color: "white" /*, specular: "white",shininess: 0*/})
-  a = openPlanGridPts[2];
-  b = openPlanGridPts[100];
-  c = openPlanGridPts[349];
+  ptColor = new THREE.PointsMaterial({color: "white" /*, specular: "white",shininess: 0*/});
+  a = scene.getObjectByName("0,1");
+  b = scene.getObjectByName("3,8");
+  c = scene.getObjectByName("6,9");
 
   a.material = ptColor;
   b.material = ptColor;
@@ -968,4 +969,59 @@ function fieldVectorizer(){
   crv = twoPtCurve(b.geometry.vertices[0],c.geometry.vertices[0]);
 }
 setTimeout(fieldVectorizer,1000);
+
+function crawler(initPt){
+  dropPtLight(initPt)
+  a = Number(initPt.name[0]); //need to translate
+  b = Number(initPt.name[2]);
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+  }
+
+  var stepPt = [a,b];
+  var steps = 200;
+  var stepInc = 0;
+
+  function actionCrawler(ss,si){
+    if(si < ss){
+      drawCrvA = scene.getObjectByName(stepPt[0]+","+stepPt[1]).geometry.vertices[0];
+
+      nA = getRandomInt(stepPt[0] - 1, stepPt[0] + 2);
+      nB = getRandomInt(stepPt[1] - 1, stepPt[1] + 2);
+      n = scene.getObjectByName(nA + "," + nB);
+      if(n == undefined){console.log("no good");
+      }else{
+        drawCrvB = n.geometry.vertices[0];
+        twoPtCurve(drawCrvA,drawCrvB);
+        stepPt = [nA,nB];
+        // dropPtLight(n);
+        si++
+        console.log(si);
+      }
+      setTimeout(function(){actionCrawler(ss,si)},100);
+    }
+  }
+  actionCrawler(steps,stepInc);
+  }
+
+
+
+setTimeout(
+  function (){
+    crawler(scene.getObjectByName("9,1"));
+  },1000);
+
+setTimeout(
+  function (){
+    crawler(scene.getObjectByName("9,0"));
+  },1000);
+
+setTimeout(
+  function (){
+    crawler(scene.getObjectByName("0,0"));
+  },1000);
+
 //RHIZOME POPULATER//////////////////////////////////////////////////////////////
