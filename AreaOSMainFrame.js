@@ -23,7 +23,7 @@ aboutButton.addEventListener('click',launchAbout);
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 var camera, scene, controls, renderer;
 // var frustumSize = 550;
-var frustumSize = 300;
+var frustumSize = 350;
 
 viewInit();
 orbitCam();
@@ -877,7 +877,7 @@ function divideCrv(crv,divisions = 10){
 
 }
 
-function extrudeStraightLine( crv, depth ) {
+function extrudeStraightLine( crv, depth=10 ) {
   var geometry = new THREE.Geometry();
   var vertices = crv.geometry.vertices;
 
@@ -894,8 +894,8 @@ function extrudeStraightLine( crv, depth ) {
   material = new THREE.MeshLambertMaterial({color: "red", emissive: "red", side: THREE.DoubleSide});
   mesh = new THREE.Mesh(geometry, material);
   mesh.castShadow = true; // shadows!
-  mesh.position.z = -2; // shadows!
-  mesh.position.y = -.1; // shadows!
+  // mesh.position.z = -2; // shadows!
+  // mesh.position.y = -.1; // shadows!
 
   scene.add(mesh);
   return geometry;
@@ -914,7 +914,7 @@ var testDivideCrv = twoPtCurve(new THREE.Vector3(15,0,0),new THREE.Vector3(30,0,
 divideCrv(testDivideCrv);
 forBlocker = testDivideCrv.clone();
 forBlocker.position.y = -.1;
-var blocker = extrudeStraightLine(forBlocker,20);
+var blocker = extrudeStraightLine(forBlocker,15);
 
 
 // function dropSpotLight(){
@@ -1133,6 +1133,9 @@ function findAdjacentMatrix(pointCoordinates){
     }
   }
 
+  function newnew(pointCoordinates){
+    console.log("YO");
+  }
   // return()
 }
 
@@ -1158,6 +1161,14 @@ function newCrawler(pt,steps = 200){
         occupiedPts.add(pastPt.clone());
         vacantPts.remove(pastPt);
         pastPt = newPt;
+
+        // camera.position.x = Number(pastPt.geometry.vertices[0].x);
+        // camera.position.y = 350;
+        // camera.position.z = Number(pastPt.geometry.vertices[0].z);
+        //
+        // controls.target.set(pastPt);
+        // console.log(camera.position);
+        // dropPtLight(newPt);
         setTimeout(animateCrawl,100);
       }else{
         dropPtLight(pastPt,"red");
