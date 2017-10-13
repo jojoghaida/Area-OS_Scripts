@@ -1103,7 +1103,7 @@ function translator(pt){
   return(pointCoordinates);
 }
 
-function findAdjacentMatrix(pointCoordinates){
+function findRandomnAdjacentMatrix(pointCoordinates){
 
   vacantPts = scene.getObjectByName("vacantPts");
 
@@ -1116,11 +1116,11 @@ function findAdjacentMatrix(pointCoordinates){
     return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
   }
   for(i=0;i<8;i++){
-    console.log("scan matrix",i);
+    // console.log("scan matrix",i);
     nA = getRandomInt(a - 1, a + 2);
     nB = getRandomInt(b - 1, b + 2);
     point = vacantPts.getObjectByName(nA+","+nB);
-    console.log(point);
+    // console.log(point);
 
     if(point != undefined){
       return(point);
@@ -1132,11 +1132,32 @@ function findAdjacentMatrix(pointCoordinates){
       break
     }
   }
-
-  function newnew(pointCoordinates){
-    console.log("YO");
-  }
   // return()
+}
+function getAvailableMatrixNeighbors(pointCoordinates){
+
+  adjacentPts = [];
+  vacantPts = scene.getObjectByName("vacantPts");
+  console.log(pointCoordinates);
+  y = [Number(pointCoordinates[0]),Number(pointCoordinates[0])-1,Number(pointCoordinates[0])+1];
+  x = [Number(pointCoordinates[1]),Number(pointCoordinates[1])-1,Number(pointCoordinates[1])+1];
+  // console.log(y,x);
+  for(l = 0; l < y.length; l ++){
+    for(b = 0; b < x.length; b++){
+      if(l+b != 0){adjacentPts.push([y[l],x[b]]);}
+    }
+  }
+  console.log(adjacentPts);
+  availableAdjacents = [];
+  vacantPts = scene.getObjectByName("vacantPts");
+  for(u = 0; u < adjacentPts.length; u++){
+    find = vacantPts.getObjectByName(adjacentPts[u][0]+","+adjacentPts[u][1])
+    if(find != undefined){
+      console.log(find);
+      availableAdjacents.push(find);
+    }
+  }
+  return(availableAdjacents);
 }
 
 function newCrawler(pt,steps = 200){
@@ -1149,11 +1170,12 @@ function newCrawler(pt,steps = 200){
   function animateCrawl(){
     if(stepNum<steps){
       stepNum++
-      console.log("step #",z);
+      // console.log("step #",z);
       crvVert1 = pastPt.geometry.vertices[0].clone();
       ptCoord = translator(pastPt);
-      newPt = findAdjacentMatrix(ptCoord);
-      console.log("newPt = ",newPt);
+      newPt = getAvailableMatrixNeighbors(ptCoord)[0];
+      // newPt = findRandomnAdjacentMatrix(ptCoord);
+      // console.log("newPt = ",newPt);
       if(newPt!=undefined){
         crvVert2 = newPt.geometry.vertices[0].clone();
         twoPtCurve(crvVert1.clone(),crvVert2.clone());
