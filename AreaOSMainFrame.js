@@ -1160,7 +1160,7 @@ function getAvailableMatrixNeighbors(pointCoordinates){
   return(availableAdjacents);
 }
 
-function newCrawler(pt,steps = 200){
+function newCrawler(pt,steps = 220){
   dropPtLight(pt,"blue");
   pastPt = pt;
   vacantPts = scene.getObjectByName("vacantPts");
@@ -1168,7 +1168,7 @@ function newCrawler(pt,steps = 200){
   stepNum = 0;
 
   function animateCrawl(){
-    if(stepNum<steps){
+    if(stepNum < steps){
       stepNum++
       // console.log("step #",z);
       crvVert1 = pastPt.geometry.vertices[0].clone();
@@ -1176,7 +1176,7 @@ function newCrawler(pt,steps = 200){
       newPt = getAvailableMatrixNeighbors(ptCoord)[0];
       // newPt = findRandomnAdjacentMatrix(ptCoord);
       // console.log("newPt = ",newPt);
-      if(newPt!=undefined){
+      if(newPt!= undefined){
         crvVert2 = newPt.geometry.vertices[0].clone();
         twoPtCurve(crvVert1.clone(),crvVert2.clone());
 
@@ -1196,6 +1196,10 @@ function newCrawler(pt,steps = 200){
         dropPtLight(pastPt,"red");
         renderer.render(scene,camera);
         stepNum = steps;
+      }
+      if(newPt != undefined && stepNum == steps){
+        dropPtLight(newPt,"red");
+        renderer.render(scene,camera);
       }
     }
   }
