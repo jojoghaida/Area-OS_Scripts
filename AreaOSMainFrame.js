@@ -22,8 +22,8 @@ aboutButton.addEventListener('click',launchAbout);
 
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 var camera, scene, controls, renderer;
-var frustumSize = 550;
-// var frustumSize = 300;
+// var frustumSize = 550;
+var frustumSize = 300;
 
 viewInit();
 orbitCam();
@@ -52,13 +52,13 @@ renderer.shadowMap.renderReverseSided; // shadows!
 viewport.appendChild(renderer.domElement);
 camera.castShadow = true;
 
-camera.position.y = 200;
-camera.position.x = -200;
-camera.position.z = -200;
+// camera.position.y = 200;
+// camera.position.x = -200;
+// camera.position.z = -200;
 
-// camera.position.y = 350;
-// camera.position.x = 0;
-// camera.position.z = 0;
+camera.position.y = 350;
+camera.position.x = 0;
+camera.position.z = 0;
 
 scene.add(camera); //!!!!!<<<<<<<<<<<<<<<<<<<<<<<<<<
 camera.lookAt(new THREE.Vector3(0,0,0));
@@ -968,6 +968,8 @@ function fieldVectorizer(){
 // setTimeout(fieldVectorizer,1000);
 
 function crawler(initPt, color = "blue"){
+  var occupiedPts = [];
+
   dropPtLight(initPt,color);
 
   pointCoordinates = [];
@@ -996,7 +998,9 @@ function crawler(initPt, color = "blue"){
     }
   }
 
-  a = Number(pointCoordinates[0]); //need to translate
+  occupiedPts.push(pointCoordinates[0] + "," + pointCoordinates[1]);
+
+  a = Number(pointCoordinates[0]);
   b = Number(pointCoordinates[1]);
 
   function getRandomInt(min, max) {
@@ -1006,40 +1010,58 @@ function crawler(initPt, color = "blue"){
   }
 
   var stepPt = [a,b];
-  var steps = 1000;
+  var steps = 10;
   var stepInc = 0;
-  var occupiedPts = [];
 
   function actionCrawler(ss,si){
     if(si < ss){
 
+      console.log("checking");
+      nA = getRandomInt(stepPt[0] - 1, stepPt[0] + 2);
+      nB = getRandomInt(stepPt[1] - 1, stepPt[1] + 2);
+
+      // caught = true;
+      //
+      // function checker(){
+      //   console.log("nA/nB =", nA + "/" + nB);
+      //   for(i = 0; i < occupiedPts.length; i++){
+      //     console.log(i);
+      //     if(occupiedPts[i] != nA + "," + nB){
+      //       console.log(occupiedPts);
+      //       break;
+      //     }else{
+      //       caught = false;
+      //       console.log("match", nA + "," + nB);
+      //
+      //     }
+      //   }
+      //   if(caught == true){
+      //     occupiedPts.push(nA + "," + nB);
+      //   }else{
+      //     nA = getRandomInt(stepPt[0] - 1, stepPt[0] + 2);
+      //     nB = getRandomInt(stepPt[1] - 1, stepPt[1] + 2);
+      //     checker();
+      //   }
+      // }
+      // checker();
+
+
       drawCrvA = scene.getObjectByName(stepPt[0]+","+stepPt[1]).geometry.vertices[0];
-      foundBool = false;
+      n = scene.getObjectByName("vacantPts").getObjectByName(nA + "," + nB);
+      console.log(n);
 
-      while(foundBool == false){
-        nA = getRandomInt(stepPt[0] - 1, stepPt[0] + 2);
-        nB = getRandomInt(stepPt[1] - 1, stepPt[1] + 2);
-        if(occupiedPts.length > 0){
-          for(i = 0; i < occupiedPts.length; i++){
-            if(occupiedPts[i] != nA + "," + nB){
-              foundBool = true;
-              occupiedPts.push(nA + "," + nB);
-              console.log(occupiedPts);
-            }
-          }
-        }else{foundBool = true;}
-      }
+      if(n == undefined){console.log("n was undefined");}else{
+        stepPt = [nA,nB];
 
-      n = scene.getObjectByName(nA + "," + nB);
-
-      if(n == undefined){}else{
+        console.log("this is",n);
+        scene.getObjectByName("vacantPts").remove(n);
         drawCrvB = n.geometry.vertices[0];
         twoPtCurve(drawCrvA,drawCrvB);
-        stepPt = [nA,nB];
         // dropPtLight(n);
+        console.log(vacantPts.children.length);
         si++
       }
-      setTimeout(function(){actionCrawler(ss,si)},1);
+      setTimeout(function(){actionCrawler(ss,si)},100);
     }
   }
   actionCrawler(steps,stepInc);
@@ -1047,19 +1069,123 @@ function crawler(initPt, color = "blue"){
 
 
 
-setTimeout(
-  function (){
-    crawler(scene.getObjectByName("13,25"));
-  },3000);
+// setTimeout(
+//   function (){
+//     crawler(scene.getObjectByName("13,25"));
+//   },3000);
+
+function translator(pt){
+
+  pointCoordinates = [];
+  store = null;
+
+  for(i = 0; i < pt.name.length; i++){
+    alphabet = pt.name[i];
+    if(i == 0){
+      store = alphabet;
+    }else if (alphabet != ",") {
+
+      if(store != null){
+        store += alphabet;
+      }else{
+        store = alphabet;
+      }
+    }
+    if(alphabet == ","){
+      pointCoordinates.push(store);
+      store = null;
+    }
+    if(i == pt.name.length - 1){
+      pointCoordinates.push(store);
+      store = null;
+    }
+  }
+  return(pointCoordinates);
+}
+
+function findAdjacentMatrix(pointCoordinates){
+
+  vacantPts = scene.getObjectByName("vacantPts");
+
+  a = Number(pointCoordinates[0]);
+  b = Number(pointCoordinates[1]);
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+  }
+  for(i=0;i<8;i++){
+    console.log("scan matrix",i);
+    nA = getRandomInt(a - 1, a + 2);
+    nB = getRandomInt(b - 1, b + 2);
+    point = vacantPts.getObjectByName(nA+","+nB);
+    console.log(point);
+
+    if(point != undefined){
+      return(point);
+      break
+    }
+
+    if(i == 8){
+      return(undefined);
+      break
+    }
+  }
+
+  // return()
+}
+
+function newCrawler(pt,steps = 200){
+  dropPtLight(pt,"blue");
+  pastPt = pt;
+  vacantPts = scene.getObjectByName("vacantPts");
+  occupiedPts = scene.getObjectByName("occupiedPts");
+  stepNum = 0;
+
+  function animateCrawl(){
+    if(stepNum<steps){
+      stepNum++
+      console.log("step #",z);
+      crvVert1 = pastPt.geometry.vertices[0].clone();
+      ptCoord = translator(pastPt);
+      newPt = findAdjacentMatrix(ptCoord);
+      console.log("newPt = ",newPt);
+      if(newPt!=undefined){
+        crvVert2 = newPt.geometry.vertices[0].clone();
+        twoPtCurve(crvVert1.clone(),crvVert2.clone());
+
+        occupiedPts.add(pastPt.clone());
+        vacantPts.remove(pastPt);
+        pastPt = newPt;
+        setTimeout(animateCrawl,100);
+      }else{
+        dropPtLight(pastPt,"red");
+        renderer.render(scene,camera);
+        stepNum = steps;
+      }
+    }
+  }
+  animateCrawl();
+}
 
 setTimeout(
   function (){
-    crawler(scene.getObjectByName("9,0"));
-  },5000);
+    newCrawler(scene.getObjectByName("13,25"));
+  },500);
 
-setTimeout(
-  function (){
-    crawler(scene.getObjectByName("0,15"));
-  },7000);
+
+
+
+
+// setTimeout(
+//   function (){
+//     crawler(scene.getObjectByName("9,0"));
+//   },5000);
+//
+// setTimeout(
+//   function (){
+//     crawler(scene.getObjectByName("0,15"));
+//   },7000);
 
 //RHIZOME POPULATER//////////////////////////////////////////////////////////////
