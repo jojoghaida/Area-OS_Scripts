@@ -1191,7 +1191,7 @@ function newCrawler(pt,steps = 220){
         // controls.target.set(pastPt);
         // console.log(camera.position);
         // dropPtLight(newPt);
-        setTimeout(animateCrawl,100);
+        setTimeout(animateCrawl,1);
       }else{
         dropPtLight(pastPt,"red");
         renderer.render(scene,camera);
