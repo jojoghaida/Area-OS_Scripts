@@ -1134,7 +1134,7 @@ function findRandomnAdjacentMatrix(pointCoordinates){
   }
   // return()
 }
-function getAvailableMatrixNeighbors(pointCoordinates){
+function getAvailableMatrixNeighbors(pointCoordinates){//!need to update to be aware of self intersections!
 
   adjacentPts = [];
   vacantPts = scene.getObjectByName("vacantPts");
@@ -1179,8 +1179,8 @@ function newCrawler(pt,steps = 220){
       if(newPt!= undefined){
         crvVert2 = newPt.geometry.vertices[0].clone();
         twoPtCurve(crvVert1.clone(),crvVert2.clone());
-
-        occupiedPts.add(pastPt.clone());
+        pastPt.material = new THREE.PointsMaterial({color: "blue"});
+        occupiedPts.add(pastPt);
         vacantPts.remove(pastPt);
         pastPt = newPt;
 
@@ -1205,14 +1205,29 @@ function newCrawler(pt,steps = 220){
   }
   animateCrawl();
 }
+setTimeout(function(){
+  setTimeout(
+    function (){
+      newCrawler(scene.getObjectByName("13,25"));
+    },500);
 
-setTimeout(
-  function (){
-    newCrawler(scene.getObjectByName("13,25"));
-  },500);
+  setTimeout(
+    function (){
+      newCrawler(scene.getObjectByName("6,15"));
+    },8000);
 
+  setTimeout(
+    function (){
+      newCrawler(scene.getObjectByName("0,0"));
+    },10000);
 
+  setTimeout(
+    function (){
+      newCrawler(scene.getObjectByName("23,30"));
+    },13000);
+  }
 
+,5000);
 
 
 // setTimeout(
