@@ -435,11 +435,10 @@ if(areaSQ<requestedSQ){
 
   //functions
     //baseCrv
-  function twoPtCurve(vec1,vec2,_group = null,_style){
+  function twoPtCurve(vec1,vec2,_group = null, _style = aOS_LineStyles.thin.aOS_LightGreen){
     geometry = new THREE.Geometry();
-    linestyle = new THREE.LineBasicMaterial({color: 0x7ce7c9, linewidth: .5});
     geometry.vertices.push(vec1,vec2);
-    lineObject = new THREE.Line(geometry,linestyle);
+    lineObject = new THREE.Line(geometry,_style);
     scene.add(lineObject);
     renderer.render(scene,camera);
     if(_group) {_group.add(lineObject);}
@@ -1187,10 +1186,11 @@ function newCrawler(pt,steps = 220){
         // camera.position.x = Number(pastPt.geometry.vertices[0].x);
         // camera.position.y = 350;
         // camera.position.z = Number(pastPt.geometry.vertices[0].z);
-        //
+
         // controls.target.set(pastPt);
         // console.log(camera.position);
         // dropPtLight(newPt);
+
         setTimeout(animateCrawl,1);
       }else{
         dropPtLight(pastPt,"red");
@@ -1205,7 +1205,8 @@ function newCrawler(pt,steps = 220){
   }
   animateCrawl();
 }
-setTimeout(function(){
+
+setTimeout( function (){
   setTimeout(
     function (){
       newCrawler(scene.getObjectByName("13,25"));
@@ -1227,7 +1228,7 @@ setTimeout(function(){
     },13000);
   }
 
-,5000);
+,1);
 
 
 // setTimeout(

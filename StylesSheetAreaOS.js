@@ -8,6 +8,7 @@ var aOS_LineStyles = {
       redLine: new THREE.LineBasicMaterial({}),
       yellowLine: new THREE.LineBasicMaterial({}),
       greenLine: new THREE.LineBasicMaterial({}),
+      aOS_LightGreen: new THREE.LineBasicMaterial({color: 0x7ce7c9, linewidth: .25}),
     },
 
     normal: {
