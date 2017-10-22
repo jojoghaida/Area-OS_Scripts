@@ -65,6 +65,15 @@ var aOS_DashedLineStyles = {
 
 };
 
+var aOS_PointStyles = {
+  blue: new THREE.PointsMaterial({color: "blue"}),
+  red: new THREE.PointsMaterial({color: "red"}),
+  yellow: new THREE.PointsMaterial({color: "yellow"}),
+  green: new THREE.PointsMaterial({color: "green"}),
+  aOS_LightGreen: new THREE.PointsMaterial({color: 0x7ce7c9}),
+};
+
+
 //mesh Styles
 var aOS_MeshStyles = {
   blueMeshBasic: new THREE.MeshBasicMaterial({}),

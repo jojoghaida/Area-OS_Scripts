@@ -435,7 +435,7 @@ if(areaSQ<requestedSQ){
 
   //functions
     //baseCrv
-  function twoPtCurve(vec1,vec2,_group = null, _style = aOS_LineStyles.thin.aOS_LightGreen){
+  function twoPtCurve(vec1,vec2,_group = null,_style = aOS_LineStyles.thin.aOS_LightGreen){
     geometry = new THREE.Geometry();
     geometry.vertices.push(vec1,vec2);
     lineObject = new THREE.Line(geometry,_style);
@@ -870,7 +870,7 @@ function divideCrv(crv,divisions = 10){
   }
   for(i=0; i < pointList.length; i++){
     move = pushPointDirection(pointList[i],getOffsetDirection(crv));
-    dropPtLight2(move);
+    // dropPtLight2(move);
   }
   return(pointList);
 
@@ -1172,13 +1172,14 @@ function newCrawler(pt,steps = 220){
       // console.log("step #",z);
       crvVert1 = pastPt.geometry.vertices[0].clone();
       ptCoord = translator(pastPt);
-      newPt = getAvailableMatrixNeighbors(ptCoord)[0];
+      availableMatrixNeighbors = getAvailableMatrixNeighbors(ptCoord);
+      newPt = availableMatrixNeighbors[0];
       // newPt = findRandomnAdjacentMatrix(ptCoord);
       // console.log("newPt = ",newPt);
       if(newPt!= undefined){
         crvVert2 = newPt.geometry.vertices[0].clone();
-        twoPtCurve(crvVert1.clone(),crvVert2.clone());
-        pastPt.material = new THREE.PointsMaterial({color: "blue"});
+        twoPtCurve(crvVert1.clone(),crvVert2.clone(),null,new THREE.LineBasicMaterial({color:"yellow"}));
+        pastPt.material = aOS_PointStyles.aOS_LightGreen;
         occupiedPts.add(pastPt);
         vacantPts.remove(pastPt);
         pastPt = newPt;
