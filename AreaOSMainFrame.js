@@ -1133,20 +1133,28 @@ function findRandomnAdjacentMatrix(pointCoordinates){
   }
   // return()
 }
+
+///////////////////////////////////////////////////////////////////////
 function getAvailableMatrixNeighbors(pointCoordinates){//!need to update to be aware of self intersections!
 
   adjacentPts = [];
   vacantPts = scene.getObjectByName("vacantPts");
+  row = Number(pointCoordinates[0]);
+  col = Number(pointCoordinates[1]);
   console.log(pointCoordinates);
-  y = [Number(pointCoordinates[0]),Number(pointCoordinates[0])-1,Number(pointCoordinates[0])+1];
-  x = [Number(pointCoordinates[1]),Number(pointCoordinates[1])-1,Number(pointCoordinates[1])+1];
-  // console.log(y,x);
+  y = [row-1,row,row+1]; //adjacent rows
+  x = [col-1,col,col+1]; //adjacent columns
+  console.log(y,x);
   for(l = 0; l < y.length; l ++){
     for(b = 0; b < x.length; b++){
-      if(l+b != 0){adjacentPts.push([y[l],x[b]]);}
+      pushBool = 0;
+      if(y[l] != row){pushBool++}
+      if(x[b] != col){pushBool++}
+      if(pushBool != 0){adjacentPts.push([y[l],x[b]]);}
     }
   }
   console.log(adjacentPts);
+  adjacentPts = [adjacentPts[1],adjacentPts[2],adjacentPts[4],adjacentPts[7],adjacentPts[6],adjacentPts[5],adjacentPts[3],adjacentPts[0]];
   availableAdjacents = [];
   vacantPts = scene.getObjectByName("vacantPts");
   for(u = 0; u < adjacentPts.length; u++){
@@ -1154,13 +1162,14 @@ function getAvailableMatrixNeighbors(pointCoordinates){//!need to update to be a
     if(find != undefined){
       console.log(find);
       availableAdjacents.push(find);
-    }
+    }else{availableAdjacents.push(null);}
   }
   return(availableAdjacents);
 }
 
 function newCrawler(pt,steps = 220){
-  dropPtLight(pt,"blue");
+  // dropPtLight(pt,"blue");
+  dropCircle(pt.geometry.vertices[0]);
   pastPt = pt;
   vacantPts = scene.getObjectByName("vacantPts");
   occupiedPts = scene.getObjectByName("occupiedPts");
@@ -1173,12 +1182,15 @@ function newCrawler(pt,steps = 220){
       crvVert1 = pastPt.geometry.vertices[0].clone();
       ptCoord = translator(pastPt);
       availableMatrixNeighbors = getAvailableMatrixNeighbors(ptCoord);
-      newPt = availableMatrixNeighbors[0];
+      matrixDirection = 7;
+      if(availableMatrixNeighbors[matrixDirection] != null){
+        newPt = availableMatrixNeighbors[matrixDirection];
+      }else{newPt = availableMatrixNeighbors[0];}
       // newPt = findRandomnAdjacentMatrix(ptCoord);
       // console.log("newPt = ",newPt);
       if(newPt!= undefined){
         crvVert2 = newPt.geometry.vertices[0].clone();
-        twoPtCurve(crvVert1.clone(),crvVert2.clone(),null,new THREE.LineBasicMaterial({color:"yellow"}));
+        twoPtCurve(crvVert1.clone(),crvVert2.clone(),null,new THREE.LineBasicMaterial({color: 0x26D8A5}));
         pastPt.material = aOS_PointStyles.aOS_LightGreen;
         occupiedPts.add(pastPt);
         vacantPts.remove(pastPt);
@@ -1206,30 +1218,31 @@ function newCrawler(pt,steps = 220){
   }
   animateCrawl();
 }
+///////////////////////////////////////////////////////////////////////
 
-setTimeout( function (){
+// setTimeout( function (){
   setTimeout(
     function (){
-      newCrawler(scene.getObjectByName("13,25"));
-    },500);
+      newCrawler(scene.getObjectByName("16,29"));
+    },1);
 
-  setTimeout(
-    function (){
-      newCrawler(scene.getObjectByName("6,15"));
-    },8000);
+  // setTimeout(
+  //   function (){
+  //     newCrawler(scene.getObjectByName("6,15"));
+  //   },8000);
+  //
+  // setTimeout(
+  //   function (){
+  //     newCrawler(scene.getObjectByName("0,0"));
+  //   },10000);
+  //
+  // setTimeout(
+  //   function (){
+  //     newCrawler(scene.getObjectByName("23,30"));
+  //   },13000);
+  // }
 
-  setTimeout(
-    function (){
-      newCrawler(scene.getObjectByName("0,0"));
-    },10000);
-
-  setTimeout(
-    function (){
-      newCrawler(scene.getObjectByName("23,30"));
-    },13000);
-  }
-
-,1);
+// ,1);
 
 
 // setTimeout(
