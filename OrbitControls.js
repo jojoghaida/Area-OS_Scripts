@@ -477,7 +477,7 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 					var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
 					var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
 					var amplitude = Math.sqrt( dx * dx + dy * dy );
-					
+
 					aspect = window.innerWidth / window.innerHeight;
 					frustumSize += amplitude
 					camera.left   = - frustumSize * aspect / 2;
@@ -487,7 +487,7 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 					camera.updateProjectionMatrix();
 					renderer.setSize(window.innerWidth, window.innerHeight);
 					renderer.render(scene,camera);
-					return;
+					break;
 				}
 
 				state = STATE.TOUCH_DOLLY;
