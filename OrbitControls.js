@@ -471,7 +471,24 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 				break;
 
 			case 2:	// two-fingered touch: dolly
-				if ( scope.noZoom === true ) { return; }
+				if ( scope.noZoom === true ) {
+					state = STATE.TOUCH_DOLLY;
+
+					var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
+					var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
+					var amplitude = Math.sqrt( dx * dx + dy * dy );
+					
+					aspect = window.innerWidth / window.innerHeight;
+					frustumSize += amplitude
+					camera.left   = - frustumSize * aspect / 2;
+					camera.right  =   frustumSize * aspect / 2;
+					camera.top    =   frustumSize / 2;
+					camera.bottom = - frustumSize / 2;
+					camera.updateProjectionMatrix();
+					renderer.setSize(window.innerWidth, window.innerHeight);
+					renderer.render(scene,camera);
+					return;
+				}
 
 				state = STATE.TOUCH_DOLLY;
 

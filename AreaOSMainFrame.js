@@ -45,12 +45,12 @@ viewport.addEventListener('mousemove',enableOrbitCam);
 viewport.addEventListener('touchstart',enableOrbitCam);
 renderer.setSize(w, h);
 renderer.setPixelRatio( window.devicePixelRatio );
-renderer.shadowMap.enabled; // shadows!
-renderer.shadowMap.type = THREE.BasicShadowMap; // shadows!
+// renderer.shadowMap.enabled; // shadows!
+// renderer.shadowMap.type = THREE.BasicShadowMap; // shadows!
 renderer.shadowMap.renderReverseSided; // shadows!
 // renderer.shadowMap.type = THREE.PCFSoftShadowMap; // shadows!
 viewport.appendChild(renderer.domElement);
-camera.castShadow = true;
+// camera.castShadow = true;
 
 // camera.position.y = 200;
 // camera.position.x = -200;
@@ -95,6 +95,8 @@ function viewAnim(){
   requestAnimationFrame(viewAnim);
   controls.update();
 }
+
+controls.noZoom = true;
 
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
