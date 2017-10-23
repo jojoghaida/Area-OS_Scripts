@@ -1125,7 +1125,7 @@ for(i = 0; i < openPlanGridImport.length; i++){
     if(openPlanGridImport[i][z] != null){
       geometry = new THREE.Geometry();
       geometry.vertices.push(openPlanGridImport[i][z]);
-      point = new THREE.Points(geometry, aOS_PointStyles.aOS_LightGreen);
+      point = new THREE.Points(geometry, aOS_PointStyles.white);
       point.name = i + "," + z;
       openPlanGridPts.push(point);
       scene.getObjectByName("vacantPts").add(point);

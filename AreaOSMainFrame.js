@@ -1168,7 +1168,7 @@ function getAvailableMatrixNeighbors(pointCoordinates){//!need to update to be a
 }
 
 function newCrawler(pt,steps = 220){
-  // dropPtLight(pt,"blue");
+  dropPtLight(pt,0x26D8A5);
   dropCircle(pt.geometry.vertices[0]);
   pastPt = pt;
   vacantPts = scene.getObjectByName("vacantPts");
@@ -1204,6 +1204,8 @@ function newCrawler(pt,steps = 220){
         // console.log(camera.position);
         // dropPtLight(newPt);
 
+        // console.log(document.querySelector('canvas').toDataURL()); //output frames
+
         setTimeout(animateCrawl,1);
       }else{
         dropPtLight(pastPt,"red");
@@ -1223,7 +1225,7 @@ function newCrawler(pt,steps = 220){
 // setTimeout( function (){
   setTimeout(
     function (){
-      newCrawler(scene.getObjectByName("16,29"));
+      newCrawler(scene.getObjectByName("18,30"));
     },1);
 
   // setTimeout(
