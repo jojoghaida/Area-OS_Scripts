@@ -72,6 +72,7 @@ var aOS_PointStyles = {
   yellow: new THREE.PointsMaterial({color: "yellow"}),
   green: new THREE.PointsMaterial({color: "green"}),
   aOS_LightGreen: new THREE.PointsMaterial({color: 0x7ce7c9, size: 1}),
+  aOS_DarkGrey: new THREE.PointsMaterial({color: 0x3e444c, size: 1}),
 };
 
 

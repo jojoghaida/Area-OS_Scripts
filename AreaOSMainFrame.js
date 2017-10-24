@@ -911,12 +911,13 @@ function extrudeStraightLine( crv, depth=10 ) {
 // 	bevelSegments: 1
 // };
 
-var testDivideCrv = twoPtCurve(new THREE.Vector3(15,0,0),new THREE.Vector3(30,0,0));
-divideCrv(testDivideCrv);
-forBlocker = testDivideCrv.clone();
-forBlocker.position.y = -.1;
-var blocker = extrudeStraightLine(forBlocker,15);
-
+//extrusion example\\
+// var testDivideCrv = twoPtCurve(new THREE.Vector3(15,0,0),new THREE.Vector3(30,0,0));
+// divideCrv(testDivideCrv);
+// forBlocker = testDivideCrv.clone();
+// forBlocker.position.y = -.1;
+// var blocker = extrudeStraightLine(forBlocker,15);
+//extrusion example\\
 
 // function dropSpotLight(){
 //   var sL = new THREE.SpotLight( 0xffffff );
@@ -966,114 +967,6 @@ function fieldVectorizer(){
   crv = twoPtCurve(a.geometry.vertices[0],b.geometry.vertices[0]);
   crv = twoPtCurve(b.geometry.vertices[0],c.geometry.vertices[0]);
 }
-// setTimeout(fieldVectorizer,1000);
-
-function crawler(initPt, color = "blue"){
-  var occupiedPts = [];
-
-  dropPtLight(initPt,color);
-
-  pointCoordinates = [];
-  store = null;
-  unit2Bool = false;
-
-  for(i = 0; i < initPt.name.length; i++){
-    alphabet = initPt.name[i];
-    if(i == 0){
-      store = alphabet;
-    }else if (alphabet != ",") {
-
-      if(store != null){
-        store += alphabet;
-      }else{
-        store = alphabet;
-      }
-    }
-    if(alphabet == ","){
-      pointCoordinates.push(store);
-      store = null;
-    }
-    if(i == initPt.name.length - 1){
-      pointCoordinates.push(store);
-      store = null;
-    }
-  }
-
-  occupiedPts.push(pointCoordinates[0] + "," + pointCoordinates[1]);
-
-  a = Number(pointCoordinates[0]);
-  b = Number(pointCoordinates[1]);
-
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-  }
-
-  var stepPt = [a,b];
-  var steps = 10;
-  var stepInc = 0;
-
-  function actionCrawler(ss,si){
-    if(si < ss){
-
-      console.log("checking");
-      nA = getRandomInt(stepPt[0] - 1, stepPt[0] + 2);
-      nB = getRandomInt(stepPt[1] - 1, stepPt[1] + 2);
-
-      // caught = true;
-      //
-      // function checker(){
-      //   console.log("nA/nB =", nA + "/" + nB);
-      //   for(i = 0; i < occupiedPts.length; i++){
-      //     console.log(i);
-      //     if(occupiedPts[i] != nA + "," + nB){
-      //       console.log(occupiedPts);
-      //       break;
-      //     }else{
-      //       caught = false;
-      //       console.log("match", nA + "," + nB);
-      //
-      //     }
-      //   }
-      //   if(caught == true){
-      //     occupiedPts.push(nA + "," + nB);
-      //   }else{
-      //     nA = getRandomInt(stepPt[0] - 1, stepPt[0] + 2);
-      //     nB = getRandomInt(stepPt[1] - 1, stepPt[1] + 2);
-      //     checker();
-      //   }
-      // }
-      // checker();
-
-
-      drawCrvA = scene.getObjectByName(stepPt[0]+","+stepPt[1]).geometry.vertices[0];
-      n = scene.getObjectByName("vacantPts").getObjectByName(nA + "," + nB);
-      console.log(n);
-
-      if(n == undefined){console.log("n was undefined");}else{
-        stepPt = [nA,nB];
-
-        console.log("this is",n);
-        scene.getObjectByName("vacantPts").remove(n);
-        drawCrvB = n.geometry.vertices[0];
-        twoPtCurve(drawCrvA,drawCrvB);
-        // dropPtLight(n);
-        console.log(vacantPts.children.length);
-        si++
-      }
-      setTimeout(function(){actionCrawler(ss,si)},100);
-    }
-  }
-  actionCrawler(steps,stepInc);
-  }
-
-
-
-// setTimeout(
-//   function (){
-//     crawler(scene.getObjectByName("13,25"));
-//   },3000);
 
 function translator(pt){
 
@@ -1157,6 +1050,7 @@ function getAvailableMatrixNeighbors(pointCoordinates){//!need to update to be a
   }
   console.log(adjacentPts);
   adjacentPts = [adjacentPts[1],adjacentPts[2],adjacentPts[4],adjacentPts[7],adjacentPts[6],adjacentPts[5],adjacentPts[3],adjacentPts[0]];
+
   availableAdjacents = [];
   vacantPts = scene.getObjectByName("vacantPts");
   for(u = 0; u < adjacentPts.length; u++){
@@ -1166,10 +1060,16 @@ function getAvailableMatrixNeighbors(pointCoordinates){//!need to update to be a
       availableAdjacents.push(find);
     }else{availableAdjacents.push(null);}
   }
+  //fix diagonals
+  // if(availableAdjacents[0]==null){availableAdjacents[7] =null; availableAdjacents[1] = null;}
+  // if(availableAdjacents[2]==null){availableAdjacents[1] =null; availableAdjacents[3] = null;}
+  // if(availableAdjacents[4]==null){availableAdjacents[3] =null; availableAdjacents[5] = null;}
+  // if(availableAdjacents[6]==null){availableAdjacents[5] =null; availableAdjacents[7] = null;}
+  //fix diagonals\\
   return(availableAdjacents);
 }
 
-function newCrawler(pt,steps = 220){
+function newCrawler(pt, steps = 220, init_Dir = 0){
   dropPtLight(pt,0x26D8A5);
   dropCircle(pt.geometry.vertices[0]);
   pastPt = pt;
@@ -1177,17 +1077,30 @@ function newCrawler(pt,steps = 220){
   occupiedPts = scene.getObjectByName("occupiedPts");
   stepNum = 0;
 
+  var matrixDirection = init_Dir;//<<<fix
   function animateCrawl(){
     if(stepNum < steps){
       stepNum++
-      // console.log("step #",z);
       crvVert1 = pastPt.geometry.vertices[0].clone();
       ptCoord = translator(pastPt);
       availableMatrixNeighbors = getAvailableMatrixNeighbors(ptCoord);
-      matrixDirection = 7;
+      matrixDirection2 = [matrixDirection-2,matrixDirection-1,matrixDirection+1,matrixDirection+2];
+      if(matrixDirection2[0]==-2){matrixDirection2[1]=6}
+      if(matrixDirection2[1]==-1){matrixDirection2[1]=7}
+      if(matrixDirection2[2]==8){matrixDirection2[2]=0}
+      if(matrixDirection2[3]==9){matrixDirection2[2]=1}
+      console.log(matrixDirection2);
       if(availableMatrixNeighbors[matrixDirection] != null){
         newPt = availableMatrixNeighbors[matrixDirection];
-      }else{newPt = availableMatrixNeighbors[0];}
+      }else{
+        for(i = 0; i < matrixDirection2.length; i++){
+          newPt = availableMatrixNeighbors[matrixDirection2[i]];
+          if(newPt != null){
+            matrixDirection = matrixDirection2[i]
+            break
+          }
+        }
+      }
       // newPt = findRandomnAdjacentMatrix(ptCoord);
       // console.log("newPt = ",newPt);
       if(newPt!= undefined){
@@ -1224,39 +1137,31 @@ function newCrawler(pt,steps = 220){
 }
 ///////////////////////////////////////////////////////////////////////
 
-// setTimeout( function (){
   setTimeout(
     function (){
-      newCrawler(scene.getObjectByName("18,30"));
+      newCrawler(scene.getObjectByName("18,5"),50,1);
     },1);
 
-  // setTimeout(
-  //   function (){
-  //     newCrawler(scene.getObjectByName("6,15"));
-  //   },8000);
-  //
-  // setTimeout(
-  //   function (){
-  //     newCrawler(scene.getObjectByName("0,0"));
-  //   },10000);
-  //
-  // setTimeout(
-  //   function (){
-  //     newCrawler(scene.getObjectByName("23,30"));
-  //   },13000);
-  // }
+  setTimeout(
+    function (){
+      newCrawler(scene.getObjectByName("15,2"));
+    },4000);
 
-// ,1);
+  setTimeout(
+    function (){
+      newCrawler(scene.getObjectByName("18,10"));
+    },6000);
 
-
-// setTimeout(
-//   function (){
-//     crawler(scene.getObjectByName("9,0"));
-//   },5000);
-//
-// setTimeout(
-//   function (){
-//     crawler(scene.getObjectByName("0,15"));
-//   },7000);
-
+    //delete
+    // test = twoPtCurve(new THREE.Vector3(0,0,0),new THREE.Vector3(0,0,10));
+    // setTimeout(
+    //   function(){
+    //     test.geometry.vertices.push(new THREE.Vector3(5,0,0));
+    //     test.geometry.verticesNeedUpdate = true;
+    //     test.geometry.computeBoundingSphere();
+    //     renderer.render(scene,camera);
+    //
+    //   }
+    //   ,3000);
+    //delete
 //RHIZOME POPULATER//////////////////////////////////////////////////////////////

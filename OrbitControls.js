@@ -471,7 +471,8 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 				break;
 
 			case 2:	// two-fingered touch: dolly
-				if ( scope.noZoom === true ) {
+				if ( scope.noZoom === true ) {//return; /*<<original*/
+					///////////////////////////////////////////////////joe
 					state = STATE.TOUCH_DOLLY;
 
 					var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
@@ -497,6 +498,7 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 				var distance = Math.sqrt( dx * dx + dy * dy );
 				dollyStart.set( 0, distance );
 				break;
+				///////////////////////////////////////////////////joe
 
 			case 3: // three-fingered touch: pan
 				if ( scope.noPan === true ) { return; }
