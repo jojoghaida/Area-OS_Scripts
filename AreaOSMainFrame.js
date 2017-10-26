@@ -1077,6 +1077,10 @@ function newCrawler(pt, steps = 220, init_Dir = 0){
   occupiedPts = scene.getObjectByName("occupiedPts");
   stepNum = 0;
 
+  crvSegments = [];
+  crvOcPts = [];
+  vecHist = [];
+
   var matrixDirection = init_Dir;//<<<fix
   function animateCrawl(){
     if(stepNum < steps){
@@ -1092,6 +1096,7 @@ function newCrawler(pt, steps = 220, init_Dir = 0){
       console.log(matrixDirection2);
       if(availableMatrixNeighbors[matrixDirection] != null){
         newPt = availableMatrixNeighbors[matrixDirection];
+
       }else{
         for(i = 0; i < matrixDirection2.length; i++){
           newPt = availableMatrixNeighbors[matrixDirection2[i]];
@@ -1105,7 +1110,24 @@ function newCrawler(pt, steps = 220, init_Dir = 0){
       // console.log("newPt = ",newPt);
       if(newPt!= undefined){
         crvVert2 = newPt.geometry.vertices[0].clone();
-        twoPtCurve(crvVert1.clone(),crvVert2.clone(),null,new THREE.LineBasicMaterial({color: 0x26D8A5}));
+        if(stepNum == 1){
+          crvSegments.push(twoPtCurve(crvVert1.clone(),crvVert2.clone(),null,new THREE.LineBasicMaterial({color: 0x26D8A5})));
+          vecHist.push(matrixDirection);
+          console.log(vecHist);
+
+        }else{
+          if(matrixDirection != vecHist[vecHist.length-1]){
+            console.log("HEY");
+            vecHist.push(matrixDirection);//now make new crv!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            crvSegments.push(twoPtCurve(crvVert1.clone(),crvVert2.clone(),null,new THREE.LineBasicMaterial({color: 0x26D8A5})));
+            dropPtLight(pastPt);
+
+          }
+          crvSegments[crvSegments.length-1].geometry.vertices[1].copy(crvVert2);
+          crvSegments[crvSegments.length-1].geometry.verticesNeedUpdate = true;
+          crvSegments[crvSegments.length-1].geometry.computeBoundingSphere();
+          renderer.render(scene,camera);
+        }
         pastPt.material = aOS_PointStyles.aOS_LightGreen;
         occupiedPts.add(pastPt);
         vacantPts.remove(pastPt);
@@ -1121,7 +1143,7 @@ function newCrawler(pt, steps = 220, init_Dir = 0){
 
         // console.log(document.querySelector('canvas').toDataURL()); //output frames
 
-        setTimeout(animateCrawl,1);
+        setTimeout(animateCrawl,100);
       }else{
         dropPtLight(pastPt,"red");
         renderer.render(scene,camera);
@@ -1139,18 +1161,18 @@ function newCrawler(pt, steps = 220, init_Dir = 0){
 
   setTimeout(
     function (){
-      newCrawler(scene.getObjectByName("18,5"),50,1);
+      newCrawler(scene.getObjectByName("18,5"),45,1);
     },1);
 
-  setTimeout(
-    function (){
-      newCrawler(scene.getObjectByName("15,2"));
-    },4000);
-
-  setTimeout(
-    function (){
-      newCrawler(scene.getObjectByName("18,10"));
-    },6000);
+  // setTimeout(
+  //   function (){
+  //     newCrawler(scene.getObjectByName("15,2"));
+  //   },4000);
+  //
+  // setTimeout(
+  //   function (){
+  //     newCrawler(scene.getObjectByName("18,10"));
+  //   },6000);
 
     //delete
     // test = twoPtCurve(new THREE.Vector3(0,0,0),new THREE.Vector3(0,0,10));
