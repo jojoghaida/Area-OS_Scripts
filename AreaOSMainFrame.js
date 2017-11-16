@@ -36,7 +36,7 @@ w = viewport.offsetWidth;
 var aspect = window.innerWidth / window.innerHeight;
 
 scene = new THREE.Scene();
-scene.background = new THREE.Color(0xbababa); //0x0851a4
+scene.background = new THREE.Color(0xf0f0f0); //0x0851a4
 
 // camera = new THREE.PerspectiveCamera( 55, w/h, 0.1, 10000 );
 camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, -5000, 5000 );
