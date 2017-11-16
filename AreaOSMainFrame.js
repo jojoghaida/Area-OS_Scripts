@@ -1132,6 +1132,10 @@ function newCrawler(pt, steps = 220, init_Dir = 0){
         occupiedPts.add(pastPt);
         vacantPts.remove(pastPt);
         pastPt = newPt;
+        console.log(getCrvLength(crvSegments[crvSegments.length-1]).toFixed(2));
+        if(getCrvLength(crvSegments[crvSegments.length-1]).toFixed(2)/2 % 1 == 0){
+          console.log("!!!!");
+        }
 
         // camera.position.x = Number(pastPt.geometry.vertices[0].x);
         // camera.position.y = 350;
