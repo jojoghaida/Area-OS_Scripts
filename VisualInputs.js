@@ -99,7 +99,6 @@ var swipeUpGlyph = two.makeStar(sW-40,15,5,null,3);
 // swipeUpGlyph.rotation = Math.PI;
 swipeUpGlyph.noStroke();
 swipeUpGlyph.fill = colorStyle;
-swipeUpGlyph.rotation = 3.14159;
 
 var swipeUpTxt = two.makeText('submit',sW-40,30);
 swipeUpTxt.fill = colorStyle;
