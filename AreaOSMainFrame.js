@@ -244,7 +244,7 @@ panningMode = function(){
 panningMode();
 
 zoomButtons = function(){
-  var zoomSpeedVariable = 4;
+  var zoomSpeedVariable = 6;
   var zoomFactor = 0;
   var zoomingInterval = null;
   var zMinusEffet = document.getElementById('ZminusEffect');
