@@ -170,7 +170,8 @@ function handleTouchMove(evt) {
             two.update();
             if(yDiff>submitThreshold){ //submitThreshold<<
               clrStop1.offset = 0;
-              Haptics.vibrate(200);
+              // Haptics.vibrate(200);
+              window.navigator.vibrate(200);
               removeInputListeners();
               sendInput = setInterval(submital,10);
             }
