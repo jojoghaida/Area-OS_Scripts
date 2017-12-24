@@ -96,7 +96,7 @@ var inputSliderGroup = two.makeGroup(tickerGroup);
 // submit styles
 var submitThreshold = 200;
 var swipeUpGlyph = two.makeStar(sW-40,15,5,null,3);
-swipeUpGlyph.rotation = Math.PI;
+// swipeUpGlyph.rotation = Math.PI;
 swipeUpGlyph.noStroke();
 swipeUpGlyph.fill = colorStyle;
 swipeUpGlyph.rotation = 3.14159;
