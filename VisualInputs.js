@@ -65,7 +65,7 @@ selectorText.size = 18;
 selectorText.family = 'Karla';
 selectorText.value = 0;
 
-var selectorGlyph = two.makeStar(5*tickSpan,leftWhiteSpace,10,null,3);
+var selectorGlyph = two.makeStar(5*tickSpan,leftWhiteSpace,-10,null,3);
 selectorGlyph.noStroke();
 selectorGlyph.fill = colorStyle;
 
