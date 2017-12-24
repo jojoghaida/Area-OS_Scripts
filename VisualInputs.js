@@ -65,7 +65,8 @@ selectorText.size = 18;
 selectorText.family = 'Karla';
 selectorText.value = 0;
 
-var selectorGlyph = two.makeStar(5*tickSpan,leftWhiteSpace,-10,null,3);
+var selectorGlyph = two.makeStar(5*tickSpan,leftWhiteSpace,10,null,3);
+selectorGlyph.rotation = Math.PI;
 selectorGlyph.noStroke();
 selectorGlyph.fill = colorStyle;
 
@@ -95,6 +96,7 @@ var inputSliderGroup = two.makeGroup(tickerGroup);
 // submit styles
 var submitThreshold = 200;
 var swipeUpGlyph = two.makeStar(sW-40,15,5,null,3);
+swipeUpGlyph.rotation = Math.PI;
 swipeUpGlyph.noStroke();
 swipeUpGlyph.fill = colorStyle;
 swipeUpGlyph.rotation = 3.14159;
