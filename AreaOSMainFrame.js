@@ -1165,7 +1165,7 @@ function newCrawler(pt, steps = 220, init_Dir = 0){
 
   setTimeout(
     function (){
-      newCrawler(scene.getObjectByName("18,15"),350,1);
+      newCrawler(scene.getObjectByName("18,25"),350,0);
     },1);
 
   // setTimeout(
