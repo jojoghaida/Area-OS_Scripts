@@ -46,7 +46,7 @@ function removeInputListeners(){
 
 
 // slider styles
-var colorStyle = "blue";
+var colorStyle = aOS_ColorStyles.aOS_OSblue;
 var tickQuan = 150;
 var bigTick = 5;
 var tickSpan = 10;

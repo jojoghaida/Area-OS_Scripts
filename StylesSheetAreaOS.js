@@ -1,5 +1,7 @@
 //Area OS Styles Sheet
-
+var aOS_ColorStyles = {
+  aOS_OSblue: "#0851a4",
+};
 //line Styles
 var aOS_LineStyles = {
 
