@@ -1118,7 +1118,7 @@ function newCrawler(pt, steps = 220, init_Dir = 0){
           console.log(vecHist);
 
         }else{
-          dropPtLight(pastPt);
+          // dropPtLight(pastPt);
 
           if(matrixDirection != vecHist[vecHist.length-1]){
             console.log("HEY");
