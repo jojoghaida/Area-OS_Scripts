@@ -66,16 +66,16 @@ window.addEventListener( 'resize', onWindowResize, false );
 window.addEventListener("orientationchange", onWindowResize);
 }
 
-function onWindowResize() {
-  aspect = window.innerWidth / window.innerHeight;
-	camera.left   = - frustumSize * aspect / 2;
-	camera.right  =   frustumSize * aspect / 2;
-	camera.top    =   frustumSize / 2;
-	camera.bottom = - frustumSize / 2;
-	camera.updateProjectionMatrix();
-	renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.render(scene,camera);
-}
+// function onWindowResize() {
+//   aspect = window.innerWidth / window.innerHeight;
+// 	camera.left   = - frustumSize * aspect / 2;
+// 	camera.right  =   frustumSize * aspect / 2;
+// 	camera.top    =   frustumSize / 2;
+// 	camera.bottom = - frustumSize / 2;
+// 	camera.updateProjectionMatrix();
+// 	renderer.setSize(window.innerWidth, window.innerHeight);
+//   renderer.render(scene,camera);
+// }
 
 function onWindowRotate() {
   function rotateView(){
