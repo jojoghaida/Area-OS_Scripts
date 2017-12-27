@@ -77,15 +77,19 @@ function onWindowResize() {
   renderer.render(scene,camera);
 }
 
-// function onWindowRotate() {
-//   function rotateView(){
-//     camera.aspect = window.innerWidth / window.innerHeight;
-//     camera.updateProjectionMatrix();
-//     renderer.setSize( window.innerWidth, window.innerHeight );
-//     render();
-//   }
-//   setTimeout(rotateView, 300);
-// }
+function onWindowRotate() {
+  function rotateView(){
+    aspect = window.innerWidth / window.innerHeight;
+  	camera.left   = - frustumSize * aspect / 2;
+  	camera.right  =   frustumSize * aspect / 2;
+  	camera.top    =   frustumSize / 2;
+  	camera.bottom = - frustumSize / 2;
+  	camera.updateProjectionMatrix();
+  	renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.render(scene,camera);
+  }
+  setTimeout(rotateView, 300);
+}
 
 function render(){
   renderer.render(scene,camera);
@@ -634,7 +638,7 @@ if(areaSQ<requestedSQ){
       }/*first addition end*/else{//second curve addition
         extendCrv(inputSecondaryCrv,secondaryConCrvsGrothInterval,getCrvVector(inputSecondaryCrv));// may have to change set up here so that max length is checked before extending curve
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 /*<<<spacing tempo*/ % 1 == 0){
-          
+
           // dropPtLight2(inputSecondaryCrv.geometry.vertices[1].clone()); //dicks
 
           furnitureGroup.push(dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv)));
