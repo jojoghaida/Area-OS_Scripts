@@ -62,20 +62,20 @@ camera.position.z = 0;
 
 scene.add(camera); //!!!!!<<<<<<<<<<<<<<<<<<<<<<<<<<
 camera.lookAt(new THREE.Vector3(0,0,0));
-// window.addEventListener( 'resize', onWindowResize, false );
+window.addEventListener( 'resize', onWindowResize, false );
 window.addEventListener("orientationchange", onWindowRotate);
 }
 
-// function onWindowResize() {
-//   aspect = window.innerWidth / window.innerHeight;
-// 	camera.left   = - frustumSize * aspect / 2;
-// 	camera.right  =   frustumSize * aspect / 2;
-// 	camera.top    =   frustumSize / 2;
-// 	camera.bottom = - frustumSize / 2;
-// 	camera.updateProjectionMatrix();
-// 	renderer.setSize(window.innerWidth, window.innerHeight);
-//   renderer.render(scene,camera);
-// }
+function onWindowResize() {
+  aspect = window.innerWidth / window.innerHeight;
+	camera.left   = - frustumSize * aspect / 2;
+	camera.right  =   frustumSize * aspect / 2;
+	camera.top    =   frustumSize / 2;
+	camera.bottom = - frustumSize / 2;
+	camera.updateProjectionMatrix();
+	renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.render(scene,camera);
+}
 
 function onWindowRotate() {
   function rotateView(){
@@ -88,7 +88,7 @@ function onWindowRotate() {
   	renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.render(scene,camera);
   }
-  setTimeout(rotateView, 300);
+  setTimeout(rotateView, 0);
 }
 
 function render(){
