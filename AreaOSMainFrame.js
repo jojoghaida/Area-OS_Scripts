@@ -634,7 +634,8 @@ if(areaSQ<requestedSQ){
       }/*first addition end*/else{//second curve addition
         extendCrv(inputSecondaryCrv,secondaryConCrvsGrothInterval,getCrvVector(inputSecondaryCrv));// may have to change set up here so that max length is checked before extending curve
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 /*<<<spacing tempo*/ % 1 == 0){
-          dropPtLight2(inputSecondaryCrv.geometry.vertices[1].clone()); //dicks
+          
+          // dropPtLight2(inputSecondaryCrv.geometry.vertices[1].clone()); //dicks
 
           furnitureGroup.push(dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv)));
         }
@@ -845,11 +846,11 @@ function dropPtLight2(point){
   lightLocation = point;
   lightLocation.y = .25;
   light1.position.set(lightLocation.x,lightLocation.y,lightLocation.z);
-  light1.castShadow = true; // shadows!
-  light1.shadow.mapSize.width = 500000;  // default
-  light1.shadow.mapSize.height = 500000; // default
-  light1.shadow.camera.near = 0.5;       // default
-  light1.shadow.camera.far = 50000;
+  // light1.castShadow = true; // shadows!
+  // light1.shadow.mapSize.width = 500000;  // default
+  // light1.shadow.mapSize.height = 500000; // default
+  // light1.shadow.camera.near = 0.5;       // default
+  // light1.shadow.camera.far = 50000;
   // light1.shadowDarkness = .5; // shadows!
   // light1.shadowCameraVisible = true; // shadows!
   // light1.camera;
