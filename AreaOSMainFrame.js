@@ -62,8 +62,8 @@ camera.position.z = 0;
 
 scene.add(camera); //!!!!!<<<<<<<<<<<<<<<<<<<<<<<<<<
 camera.lookAt(new THREE.Vector3(0,0,0));
-window.addEventListener( 'resize', onWindowResize, false );
-window.addEventListener("orientationchange", onWindowResize);
+// window.addEventListener( 'resize', onWindowResize, false );
+window.addEventListener("orientationchange", onWindowRotate);
 }
 
 // function onWindowResize() {
@@ -88,7 +88,7 @@ function onWindowRotate() {
   	renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.render(scene,camera);
   }
-  setTimeout(rotateView, 1000);
+  setTimeout(rotateView, 300);
 }
 
 function render(){
