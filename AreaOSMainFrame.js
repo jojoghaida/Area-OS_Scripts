@@ -5,7 +5,6 @@
 
 
 
-//RHIZOME POPULATER//////////////////////////////////////////////////////////////
 // Raycaster
 function mouseCasting(){
 mouseRay = new THREE.Raycaster();
@@ -80,27 +79,10 @@ if(areaSQ<requestedSQ){
   occupy = false;
 }
 }
-// SQstuff
-
-// function spaceNavigator(){ //!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-  //variables
-  var mainAxis = new THREE.Vector3();
-  var mainAxisCrv = new THREE.Line();
-  var baseCrvOffsetVec = new THREE.Vector3();
 
   //functions
     //baseCrv
-  function twoPtCurve(vec1,vec2,_group = null,_style = aOS_LineStyles.thin.aOS_LightGreen){
-    geometry = new THREE.Geometry();
-    geometry.vertices.push(vec1,vec2);
-    lineObject = new THREE.Line(geometry,_style);
-    scene.add(lineObject);
-    renderer.render(scene,camera);
-    if(_group) {_group.add(lineObject);}
 
-    return(lineObject);
-  }
   //
   function getCrvVector(crv){
     direction = new THREE.Vector3();
@@ -133,12 +115,6 @@ if(areaSQ<requestedSQ){
     crv.geometry.vertices[1].copy(newExtedPt);
     crv.geometry.verticesNeedUpdate = true;
     crv.geometry.computeBoundingSphere();
-    //!!!!!!!!!!!
-    // camera.position.set(newExtedPt.toArray());
-    // controls.target.set(newExtedPt.toArray());
-    // camera.position.y = 45;
-    // controls.update();
-    //!!!!!!!!!!!
     renderer.render(scene,camera);
     return(crv);
   }
@@ -217,19 +193,7 @@ if(areaSQ<requestedSQ){
       return(triangle);
     }
 
-    ///anots
 
-    //furnitureFunctions
-  function dropChairs(point,direction){
-    newChair = new THREE.Mesh();
-    newChair = chairMesh.clone();
-    chairFacing = new THREE.Vector3(1,0,0);
-    newChair.rotation.y = chairFacing.angleTo(direction)*-1;
-    newChair.position.copy(point);
-    scene.add(newChair);
-    renderer.render(scene,camera);
-    return(newChair);
-  }
     //furnitureFunctions
 
     // test2
