@@ -91,6 +91,51 @@ function cleanVector(v){
   return(v);
 }
 
+function divideCrv(crv,divisions = 10){
+
+  pointList = [];
+  direction = getCrvVector(crv);
+  distance = getCrvLength(crv);
+  for(i=0; i < divisions; i++){
+    point = crv.geometry.vertices[0].clone();
+    if(i==0){check = point.clone()}else{
+      check = pushPointDirection(point.clone(),direction,(distance/divisions)*i);
+    }
+    pointList.push(new THREE.Vector3());
+    pointList[i].set(check.x,check.y,check.z);
+    dropPoints(pointList[i]);
+  }
+  for(i=0; i < pointList.length; i++){
+    move = pushPointDirection(pointList[i],getOffsetDirection(crv));
+    // dropPtLight2(move);
+  }
+  return(pointList);
+
+}
+
+function extrudeStraightLine( crv, depth=10 ) {
+  var geometry = new THREE.Geometry();
+  var vertices = crv.geometry.vertices;
+
+  for (i = 0; i < vertices.length; i++) {
+    a = vertices[i].clone();
+    geometry.vertices.push(a);
+    b = a.clone();
+    b.y = depth;
+    geometry.vertices.push(b);
+    geometry.faces.push(new THREE.Face3(i, i+1, i+2));
+  }
+  geometry.verticesNeedUpdate;
+  geometry.computeFaceNormals;
+  material = new THREE.MeshLambertMaterial({color: "red", emissive: "red", side: THREE.DoubleSide});
+  mesh = new THREE.Mesh(geometry, material);
+  mesh.castShadow = true; // shadows!
+  // mesh.position.z = -2; // shadows!
+  // mesh.position.y = -.1; // shadows!
+
+  scene.add(mesh);
+  return geometry;
+}
 
 //Matrix Functions
 
@@ -109,3 +154,87 @@ function dropChairs(point,direction){
 }
 
 ///Annotations
+
+function dropCircle(point,radius = 1,_group,_style){
+  var geometry = new THREE.CircleGeometry( radius, 32 );
+  var material = new THREE.MeshBasicMaterial( { color: 0x26D8A5/*0x7ce7c9*/ } );
+  var circle = new THREE.Mesh( geometry, material );
+  circle.position.copy(point);
+  circle.rotation.x = -Math.PI/2
+  scene.add( circle );
+  renderer.render(scene,camera);
+  }
+
+function dropTriangle(a,b,c){
+  var geometry = new THREE.Geometry();
+  // a = new THREE.Vector3(30,0,30);
+  // b = new THREE.Vector3(30,0,0);
+  // c = new THREE.Vector3(0,0,0);
+  geometry.vertices.push(c);
+  geometry.vertices.push(b);
+  geometry.vertices.push(a);
+
+  geometry.faces.push(new THREE.Face3(2,1,0));
+  geometry.computeFaceNormals();
+  var material = new THREE.MeshBasicMaterial({color: 0x26D8A5});
+  var triangle = new THREE.Mesh(geometry, material);
+  scene.add(triangle);
+  renderer.render(scene,camera);
+  return(triangle);
+}
+function dropPoints(coord,color = "red"){
+  geometry = new THREE.Geometry();
+  geometry.vertices.push(coord);
+  material = new THREE.PointsMaterial({color: color});
+  point = new THREE.Points(geometry, material);
+  // points.size(.5);
+  scene.add(point);
+  renderer.render(scene,camera);
+  return(point);
+}
+
+
+function dropText(text,pos,font = fontKarla_Reg,just=0,size=1){
+  var geometry = new THREE.TextGeometry( text, {font: font, size: size, height: 0, curveSegments: 30, bevelEnabled: false, bevelThickness: 10, bevelSize: 8, bevelSegments: 5});
+  var material = new THREE.MeshBasicMaterial({color: "white"});
+  var text = new THREE.Mesh(geometry, material);
+  textObject = new THREE.Object3D();
+  textObject.add(text);
+  scene.add(textObject);
+  // textObject.center();
+  // textObject.position.x = pos[0];
+  // textObject.position.y = pos[1];
+  // textObject.position.z = pos[2];
+  textObject.position.set(pos.x,pos.y,pos.z);
+
+  textObject.rotation.x = -Math.PI/2;
+  renderer.render(scene,camera);
+  return(textObject);
+
+}
+
+function dropPtLight(point, color = 0x26D8A5){
+  light1 = new THREE.PointLight(color, .7, 10000);
+  lightLocation = point.geometry.vertices[0].clone();
+  lightLocation.y = 1;
+  light1.position.set(lightLocation.x,lightLocation.y,lightLocation.z);
+  scene.add(light1);
+}
+
+function dropPtLight2(point){
+  light1 = new THREE.PointLight(0x0092ff, .2, 10000);
+  lightLocation = point;
+  lightLocation.y = .25;
+  light1.position.set(lightLocation.x,lightLocation.y,lightLocation.z);
+  // light1.castShadow = true; // shadows!
+  // light1.shadow.mapSize.width = 500000;  // default
+  // light1.shadow.mapSize.height = 500000; // default
+  // light1.shadow.camera.near = 0.5;       // default
+  // light1.shadow.camera.far = 50000;
+  // light1.shadowDarkness = .5; // shadows!
+  // light1.shadowCameraVisible = true; // shadows!
+  // light1.camera;
+  // var helper = new THREE.CameraHelper( light1.shadow.camera ); // shadows!
+  // scene.add( helper ); // shadows!
+  scene.add(light1);
+}
