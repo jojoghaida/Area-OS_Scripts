@@ -1031,33 +1031,8 @@ function newCrawler(pt, steps = 220, init_Dir = 0){
   }
   animateCrawl();
 }
-///////////////////////////////////////////////////////////////////////
 
   setTimeout(
     function (){
       newCrawler(scene.getObjectByName("18,0"),450,0);
-    },.1);
-
-  // setTimeout(
-  //   function (){
-  //     newCrawler(scene.getObjectByName("15,2"));
-  //   },4000);
-  //
-  // setTimeout(
-  //   function (){
-  //     newCrawler(scene.getObjectByName("18,10"));
-  //   },6000);
-
-    //delete
-    // test = twoPtCurve(new THREE.Vector3(0,0,0),new THREE.Vector3(0,0,10));
-    // setTimeout(
-    //   function(){
-    //     test.geometry.vertices.push(new THREE.Vector3(5,0,0));
-    //     test.geometry.verticesNeedUpdate = true;
-    //     test.geometry.computeBoundingSphere();
-    //     renderer.render(scene,camera);
-    //
-    //   }
-    //   ,3000);
-    //delete
-//RHIZOME POPULATER//////////////////////////////////////////////////////////////
+    },1000);
