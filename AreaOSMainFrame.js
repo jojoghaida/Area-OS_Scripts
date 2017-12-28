@@ -613,6 +613,9 @@ if(areaSQ<requestedSQ){
   var logDrawF = true;
   var drawBool = false;
 
+  var cursorBool = 0;
+
+
   function drawElements(){ /*design to be looped live*/ //if(logDrawF==true){console.log("drawElements() is running. Request is =",selectorText.value);};
 
     drawBool = true;
@@ -690,109 +693,17 @@ if(areaSQ<requestedSQ){
   }
 
 
+  function liveCursor(point,boundingBox,colors){
+    currentCursor = scene.getObjectByName("cursor");
 
-  // function clearMyIntervals(){
-  //   //clear any existing intervals
-  //   if(editMainCrv != null){
-  //     clearInterval(editMainCrv);
-  //     editMainCrv = null;
-  //   }
-  //   if(editSecCrv != null){
-  //     clearInterval(editSecCrv);
-  //     editSecCrv = null;
-  //   }
-  // }
-  // function livePreview(furnitureElement,furnishRequest){
-  //   clearMyIntervals();
-  //   if(furnishRequest > furnitureGroup.children.length){
-  //     editMainCrv = setInterval(function(){
-  //       // extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
-  //       console.log(getCrvLength(inputMainCrv).toFixed(2));
-  //       if(Number(getCrvLength(inputMainCrv).toFixed(2))/4 /*<<<spacing tempo*/ % 1 == 0){
-  //         if(on2nd == false){
-  //           console.log("little crv drop");
-  //           /////
-  //           clearInterval(editMainCrv);
-  //           a = inputMainCrv.geometry.vertices[1].clone();
-  //           bD = getOffsetDirection(inputMainCrv);
-  //           b = pushPointDirection(a,bD,secondaryConCrvsGrothInterval);
-  //           inputSecondaryCrv = twoPtCurve(a,b);
-  //           dropTriangle(a.clone(),pushPointDirection(a,getCrvVector(inputMainCrv)),b.clone());
-  //           on2nd = true;//set bool to secondary crv
-  //           /////
-  //         }
-  //         editSecCrv = setInterval(function(){
-  //           if(furnishRequest > furnitureGroup.children.length){
-  //             if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))<15){
-  //               extendCrv(inputSecondaryCrv, inputMainCrvGrowthInterval, getCrvVector(inputSecondaryCrv));
-  //               if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 % 1 == 0){
-  //                 furnitureGroup.add(dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv)));
-  //               }
-  //             }else{
-  //               on2nd = false;
-  //               extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
-  //               livePreview(null,selectorText.value);
-  //             }
-  //           }else{clearMyIntervals()}
-  //         },1);
-  //       }else{
-  //         extendCrv(inputMainCrv,inputMainCrvGrowthInterval/*<fix*/,getCrvVector(inputMainCrv));
-  //       }
-  //     },1);
-  //     if(secondaryConCrvs.children.length == 0){
-  //       // extendCrv(inputMainCrv,inputMainCrvGrowthInterval,getCrvVector(inputMainCrv));
-  //     }
-  //   }
-  //   if(furnishRequest < furnitureGroup.children.length){
-  //     // editMainCrv = setInterval(function(){extendCrv(inputMainCrv,furnishRequest/*<fix*/,getCrvVector(inputMainCrv))},1);
-  //   }
-  // }
-
-
-
-  function newStepExt(crv,distance,increment = 0.5){
-    extLength = 1;
-    function loopExt(){
-      realCrvLength = getCrvLength(crv);
-      extLength+= increment;
-      if(realCrvLength >= distance){console.log("done!");}else{
-        extendCrv(crv,increment,getCrvVector(crv));
-        crv.geometry.computeBoundingSphere();
-        if(extLength/4 % 1 == 0){
-          p1 = crv.geometry.vertices[1].clone();
-          p2 = pushPointDirection(p1,getOffsetDirection(crv));
-          secondaryCrv = twoPtCurve(p1,p2.multiplyScalar(1));
-          dropTriangle(p1.clone(),pushPointDirection(p1,getCrvVector(crv)),p2.clone());
-          function inceptiveCrv(crv2,distance,increment2 = 1,passDistance){
-            realCrvLength2 = getCrvLength(crv2)
-            extLength2+=increment2 ;
-            if(realCrvLength2>=distance){
-              // callback
-              newStepExt(crv,passDistance,.5)
-            }else{
-            extendCrv(crv2,increment2,getCrvVector(crv2));
-            if(extLength2/2 % 1 == 0){
-              c = dropChairs(crv2.geometry.vertices[1],getCrvVector(crv));
-              // c.material.color.set("red");
-            }
-            setTimeout(function(){inceptiveCrv(crv2,distance,increment2,passDistance)},1);
-            }
-          }
-          var extLength2 = 0; // tracks the extension ammount while looping
-          inceptiveCrv(secondaryCrv,15,1,distance);
-        }else{setTimeout(loopExt,1);}
-      }
+    if(cursorBool == 1){
+      setTimeout(liveCursor,500);
     }
-    loopExt();
   }
-  // window.onload(newStepExt(newMainAxisCrv,80)); //!!!!!!!!
-
-  // setTimeout(function(){newStepExt(newMainAxisCrv,80)},2000);
 
 
-// test2
-// }
-// test 1
+
+
 function dropPoints(coord,color = "red"){
   geometry = new THREE.Geometry();
   geometry.vertices.push(coord);
@@ -803,14 +714,6 @@ function dropPoints(coord,color = "red"){
   renderer.render(scene,camera);
   return(point);
 }
-// a = dropPoints(new THREE.Vector3(-20,0,-10));
-// b = dropPoints(new THREE.Vector3(-20,0,0));
-// c = dropPoints(new THREE.Vector3(-10,0,0));
-// d = dropPoints(new THREE.Vector3(-10,0,-10));
-// e = dropPoints(new THREE.Vector3(-5,0,-5),"blue");
-// f = dropPoints(new THREE.Vector3(-15,0,-5),"green");
-//
-// checkPts = [a,b,c,d];
 
 
 function dropText(text,pos,font = fontKarla_Reg,just=0,size=1){
@@ -831,11 +734,7 @@ function dropText(text,pos,font = fontKarla_Reg,just=0,size=1){
   return(textObject);
 
 }
-// dropText();
 
-// setTimeout(function () {
-//   dropText("test!",[-20,0,-20],fontKarla_Reg);
-// }, 2000);
 
 function dropPtLight(point, color = 0x26D8A5){
   light1 = new THREE.PointLight(color, .7, 10000);
@@ -911,41 +810,7 @@ function extrudeStraightLine( crv, depth=10 ) {
   return geometry;
 }
 
-// var extrudeSettings = {
-// 	steps: 1,
-// 	amount: 16,
-// 	bevelEnabled: true,
-// 	bevelThickness: 1,
-// 	bevelSize: 1,
-// 	bevelSegments: 1
-// };
 
-//extrusion example\\
-// var testDivideCrv = twoPtCurve(new THREE.Vector3(15,0,0),new THREE.Vector3(30,0,0));
-// divideCrv(testDivideCrv);
-// forBlocker = testDivideCrv.clone();
-// forBlocker.position.y = -.1;
-// var blocker = extrudeStraightLine(forBlocker,15);
-//extrusion example\\
-
-// function dropSpotLight(){
-//   var sL = new THREE.SpotLight( 0xffffff );
-//   sL.position.set(0,35,-15);
-//   sL.castShadow = true;
-//   sL.shadow.mapSize.width = 1024;
-//   sL.shadow.mapSize.height = 1024;
-//
-//   sL.shadow.camera.near = 0;
-//   sL.shadow.camera.far = 500;
-//   sL.shadow.camera.fov = 50;
-//
-//   scene.add(sL);
-// }
-// dropSpotLight();
-
-
-
-// spaceNavigator(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function fieldVectorizer(){
 
   ptColor = new THREE.PointsMaterial({color: "white" /*, specular: "white",shininess: 0*/});
@@ -966,12 +831,6 @@ function fieldVectorizer(){
   dropPtLight(c);
 
   renderer.render(scene,camera);
-
-  // dL = new THREE.DirectionalLight(0x0851a4, .5, 1000);
-  // scene.add(dL);
-  // renderer.render(scene,camera);
-
-
 
   crv = twoPtCurve(a.geometry.vertices[0],b.geometry.vertices[0]);
   crv = twoPtCurve(b.geometry.vertices[0],c.geometry.vertices[0]);
