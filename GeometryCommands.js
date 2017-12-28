@@ -139,6 +139,129 @@ function extrudeStraightLine( crv, depth=10 ) {
 
 //Matrix Functions
 
+function findRandomnAdjacentMatrix(pointCoordinates){
+
+  vacantPts = scene.getObjectByName("vacantPts");
+
+  a = Number(pointCoordinates[0]);
+  b = Number(pointCoordinates[1]);
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+  }
+  for(i=0;i<8;i++){
+    // console.log("scan matrix",i);
+    nA = getRandomInt(a - 1, a + 2);
+    nB = getRandomInt(b - 1, b + 2);
+    point = vacantPts.getObjectByName(nA+","+nB);
+    // console.log(point);
+
+    if(point != undefined){
+      return(point);
+      break
+    }
+
+    if(i == 8){
+      return(undefined);
+      break
+    }
+  }
+  // return()
+}
+
+function getAvailableMatrixNeighbors(pointCoordinates){//!need to update to be aware of self intersections!
+  adjacentPts = [];
+  vacantPts = scene.getObjectByName("vacantPts");
+  row = Number(pointCoordinates[0]);
+  col = Number(pointCoordinates[1]);
+  console.log(pointCoordinates);
+  y = [row-1,row,row+1]; //adjacent rows
+  x = [col-1,col,col+1]; //adjacent columns
+  console.log(y,x);
+  for(l = 0; l < y.length; l ++){
+    for(b = 0; b < x.length; b++){
+      pushBool = 0;
+      if(y[l] != row){pushBool++}
+      if(x[b] != col){pushBool++}
+      if(pushBool != 0){adjacentPts.push([y[l],x[b]]);}
+    }
+  }
+  console.log(adjacentPts);
+  adjacentPts = [adjacentPts[1],adjacentPts[2],adjacentPts[4],adjacentPts[7],adjacentPts[6],adjacentPts[5],adjacentPts[3],adjacentPts[0]];
+  availableAdjacents = [];
+  vacantPts = scene.getObjectByName("vacantPts");
+  for(u = 0; u < adjacentPts.length; u++){
+    find = vacantPts.getObjectByName(adjacentPts[u][0]+","+adjacentPts[u][1])
+    if(find != undefined){
+      console.log(find);
+      availableAdjacents.push(find);
+    }else{availableAdjacents.push(null);}
+  }
+  //fix diagonals
+  // if(availableAdjacents[0]==null){availableAdjacents[7] =null; availableAdjacents[1] = null;}
+  // if(availableAdjacents[2]==null){availableAdjacents[1] =null; availableAdjacents[3] = null;}
+  // if(availableAdjacents[4]==null){availableAdjacents[3] =null; availableAdjacents[5] = null;}
+  // if(availableAdjacents[6]==null){availableAdjacents[5] =null; availableAdjacents[7] = null;}
+  //fix diagonals\\
+  return(availableAdjacents);
+}
+
+function fieldVectorizer(){
+
+  ptColor = new THREE.PointsMaterial({color: "white" /*, specular: "white",shininess: 0*/});
+  a = scene.getObjectByName("0,1");
+  b = scene.getObjectByName("3,8");
+  c = scene.getObjectByName("6,9");
+
+  a.material = ptColor;
+  b.material = ptColor;
+  c.material = ptColor;
+
+  dropCircle(a.geometry.vertices[0]);
+  dropCircle(b.geometry.vertices[0]);
+  dropCircle(c.geometry.vertices[0]);
+
+  dropPtLight(a);
+  dropPtLight(b);
+  dropPtLight(c);
+
+  renderer.render(scene,camera);
+
+  crv = twoPtCurve(a.geometry.vertices[0],b.geometry.vertices[0]);
+  crv = twoPtCurve(b.geometry.vertices[0],c.geometry.vertices[0]);
+}
+
+function translator(pt){
+
+  pointCoordinates = [];
+  store = null;
+
+  for(i = 0; i < pt.name.length; i++){
+    alphabet = pt.name[i];
+    if(i == 0){
+      store = alphabet;
+    }else if (alphabet != ",") {
+
+      if(store != null){
+        store += alphabet;
+      }else{
+        store = alphabet;
+      }
+    }
+    if(alphabet == ","){
+      pointCoordinates.push(store);
+      store = null;
+    }
+    if(i == pt.name.length - 1){
+      pointCoordinates.push(store);
+      store = null;
+    }
+  }
+  return(pointCoordinates);
+}
+
 //Item Functions
 
 ///Furnitures

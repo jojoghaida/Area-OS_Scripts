@@ -352,3 +352,27 @@ zoomButtons = function(){
 zoomButtons();
 
 //PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
+
+function mouseCasting(){
+  mouseRay = new THREE.Raycaster();
+  mouse = new THREE.Vector2();
+  // areaoscanvas.addEventListener( 'mousemove', onMouseMove, false );
+
+  // rayIconGeo = new THREE.Geometry();
+  // rayIconGeo.vertices.push(new THREE.Vector3(0,0,0),new THREE.Vector3(0,10,0))
+  // rayIcon = new THREE.Line(rayIconGeo,new THREE.LineBasicMaterial({color: "red"}));
+  // scene.add(rayIcon);
+  function onMouseMove(event){
+    mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+    mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+    mouseRay.setFromCamera(mouse,camera);
+    // rayCatch = mouseRay.intersectObjects(groupShapes.children);
+    if ( rayCatch.length > 0 ) {
+      // console.log(rayCatch[0].object.geometry.vertices[0]);
+      // rayIcon.position.set( 0, 0, 0 );
+      // rayIcon.lookAt( rayCatch[ 0 ].object.geometry.faces[0].normal);
+      // rayIcon.position.copy(new THREE.Vector3(0,0,0));
+    }
+    renderer.render(scene,camera);
+  }
+}
