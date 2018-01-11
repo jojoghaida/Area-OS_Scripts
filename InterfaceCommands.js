@@ -258,7 +258,7 @@ zoomButtons = function(){
     if(value != 0){
       amplitude = amplitude*-1;
       if(frustumSize<=25){clearInterval(zoomingInterval);return}
-    }else{if(frustumSize>=550){return}}
+    }else{if(frustumSize>=550){clearInterval(zoomingInterval);return}}
     console.log(frustumSize);
     aspect = window.innerWidth / window.innerHeight;
     frustumSize += amplitude
