@@ -23,6 +23,7 @@ aboutButton.addEventListener('click',launchAbout);
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 var camera, scene, controls, renderer;
 // var frustumSize = 550;
+var controllerOveride = 0;
 var frustumSize = 350;
 
 viewInit();
@@ -237,7 +238,7 @@ panningMode = function(){
       // controls.noRotate = true;
       // controls.pan.set(event.clientX, event.clientY);
       // alert("yah");
-      var controllerOveride = 2;
+      controllerOveride = 2;
     },
     endDeepPress: function(){
       banner.style.color = "blue";

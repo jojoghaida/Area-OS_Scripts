@@ -78,8 +78,6 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 
 	var EPS = 0.000001;
 
-	var controllerOveride = 0; //dicks
-
 	var rotateStart = new THREE.Vector2();
 	var rotateEnd = new THREE.Vector2();
 	var rotateDelta = new THREE.Vector2();
@@ -463,7 +461,7 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 		if ( scope.enabled === false ) { return; }
 
 		switch ( event.touches.length + controllerOveride ) {//dicks
-
+			console.log(controllerOveride,"<<<<<<<<<<<<<<<<");
 			case 1:	// one-fingered touch: rotate
 				if ( scope.noRotate === true ) { return; }
 
@@ -525,7 +523,7 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 
 		var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
 
-		switch ( event.touches.length ) {
+		switch ( event.touches.length + controllerOveride) {
 
 			case 1: // one-fingered touch: rotate
 				if ( scope.noRotate === true ) { return; }
