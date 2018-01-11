@@ -464,7 +464,7 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 
 		switch ( event.touches.length ) {//dicks
 
-			case event.touches.length + controllerOveride:	// one-fingered touch: rotate
+			case (event.touches.length + controllerOveride):	// one-fingered touch: rotate
 				if ( scope.noRotate === true ) { return; }
 
 				state = STATE.TOUCH_ROTATE;
@@ -472,7 +472,7 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 				rotateStart.set( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
 				break;
 
-			case event.touches.length + controllerOveride:	// two-fingered touch: dolly
+			case (event.touches.length + controllerOveride):	// two-fingered touch: dolly
 				if ( scope.noZoom === true ) {//return; /*<<original*/
 					///////////////////////////////////////////////////joe
 					state = STATE.TOUCH_DOLLY;
@@ -502,7 +502,7 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 				break;
 				///////////////////////////////////////////////////joe
 
-			case event.touches.length + controllerOveride: // three-fingered touch: pan
+			case (event.touches.length + controllerOveride): // three-fingered touch: pan
 				if ( scope.noPan === true ) { return; }
 
 				state = STATE.TOUCH_PAN;
