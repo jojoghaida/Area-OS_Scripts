@@ -257,8 +257,17 @@ zoomButtons = function(){
   function zoom(value,amplitude){
     if(value != 0){
       amplitude = amplitude*-1;
-      if(frustumSize<=25){clearInterval(zoomingInterval);return}
-    }else{if(frustumSize>=550){clearInterval(zoomingInterval);return}}
+      if(frustumSize<=25){
+        clearInterval(zoomingInterval);
+        pressureButtonZplus.style.background = null;
+        zPlusEffect.style.visibility = 'hidden';
+        return}
+    }else{if(frustumSize>=550){
+      clearInterval(zoomingInterval);
+      pressureButtonZminus.style.background = null;
+      zMinusEffet.style.visibility = 'hidden';
+      return}
+    }
     console.log(frustumSize);
     aspect = window.innerWidth / window.innerHeight;
     frustumSize += amplitude
