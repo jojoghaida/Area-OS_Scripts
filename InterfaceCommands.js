@@ -232,10 +232,17 @@ panningMode = function(){
     },
     startDeepPress: function(event){
       banner.style.color = "red";
+      // camera.position.x = 20; ///////////////////!!!!!!
       // controls.pan.set(event.touches[ 0 ].pageX, event.touches[ 0 ].pageY);
+      // controls.noRotate = true;
+      // controls.pan.set(event.clientX, event.clientY);
+      // alert("yah");
+      var controllerOveride = 2;
     },
     endDeepPress: function(){
       banner.style.color = "blue";
+      // controls.noRotate = false;
+
     },
     change: function(force, event){
     },
