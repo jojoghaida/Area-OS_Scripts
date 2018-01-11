@@ -24,8 +24,6 @@
 //      controls.target.z = 150;
 // Simple substitute "OrbitControls" and the control should work as-is.
 
-var controllerOveride = 0;
-
 THREE.OrbitControls = function ( object, domElement, localElement ) {
 
 	this.object = object;
@@ -462,18 +460,17 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 
 		if ( scope.enabled === false ) { return; }
 
-		switch ( event.touches.length ) {//dicks
+		switch ( event.touches.length ) {
 
-			if(event.touches.length + controllerOveride == 1){
+			case 1:	// one-fingered touch: rotate
 				if ( scope.noRotate === true ) { return; }
 
 				state = STATE.TOUCH_ROTATE;
 
 				rotateStart.set( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
 				break;
-			}
 
-			if(event.touches.length + controllerOveride){
+			case 2:	// two-fingered touch: dolly
 				if ( scope.noZoom === true ) {//return; /*<<original*/
 					///////////////////////////////////////////////////joe
 					state = STATE.TOUCH_DOLLY;
@@ -502,9 +499,8 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 				dollyStart.set( 0, distance );
 				break;
 				///////////////////////////////////////////////////joe
-			}
 
-			if(event.touches.length + controllerOveride){
+			case 3: // three-fingered touch: pan
 				if ( scope.noPan === true ) { return; }
 
 				state = STATE.TOUCH_PAN;
@@ -514,9 +510,8 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 
 			default:
 				state = STATE.NONE;
-			}
-			}
 
+		}
 	}
 
 	function touchmove( event ) {
@@ -528,7 +523,7 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 
 		var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
 
-		switch ( event.touches.length + controllerOveride) {
+		switch ( event.touches.length ) {
 
 			case 1: // one-fingered touch: rotate
 				if ( scope.noRotate === true ) { return; }
