@@ -100,6 +100,8 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 	var STATE = { NONE : -1, ROTATE : 0, DOLLY : 1, PAN : 2, TOUCH_ROTATE : 3, TOUCH_DOLLY : 4, TOUCH_PAN : 5 };
 	var state = STATE.NONE;
 
+	var controllerOveride = 0;
+
 	// events
 
 	var changeEvent = { type: 'change' };
@@ -461,7 +463,7 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 		if ( scope.enabled === false ) { return; }
 
 		switch ( event.touches.length + controllerOveride ) {//dicks
-			console.log(controllerOveride,"<<<<<<<<<<<<<<<<");
+
 			case 1:	// one-fingered touch: rotate
 				if ( scope.noRotate === true ) { return; }
 
