@@ -153,9 +153,8 @@ if(areaSQ<requestedSQ){
       if(cursor.intensity == 0){cursorFadeBool = 0}
     }
     renderer.render(scene,camera);
-    console.log(cursor.intensity);
     if(cursorBool == 1){
-      var runCursor = setTimeout(liveCursor,1);
+      var runCursor = setTimeout(liveCursor,.1);
     }else{
       clearInterval(runCursor);
       cursorFadeBool = 1;
