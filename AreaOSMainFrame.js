@@ -150,7 +150,7 @@ if(areaSQ<requestedSQ){
       if(cursor.intensity == 1){cursorFadeBool = 1}
     }else{
       cursor.intensity = Number((cursor.intensity-.01).toFixed(2));
-      if(cursor.intensity == 0){cursorFadeBool = 0}
+      if(cursor.intensity == .5){cursorFadeBool = 0}
     }
     renderer.render(scene,camera);
     if(cursorBool == 1){
