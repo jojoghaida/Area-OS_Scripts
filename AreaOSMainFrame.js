@@ -51,12 +51,22 @@ if(areaSQ<requestedSQ){
   var logDrawF = true;
   var drawBool = false;
 
-  var cursorBool = 0;
+///////////////////newcode
+  var cursorBool = 1;
+  var cursorFadeBool = 1;
+  var cursor = new THREE.PointLight(0x0092ff, 1, 10000);
+  lightLocation = stPt.clone();
+  lightLocation.y = 1;
+  cursor.position.set(lightLocation.x,lightLocation.y,lightLocation.z);
+  scene.add(cursor);
+  renderer.render(scene,camera);
+///////////////////newcode
 
 
   function drawElements(){ /*design to be looped live*/ //if(logDrawF==true){console.log("drawElements() is running. Request is =",selectorText.value);};
 
     drawBool = true;
+
 
     if(selectorText.value>furnitureGroup.length){ /*addition*/
       drawBool = true;
@@ -83,6 +93,8 @@ if(areaSQ<requestedSQ){
           // dropPtLight2(inputSecondaryCrv.geometry.vertices[1].clone()); //dicks
 
           furnitureGroup.push(dropChairs(inputSecondaryCrv.geometry.vertices[1],getCrvVector(inputMainCrv)));
+          cursor.position.set(furnitureGroup[furnitureGroup.length-1].position.x,furnitureGroup[furnitureGroup.length-1].position.y+1,furnitureGroup[furnitureGroup.length-1].position.z);//make a function!
+          renderer.render(scene,camera);
         }
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) >= 15){
           on2nd = false;
@@ -107,6 +119,7 @@ if(areaSQ<requestedSQ){
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2))/2 /*<<<spacing tempo*/ % 1 == 0){
           removal = furnitureGroup.pop();
           scene.remove(removal);
+          cursor.position.set(furnitureGroup[furnitureGroup.length-1].position.x,furnitureGroup[furnitureGroup.length-1].position.y+1,furnitureGroup[furnitureGroup.length-1].position.z);//make a function!
           renderer.render(scene,camera);
         }
         if(Number(getCrvLength(inputSecondaryCrv).toFixed(2)) <= secondaryConCrvsGrothInterval){ if(logDrawF==true){console.log("removing trajectory curve");};
@@ -130,15 +143,26 @@ if(areaSQ<requestedSQ){
 
   }
 
-
-  function liveCursor(point,boundingBox,colors){
-    currentCursor = scene.getObjectByName("cursor");
-
+  function liveCursor(){
+    current = cursor.intensity;
+    if(cursorFadeBool==0){
+      cursor.intensity = Number((cursor.intensity+.01).toFixed(2));
+      if(cursor.intensity == 1){cursorFadeBool = 1}
+    }else{
+      cursor.intensity = Number((cursor.intensity-.01).toFixed(2));
+      if(cursor.intensity == 0){cursorFadeBool = 0}
+    }
+    renderer.render(scene,camera);
+    console.log(cursor.intensity);
     if(cursorBool == 1){
-      setTimeout(liveCursor,500);
+      var runCursor = setTimeout(liveCursor,1);
+    }else{
+      clearInterval(runCursor);
+      cursorFadeBool = 1;
     }
   }
-
+liveCursor(1);
+///////////////////////////////////////////////////////////////////////
 
 function newCrawler(pt, steps = 220, init_Dir = 0){
   dropPtLight(pt,0x26D8A5);
@@ -225,7 +249,7 @@ function newCrawler(pt, steps = 220, init_Dir = 0){
   animateCrawl();
 }
 
-  setTimeout(
-    function (){
-      newCrawler(scene.getObjectByName("18,0"),450,0);
-    },1000);
+  // setTimeout(
+  //   function (){
+  //     newCrawler(scene.getObjectByName("18,0"),450,0);
+  //   },1000);
