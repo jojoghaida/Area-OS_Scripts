@@ -1,6 +1,7 @@
 //Area OS Styles Sheet
 var aOS_ColorStyles = {
-  aOS_OSblue: "#0092ff",
+  aOS_OSblue: "#0851a4",
+  basicChairColor: "#0092ff",
 };
 //line Styles
 var aOS_LineStyles = {

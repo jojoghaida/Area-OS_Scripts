@@ -11,7 +11,7 @@ var twoToo = new Two(params).appendTo(feedbackTwoScene);
 feedbackTwoScene.addEventListener('mousemove',disableOrbitCam);
 
 var titleTop = twoToo.makeText('AREA OS',vfsw/2,vfsh/2+10); //get glyph size to get y-value
-titleTop.fill = colorStyle;
+titleTop.fill = aOS_ColorStyles.aOS_OSblue;
 titleTop.size = 24;
 titleTop.family = 'Karla';
 titleTop.alignment = 'center';

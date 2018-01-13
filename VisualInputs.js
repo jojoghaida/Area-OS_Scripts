@@ -18,6 +18,7 @@ function initInputTouchListeners(){
   inputsTwoScene.addEventListener('touchend', handleTouchEnd, false);
 }
 initInputTouchListeners();
+
 function removeInputListeners(){
   inputsTwoScene.removeEventListener('touchstart',disableOrbitCam);
   inputsTwoScene.removeEventListener('touchstart', handleTouchStart, false);
@@ -46,7 +47,7 @@ function removeInputListeners(){
 
 
 // slider styles
-var colorStyle = aOS_ColorStyles.aOS_OSblue;
+var colorStyle = aOS_ColorStyles.basicChairColor;
 var tickQuan = 150;
 var bigTick = 5;
 var tickSpan = 10;
