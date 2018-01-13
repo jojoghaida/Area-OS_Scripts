@@ -10,7 +10,7 @@ var twoToo = new Two(params).appendTo(feedbackTwoScene);
 //mouse gestures*
 feedbackTwoScene.addEventListener('mousemove',disableOrbitCam);
 
-var titleTop = twoToo.makeText('AREA OS',vfsw/2,vfsh/2+15); //get glyph size to get y-value
+var titleTop = twoToo.makeText('AREA OS',vfsw/2,vfsh/2+10); //get glyph size to get y-value
 titleTop.fill = colorStyle;
 titleTop.size = 24;
 titleTop.family = 'Karla';
