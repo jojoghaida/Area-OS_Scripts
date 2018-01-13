@@ -15,3 +15,5 @@ titleTop.fill = colorStyle;
 titleTop.size = 24;
 titleTop.family = 'Karla';
 titleTop.alignment = 'left';
+
+twoToo.update();
