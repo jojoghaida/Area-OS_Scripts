@@ -223,6 +223,30 @@ function swingCamAxon(){
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
 
 //PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
+
+bottomInput = document.getElementById('inputCanvas');
+expandInput = function(){
+  Pressure.set(bottomInput, {
+    start: function(event){
+    },
+    end: function(){
+    },
+    startDeepPress: function(event){
+      bottomInput.style.height = "500px";
+    },
+    endDeepPress: function(){
+      // banner.style.color = "blue";
+    },
+    change: function(force, event){
+    },
+    unsupported: function(){
+      // NOTE: this is only called if the polyfill option is disabled!
+      // this is called once there is a touch on the element and the device or browser does not support Force or 3D touch
+    }
+  });
+}
+expandInput();
+
 panCanvas = document.getElementById('areaoscanvas')
 banner = document.getElementById('titleText');//test
 panningMode = function(){
