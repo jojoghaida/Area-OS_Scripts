@@ -225,16 +225,15 @@ function swingCamAxon(){
 //PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
 
 bottomInput = document.getElementById('inputCanvas');
-expandInput = function(){
+pressureInput = function(){
   Pressure.set(bottomInput, {
     start: function(event){
     },
     end: function(){
     },
     startDeepPress: function(event){
-      bottomInput.style.height = screen.height - feedbackTwoScene.offsetHeight + "px";
-      two.clear();
-      two.update();
+      menuHeaderBasic();
+      expandInput();
     },
     endDeepPress: function(){
       // banner.style.color = "blue";
@@ -247,7 +246,7 @@ expandInput = function(){
     }
   });
 }
-expandInput();
+pressureInput();
 
 panCanvas = document.getElementById('areaoscanvas')
 banner = document.getElementById('titleText');//test

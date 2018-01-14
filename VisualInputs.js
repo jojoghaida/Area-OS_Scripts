@@ -218,3 +218,13 @@ function submital(){
 //   selectorText.value = xAbsPos/tickSpan; // delete
 //
 // }
+
+function expandInput(){
+  bottomInput.style.height = screen.height - feedbackTwoScene.offsetHeight + "px";
+  two.clear();
+  two.update();
+}
+
+function shrinkInput(){
+  bottomInput.style.height = "100px";  
+}
