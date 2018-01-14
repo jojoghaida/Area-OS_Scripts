@@ -28,4 +28,8 @@ titleRight.size = 14;
 titleRight.family = 'Karla';
 titleRight.alignment = 'right';
 
+
 twoToo.update();
+
+titleRight._renderer.elem.addEventListener('click', function(){console.log("yo")});
+titleLeft._renderer.elem.addEventListener('click', function(){location.reload()});
