@@ -232,7 +232,9 @@ expandInput = function(){
     end: function(){
     },
     startDeepPress: function(event){
-      bottomInput.style.height = "500px";
+      bottomInput.style.height = screen.height - feedbackTwoScene.offsetHeight + "px";
+      two.clear();
+      two.update();
     },
     endDeepPress: function(){
       // banner.style.color = "blue";

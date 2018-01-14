@@ -16,4 +16,16 @@ titleTop.size = 24;
 titleTop.family = 'Karla';
 titleTop.alignment = 'center';
 
+var titleLeft = twoToo.makeText('Reset',20,vfsh/2+10); //get glyph size to get y-value
+titleLeft.fill = aOS_ColorStyles.aOS_OSblue;
+titleLeft.size = 14;
+titleLeft.family = 'Karla';
+titleLeft.alignment = 'left';
+
+var titleRight = twoToo.makeText('About',vfsw-20,vfsh/2+10); //get glyph size to get y-value
+titleRight.fill = aOS_ColorStyles.aOS_OSblue;
+titleRight.size = 14;
+titleRight.family = 'Karla';
+titleRight.alignment = 'right';
+
 twoToo.update();
