@@ -232,8 +232,12 @@ pressureInput = function(){
     end: function(){
     },
     startDeepPress: function(event){
-      menuHeaderBasic();
+      if(headerMode!=1){
+        menuHeaderBasic();
+      }
       expandInput();
+      removeInputListeners();
+      Pressure.remove();
     },
     endDeepPress: function(){
       // banner.style.color = "blue";
