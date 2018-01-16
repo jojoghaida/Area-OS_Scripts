@@ -1170,3 +1170,8 @@ for(i = 0; i < openPlanGridImport.length; i++){
 
 
 // var myMatrix = new constructMatrixFrom2DArray(openPlanGridImport); // input array matrix
+
+
+//Glyphs
+
+//Glyphs
