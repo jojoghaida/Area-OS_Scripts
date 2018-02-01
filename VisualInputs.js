@@ -229,6 +229,14 @@ function expandInput(){
   bottomInput.style.height = screen.height - feedbackTwoScene.offsetHeight + "px";
   two.clear();
   two.update();
+
+  areaOStoo = two.makeText(0,15,30);
+  selectorText.fill = colorStyle;
+  selectorText.size = 18;
+  selectorText.family = 'Karla';
+  selectorText.value = "Switch to desk rental service";
+  two.update();
+
 }
 
 function shrinkInput(){
