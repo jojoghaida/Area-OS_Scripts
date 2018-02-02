@@ -230,10 +230,12 @@ function expandInput(){
   two.clear();
   two.update();
 
-  areaOStoo = two.makeText("Existing Spaces",15,30);
-  areaOStoo.fill = colorStyle;
+  areaOStoo = two.makeText("Existing Spaces >",15,35);
+  areaOStoo.fill = aOS_ColorStyles.aOS_OSblue;
   areaOStoo.size = 18;
   areaOStoo.family = 'Karla';
+  areaOStoo.alignment = 'left';
+
   // areaOStoo.value = "Switch to desk rental service";
   two.update();
 
