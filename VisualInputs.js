@@ -230,15 +230,16 @@ function expandInput(){
   two.clear();
   two.update();
 
-  areaOStoo = two.makeText(0,15,30);
-  selectorText.fill = colorStyle;
-  selectorText.size = 18;
-  selectorText.family = 'Karla';
-  selectorText.value = "Switch to desk rental service";
+  areaOStoo = two.makeText("Existing Spaces",15,30);
+  areaOStoo.fill = colorStyle;
+  areaOStoo.size = 18;
+  areaOStoo.family = 'Karla';
+  // areaOStoo.value = "Switch to desk rental service";
   two.update();
 
 }
 
 function shrinkInput(){
+  two.clear();
   bottomInput.style.height = "100px";
 }
