@@ -265,6 +265,15 @@ function lowerFloors(mesh,arrayCount = 15, floorHeight = 15){
   }
 }
 
+//SLIDER OBJECTS
+var basicChairSL = {
+  name: "Chair(s)",
+  glyph: "put Two.js glyph here",
+  mesh: chairMesh,
+
+}
+//SLIDER OBJECTS
+
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 var openPlanGridImport = [
