@@ -272,8 +272,9 @@ function loadSliderStyles(){
   basicChairSL = {
     name: "Chair(s)",
     glyph: "put Two.js glyph here",
+    color: aOS_ColorStyles.basicChairColor,
     mesh: chairMesh,
-
+    function: refreshPage,
   }
 }
 setTimeout(loadSliderStyles,2000);
