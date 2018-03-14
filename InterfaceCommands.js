@@ -115,11 +115,9 @@ function returnCamPlan(mC=[0,350,0],tC=[0,0,0]){
   disableOrbitCam();
   steps = 10;
   currentPos = [camera.position.x, camera.position.y, camera.position.z];
-  console.log(currentPos);
   currentTarget = controls.target;
   cameraPosIncrements = [(currentPos[0] - 0)/-10, (currentPos[1] - 350)/10, (currentPos[2] - 0)/-10];
   cameraTarIncrements = [(currentTarget.x - tC[0]/-steps), (currentTarget.y - tC[1]/-steps), (currentTarget.z - tC[2]/-steps)];
-  console.log(cameraTarIncrements);
 
   function dollyCam(){
     console.log("dolly");
@@ -305,7 +303,6 @@ zoomButtons = function(){
       zMinusEffet.style.visibility = 'hidden';
       return}
     }
-    console.log(frustumSize);
     aspect = window.innerWidth / window.innerHeight;
     frustumSize += amplitude
   	camera.left   = - frustumSize * aspect / 2;

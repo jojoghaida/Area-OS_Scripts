@@ -276,6 +276,9 @@ function dropChairs(point,direction){
   return(newChair);
 }
 
+function dropWhiteCollar(){
+  
+}
 ///Annotations
 
 function dropCircle(point,radius = 1,_group,_style){
