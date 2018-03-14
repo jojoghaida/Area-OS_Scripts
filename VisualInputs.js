@@ -1,5 +1,6 @@
 //two js form inputs**
 alert("MASTER");
+
 //setting canvas*
 var inputsTwoScene = document.getElementById('inputCanvas');
 var sW = inputsTwoScene.offsetWidth
