@@ -1,4 +1,5 @@
 //MESH LIBRARY//////////////////////////////////////////////////////////////
+var thisSite = new THREE.Group();
 // fonts
 fontKarla_Reg = undefined;
 function loadKarla(){
@@ -94,8 +95,7 @@ function ( geometry, materials ) {
  var siteColumnsMaterial = new THREE.MeshBasicMaterial( { color: "white", wireframe: false, transparent: true} );
  siteColumnsMesh = new THREE.Mesh(geometry,siteColumnsMaterial);
  // siteColumnsMesh.castShadow = true;
- scene.add(siteColumnsMesh);
- renderer.render(scene,camera);
+ thisSite.add(siteColumnsMesh);
  lowerFloors(siteColumnsMesh);
 }
 );
@@ -109,8 +109,7 @@ siteSlabLoader.load(
       siteSlabGeo = geometry;
       var siteSlabMaterial = new THREE.MeshBasicMaterial( { color: "white", wireframe: false, transparent: true, side: THREE.DoubleSide} );
       siteSlabMesh = new THREE.Mesh(geometry, siteSlabMaterial);
-      scene.add(siteSlabMesh);
-      renderer.render(scene,camera);
+      thisSite.add(siteSlabMesh);
       lowerFloors(siteSlabMesh);
   }
 );
@@ -155,12 +154,11 @@ function ( geometry, materials ) {
  siteEgressGeo = geometry;
  var siteEgressMaterial = new THREE.MeshBasicMaterial( { color: 0xFFEB00, wireframe: false, transparent: true, opacity: 1, side: THREE.DoubleSide} );
  siteEgressMesh = new THREE.Mesh(geometry,siteEgressMaterial);
- scene.add(siteEgressMesh);
+ thisSite.add(siteEgressMesh);
  var egressOutline = new THREE.Geometry();
  egressOutline.copy(siteEgressGeo);
  egressOutline.mergeVertices();
- highlightEdges(egressOutline);
- renderer.render(scene,camera);
+ thisSite.add(highlightEdges(egressOutline));
 }
 );
 
@@ -174,14 +172,15 @@ function ( geometry, materials ) {
  siteWallsGeo = geometry;
  var siteWallsMaterial = new THREE.MeshBasicMaterial( { color: 0xf2f2f2} );
  siteWallsMesh = new THREE.Mesh(geometry,siteWallsMaterial);
- scene.add(siteWallsMesh);
- renderer.render(scene,camera);
+ thisSite.add(siteWallsMesh);
  lowerFloors(siteWallsMesh);
 
  var wallOutline = new THREE.Geometry();
  wallOutline.copy(siteWallsGeo);
  wallOutline.mergeVertices();
- lowerFloors(highlightEdges(wallOutline));
+ var outLinedOfWalls = highlightEdges(wallOutline);
+ thisSite.add(outLinedOfWalls);
+ lowerFloors(outLinedOfWalls);
 }
 );
 //siteSection
@@ -194,9 +193,8 @@ function ( geometry, materials ) {
  siteSectionGeo = geometry;
  var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: 0xf2f2f2, wireframe: false, transparent: true} );
  siteSectionMesh = new THREE.Mesh(geometry,siteSectionMaterial);
- scene.add(siteSectionMesh);
- renderer.render(scene,camera);
- highlightEdges(siteSectionGeo,.5);
+ thisSite.add(siteSectionMesh);
+ thisSite.add(highlightEdges(siteSectionGeo,.5));
 }
 );
 //siteFacade
@@ -209,8 +207,7 @@ function ( geometry, materials ) {
  siteSectionGeo = geometry;
  var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: "black", wireframe: false, transparent: true} );
  siteFacadeMesh = new THREE.Mesh(geometry,siteSectionMaterial);
- scene.add(siteFacadeMesh);
- renderer.render(scene,camera);
+ thisSite.add(siteFacadeMesh);
  lowerFloors(siteFacadeMesh);
 }
 );
@@ -224,8 +221,7 @@ function ( geometry, materials ) {
  siteGlazingGeo = geometry;
  var siteGlazingMaterial = new THREE.MeshBasicMaterial( { color: 0x26D8A5, wireframe: false, transparent: true,  opacity:.1, side: THREE.DoubleSide} );//new THREE.MeshPhongMaterial( { color: 0x26D8A5, wireframe: false, transparent: true, opacity:.1, side: THREE.DoubleSide, reflectivity: 1, shininess: 150} );
  siteGlazingMesh = new THREE.Mesh(geometry,siteGlazingMaterial);
- scene.add(siteGlazingMesh);
- renderer.render(scene,camera);
+ thisSite.add(siteGlazingMesh);
  lowerFloors(siteGlazingMesh);
 }
 );
@@ -265,6 +261,9 @@ function lowerFloors(mesh,arrayCount = 15, floorHeight = 15){
   }
 }
 
+setTimeout(function(){scene.add(thisSite)},2000);
+
+
 //SLIDER OBJECTS
 var basicChairSL = null;
 
@@ -274,7 +273,7 @@ function loadSliderStyles(){
     glyph: "put Two.js glyph here",
     color: aOS_ColorStyles.basicChairColor,
     mesh: chairMesh,
-    function: refreshPage,
+    function: 0,
   }
 }
 setTimeout(loadSliderStyles,2000);

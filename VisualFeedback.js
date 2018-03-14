@@ -52,7 +52,7 @@ function menuHeaderBasic(){
     console.log("closing menu");
     shrinkInput();
     headerStandard();
-    sliderInput();
+    sliderInput(basicChairSL);
     pressureInput();
   });
   titleLeft._renderer.elem.addEventListener('click', function(){location.reload()});

@@ -34,12 +34,12 @@ inputsTwoScene.addEventListener('touchstart',disableOrbitCam);
 // }
 var selectorText = null;
 
-function sliderInput(){
+function sliderInput(thisSliderStyle){
 
   initInputTouchListeners();
 
   // slider styles
-  colorStyle = aOS_ColorStyles.basicChairColor;
+  colorStyle = thisSliderStyle.color;//aOS_ColorStyles.basicChairColor;
   tickQuan = 150;
   bigTick = 5;
   tickSpan = 10;
@@ -111,7 +111,9 @@ function sliderInput(){
 
   two.update();
 }
-sliderInput();
+
+// window.onload = sliderInput(basicChairSL);
+setTimeout(function(){sliderInput(basicChairSL)},2000);
 
 //gesture effects*
 
