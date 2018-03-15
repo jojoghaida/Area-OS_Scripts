@@ -266,8 +266,8 @@ function translator(pt){
 
 ///Furnitures
 function dropChairs(point = new THREE.Vector3(0,0,0),direction = new THREE.Vector3(1,0,0)){
-  newChair = new THREE.Mesh();
   newChair = chairMesh.clone();
+
   baseD = new THREE.Vector3(1,0,0);
   newChair.rotation.y = baseD.angleTo(direction)*-1;
   newChair.position.copy(point);
@@ -279,9 +279,12 @@ function dropChairs(point = new THREE.Vector3(0,0,0),direction = new THREE.Vecto
 function dropTypWorkBasicGroup(point = new THREE.Vector3(0,0,0),direction = new THREE.Vector3(1,0,0)){
   baseD = new THREE.Vector3(1,0,0);
   thisSet = typWorkBasicGroup.clone();
-  thisSet.rotation.y = baseD.angleTo(direction)*-1;
-  console.log(direction);
-  console.log(thisSet.rotation.y);
+
+  if(direction.z < 0){
+    thisSet.rotation.y = baseD.angleTo(direction)*-1;
+  }else{
+    thisSet.rotation.y = baseD.angleTo(direction);
+  }
   thisSet.position.copy(point);
   scene.add(thisSet);
   renderer.render(scene,camera);

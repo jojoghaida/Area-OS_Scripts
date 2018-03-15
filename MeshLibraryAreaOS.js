@@ -68,7 +68,7 @@ var deskDrawers = null;
 deskDrawersLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/desk.json',
 function (geometry, materials) {
-  var material = new THREE.MeshBasicMaterial( { color: 0x3ad3ea } );
+  var material = new THREE.MeshBasicMaterial( { color: 0x3ad3ea , transparent: true, opacity: 1} );
   deskDrawers = new THREE.Mesh(geometry,material);
   // deskDrawers.position.x = 15;
   // scene.add(deskDrawers);
@@ -325,13 +325,17 @@ var layoutPts = [
    new THREE.Vector3(-39.0546596538163,0,1.53697022538654),
    new THREE.Vector3(-42.6785819073974,0,5.16089247896763),
    new THREE.Vector3(-46.3025041609784,0,8.78481473254872),
+   new THREE.Vector3(-46.3025041609784,0,8.78481473254873),
+   new THREE.Vector3(-42.6785819073973,0,5.16089247896765),
+   new THREE.Vector3(-39.0546596538163,0,1.53697022538658),
+   new THREE.Vector3(-35.4307374002352,0,-2.0869520281945),
 ];
 
 var layoutVecs = [
    new THREE.Vector3(1,0,0),
    new THREE.Vector3(1,0,0),
    new THREE.Vector3(1,0,0),
-   new THREE.Vector3(-1,0,0),
+   new THREE.Vector3(1,0,0),
    new THREE.Vector3(0,0,1),
    new THREE.Vector3(0,0,1),
    new THREE.Vector3(0,0,-1),
@@ -341,6 +345,10 @@ var layoutVecs = [
    new THREE.Vector3(0.707106781186547,0,-0.707106781186548),
    new THREE.Vector3(0.707106781186547,0,-0.707106781186548),
    new THREE.Vector3(0.707106781186547,0,-0.707106781186548),
+   new THREE.Vector3(-0.70710678118655,0,0.707106781186545),
+   new THREE.Vector3(-0.70710678118655,0,0.707106781186544),
+   new THREE.Vector3(-0.70710678118655,0,0.707106781186545),
+   new THREE.Vector3(-0.707106781186551,0,0.707106781186544),
 ];
 
 
