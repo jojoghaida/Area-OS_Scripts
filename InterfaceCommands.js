@@ -264,7 +264,6 @@ panningMode = function(){
       // controls.pan.set(event.touches[ 0 ].pageX, event.touches[ 0 ].pageY);
       // controls.noRotate = true;
       // controls.pan.set(event.clientX, event.clientY);
-      // alert("yah");
       controllerOveride = 2;
     },
     endDeepPress: function(){
