@@ -211,7 +211,7 @@ function ( geometry, materials ) {
  wallOutline.mergeVertices();
  var outLinedOfWalls = highlightEdges(wallOutline);
  thisSite.add(outLinedOfWalls);
- lowerFloors(outLinedOfWalls);
+ lowerFloors(outLinedOfWalls,.15);
 }
 );
 //siteSection
@@ -225,7 +225,7 @@ function ( geometry, materials ) {
  var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: 0xf2f2f2, wireframe: false, transparent: true} );
  siteSectionMesh = new THREE.Mesh(geometry,siteSectionMaterial);
  thisSite.add(siteSectionMesh);
- thisSite.add(highlightEdges(siteSectionGeo,.5));
+ scene.add(highlightEdges(siteSectionGeo,.5));
 }
 );
 //siteFacade
@@ -269,7 +269,7 @@ function ( geometry, materials ) {
 // );
 function highlightEdges(outlineThis, lineW = .2, color = "black"){
 var eGeometry = new THREE.EdgesGeometry(outlineThis);
-var eMaterial = new THREE.LineBasicMaterial({ color: color, linewidth: lineW });
+var eMaterial = new THREE.LineBasicMaterial({ color: color, linewidth: lineW, transparent: true });
 var edges = new THREE.LineSegments(eGeometry,eMaterial);
 scene.add(edges);
 renderer.render(scene,camera);
@@ -331,6 +331,22 @@ var layoutPts = [
    new THREE.Vector3(-42.6785819073973,0,5.16089247896765),
    new THREE.Vector3(-39.0546596538163,0,1.53697022538658),
    new THREE.Vector3(-35.4307374002352,0,-2.0869520281945),
+   new THREE.Vector3(20.6580202736674,0,23.4895214711051),
+   new THREE.Vector3(17.0340980200863,0,27.1134437246862),
+   new THREE.Vector3(13.4101757665053,0,30.7373659782672),
+   new THREE.Vector3(9.78625351292418,0,34.3612882318483),
+   new THREE.Vector3(9.78625351292418,0,34.3612882318483),
+   new THREE.Vector3(13.4101757665053,0,30.7373659782672),
+   new THREE.Vector3(17.0340980200863,0,27.1134437246861),
+   new THREE.Vector3(20.6580202736674,0,23.489521471105),
+   new THREE.Vector3(-5.58640423443772,0,31.0362236797482),
+   new THREE.Vector3(-10.7114042344378,0,31.0362236797482),
+   new THREE.Vector3(-15.8364042344378,0,31.0362236797482),
+   new THREE.Vector3(-20.9614042344378,0,31.0362236797482),
+   new THREE.Vector3(-20.9614042344378,0,31.0362236797482),
+   new THREE.Vector3(-15.8364042344378,0,31.0362236797482),
+   new THREE.Vector3(-10.7114042344377,0,31.0362236797482),
+   new THREE.Vector3(-5.58640423443771,0,31.0362236797482),
 ];
 
 var layoutVecs = [
@@ -351,7 +367,24 @@ var layoutVecs = [
    new THREE.Vector3(-0.70710678118655,0,0.707106781186544),
    new THREE.Vector3(-0.70710678118655,0,0.707106781186545),
    new THREE.Vector3(-0.707106781186551,0,0.707106781186544),
+   new THREE.Vector3(-0.707106781186551,0,0.707106781186544),
+   new THREE.Vector3(-0.70710678118655,0,0.707106781186545),
+   new THREE.Vector3(-0.70710678118655,0,0.707106781186544),
+   new THREE.Vector3(-0.707106781186549,0,0.707106781186546),
+   new THREE.Vector3(0.707106781186547,0,-0.707106781186548),
+   new THREE.Vector3(0.707106781186547,0,-0.707106781186548),
+   new THREE.Vector3(0.707106781186547,0,-0.707106781186548),
+   new THREE.Vector3(0.707106781186546,0,-0.707106781186549),
+   new THREE.Vector3(-4.48764047391658E-15,0,1),
+   new THREE.Vector3(-2.99176031594438E-15,0,1),
+   new THREE.Vector3(-3.36573035543743E-15,0,1),
+   new THREE.Vector3(-2.99176031594438E-15,0,1),
+   new THREE.Vector3(-1.49588015797219E-15,0,-1),
+   new THREE.Vector3(-7.47940078986096E-16,0,-1),
+   new THREE.Vector3(-1.49588015797219E-15,0,-1),
+   new THREE.Vector3(-2.99176031594439E-15,0,-1),
 ];
+
 
 
 
