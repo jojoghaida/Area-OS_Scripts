@@ -68,7 +68,7 @@ var deskDrawers = null;
 deskDrawersLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/desk.json',
 function (geometry, materials) {
-  var material = new THREE.MeshBasicMaterial( { color: 0x3ad3ea , transparent: true, opacity: 1} );
+  var material = new THREE.MeshBasicMaterial( { color: 0x3ad3ea , transparent: false, opacity: 1} );
   deskDrawers = new THREE.Mesh(geometry,material);
   // deskDrawers.position.x = 15;
   // scene.add(deskDrawers);
@@ -79,12 +79,14 @@ var typWorkBasicGroup = null;
 
 function conTypWorkBasicGroup(){
   desk = deskDrawers.clone();
+  deskLines = highlightEdges(desk.geometry,.1,0x33b7cc);
   chair = chairMesh.clone();
   desk.position.x = 1.34;
+  deskLines.position.x = 1.34;
   chair.rotation.y = -Math.PI;
   chair.position.x = 4;
   typWorkBasicGroup = new THREE.Group();
-  typWorkBasicGroup.add(desk,chair);
+  typWorkBasicGroup.add(desk,deskLines,chair);
   console.log(typWorkBasicGroup);
 }
 setTimeout(function () {
@@ -265,9 +267,9 @@ function ( geometry, materials ) {
 //  highlightEdges(siteOutlineGeo);
 // }
 // );
-function highlightEdges(outlineThis, lineW = .2){
+function highlightEdges(outlineThis, lineW = .2, color = "black"){
 var eGeometry = new THREE.EdgesGeometry(outlineThis);
-var eMaterial = new THREE.LineBasicMaterial({ color: "black", linewidth: lineW });
+var eMaterial = new THREE.LineBasicMaterial({ color: color, linewidth: lineW });
 var edges = new THREE.LineSegments(eGeometry,eMaterial);
 scene.add(edges);
 renderer.render(scene,camera);
