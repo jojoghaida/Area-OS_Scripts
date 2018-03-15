@@ -280,6 +280,8 @@ function dropTypWorkBasicGroup(point = new THREE.Vector3(0,0,0),direction = new 
   baseD = new THREE.Vector3(1,0,0);
   thisSet = typWorkBasicGroup.clone();
   thisSet.rotation.y = baseD.angleTo(direction)*-1;
+  console.log(direction);
+  console.log(thisSet.rotation.y);
   thisSet.position.copy(point);
   scene.add(thisSet);
   renderer.render(scene,camera);

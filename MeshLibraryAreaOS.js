@@ -312,30 +312,37 @@ setTimeout(loadSliderStyles,2000);
 
 //floor 3 layout
 var layoutPts = [
-   new THREE.Vector3(-75.8599583252512,0,-44.1583738305845),
-   new THREE.Vector3(-70.7349583252511,0,-44.1583738305845),
-   new THREE.Vector3(-72.5192123990125,0,-44.6583738305844),
-   new THREE.Vector3(-77.6442123990125,0,-44.6583738305845),
-   new THREE.Vector3(-82.7692123990125,0,-44.6583738305845),
-   new THREE.Vector3(-85.0871209820752,0,-21.6833272135597),
-   new THREE.Vector3(-85.0871209820752,0,-26.8083272135598),
-   new THREE.Vector3(-85.0871209820752,0,-31.9333272135598),
-   new THREE.Vector3(-85.0871209820751,0,-37.0583272135598),
-   new THREE.Vector3(0,0,0),
+   new THREE.Vector3(-85.0871209820751,0,37.0583272135598),
+   new THREE.Vector3(-85.0871209820752,0,31.9333272135598),
+   new THREE.Vector3(-85.0871209820752,0,26.8083272135598),
+   new THREE.Vector3(-85.0871209820752,0,21.6833272135597),
+   new THREE.Vector3(-70.7349583252511,0,44.1583738305845),
+   new THREE.Vector3(-75.8599583252512,0,44.1583738305845),
+   new THREE.Vector3(-72.5192123990125,0,44.6583738305844),
+   new THREE.Vector3(-77.6442123990125,0,44.6583738305845),
+   new THREE.Vector3(-82.7692123990125,0,44.6583738305845),
+   new THREE.Vector3(-35.4307374002352,0,-2.08695202819455),
+   new THREE.Vector3(-39.0546596538163,0,1.53697022538654),
+   new THREE.Vector3(-42.6785819073974,0,5.16089247896763),
+   new THREE.Vector3(-46.3025041609784,0,8.78481473254872),
 ];
 
 var layoutVecs = [
+   new THREE.Vector3(1,0,0),
+   new THREE.Vector3(1,0,0),
+   new THREE.Vector3(1,0,0),
+   new THREE.Vector3(-1,0,0),
    new THREE.Vector3(0,0,1),
    new THREE.Vector3(0,0,1),
    new THREE.Vector3(0,0,-1),
    new THREE.Vector3(0,0,-1),
    new THREE.Vector3(0,0,-1),
-   new THREE.Vector3(1,0,0),
-   new THREE.Vector3(1,0,0),
-   new THREE.Vector3(1,0,0),
-   new THREE.Vector3(1,0,0),
-   new THREE.Vector3(1,0,0),
+   new THREE.Vector3(0.707106781186546,0,-0.707106781186549),
+   new THREE.Vector3(0.707106781186547,0,-0.707106781186548),
+   new THREE.Vector3(0.707106781186547,0,-0.707106781186548),
+   new THREE.Vector3(0.707106781186547,0,-0.707106781186548),
 ];
+
 
 
 
@@ -344,7 +351,7 @@ floor3WorkDesks = layoutPts.length;
 setTimeout(function(){
   console.log("pop");
   for(i=0; i<floor3WorkDesks; i++){
-    console.log(i);
+    console.log(i+"---------------------------");
     dropTypWorkBasicGroup(layoutPts[i],layoutVecs[i]);
   }
 },1000);
