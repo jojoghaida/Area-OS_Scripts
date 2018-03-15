@@ -21,8 +21,8 @@ myChairLoader.load(
     chairGeo = geometry;
     var material = new THREE.MeshBasicMaterial( { color: 0x0092ff } );
     chairMesh = new THREE.Mesh(geometry,material);
-    scene.add(chairMesh);
-    renderer.render(scene,camera);
+    // scene.add(chairMesh);
+    // renderer.render(scene,camera);
   }
 );
 
@@ -57,11 +57,40 @@ function (geometry, materials) {
   var material = new THREE.MeshBasicMaterial( { color: 0xc26bff } );
   conferenceTable4_6 = new THREE.Mesh(geometry,material);
   conferenceTable4_6.position.x = 3;
-  scene.add(conferenceTable4_6);
-  renderer.render(scene,camera);
-}
-);
+  // scene.add(conferenceTable4_6);
+  // renderer.render(scene,camera);
+});
 //conference table//
+
+//desk w/ drawers
+var deskDrawersLoader = new THREE.JSONLoader();
+var deskDrawers = null;
+deskDrawersLoader.load(
+'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/desk.json',
+function (geometry, materials) {
+  var material = new THREE.MeshBasicMaterial( { color: 0x3ad3ea } );
+  deskDrawers = new THREE.Mesh(geometry,material);
+  // deskDrawers.position.x = 15;
+  // scene.add(deskDrawers);
+  // renderer.render(scene,camera);
+});
+//desk w/ drawers
+var typWorkBasicGroup = null;
+
+function conTypWorkBasicGroup(){
+  desk = deskDrawers.clone();
+  chair = chairMesh.clone();
+  desk.position.x = 1.34;
+  chair.rotation.y = -Math.PI;
+  chair.position.x = 4;
+  typWorkBasicGroup = new THREE.Group();
+  typWorkBasicGroup.add(desk,chair);
+  console.log(typWorkBasicGroup);
+}
+setTimeout(function () {
+  conTypWorkBasicGroup();
+  dropTypWorkBasicGroup();
+}, 1000);
 //site..
 // var siteLoader = new THREE.JSONLoader();
 // var siteMesh = null;
@@ -280,6 +309,46 @@ setTimeout(loadSliderStyles,2000);
 //SLIDER OBJECTS
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+//floor 3 layout
+var layoutPts = [
+   new THREE.Vector3(-75.8599583252512,0,-44.1583738305845),
+   new THREE.Vector3(-70.7349583252511,0,-44.1583738305845),
+   new THREE.Vector3(-72.5192123990125,0,-44.6583738305844),
+   new THREE.Vector3(-77.6442123990125,0,-44.6583738305845),
+   new THREE.Vector3(-82.7692123990125,0,-44.6583738305845),
+   new THREE.Vector3(-85.0871209820752,0,-21.6833272135597),
+   new THREE.Vector3(-85.0871209820752,0,-26.8083272135598),
+   new THREE.Vector3(-85.0871209820752,0,-31.9333272135598),
+   new THREE.Vector3(-85.0871209820751,0,-37.0583272135598),
+   new THREE.Vector3(0,0,0),
+];
+
+var layoutVecs = [
+   new THREE.Vector3(0,0,1),
+   new THREE.Vector3(0,0,1),
+   new THREE.Vector3(0,0,-1),
+   new THREE.Vector3(0,0,-1),
+   new THREE.Vector3(0,0,-1),
+   new THREE.Vector3(1,0,0),
+   new THREE.Vector3(1,0,0),
+   new THREE.Vector3(1,0,0),
+   new THREE.Vector3(1,0,0),
+   new THREE.Vector3(1,0,0),
+];
+
+
+
+/////////////
+floor3WorkDesks = layoutPts.length;
+setTimeout(function(){
+  console.log("pop");
+  for(i=0; i<floor3WorkDesks; i++){
+    console.log(i);
+    dropTypWorkBasicGroup(layoutPts[i],layoutVecs[i]);
+  }
+},1000);
+//floor 3 layout
 
 var openPlanGridImport = [
 

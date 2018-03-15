@@ -21,10 +21,10 @@ cross.crossVectors( ab, ac );
 areaSQ += cross.length() / 2;
 }
 if(areaSQ<requestedSQ){
-}else{
-  var li = 0;
-  occupy = false;
-}
+  }else{
+    var li = 0;
+    occupy = false;
+  }
 }
 
 

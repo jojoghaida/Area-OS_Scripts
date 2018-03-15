@@ -265,20 +265,26 @@ function translator(pt){
 //Item Functions
 
 ///Furnitures
-function dropChairs(point,direction){
+function dropChairs(point = new THREE.Vector3(0,0,0),direction = new THREE.Vector3(1,0,0)){
   newChair = new THREE.Mesh();
   newChair = chairMesh.clone();
-  chairFacing = new THREE.Vector3(1,0,0);
-  newChair.rotation.y = chairFacing.angleTo(direction)*-1;
+  baseD = new THREE.Vector3(1,0,0);
+  newChair.rotation.y = baseD.angleTo(direction)*-1;
   newChair.position.copy(point);
   scene.add(newChair);
   renderer.render(scene,camera);
   return(newChair);
 }
 
-function dropWhiteCollar(){
-  
+function dropTypWorkBasicGroup(point = new THREE.Vector3(0,0,0),direction = new THREE.Vector3(1,0,0)){
+  baseD = new THREE.Vector3(1,0,0);
+  thisSet = typWorkBasicGroup.clone();
+  thisSet.rotation.y = baseD.angleTo(direction)*-1;
+  thisSet.position.copy(point);
+  scene.add(thisSet);
+  renderer.render(scene,camera);
 }
+
 ///Annotations
 
 function dropCircle(point,radius = 1,_group,_style){
