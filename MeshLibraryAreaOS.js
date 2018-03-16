@@ -81,12 +81,15 @@ function conTypWorkBasicGroup(){
   desk = deskDrawers.clone();
   deskLines = highlightEdges(desk.geometry,.1,0x33b7cc);
   chair = chairMesh.clone();
+  chairLines = highlightEdges(chair.geometry,.1,0x33b7cc);
   desk.position.x = 1.34;
   deskLines.position.x = 1.34;
   chair.rotation.y = -Math.PI;
   chair.position.x = 4;
+  chairLines.rotation.y = -Math.PI;
+  chairLines.position.x = 4;
   typWorkBasicGroup = new THREE.Group();
-  typWorkBasicGroup.add(desk,deskLines,chair);
+  typWorkBasicGroup.add(desk,deskLines,chair,chairLines);
   console.log(typWorkBasicGroup);
 }
 setTimeout(function () {
