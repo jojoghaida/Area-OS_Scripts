@@ -422,10 +422,10 @@ function mouseCasting(){
       if(thisSelection.children[i].type == "LineSegments"){
         console.log("line");
         console.log(thisSelection.children[i].material);
-        thisSelection.children[i].material = new THREE.LineBasicMaterial({ color: "white"});
+        thisSelection.children[i].material = new THREE.LineBasicMaterial({ color: "white", linewidth: .2 });
         console.log(thisSelection.children[i].material);
       }else{
-        thisSelection.children[i].material = new THREE.MeshBasicMaterial({color: "red"});        
+        thisSelection.children[i].material = new THREE.MeshBasicMaterial({color: "red"});
       }
     }
     // rayCatch.object.material = new THREE.MeshBasicMaterial({color: "red"});
