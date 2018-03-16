@@ -236,7 +236,7 @@ siteSectionLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/facade.json',
 function ( geometry, materials ) {
  siteSectionGeo = geometry;
- var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: "black", wireframe: false, transparent: true} );
+ var siteSectionMaterial = new THREE.MeshBasicMaterial( { color: 0x606060, wireframe: false, transparent: true} );
  siteFacadeMesh = new THREE.Mesh(geometry,siteSectionMaterial);
  thisSite.add(siteFacadeMesh);
  lowerFloors(siteFacadeMesh);
@@ -406,12 +406,16 @@ var layoutVecs = [
 
 /////////////
 floor3WorkDesks = layoutPts.length;
+var clickables = new THREE.Group();
+
 setTimeout(function(){
   console.log("pop");
   for(i=0; i<floor3WorkDesks; i++){
     console.log(i+"---------------------------");
-    dropTypWorkBasicGroup(layoutPts[i],layoutVecs[i]);
+    a = dropTypWorkBasicGroup(layoutPts[i],layoutVecs[i]);
+    clickables.add(a);
   }
+  scene.add(clickables);
 },1000);
 //floor 3 layout
 

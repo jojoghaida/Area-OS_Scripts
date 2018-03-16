@@ -276,6 +276,7 @@ function dropChairs(point = new THREE.Vector3(0,0,0),direction = new THREE.Vecto
   return(newChair);
 }
 
+
 function dropTypWorkBasicGroup(point = new THREE.Vector3(0,0,0),direction = new THREE.Vector3(1,0,0)){
   baseD = new THREE.Vector3(1,0,0);
   thisSet = typWorkBasicGroup.clone();
@@ -286,8 +287,7 @@ function dropTypWorkBasicGroup(point = new THREE.Vector3(0,0,0),direction = new 
     thisSet.rotation.y = baseD.angleTo(direction);
   }
   thisSet.position.copy(point);
-  scene.add(thisSet);
-  renderer.render(scene,camera);
+  return(thisSet);
 }
 
 ///Annotations

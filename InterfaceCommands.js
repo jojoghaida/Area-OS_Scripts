@@ -396,10 +396,10 @@ zoomButtons();
 //PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
 
 function mouseCasting(){
+  console.log("ray live");
   mouseRay = new THREE.Raycaster();
   mouse = new THREE.Vector2();
-  // areaoscanvas.addEventListener( 'mousemove', onMouseMove, false );
-
+  areaoscanvas.addEventListener( 'mousemove', onMouseMove, false );
   // rayIconGeo = new THREE.Geometry();
   // rayIconGeo.vertices.push(new THREE.Vector3(0,0,0),new THREE.Vector3(0,10,0))
   // rayIcon = new THREE.Line(rayIconGeo,new THREE.LineBasicMaterial({color: "red"}));
@@ -408,13 +408,23 @@ function mouseCasting(){
     mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
     mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
     mouseRay.setFromCamera(mouse,camera);
-    // rayCatch = mouseRay.intersectObjects(groupShapes.children);
-    if ( rayCatch.length > 0 ) {
-      // console.log(rayCatch[0].object.geometry.vertices[0]);
-      // rayIcon.position.set( 0, 0, 0 );
-      // rayIcon.lookAt( rayCatch[ 0 ].object.geometry.faces[0].normal);
-      // rayIcon.position.copy(new THREE.Vector3(0,0,0));
+    rayInter = mouseRay.intersectObjects(clickables.children,true);
+    rayCatch = null;
+    if ( rayInter.length > 0 ) {
+      rayCatch = rayInter[0];
+    }else{
+      rayCatch = rayInter;
     }
+    thisSelection = rayCatch.object.parent;
+    console.log(thisSelection);
+    for(i=0;i<thisSelection.children.length;i++){
+      thisSelection.children[i].material = new THREE.MeshBasicMaterial({color: "red"});
+    }
+    // rayCatch.object.material = new THREE.MeshBasicMaterial({color: "red"});
+    // rayCatch.object.material.color.b = 0;
+    // rayCatch.object.material.color.g = .2;
+    // rayCatch.object.material.color.r = 1;
     renderer.render(scene,camera);
   }
 }
+setTimeout(mouseCasting,3000);
