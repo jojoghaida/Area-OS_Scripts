@@ -91,7 +91,7 @@ function conTypWorkBasicGroup(){
 }
 setTimeout(function () {
   conTypWorkBasicGroup();
-  dropTypWorkBasicGroup();
+  // dropTypWorkBasicGroup();
 }, 1000);
 //site..
 // var siteLoader = new THREE.JSONLoader();
@@ -183,13 +183,13 @@ siteEgressLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/70a73598111b4631a829e5fd735fb8c4d2867c0d/egress.json',
 function ( geometry, materials ) {
  siteEgressGeo = geometry;
- var siteEgressMaterial = new THREE.MeshBasicMaterial( { color: 0xFFEB00, wireframe: false, transparent: true, opacity: 1, side: THREE.DoubleSide} );
+ var siteEgressMaterial = new THREE.MeshBasicMaterial({color: 0xFFEB00, wireframe: false, transparent: true, opacity: 1, side: THREE.DoubleSide});
  siteEgressMesh = new THREE.Mesh(geometry,siteEgressMaterial);
  thisSite.add(siteEgressMesh);
  var egressOutline = new THREE.Geometry();
  egressOutline.copy(siteEgressGeo);
  egressOutline.mergeVertices();
- thisSite.add(highlightEdges(egressOutline));
+ thisSite.add(highlightEdges(egressOutline,.1,0xad9f00));
 }
 );
 
@@ -314,6 +314,7 @@ setTimeout(loadSliderStyles,2000);
 
 //floor 3 layout
 var layoutPts = [
+   new THREE.Vector3(0,0,0),
    new THREE.Vector3(-85.0871209820751,0,37.0583272135598),
    new THREE.Vector3(-85.0871209820752,0,31.9333272135598),
    new THREE.Vector3(-85.0871209820752,0,26.8083272135598),
@@ -347,9 +348,16 @@ var layoutPts = [
    new THREE.Vector3(-15.8364042344378,0,31.0362236797482),
    new THREE.Vector3(-10.7114042344377,0,31.0362236797482),
    new THREE.Vector3(-5.58640423443771,0,31.0362236797482),
+   new THREE.Vector3(-5.32907051820075E-15,0,-5.12500000000004),
+   new THREE.Vector3(0,0,0),
+   new THREE.Vector3(2.8421709430404E-14,0,5.12500000000003),
+   new THREE.Vector3(2.8421709430404E-14,0,5.12500000000003),
+   new THREE.Vector3(5.6843418860808E-14,0,10.2500000000001),
+   new THREE.Vector3(5.6843418860808E-14,0,10.2500000000001),
 ];
 
 var layoutVecs = [
+   new THREE.Vector3(1,0,0),
    new THREE.Vector3(1,0,0),
    new THREE.Vector3(1,0,0),
    new THREE.Vector3(1,0,0),
@@ -383,7 +391,14 @@ var layoutVecs = [
    new THREE.Vector3(-7.47940078986096E-16,0,-1),
    new THREE.Vector3(-1.49588015797219E-15,0,-1),
    new THREE.Vector3(-2.99176031594439E-15,0,-1),
+   new THREE.Vector3(-1,0,-3.73970039493048E-15),
+   new THREE.Vector3(-1,0,-3.36573035543743E-15),
+   new THREE.Vector3(-1,0,-3.36573035543743E-15),
+   new THREE.Vector3(1,0,0),
+   new THREE.Vector3(-1,0,-3.36573035543743E-15),
+   new THREE.Vector3(1,0,0),
 ];
+
 
 
 
