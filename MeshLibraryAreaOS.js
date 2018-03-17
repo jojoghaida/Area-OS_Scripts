@@ -13,16 +13,17 @@ loadKarla();
 //stage camera//
 //chair & chair functions
 var myChairLoader = new THREE.JSONLoader();
-var chairMesh = null;
+var chairMesh = new THREE.Group();
 var chairGeo = null;
 myChairLoader.load(
   'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicChair.json',
   function (geometry, materials) {
-    chairGeo = geometry;
     var material = new THREE.MeshBasicMaterial( { color: 0x0092ff } );
-    chairMesh = new THREE.Mesh(geometry,material);
-    // scene.add(chairMesh);
-    // renderer.render(scene,camera);
+    mesh = new THREE.Mesh(geometry,material);
+    lines = highlightEdges(mesh.geometry,.1,0x33b7cc);
+    chairMesh.add(mesh,lines);
+    chairMesh.userData.elementType = "Furniture";
+    chairMesh.userData.elementName = "ChairBasic";
   }
 );
 
@@ -63,33 +64,33 @@ function (geometry, materials) {
 //conference table//
 
 //desk w/ drawers
-var deskDrawersLoader = new THREE.JSONLoader();
-var deskDrawers = null;
-deskDrawersLoader.load(
+var DeskBasicLoader = new THREE.JSONLoader();
+var DeskBasic = null;
+DeskBasicLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/desk.json',
 function (geometry, materials) {
   var material = new THREE.MeshBasicMaterial( { color: 0x3ad3ea , transparent: false, opacity: 1} );
-  deskDrawers = new THREE.Mesh(geometry,material);
-  // deskDrawers.position.x = 15;
-  // scene.add(deskDrawers);
-  // renderer.render(scene,camera);
+  mesh = new THREE.Mesh(geometry,material);
+  lines = highlightEdges(mesh.geometry,.1,0x33b7cc);
+  DeskBasic = new THREE.Group();
+  DeskBasic.add(mesh,lines);
+  DeskBasic.userData.elementType = "Furniture";
+  DeskBasic.userData.elementName = "DeskBasic";
 });
+
 //desk w/ drawers
 var typWorkBasicGroup = null;
 
 function conTypWorkBasicGroup(){
-  desk = deskDrawers.clone();
-  deskLines = highlightEdges(desk.geometry,.1,0x33b7cc);
+  desk = DeskBasic.clone();
   chair = chairMesh.clone();
-  chairLines = highlightEdges(chair.geometry,.1,0x33b7cc);
   desk.position.x = 1.34;
-  deskLines.position.x = 1.34;
   chair.rotation.y = -Math.PI;
   chair.position.x = 4;
-  chairLines.rotation.y = -Math.PI;
-  chairLines.position.x = 4;
   typWorkBasicGroup = new THREE.Group();
-  typWorkBasicGroup.add(desk,deskLines,chair,chairLines);
+  typWorkBasicGroup.userData.elementType = "FurnitureSet";
+  typWorkBasicGroup.userData.elementName = "DeskW/Chair";
+  typWorkBasicGroup.add(desk,chair);
   console.log(typWorkBasicGroup);
 }
 setTimeout(function () {
@@ -412,9 +413,7 @@ floor3WorkDesks = layoutPts.length;
 var clickables = new THREE.Group();
 
 setTimeout(function(){
-  console.log("pop");
   for(i=0; i<floor3WorkDesks; i++){
-    console.log(i+"---------------------------");
     a = dropTypWorkBasicGroup(layoutPts[i],layoutVecs[i]);
     clickables.add(a);
   }

@@ -280,7 +280,6 @@ function dropChairs(point = new THREE.Vector3(0,0,0),direction = new THREE.Vecto
 function dropTypWorkBasicGroup(point = new THREE.Vector3(0,0,0),direction = new THREE.Vector3(1,0,0)){
   baseD = new THREE.Vector3(1,0,0);
   thisSet = typWorkBasicGroup.clone();
-
   if(direction.z < 0){
     thisSet.rotation.y = baseD.angleTo(direction)*-1;
   }else{
@@ -294,10 +293,11 @@ function dropTypWorkBasicGroup(point = new THREE.Vector3(0,0,0),direction = new 
 
 function dropCircle(point,radius = 1,_group,_style){
   var geometry = new THREE.CircleGeometry( radius, 32 );
-  var material = new THREE.MeshBasicMaterial( { color: 0x26D8A5/*0x7ce7c9*/ } );
+  var material = new THREE.MeshBasicMaterial( { color: 0x26D8A5 /*0x7ce7c9*/ } );
   var circle = new THREE.Mesh( geometry, material );
   circle.position.copy(point);
   circle.rotation.x = -Math.PI/2
+  // return(circle)
   scene.add( circle );
   renderer.render(scene,camera);
   }

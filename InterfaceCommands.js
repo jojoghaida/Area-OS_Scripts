@@ -415,24 +415,49 @@ function mouseCasting(){
     }else{
       rayCatch = rayInter;
     }
-    thisSelection = rayCatch.object.parent;
-    console.log(thisSelection);
-    for(i=0;i<thisSelection.children.length;i++){
-      console.log(thisSelection.children[i].type);
-      if(thisSelection.children[i].type == "LineSegments"){
-        console.log("line");
-        console.log(thisSelection.children[i].material);
-        thisSelection.children[i].material = new THREE.LineBasicMaterial({ color: "pink", linewidth: .1 });
-        console.log(thisSelection.children[i].material);
-      }else{
-        thisSelection.children[i].material = new THREE.MeshBasicMaterial({color: "red"});
-      }
+
+    console.log(rayCatch.object.parent.userData.elementType);
+
+    if(rayCatch.object.parent.userData.elementType == "FurnitureSet"){
+      thisSelection = rayCatch.object.parent;
+      console.log("1");
+    }else {
+      console.log(rayCatch.object.parent.parent);
+      thisSelection = rayCatch.object.parent.parent;
+      console.log("2");
     }
-    // rayCatch.object.material = new THREE.MeshBasicMaterial({color: "red"});
-    // rayCatch.object.material.color.b = 0;
-    // rayCatch.object.material.color.g = .2;
-    // rayCatch.object.material.color.r = 1;
+
+    for(i=0;i<thisSelection.children.length;i++){
+      console.log(i);
+      function paintSelection(paintChild){
+        console.log("painting...", paintChild);
+        if(paintChild.type == "LineSegments"){
+          console.log("lines");
+          paintChild.material = new THREE.LineBasicMaterial({ color: "pink", linewidth: .1 });
+        }else{
+          paintChild.material = new THREE.MeshBasicMaterial({color: "red"});
+        }
+      }
+      if(thisSelection.children[i].children.length != 0){
+        console.log("child has children");
+        for(z=0;z<thisSelection.children[i].children.length;z++){
+          paintSelection(thisSelection.children[i].children[z]);
+        }
+      }else{paintSelection(thisSelection.children[i]);}
+
+    }
     renderer.render(scene,camera);
   }
 }
 setTimeout(mouseCasting,3000);
+
+
+// sprites
+function addSprite(pos){
+  var spriteMap = dropCircle();
+  // spriteMap.position.y = 10;
+  var spriteMaterial = new THREE.SpriteMaterial( { map: spriteMap, color: 0xffffff } );
+  var sprite = new THREE.Sprite( spriteMaterial );
+  scene.add( sprite );
+}
+// sprites
