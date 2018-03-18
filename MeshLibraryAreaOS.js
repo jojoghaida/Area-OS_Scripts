@@ -35,20 +35,8 @@ if(chairMesh !== null){
 renderer.render(scene,camera);
 };
 
-var alsoChair = null;
-var copyChair = function(){
-  if(chairMesh !== null){
-    alsoChair = chairMesh.clone();
-    alsoChair.rotation.y = 1
-    scene.add(alsoChair);
-    moveChair(alsoChair);
-  }
-}
-
-function moveChair(chairToMove){
-  chairToMove.position.z = 4;
-}
 //chair & chair functions//
+
 //conference table
 var conferenceTableLoader = new THREE.JSONLoader();
 var conferenceTable4_6 = null;

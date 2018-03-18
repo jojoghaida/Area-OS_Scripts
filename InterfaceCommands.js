@@ -433,9 +433,9 @@ function mouseCasting(){
         console.log("painting...", paintChild);
         if(paintChild.type == "LineSegments"){
           console.log("lines");
-          paintChild.material = new THREE.LineBasicMaterial({ color: "pink", linewidth: .1 });
+          paintChild.material = userSelectionMaterials.line;
         }else{
-          paintChild.material = new THREE.MeshBasicMaterial({color: "red"});
+          paintChild.material = userSelectionMaterials.mesh;
         }
       }
       if(thisSelection.children[i].children.length != 0){
@@ -444,13 +444,39 @@ function mouseCasting(){
           paintSelection(thisSelection.children[i].children[z]);
         }
       }else{paintSelection(thisSelection.children[i]);}
-
     }
     renderer.render(scene,camera);
   }
 }
 setTimeout(mouseCasting,3000);
 
+
+var userSelection = new THREE.Group();
+var userSelectionMaterials = {
+  mesh: new THREE.MeshBasicMaterial({color: "red", transparent: true, opacity: 1}),
+  line: new THREE.LineBasicMaterial({ color: "pink", linewidth: .1 }),
+}
+var selBool = 1;
+var selFadeBool = 1;
+
+function liveSelector(){
+  current = userSelectionMaterials.mesh.opacity;
+  if(selFadeBool==0){
+    userSelectionMaterials.mesh.opacity = Number((userSelectionMaterials.mesh.opacity+.01).toFixed(2));
+    if(userSelectionMaterials.mesh.opacity == 1){selFadeBool = 1}
+  }else{
+    userSelectionMaterials.mesh.opacity = Number((userSelectionMaterials.mesh.opacity-.01).toFixed(2));
+    if(userSelectionMaterials.mesh.opacity == .5){selFadeBool = 0}
+  }
+  renderer.render(scene,camera);
+  if(selBool == 1){
+    var runLiveSelector = setTimeout(liveSelector,.1);
+  }else{
+    clearInterval(runLiveSelector);
+    selFadeBool = 1;
+  }
+}
+liveSelector(1);
 
 // sprites
 function addSprite(pos){
