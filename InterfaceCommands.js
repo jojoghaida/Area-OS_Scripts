@@ -426,36 +426,33 @@ function mouseCasting(){
       thisSelection = rayCatch.object.parent.parent;
       console.log("2");
     }
-
+    if(thisSelection.userData.status == "occupied"){return}
+    // paintObjects(thisSelection,userSelectionMaterials);
     for(i=0;i<thisSelection.children.length;i++){
-      console.log(i);
-      function paintSelection(paintChild){
-        console.log("painting...", paintChild);
-        if(paintChild.type == "LineSegments"){
-          console.log("lines");
-          paintChild.material = userSelectionMaterials.line;
-        }else{
-          paintChild.material = userSelectionMaterials.mesh;
-        }
-      }
       if(thisSelection.children[i].children.length != 0){
         console.log("child has children");
         for(z=0;z<thisSelection.children[i].children.length;z++){
-          paintSelection(thisSelection.children[i].children[z]);
+          paintObjects(thisSelection.children[i].children[z],userSelectionMaterials);
         }
-      }else{paintSelection(thisSelection.children[i]);}
+      }else{paintObjects(thisSelection.children[i],userSelectionMaterials);}
     }
     renderer.render(scene,camera);
   }
 }
 setTimeout(mouseCasting,3000);
 
+function paintObjects(paintChild,style){
+  console.log("painting...", paintChild);
+  if(paintChild.type == "LineSegments"){
+    console.log("lines");
+    paintChild.material = style.line;
+  }else{
+    paintChild.material = style.mesh;
+  }
+}
 
 var userSelection = new THREE.Group();
-var userSelectionMaterials = {
-  mesh: new THREE.MeshBasicMaterial({color: "red", transparent: true, opacity: 1}),
-  line: new THREE.LineBasicMaterial({ color: "pink", linewidth: .1 }),
-}
+
 var selBool = 1;
 var selFadeBool = 1;
 

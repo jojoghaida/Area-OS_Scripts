@@ -20,7 +20,7 @@ myChairLoader.load(
   function (geometry, materials) {
     var material = new THREE.MeshBasicMaterial( { color: 0x0092ff } );
     mesh = new THREE.Mesh(geometry,material);
-    lines = highlightEdges(mesh.geometry,.1,0x33b7cc);
+    lines = highlightEdges(mesh.geometry,.1,0x9ed5ff);
     chairMesh.add(mesh,lines);
     chairMesh.userData.elementType = "Furniture";
     chairMesh.userData.elementName = "ChairBasic";
@@ -406,7 +406,7 @@ setTimeout(function(){
     clickables.add(a);
   }
   scene.add(clickables);
-},1000);
+},2000);
 //floor 3 layout
 
 var openPlanGridImport = [

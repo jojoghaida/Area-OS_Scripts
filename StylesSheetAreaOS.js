@@ -3,6 +3,16 @@ var aOS_ColorStyles = {
   aOS_OSblue: "#0851a4",
   basicChairColor: "#0092ff",
 };
+var userSelectionMaterials = {
+  mesh: new THREE.MeshBasicMaterial({color: "red", transparent: true, opacity: 1, /*envMap: "reflection"*/}),
+  line: new THREE.LineBasicMaterial({ color: "pink", linewidth: .1 }),
+}
+var occupiedMaterials = {
+  mesh: new THREE.MeshBasicMaterial({color: "white", transparent: true, opacity: .8, /*envMap: "reflection"*/}),
+  line: new THREE.LineBasicMaterial({ color: "grey", linewidth: .1 }),
+}
+
+
 //line Styles
 var aOS_LineStyles = {
 
