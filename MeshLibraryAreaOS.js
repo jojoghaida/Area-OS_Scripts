@@ -119,7 +119,6 @@ function conTypConferenceGroup(){
 
   for(i=0;i<chairPos.length;i++){
     chair = chairMesh.clone();
-    console.log("herherherheh",chairPos[i]);
     chair.position.x = chairPos[i].pos.x;
     chair.position.z = chairPos[i].pos.z;
     chair.rotation.y = chairPos[i].rot;
@@ -314,7 +313,7 @@ function loadSliderStyles(){
     function: 0,
   }
 }
-setTimeout(loadSliderStyles,2000);
+setTimeout(loadSliderStyles,4000);
 //SLIDER OBJECTS
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

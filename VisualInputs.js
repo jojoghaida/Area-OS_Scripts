@@ -4,7 +4,7 @@ var inputsTwoScene = document.getElementById('inputCanvas');
 var sW = inputsTwoScene.offsetWidth
 var sH = inputsTwoScene.offsetHeight
 var params = {width: sW, height: sH};
-var two = new Two(params).appendTo(inputsTwoScene);
+var twoJS = new Two(params).appendTo(inputsTwoScene);
 
 //mouse gestures*
 inputsTwoScene.addEventListener('mousemove',disableOrbitCam);
@@ -44,55 +44,55 @@ function sliderInput(thisSliderStyle){
   tickSpan = 10;
   leftWhiteSpace = 50;
 
-  inputLabel = two.makeText('Chair(s)',leftWhiteSpace+60,sH*.37); //get glyph size to get y-value
+  inputLabel = twoJS.makeText('Chair(s)',leftWhiteSpace+60,sH*.37); //get glyph size to get y-value
   inputLabel.fill = colorStyle;
   inputLabel.size = 24;
   inputLabel.family = 'Karla';
   inputLabel.alignment = 'left';
 
 
-  selectorText = two.makeText(0,leftWhiteSpace,sH*.25);
+  selectorText = twoJS.makeText(0,leftWhiteSpace,sH*.25);
   selectorText.fill = colorStyle;
   selectorText.size = 18;
   selectorText.family = 'Karla';
   selectorText.value = 0;
 
-  selectorGlyph = two.makeStar(5*tickSpan,leftWhiteSpace,10,null,3);
+  selectorGlyph = twoJS.makeStar(5*tickSpan,leftWhiteSpace,10,null,3);
   selectorGlyph.rotation = Math.PI;
   selectorGlyph.noStroke();
   selectorGlyph.fill = colorStyle;
 
   tickerGroup = []
 
-  var line = two.makeLine(0,sH,sW,sH);
+  var line = twoJS.makeLine(0,sH,sW,sH);
   line.linewidth = 3;
   line.stroke = colorStyle;
 
   for(i=0;i<tickQuan;i++){
     if(i/bigTick % 1 == 0){
-      tick = two.makeLine(i*tickSpan+leftWhiteSpace,sH,i*tickSpan+leftWhiteSpace,sH-15);
+      tick = twoJS.makeLine(i*tickSpan+leftWhiteSpace,sH,i*tickSpan+leftWhiteSpace,sH-15);
       tick.stroke = colorStyle;
-      integer = two.makeText(i,i*tickSpan+leftWhiteSpace,sH-25);
+      integer = twoJS.makeText(i,i*tickSpan+leftWhiteSpace,sH-25);
       integer.fill = colorStyle;
       integer.family = 'Karla';
       tickerGroup.push(tick,integer);
     }else{
-      tick = two.makeLine(i*tickSpan+leftWhiteSpace,sH,i*tickSpan+leftWhiteSpace,sH-10);
+      tick = twoJS.makeLine(i*tickSpan+leftWhiteSpace,sH,i*tickSpan+leftWhiteSpace,sH-10);
       tick.stroke = colorStyle;
       tickerGroup.push(tick);
     }
   }
 
-  inputSliderGroup = two.makeGroup(tickerGroup);
+  inputSliderGroup = twoJS.makeGroup(tickerGroup);
 
   // submit styles
   submitThreshold = 200;
-  swipeUpGlyph = two.makeStar(sW-40,15,5,null,3);
+  swipeUpGlyph = twoJS.makeStar(sW-40,15,5,null,3);
   // swipeUpGlyph.rotation = Math.PI;
   swipeUpGlyph.noStroke();
   swipeUpGlyph.fill = colorStyle;
 
-  swipeUpTxt = two.makeText('submit',sW-40,30);
+  swipeUpTxt = twoJS.makeText('submit',sW-40,30);
   swipeUpTxt.fill = colorStyle;
   swipeUpTxt.size = 12;
   swipeUpTxt.family = 'Karla';
@@ -101,18 +101,18 @@ function sliderInput(thisSliderStyle){
   clrStop1 = new Two.Stop(.9,'white',0);
   clrStop2 = new Two.Stop(1,colorStyle,1);
   clrStop3 = new Two.Stop(.75,colorStyle,1);
-  swipeUpGradient = two.makeLinearGradient(sW,-sH/2,sW,sH/2,clrStop1,clrStop2);
-  submitRec = two.makeRectangle(sW/2,sH/2,sW,sH);
+  swipeUpGradient = twoJS.makeLinearGradient(sW,-sH/2,sW,sH/2,clrStop1,clrStop2);
+  submitRec = twoJS.makeRectangle(sW/2,sH/2,sW,sH);
   submitRec.fill = swipeUpGradient;
 
   ungrade = null;
   sendInput = null;
 
-  two.update();
+  twoJS.update();
 }
 
 // window.onload = sliderInput(basicChairSL);
-setTimeout(function(){sliderInput(basicChairSL)},2000);
+setTimeout(function(){sliderInput(basicChairSL)},5000);
 
 //gesture effects*
 
@@ -146,7 +146,7 @@ function handleTouchMove(evt) {
             backPedalX = xDiff;
             selectorText.value = Math.round(Math.abs(xAbsPos/tickSpan));
             if(drawBool == false){drawElements();}
-            two.update();
+            twoJS.update();
         } else {
             /* right swipe */
             if(xDiff<backPedalX){xAbsPos += Math.abs(xDiff-backPedalX);}else{xAbsPos += -(Math.abs(xDiff-backPedalX));}
@@ -155,14 +155,14 @@ function handleTouchMove(evt) {
             backPedalX = xDiff;
             selectorText.value = Math.round(Math.abs(xAbsPos/tickSpan));
             if(drawBool == false){drawElements();}
-            two.update();
+            twoJS.update();
         }
     } else {
         if ( yDiff > 0 ) {
             /* up swipe */
             clrStop1.offset = .9-(yDiff/submitThreshold);
             clrStop2.offset = 1;
-            two.update();
+            twoJS.update();
             if(yDiff>submitThreshold){ //submitThreshold<<
               clrStop1.offset = 0;
               removeInputListeners();
@@ -182,18 +182,18 @@ function handleTouchEnd(evt){
 function unGradient(){
   if(clrStop1.offset < .9 && clrStop1.offset != 0){
     clrStop1.offset += .01;
-    two.update();
+    twoJS.update();
   }else{clearInterval(ungrade);}
 }
 
 function submital(){
   if(clrStop2.offset > 0){
     clrStop2.offset -= .1;
-    two.update();
+    twoJS.update();
   }else{
     initInputTouchListeners();
     clearInterval(sendInput);
-    two.update();
+    twoJS.update();
   }
   clearInterval(editMainCrv); // temporary for testing; stops propogation
   editMainCrv = null; // temporary for testing; stops propogation
@@ -208,7 +208,7 @@ function submital(){
 //   }
 //   xAbsPos += correctDifference;
 //   inputSliderGroup.translation.x = xAbsPos;
-//   two.update();
+//   twoJS.update();
 //   selectorText.value = xAbsPos/tickSpan; // delete
 //
 // }
@@ -228,21 +228,21 @@ function removeInputListeners(){
 
 function expandInput(){
   bottomInput.style.height = screen.height - feedbackTwoScene.offsetHeight + "px";
-  two.clear();
-  two.update();
+  twoJS.clear();
+  twoJS.update();
 
-  areaOStoo = two.makeText("Existing Spaces >",15,35);
+  areaOStoo = twoJS.makeText("Existing Spaces >",15,35);
   areaOStoo.fill = aOS_ColorStyles.aOS_OSblue;
   areaOStoo.size = 18;
   areaOStoo.family = 'Karla';
   areaOStoo.alignment = 'left';
 
   // areaOStoo.value = "Switch to desk rental service";
-  two.update();
+  twoJS.update();
 
 }
 
 function shrinkInput(){
-  two.clear();
+  twoJS.clear();
   bottomInput.style.height = "100px";
 }
