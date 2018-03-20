@@ -281,15 +281,9 @@ function randomOccupy(object){
   var r = Math.random();
   if(r>.4){
     object.userData.status = "occupied";
-    console.log();
-    console.log("//////////////",object);
     if(object.children != 0){
-      console.log("!=");
       for(t=0;t<object.children.length;t++){
-        console.log(t);
         for(o=0;o<object.children[t].children.length;o++){
-          console.log("this is o");
-          console.log(object.children[t].children[o]);
           paintObjects(object.children[t].children[o],occupiedMaterials);
           scene.add(object);
         }
@@ -301,9 +295,9 @@ function randomOccupy(object){
   // return(object);
 }
 //TEMPORARY
-function dropTypWorkBasicGroup(point = new THREE.Vector3(0,0,0),direction = new THREE.Vector3(1,0,0)){
+function dropSet(typ,point = new THREE.Vector3(0,0,0),direction = new THREE.Vector3(1,0,0)){
   baseD = new THREE.Vector3(1,0,0);
-  thisSet = typWorkBasicGroup.clone();
+  thisSet = typ.clone();
   if(direction.z < 0){
     thisSet.rotation.y = baseD.angleTo(direction)*-1;
   }else{

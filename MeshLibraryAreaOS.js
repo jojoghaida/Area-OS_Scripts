@@ -1,5 +1,6 @@
 //MESH LIBRARY//////////////////////////////////////////////////////////////
 var thisSite = new THREE.Group();
+
 // fonts
 fontKarla_Reg = undefined;
 function loadKarla(){
@@ -8,66 +9,65 @@ function loadKarla(){
   					fontKarla_Reg = response;} );
 }
 loadKarla();
-// fonts
-//swingCamAxon();
-//stage camera//
-//chair & chair functions
-var myChairLoader = new THREE.JSONLoader();
-var chairMesh = new THREE.Group();
-var chairGeo = null;
-myChairLoader.load(
-  'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicChair.json',
-  function (geometry, materials) {
-    var material = new THREE.MeshBasicMaterial( { color: 0x0092ff } );
-    mesh = new THREE.Mesh(geometry,material);
-    lines = highlightEdges(mesh.geometry,.1,0x9ed5ff);
-    chairMesh.add(mesh,lines);
-    chairMesh.userData.elementType = "Furniture";
-    chairMesh.userData.elementName = "ChairBasic";
-  }
-);
 
-var animate = function (){
-requestAnimationFrame(animate);
-if(chairMesh !== null){
-  chairMesh.rotation.y += 0.01;
+var loadFurnitureFamilies = function(){
+  q = (loaderQue - loadBasicsList.length)*-1;
+  style = loaderBasicsVars[q][0];//
+  link = loaderBasicsVars[q][1];//
+  loader = new THREE.JSONLoader();
+  group = new THREE.Group();
+  group.name = style.name;
+  loader.load(
+    link,
+    function (geometry) {
+      material = new THREE.MeshBasicMaterial( { color: 0x0092ff } );
+      mesh = new THREE.Mesh(geometry,style.styles.mesh);
+      lines = highlightEdges(mesh.geometry,.1,style.styles.line.color);
+      group.add(mesh,lines);
+      group.userData = style.metaData;
+      console.log(loaderQue);//
+      loaderQue--;//
+      if(loaderQue!=0){loadFurnitureFamilies();}else{
+        console.log("yo");
+        setLoadedFurniture();
+      }//
+    });
+    // return(group);
+    loadBasicsList[q] = group;
+    console.log(loadBasicsList);
 }
-renderer.render(scene,camera);
-};
 
-//chair & chair functions//
+var chairMesh,DeskBasic,table;
+function setLoadedFurniture(){
+  console.log("GFGDGFDGFDG");
+  chairMesh = loadBasicsList[0];
+  DeskBasic = loadBasicsList[1];
+  table = loadBasicsList[2];
+}
+var loadBasicsList = [chairMesh,DeskBasic,table];
+var loaderBasicsVars = [
+  [metaBasicChair,'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicChair.json'],
+  [metaBasicDesk,'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/desk.json'],
+  [metaBasicTable,'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicConferenceTable4to6.json'],
+]
+var loaderQue = loadBasicsList.length;
+loadFurnitureFamilies();
 
-//conference table
-var conferenceTableLoader = new THREE.JSONLoader();
-var conferenceTable4_6 = null;
-conferenceTableLoader.load(
-'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicConferenceTable4to6.json',
-function (geometry, materials) {
-  var material = new THREE.MeshBasicMaterial( { color: 0xc26bff } );
-  conferenceTable4_6 = new THREE.Mesh(geometry,material);
-  conferenceTable4_6.position.x = 3;
-  // scene.add(conferenceTable4_6);
-  // renderer.render(scene,camera);
-});
-//conference table//
+// chairMesh = loadFurnitureFamily(
+//   metaBasicChair,'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicChair.json');
+//
+// setTimeout(function(){
+//   DeskBasic = loadFurnitureFamily(metaBasicDesk,'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/desk.json')
+// },1000);
+//
+// setTimeout(function(){
+//   table = loadFurnitureFamily(metaBasicTable,'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/basicConferenceTable4to6.json')
+// },1500);
 
-//desk w/ drawers
-var DeskBasicLoader = new THREE.JSONLoader();
-var DeskBasic = null;
-DeskBasicLoader.load(
-'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/desk.json',
-function (geometry, materials) {
-  var material = new THREE.MeshBasicMaterial( { color: 0x3ad3ea , transparent: false, opacity: 1} );
-  mesh = new THREE.Mesh(geometry,material);
-  lines = highlightEdges(mesh.geometry,.1,0x33b7cc);
-  DeskBasic = new THREE.Group();
-  DeskBasic.add(mesh,lines);
-  DeskBasic.userData.elementType = "Furniture";
-  DeskBasic.userData.elementName = "DeskBasic";
-});
-
-//desk w/ drawers
-var typWorkBasicGroup = null;
+var typWorkBasicGroup = new THREE.Group();
+typWorkBasicGroup.name = "Work Stool";
+typWorkBasicGroup.userData.elementType = "furniture set";
+typWorkBasicGroup.userData.elementName = "DeskW/Chair";
 
 function conTypWorkBasicGroup(){
   desk = DeskBasic.clone();
@@ -75,38 +75,63 @@ function conTypWorkBasicGroup(){
   desk.position.x = 1.34;
   chair.rotation.y = -Math.PI;
   chair.position.x = 4;
-  typWorkBasicGroup = new THREE.Group();
-  typWorkBasicGroup.userData.elementType = "FurnitureSet";
-  typWorkBasicGroup.userData.elementName = "DeskW/Chair";
   typWorkBasicGroup.add(desk,chair);
-  console.log(typWorkBasicGroup);
 }
 setTimeout(function () {
   conTypWorkBasicGroup();
-  // dropTypWorkBasicGroup();
-}, 1000);
-//site..
-// var siteLoader = new THREE.JSONLoader();
-// var siteMesh = null;
-// var siteGeo = null;
-// siteLoader.load(
-//   'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/siteOutline.json',
-//  function ( geometry, materials ) {
-//    siteGeo = geometry;
-//    var siteMaterial = new THREE.MeshBasicMaterial( { color: 0x000000 , wireframe: true, transparent: true} );
-//    siteMesh = new THREE.Mesh(geometry,siteMaterial);
-//    scene.add(siteMesh);
-//    renderer.render(scene,camera);
-//    //highlightEdges(siteGeo);
-//  }
-// );
-// function highlightEdges(outlineThis){
-//   var eGeometry = new THREE.EdgesGeometry(outlineThis);
-//   var eMaterial = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
-//   var edges = new THREE.LineSegments(eGeometry,eMaterial);
-//   scene.add(edges);
-//   renderer.render(scene, camera);
-// }
+}, 4000);
+
+var typConferenceGroup = new THREE.Group();
+typConferenceGroup.name = "Conference Table & Chairs";
+typConferenceGroup.userData.elementType = "FurnitureSet";
+typConferenceGroup.userData.elementName = "DeskW/Chair";
+
+function conTypConferenceGroup(){
+  table = table.clone();
+  typConferenceGroup.add(table);
+
+  chairPos = [
+    one = {
+      pos: new THREE.Vector3(0,0,-4.63),
+      rot: -Math.PI/2
+    },
+    two = {
+      pos: new THREE.Vector3(-2.88,0,-1.62),
+      rot: 0
+    },
+    three = {
+      pos: new THREE.Vector3(-2.88,0,1.62),
+      rot: 0
+    },
+    four = {
+      pos: new THREE.Vector3(0,0,4.63),
+      rot: Math.PI/2
+    },
+    five = {
+      pos: new THREE.Vector3(2.88,0,1.62),
+      rot: -Math.PI
+    },
+    six = {
+      pos: new THREE.Vector3(2.88,0,-1.62),
+      rot: -Math.PI
+    },
+  ];
+
+  for(i=0;i<chairPos.length;i++){
+    chair = chairMesh.clone();
+    console.log("herherherheh",chairPos[i]);
+    chair.position.x = chairPos[i].pos.x;
+    chair.position.z = chairPos[i].pos.z;
+    chair.rotation.y = chairPos[i].rot;
+    //
+    typConferenceGroup.add(chair);
+  }
+}
+setTimeout(function () {
+  conTypConferenceGroup();
+}, 3000);
+
+
 //siteColumns
 var siteColumnsLoader = new THREE.JSONLoader();
 var siteColumnsMesh = null;
@@ -248,24 +273,14 @@ function ( geometry, materials ) {
  lowerFloors(siteGlazingMesh);
 }
 );
-//siteOutline
-// var siteOutlineLoader = new THREE.JSONLoader();
-// var siteOutlineMesh = null;
-// var siteOutlineGeo = null;
-// siteOutlineLoader.load(
-// 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/master/siteOutline.json',
-// function ( geometry, materials ) {
-//  siteOutlineGeo = geometry;
-//  highlightEdges(siteOutlineGeo);
-// }
-// );
+
 function highlightEdges(outlineThis, lineW = .2, color = "black"){
-var eGeometry = new THREE.EdgesGeometry(outlineThis);
-var eMaterial = new THREE.LineBasicMaterial({ color: color, linewidth: lineW, transparent: true });
-var edges = new THREE.LineSegments(eGeometry,eMaterial);
-scene.add(edges);
-renderer.render(scene,camera);
-return(edges);
+  var eGeometry = new THREE.EdgesGeometry(outlineThis);
+  var eMaterial = new THREE.LineBasicMaterial({ color: color, linewidth: lineW, transparent: true });
+  var edges = new THREE.LineSegments(eGeometry,eMaterial);
+  scene.add(edges);
+  renderer.render(scene,camera);
+  return(edges);
 }
 
 function lowerFloors(mesh,arrayCount = 15, floorHeight = 15){
@@ -305,6 +320,7 @@ setTimeout(loadSliderStyles,2000);
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 //floor 3 layout
+  //Work Stool
 var layoutPts = [
    new THREE.Vector3(0,0,0),
    new THREE.Vector3(-85.0871209820751,0,37.0583272135598),
@@ -392,21 +408,39 @@ var layoutVecs = [
 ];
 
 
+  //Work Stool
+  //Conference TableL
+  var conferenceLayoutPts = [
+     new THREE.Vector3(-69.1474193382572,0,29.7905756843282),
+     new THREE.Vector3(-68.9229735246346,0,-51.0688106430911),
+     new THREE.Vector3(-16.7857724225218,0,5.92327153330748),
+     new THREE.Vector3(17.4094768833174,0,5.92327153330748),
+  ];
 
+  var conferenceLayoutVecs = [
+     new THREE.Vector3(0.707106781186553,0,0.707106781186542),
+     new THREE.Vector3(1,0,0),
+     new THREE.Vector3(1,0,0),
+     new THREE.Vector3(1,0,0),
+  ];
 
+  //Conference TableL
+  /////////////
+  floor3WorkDesks = layoutPts.length;
+  floor3Conference = conferenceLayoutPts.length;
+  var clickables = new THREE.Group();
 
-
-/////////////
-floor3WorkDesks = layoutPts.length;
-var clickables = new THREE.Group();
-
-setTimeout(function(){
-  for(i=0; i<floor3WorkDesks; i++){
-    a = dropTypWorkBasicGroup(layoutPts[i],layoutVecs[i]);
-    clickables.add(a);
-  }
-  scene.add(clickables);
-},2000);
+  setTimeout(function(){
+    for(i=0; i<floor3WorkDesks; i++){
+      a = dropSet(typWorkBasicGroup,layoutPts[i],layoutVecs[i]);
+      clickables.add(a);
+    }
+    for(i=0; i<floor3Conference; i++){
+      a = dropSet(typConferenceGroup,conferenceLayoutPts[i],conferenceLayoutVecs[i]);
+      clickables.add(a);
+    }
+    scene.add(clickables);
+  },5000);
 //floor 3 layout
 
 var openPlanGridImport = [
@@ -1276,44 +1310,3 @@ for(i = 0; i < openPlanGridImport.length; i++){
     }
   }
 }
-
-//myMatrix {}
-  //row {}
-    //column {}
-      //point {}
-      //weight {}
-
-// function constructMatrixFrom2DArray(inputMatrix){
-//
-//   for(i = 0; i < inputMatrix.length; i++){
-//     var row = new Object(),
-//     nameString = i;
-//     this.[nameString] = function(inputMatrix[i]){
-//
-//     }
-//     // var obj = new Object(),
-//     //   nameString = "row" + i;
-//     //   this.obj[nameString] = 2;
-//     // for(z = 0; z < inputMatrix[i].length; i++){
-//     //   if(inputMatrix[i][z] != null){
-//     //
-//     //   }
-//     // }
-//     // geometry = new THREE.Geometry();
-//     // geometry.vertices.push(inputMatrix[i]);
-//     // point = new THREE.Points(geometry, ptDefaultMaterial);
-//     // openPlanGridPts.push(point);
-//     // scene.add(point);
-//   }
-//
-//
-// }
-
-
-
-// var myMatrix = new constructMatrixFrom2DArray(openPlanGridImport); // input array matrix
-
-
-//Glyphs
-
-//Glyphs

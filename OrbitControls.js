@@ -406,13 +406,9 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 		}
 
 		if ( delta > 0 ) {
-
 			scope.dollyOut();
-
 		} else {
-
 			scope.dollyIn();
-
 		}
 
 	}

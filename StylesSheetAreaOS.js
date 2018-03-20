@@ -3,15 +3,55 @@ var aOS_ColorStyles = {
   aOS_OSblue: "#0851a4",
   basicChairColor: "#0092ff",
 };
+////////////////////////////////////////////////////
 var userSelectionMaterials = {
   mesh: new THREE.MeshBasicMaterial({color: "red", transparent: true, opacity: 1, /*envMap: "reflection"*/}),
   line: new THREE.LineBasicMaterial({ color: "pink", linewidth: .1 }),
 }
+
 var occupiedMaterials = {
   mesh: new THREE.MeshBasicMaterial({color: "white", transparent: true, opacity: .8, /*envMap: "reflection"*/}),
   line: new THREE.LineBasicMaterial({ color: "grey", linewidth: .1 }),
 }
+////////////////////////////////////////////////////
+var metaBasicChair = {
+  name: "Chair",
+  styles: {
+    mesh: new THREE.MeshBasicMaterial({color: 0x0092ff, transparent: true, opacity: 1}),
+    line: new THREE.LineBasicMaterial({ color: 0x9ed5ff, linewidth: .1 }),
+  },
+  metaData: {
+    typ: "furniture",
+    displayName: "chair",
+  }
+}
 
+var metaBasicDesk = {
+  name: "Desk",
+  styles: {
+    mesh: new THREE.MeshBasicMaterial({color: 0x3ad3ea, transparent: true, opacity: 1}),
+    line: new THREE.LineBasicMaterial({ color: 0x33b7cc, linewidth: .1 }),
+  },
+  metaData: {
+    typ: "furniture",
+    displayName: "desk",
+  }
+}
+
+var metaBasicTable = {
+  name: "Table",
+  styles: {
+    mesh: new THREE.MeshBasicMaterial({color: 0xaf92ef, transparent: true, opacity: 1}),
+    line: new THREE.LineBasicMaterial({ color: 0x66558c, linewidth: .1 }),
+  },
+  metaData: {
+    typ: "furniture",
+    displayName: "table",
+    insertionMethod: "center",
+  }
+}
+
+////////////////////////////////////////////////////
 
 //line Styles
 var aOS_LineStyles = {

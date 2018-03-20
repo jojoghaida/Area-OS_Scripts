@@ -1,4 +1,5 @@
 //Area OS Interface Commands
+
 //Creates and sets scene. Manages buttons and interactions.
 //app UI
 resetButton = document.getElementById('resetButton');
@@ -66,6 +67,13 @@ camera.lookAt(new THREE.Vector3(0,0,0));
 window.addEventListener( 'resize', onWindowResize, false );
 window.addEventListener("orientationchange", onWindowRotate);
 }
+///////////////////////////////////////////////////////////////////
+//2D OVERLAY
+
+
+
+//2D OVERLAY
+///////////////////////////////////////////////////////////////////
 
 function onWindowResize() {
   aspect = window.innerWidth / window.innerHeight;
@@ -105,6 +113,30 @@ controls.noZoom = true;
 
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
+
+function frustumMouse( event ) {
+  var amplitude = null;
+  if(event.deltaY>0){
+    amplitude = 25;
+  }else{
+    amplitude = -25;
+  }
+  frustumSize += amplitude
+  if(frustumSize<25){frustumSize = 25;}
+  if(frustumSize>400){frustumSize = 400;}
+  aspect = window.innerWidth / window.innerHeight;
+  camera.left   = - frustumSize * aspect / 2;
+  camera.right  =   frustumSize * aspect / 2;
+  camera.top    =   frustumSize / 2;
+  camera.bottom = - frustumSize / 2;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.render(scene,camera);
+
+}
+viewport.addEventListener( 'mousewheel', frustumMouse, false );
+
+
 function returnCamAxon(){
   camera.position.y = 200;
   camera.position.x = -200;
@@ -399,7 +431,7 @@ function mouseCasting(){
   console.log("ray live");
   mouseRay = new THREE.Raycaster();
   mouse = new THREE.Vector2();
-  areaoscanvas.addEventListener( 'mousemove', onMouseMove, false );
+  areaoscanvas.addEventListener( 'click', onMouseMove, false );
   // rayIconGeo = new THREE.Geometry();
   // rayIconGeo.vertices.push(new THREE.Vector3(0,0,0),new THREE.Vector3(0,10,0))
   // rayIcon = new THREE.Line(rayIconGeo,new THREE.LineBasicMaterial({color: "red"}));
@@ -441,10 +473,12 @@ function mouseCasting(){
 }
 setTimeout(mouseCasting,3000);
 
+function clickScope(){
+  //
+}
+
 function paintObjects(paintChild,style){
-  console.log("painting...", paintChild);
   if(paintChild.type == "LineSegments"){
-    console.log("lines");
     paintChild.material = style.line;
   }else{
     paintChild.material = style.mesh;
