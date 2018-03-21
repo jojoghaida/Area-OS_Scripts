@@ -25,21 +25,17 @@ var loadFurnitureFamilies = function(){
       lines = highlightEdges(mesh.geometry,.1,style.styles.line.color);
       group.add(mesh,lines);
       group.userData = style.metaData;
-      console.log(loaderQue);//
       loaderQue--;//
       if(loaderQue!=0){loadFurnitureFamilies();}else{
-        console.log("yo");
         setLoadedFurniture();
       }//
     });
     // return(group);
     loadBasicsList[q] = group;
-    console.log(loadBasicsList);
 }
 
 var chairMesh,DeskBasic,table;
 function setLoadedFurniture(){
-  console.log("GFGDGFDGFDG");
   chairMesh = loadBasicsList[0];
   DeskBasic = loadBasicsList[1];
   table = loadBasicsList[2];
