@@ -126,7 +126,12 @@ setTimeout(function () {
   conTypConferenceGroup();
 }, 3000);
 
-
+function outline3D(geo){
+  mat = new THREE.MeshBasicMaterial({color: "red", side: THREE.BackSide});
+  backSide3D = new THREE.Mesh(geo, mat);
+  backSide3D.scale.multiplyScalar(1.05);
+  return(backSide3D);
+}
 //siteColumns
 var siteColumnsLoader = new THREE.JSONLoader();
 var siteColumnsMesh = null;
@@ -138,7 +143,9 @@ function ( geometry, materials ) {
  var siteColumnsMaterial = new THREE.MeshBasicMaterial( { color: "white", wireframe: false, transparent: true} );
  siteColumnsMesh = new THREE.Mesh(geometry,siteColumnsMaterial);
  // siteColumnsMesh.castShadow = true;
- thisSite.add(siteColumnsMesh);
+ // outlinedCol = outline3D(siteColumnsMesh.geometry.clone());
+  // thisSite.add(siteColumnsMesh,outlinedCol);
+  thisSite.add(siteColumnsMesh);
  lowerFloors(siteColumnsMesh);
 }
 );
