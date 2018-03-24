@@ -1,5 +1,6 @@
 //AREA OS HUD//
 
+
 	var spritey = makeTextSprite( " Area ",
 		{ fontsize: 24, borderColor: {r:255, g:0, b:0, a:1.0}, backgroundColor: {r:255, g:100, b:100, a:0.8} } );
 	spritey.position.set(0,0,0);
@@ -83,22 +84,4 @@ function roundRect(ctx, x, y, w, h, r)
     ctx.closePath();
     ctx.fill();
 	ctx.stroke();
-}
-
-function animate()
-{
-    requestAnimationFrame( animate );
-	render();
-	update();
-}
-
-function update()
-{
-	controls.update();
-	stats.update();
-}
-
-function render()
-{
-	renderer.render( scene, camera );
 }

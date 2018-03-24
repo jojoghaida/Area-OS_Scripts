@@ -23,7 +23,6 @@ aboutButton.addEventListener('click',launchAbout);
 
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 var camera, scene, controls, renderer;
-// var frustumSize = 550;
 var controllerOveride = 0;
 var frustumSize = 350;
 
@@ -40,9 +39,10 @@ var aspect = window.innerWidth / window.innerHeight;
 scene = new THREE.Scene();
 scene.background = new THREE.Color(0xf0f0f0); //0x0851a4
 
-// camera = new THREE.PerspectiveCamera( 55, w/h, 0.1, 10000 );
 camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, -5000, 5000 );
-renderer = new THREE.WebGLRenderer({antialias:true});
+
+renderer = new THREE.WebGLRenderer({antialias:true, alpha: true, autoClear: false,});
+
 viewport.addEventListener('mousemove',enableOrbitCam);
 viewport.addEventListener('touchstart',enableOrbitCam);
 renderer.setSize(w, h);
@@ -52,28 +52,17 @@ renderer.setPixelRatio( window.devicePixelRatio );
 renderer.shadowMap.renderReverseSided; // shadows!
 // renderer.shadowMap.type = THREE.PCFSoftShadowMap; // shadows!
 viewport.appendChild(renderer.domElement);
-// camera.castShadow = true;
-
-// camera.position.y = 200;
-// camera.position.x = -200;
-// camera.position.z = -200;
-
 camera.position.y = 350;
 camera.position.x = 0;
 camera.position.z = 0;
 
 scene.add(camera); //!!!!!<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 camera.lookAt(new THREE.Vector3(0,0,0));
 window.addEventListener( 'resize', onWindowResize, false );
 window.addEventListener("orientationchange", onWindowRotate);
 }
-///////////////////////////////////////////////////////////////////
-//2D OVERLAY
 
-
-
-//2D OVERLAY
-///////////////////////////////////////////////////////////////////
 
 function onWindowResize() {
   aspect = window.innerWidth / window.innerHeight;
@@ -82,6 +71,7 @@ function onWindowResize() {
 	camera.top    =   frustumSize / 2;
 	camera.bottom = - frustumSize / 2;
 	camera.updateProjectionMatrix();
+
 	renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.render(scene,camera);
 }
@@ -100,9 +90,6 @@ function onWindowRotate() {
   setTimeout(rotateView, 100);
 }
 
-function render(){
-  renderer.render(scene,camera);
-}
 
 function viewAnim(){
   requestAnimationFrame(viewAnim);
@@ -110,7 +97,6 @@ function viewAnim(){
 }
 
 controls.noZoom = true;
-
 //SCENE AND CONTROLS////////////////////////////////////////////////////////////
 //CAMERA FUNCTIONS//////////////////////////////////////////////////////////////
 
@@ -181,11 +167,10 @@ var resetCamButton = document.getElementById("resetCamButton");
 resetCamButton.addEventListener('click', returnCamPlan);
 
 function orbitCam(){
-controls = new THREE.OrbitControls( camera,renderer.domElement );
-controls.enableZoom = true;
-controls.enableKeys = false;
-controls.maxPolarAngle = Math.PI/2;
-controls.addEventListener( 'change', render );
+  controls = new THREE.OrbitControls( camera, viewport );
+  controls.enableZoom = true;
+  controls.enableKeys = false;
+  controls.maxPolarAngle = Math.PI/2;
 }
 
 //orbit activation/deactivation
@@ -431,7 +416,7 @@ function mouseCasting(){
   console.log("ray live");
   mouseRay = new THREE.Raycaster();
   mouse = new THREE.Vector2();
-  areaoscanvas.addEventListener( 'click', onMouseMove, false );
+  viewport.addEventListener( 'click', onMouseMove, false );
   // rayIconGeo = new THREE.Geometry();
   // rayIconGeo.vertices.push(new THREE.Vector3(0,0,0),new THREE.Vector3(0,10,0))
   // rayIcon = new THREE.Line(rayIconGeo,new THREE.LineBasicMaterial({color: "red"}));
@@ -507,8 +492,3 @@ function liveSelector(){
   }
 }
 liveSelector(1);
-
-// sprites
-
-
-// sprites
