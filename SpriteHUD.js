@@ -11,7 +11,7 @@
 	scene.add(sprites);
 
 	var spritey = makeTextSprite( "Group #1",
-		{ fontsize: 24, borderColor: {r:0, g:0, b:0, a:1.0}, borderColor: {r:0, g:0, b:0, a:0.0}, backgroundColor: {r:255, g:255, b:255, a:1.0} } );
+		{ fontsize: 24, borderColor: {r:0, g:0, b:0, a:1.0}, borderColor: {r:0, g:0, b:0, a:0.0}, backgroundColor: {r:58, g:211, b:234, a:1.0} } );
 	spritey.position.set(0,10,0);
 	sprites.add( spritey );
 
@@ -51,7 +51,9 @@ function makeTextSprite( message, parameters )
 	  canvas.height = size;
 		var context = canvas.getContext('2d');
 		context.textAlign = "center";
-	  context.fillStyle = "white";
+		context.fillStyle   = "rgba(" + backgroundColor.r + "," + backgroundColor.g + ","
+																	+ backgroundColor.b + "," + backgroundColor.a + ")";
+
 		context.font = "Bold " + fontsize + "px " + fontface;
 		var metrics = context.measureText( message );
     var textWidth = metrics.width + 15;
@@ -88,6 +90,7 @@ function makeTextSprite( message, parameters )
     var spriteMaterial = new THREE.SpriteMaterial({ map: texture});
 
     var sprite = new THREE.Sprite( spriteMaterial );
+		sprite.fog = true;
    	sprite.scale.set(100,100,1.0);
     return sprite;
 }
