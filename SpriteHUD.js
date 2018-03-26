@@ -7,15 +7,18 @@
 	// console.log(pointt);
 	// scene.add(pointt);
 
+	var sprites = new THREE.Group();
+	scene.add(sprites);
+
 	var spritey = makeTextSprite( "Group #1",
 		{ fontsize: 24, borderColor: {r:0, g:0, b:0, a:1.0}, borderColor: {r:0, g:0, b:0, a:0.0}, backgroundColor: {r:255, g:255, b:255, a:1.0} } );
 	spritey.position.set(0,10,0);
-	scene.add( spritey );
+	sprites.add( spritey );
 
-	var spritey = makeTextSprite( " OS! ",
+	var spritey = makeTextSprite( "OS",
 		{ fontsize: 24, fontface: "Karla", borderColor: {r:0, g:0, b:0, a:0.0} } );
-	spritey.position.set(50,0,0);
-	scene.add( spritey );
+	spritey.position.set(50,10,0);
+	sprites.add( spritey );
 
 function makeTextSprite( message, parameters )
 {
@@ -43,18 +46,18 @@ function makeTextSprite( message, parameters )
     var canvas = document.createElement('canvas');
 
 	  //
-	  var size = 500;
+	  var size = 2048;
 	  canvas.width = size;
 	  canvas.height = size;
 		var context = canvas.getContext('2d');
 		context.textAlign = "center";
 	  context.fillStyle = "white";
+		context.font = "Bold " + fontsize + "px " + fontface;
 		var metrics = context.measureText( message );
-    var textWidth = metrics.width;
+    var textWidth = metrics.width + 15;
 		console.log(textWidth);
 		console.log(fontsize);
-	  context.fillRect( 0, (size/2) - fontsize/2, size, fontsize + fontsize/2);
-	  context.font = "Bold " + fontsize + "px " + fontface;
+	  context.fillRect( size/2 - textWidth/2, (size/2) - fontsize/2, textWidth, fontsize + fontsize/2);
 
     // get size data (height depends only on font size)
 		// canvas.width = textWidth;
@@ -85,7 +88,7 @@ function makeTextSprite( message, parameters )
     var spriteMaterial = new THREE.SpriteMaterial({ map: texture});
 
     var sprite = new THREE.Sprite( spriteMaterial );
-   	sprite.scale.set(10,10,1.0);
+   	sprite.scale.set(100,100,1.0);
     return sprite;
 }
 
