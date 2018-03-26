@@ -49,7 +49,7 @@ renderer.setSize(w, h);
 renderer.setPixelRatio( window.devicePixelRatio );
 // renderer.shadowMap.enabled; // shadows!
 // renderer.shadowMap.type = THREE.BasicShadowMap; // shadows!
-renderer.shadowMap.renderReverseSided; // shadows!
+// renderer.shadowMap.renderReverseSided; // shadows!
 // renderer.shadowMap.type = THREE.PCFSoftShadowMap; // shadows!
 viewport.appendChild(renderer.domElement);
 camera.position.y = 350;
@@ -268,7 +268,7 @@ pressureInput = function(){
 pressureInput();
 
 panCanvas = document.getElementById('areaoscanvas')
-banner = document.getElementById('titleText');//test
+// banner = document.getElementById('titleText');//test
 panningMode = function(){
   Pressure.set(panCanvas, {
     start: function(event){
@@ -276,7 +276,7 @@ panningMode = function(){
     end: function(){
     },
     startDeepPress: function(event){
-      banner.style.color = "red";
+      // banner.style.color = "red";
       // camera.position.x = 20; ///////////////////!!!!!!
       // controls.pan.set(event.touches[ 0 ].pageX, event.touches[ 0 ].pageY);
       // controls.noRotate = true;
@@ -284,7 +284,7 @@ panningMode = function(){
       controllerOveride = 2;
     },
     endDeepPress: function(){
-      banner.style.color = "blue";
+      // banner.style.color = "blue";
       // controls.noRotate = false;
 
     },
