@@ -413,18 +413,27 @@ var layoutVecs = [
   //Work Stool
   //Conference TableL
   var conferenceLayoutPts = [
-     new THREE.Vector3(-69.1474193382572,0,29.7905756843282),
-     new THREE.Vector3(-68.9229735246346,0,-51.0688106430911),
-     new THREE.Vector3(-16.7857724225218,0,5.92327153330748),
-     new THREE.Vector3(17.4094768833174,0,5.92327153330748),
-  ];
+   new THREE.Vector3(-69.1474193382572,0,29.7905756843282),
+   new THREE.Vector3(-68.9229735246346,0,-51.0688106430911),
+   new THREE.Vector3(-16.7857724225218,0,5.92327153330748),
+   new THREE.Vector3(17.4094768833174,0,5.92327153330748),
+   new THREE.Vector3(-77.2330973067781,0,75.3910991293863),
+   new THREE.Vector3(60.8870755017496,0,95.4349784687038),
+   new THREE.Vector3(47.5589732764076,0,95.1743836713723),
+   new THREE.Vector3(34.2960197503985,0,95.4219487288373),
+];
 
-  var conferenceLayoutVecs = [
-     new THREE.Vector3(0.707106781186553,0,0.707106781186542),
-     new THREE.Vector3(1,0,0),
-     new THREE.Vector3(1,0,0),
-     new THREE.Vector3(1,0,0),
-  ];
+var conferenceLayoutVecs = [
+   new THREE.Vector3(0.707106781186553,0,0.707106781186542),
+   new THREE.Vector3(1,0,0),
+   new THREE.Vector3(1,0,0),
+   new THREE.Vector3(1,0,0),
+   new THREE.Vector3(1,0,0),
+   new THREE.Vector3(1,0,0),
+   new THREE.Vector3(1,0,0),
+   new THREE.Vector3(1,0,0),
+];
+
 
   //Conference TableL
   /////////////
@@ -440,6 +449,12 @@ var layoutVecs = [
     for(i=0; i<floor3Conference; i++){
       a = dropSet(typConferenceGroup,conferenceLayoutPts[i],conferenceLayoutVecs[i]);
       clickables.add(a);
+      var spritey = makeTextSprite( i, {backgroundColor: {r:58, g:211, b:234, a:1.0}});
+      spritey.position.x = a.position.x;
+      spritey.position.z = a.position.z;
+      spritey.position.y = 12;
+      console.log(spritey);
+    	sprites.add( spritey );
     }
     scene.add(clickables);
   },5000);
