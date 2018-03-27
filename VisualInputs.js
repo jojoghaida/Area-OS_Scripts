@@ -35,6 +35,8 @@ var selectorText = null;
 
 function sliderInput(thisSliderStyle){
 
+  iconbox = document.getElementById('glyphbox');
+  iconbox.style.visible = true;
   initInputTouchListeners();
 
   // slider styles

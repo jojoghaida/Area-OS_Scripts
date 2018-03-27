@@ -449,13 +449,13 @@ var conferenceLayoutVecs = [
     for(i=0; i<floor3Conference; i++){
       a = dropSet(typConferenceGroup,conferenceLayoutPts[i],conferenceLayoutVecs[i]);
       clickables.add(a);
-      if(i<3){
-        var spritey = makeTextSprite( i, {backgroundColor: {r:58, g:211, b:234, a:1.0}});
-        spritey.position.x = a.position.x;
-        spritey.position.z = a.position.z;
-        spritey.position.y = 12;
-      	sprites.add( spritey );        
-      }
+      // if(i<3){
+      //   var spritey = makeTextSprite( i, {backgroundColor: {r:58, g:211, b:234, a:1.0}});
+      //   spritey.position.x = a.position.x;
+      //   spritey.position.z = a.position.z;
+      //   spritey.position.y = 12;
+      // 	sprites.add( spritey );
+      // }
     }
     scene.add(clickables);
   },5000);
