@@ -48,8 +48,6 @@ function makeTextSprite( message, parameters )
 		context.font = "Bold " + fontsize + "px " + fontface;
 		var metrics = context.measureText( message );
     var textWidth = metrics.width + 50;
-		console.log(textWidth);
-		console.log(fontsize);
 	  context.fillRect( size/2 - textWidth/2, (size/2) - fontsize/2, textWidth, fontsize + fontsize/2);
 
     context.fillStyle   = "rgba(" + backgroundColor.r + "," + backgroundColor.g + ","
@@ -68,7 +66,6 @@ function makeTextSprite( message, parameters )
     var texture = new THREE.Texture(canvas);
     texture.needsUpdate = true;
 		texture.premultiplyAlpha = true;
-		console.log(texture);
 
     var spriteMaterial = new THREE.SpriteMaterial({ map: texture});
 
