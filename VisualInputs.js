@@ -35,6 +35,8 @@ var selectorText = null;
 
 function sliderInput(thisSliderStyle){
 
+  twoJS.clear();
+  twoJS.update();
   iconbox = document.getElementById('glyphbox');
   iconbox.style.display = 'block';
   initInputTouchListeners();
@@ -232,6 +234,8 @@ function expandInput(){
   bottomInput.style.height = screen.height - feedbackTwoScene.offsetHeight + "px";
   twoJS.clear();
   twoJS.update();
+  iconbox = document.getElementById('glyphbox');
+  iconbox.style.display = 'none';
 
   areaOStoo = twoJS.makeText("Existing Spaces >",15,35);
   areaOStoo.fill = aOS_ColorStyles.aOS_OSblue;
