@@ -19,6 +19,7 @@ var metaBasicChair = {
   styles: {
     mesh: new THREE.MeshBasicMaterial({color: 0x0092ff, transparent: true, opacity: 1}),
     line: new THREE.LineBasicMaterial({ color: 0x9ed5ff, linewidth: .1 }),
+    glyph: document.getElementById('basicChairGlyphy'),
   },
   metaData: {
     typ: "furniture",
@@ -31,6 +32,7 @@ var metaBasicDesk = {
   styles: {
     mesh: new THREE.MeshBasicMaterial({color: 0x3ad3ea, transparent: true, opacity: 1}),
     line: new THREE.LineBasicMaterial({ color: 0x33b7cc, linewidth: .1 }),
+    glyph: document.getElementById('workStoolGlyphy'),
   },
   metaData: {
     typ: "furniture",
@@ -43,6 +45,7 @@ var metaBasicTable = {
   styles: {
     mesh: new THREE.MeshBasicMaterial({color: 0xaf92ef, transparent: true, opacity: 1}),
     line: new THREE.LineBasicMaterial({ color: 0x66558c, linewidth: .1 }),
+    glyph: document.getElementById('conferenceTableGlyphy'),
   },
   metaData: {
     typ: "furniture",
@@ -136,3 +139,37 @@ var aOS_MeshStyles = {
   yellowMeshBasic: new THREE.MeshBasicMaterial({}),
   greenMeshBasic: new THREE.MeshBasicMaterial({}),
 };
+
+//MENU OBJECTS
+var menuObjects = {
+  locations:{
+    name: 'Locations',
+    neighborhood: {
+      name: 'Neighborhood',
+      hellsKitchen: {
+        name: "Hell's Kitchen",
+        clickFun: function(){console.log('HK selected!')},
+      },
+      lowerEastSide: {
+        name: "LES",
+        clickFun: function(){console.log('LES selected')},
+      },
+    }
+  }
+}
+//MENU OBJECTS
+
+//SLIDER OBJECTS
+var basicChairSL = null;
+
+function loadSliderStyles(){
+  basicChairSL = {
+    name: "Chair(s)",
+    glyph: "put Two.js glyph here",
+    color: aOS_ColorStyles.basicChairColor,
+    mesh: chairMesh,
+    function: 0,
+  }
+}
+setTimeout(loadSliderStyles,4000);
+//SLIDER OBJECTS

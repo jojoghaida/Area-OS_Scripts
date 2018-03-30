@@ -304,20 +304,6 @@ function lowerFloors(mesh,arrayCount = 15, floorHeight = 15){
 setTimeout(function(){scene.add(thisSite)},2000);
 
 
-//SLIDER OBJECTS
-var basicChairSL = null;
-
-function loadSliderStyles(){
-  basicChairSL = {
-    name: "Chair(s)",
-    glyph: "put Two.js glyph here",
-    color: aOS_ColorStyles.basicChairColor,
-    mesh: chairMesh,
-    function: 0,
-  }
-}
-setTimeout(loadSliderStyles,4000);
-//SLIDER OBJECTS
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

@@ -10,35 +10,32 @@ var twoJS = new Two(params).appendTo(inputsTwoScene);
 inputsTwoScene.addEventListener('mousemove',disableOrbitCam);
 inputsTwoScene.addEventListener('touchstart',disableOrbitCam);
 
+var iconbox = document.getElementById('glyphbox');
+var menu = document.getElementById('areaosmenu');
 
 
+function selectorUI(){
+  console.log('selectorUI init');
+  initMissive = twoJS.makeText('Select Items',sW*.5,sH*.5);
+  initMissive.fill = 'red';
+  initMissive.size = 24;
+  initMissive.family = 'Karla';
+  initMissive.alignment = 'center';
+  twoJS.update();
+
+}
+selectorUI();
 
 
-//standard input
-
-
-// var glyph = null;
-// window.onload = function(){
-//   var svg = document.getElementById('basicChairGlyph');
-//   var getSVG = svg.getElementsByTagName('svg')[0];
-//   console.log(svg);
-//   console.log(getSVG);
-//   glyph = two.interpret(getSVG);
-//   console.log(glyph);
-//   // glyph.linewidth = 200;
-//   glyph.translation.y = -100;
-//   glyph.scale = 5;
-//   two.update();
-//
-// }
 var selectorText = null;
 
 function sliderInput(thisSliderStyle){
-
+  //if no scene return
+  console.log(thisSliderStyle);
   twoJS.clear();
   twoJS.update();
-  iconbox = document.getElementById('glyphbox');
-  iconbox.style.display = 'block';
+  // iconbox = document.getElementById('glyphbox');
+  // iconbox.style.display = 'block';
   initInputTouchListeners();
 
   // slider styles
@@ -115,8 +112,7 @@ function sliderInput(thisSliderStyle){
   twoJS.update();
 }
 
-// window.onload = sliderInput(basicChairSL);
-setTimeout(function(){sliderInput(basicChairSL)},5000);
+// setTimeout(function(){sliderInput(basicChairSL)},5000);
 
 //gesture effects*
 
@@ -203,19 +199,6 @@ function submital(){
   editMainCrv = null; // temporary for testing; stops propogation
 }
 
-// function alignSlider(){
-//   correctDifference = (xAbsPos/tickSpan % 1)*tickSpan;
-//   if(correctDifference*-1>=tickSpan/2){
-//     correctDifference = tickSpan-correctDifference;
-//   }else{
-//     correctDifference *= -1;
-//   }
-//   xAbsPos += correctDifference;
-//   inputSliderGroup.translation.x = xAbsPos;
-//   twoJS.update();
-//   selectorText.value = xAbsPos/tickSpan; // delete
-//
-// }
 
 //touch gestures*
 function initInputTouchListeners(){
@@ -234,15 +217,15 @@ function expandInput(){
   bottomInput.style.height = screen.height - feedbackTwoScene.offsetHeight + "px";
   twoJS.clear();
   twoJS.update();
-  iconbox = document.getElementById('glyphbox');
-  iconbox.style.display = 'none';
+
+  // menu.style.display = 'block';
+  // iconbox.style.display = 'none';
 
   areaOStoo = twoJS.makeText("Existing Spaces >",15,35);
   areaOStoo.fill = aOS_ColorStyles.aOS_OSblue;
   areaOStoo.size = 18;
   areaOStoo.family = 'Karla';
   areaOStoo.alignment = 'left';
-
   // areaOStoo.value = "Switch to desk rental service";
   twoJS.update();
 
@@ -252,3 +235,13 @@ function shrinkInput(){
   twoJS.clear();
   bottomInput.style.height = "100px";
 }
+
+
+function loadMenuItems(){
+  var list = [];
+  for (property in menuObjects) {
+    list.push(property);
+  }
+  // console.log(menuObjects.list[0]);
+}
+loadMenuItems();

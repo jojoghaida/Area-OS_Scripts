@@ -3,9 +3,9 @@
 	var sprites = new THREE.Group();
 	scene.add(sprites);
 
-	// var spritey = makeTextSprite( "Group #1");
-	// spritey.position.set(0,12,0);
-	// sprites.add( spritey );
+	var spritey = makeTextSprite( "Group #1");
+	spritey.position.set(0,12,0);
+	sprites.add( spritey );
 
 	// var spritey = makeTextSprite( "Group #2",
 	// 	{ fontsize: 48, fontface: "Karla", fontColor: {r:255, g:255, b:255, a:1.0}, backgroundColor: {r:58, g:211, b:234, a:1.0} } );
