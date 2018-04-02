@@ -24,7 +24,6 @@ function selectorUI(){
   twoJS.update();
 
 }
-selectorUI();
 
 
 var selectorText = null;

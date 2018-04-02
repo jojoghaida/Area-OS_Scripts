@@ -414,6 +414,7 @@ zoomButtons();
 
 function mouseCasting(){
   console.log("ray live");
+  selectorUI();
   mouseRay = new THREE.Raycaster();
   mouse = new THREE.Vector2();
   viewport.addEventListener( 'click', onMouseMove, false );

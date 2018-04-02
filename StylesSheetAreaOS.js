@@ -19,7 +19,7 @@ var metaBasicChair = {
   styles: {
     mesh: new THREE.MeshBasicMaterial({color: 0x0092ff, transparent: true, opacity: 1}),
     line: new THREE.LineBasicMaterial({ color: 0x9ed5ff, linewidth: .1 }),
-    glyph: document.getElementById('basicChairGlyphy'),
+    glyph: document.getElementById('basicChairGlyphy').cloneNode('true'),
   },
   metaData: {
     typ: "furniture",
