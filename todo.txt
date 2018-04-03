@@ -1,0 +1,7 @@
+to do
+
+-banner communicator
+-deselector
+-selection interface HUD
+-menu Interface
+-progression location>neighborhood>building>level(layout)>groups(maybe)>items

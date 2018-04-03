@@ -61,9 +61,6 @@ loadFurnitureFamilies();
 // },1500);
 
 var typWorkBasicGroup = new THREE.Group();
-typWorkBasicGroup.name = "Work Stool";
-typWorkBasicGroup.userData.elementType = "furniture set";
-typWorkBasicGroup.userData.elementName = "DeskW/Chair";
 
 function conTypWorkBasicGroup(){
   desk = DeskBasic.clone();
@@ -72,15 +69,16 @@ function conTypWorkBasicGroup(){
   chair.rotation.y = -Math.PI;
   chair.position.x = 4;
   typWorkBasicGroup.add(desk,chair);
+  typWorkBasicGroup.userData = metaWorkStool.metaData;
 }
 setTimeout(function () {
   conTypWorkBasicGroup();
 }, 4000);
 
 var typConferenceGroup = new THREE.Group();
-typConferenceGroup.name = "Conference Table & Chairs";
-typConferenceGroup.userData.elementType = "FurnitureSet";
-typConferenceGroup.userData.elementName = "DeskW/Chair";
+// typConferenceGroup.name = "Conference Table & Chairs";
+// typConferenceGroup.userData.elementType = "FurnitureSet";
+// typConferenceGroup.userData.elementName = "DeskW/Chair";
 
 function conTypConferenceGroup(){
   table = table.clone();
@@ -121,6 +119,8 @@ function conTypConferenceGroup(){
     //
     typConferenceGroup.add(chair);
   }
+  typConferenceGroup.userData = metaConferenceTable.metaData;
+
 }
 setTimeout(function () {
   conTypConferenceGroup();
@@ -425,16 +425,15 @@ var conferenceLayoutVecs = [
   /////////////
   floor3WorkDesks = layoutPts.length;
   floor3Conference = conferenceLayoutPts.length;
-  var clickables = new THREE.Group();
 
   setTimeout(function(){
     for(i=0; i<floor3WorkDesks; i++){
-      a = dropSet(typWorkBasicGroup,layoutPts[i],layoutVecs[i]);
-      clickables.add(a);
+      dropSet(typWorkBasicGroup,layoutPts[i],layoutVecs[i]);
+      // clickables.add(a);
     }
     for(i=0; i<floor3Conference; i++){
-      a = dropSet(typConferenceGroup,conferenceLayoutPts[i],conferenceLayoutVecs[i]);
-      clickables.add(a);
+      dropSet(typConferenceGroup,conferenceLayoutPts[i],conferenceLayoutVecs[i]);
+      // clickables.add(a);
       // if(i<3){
       //   var spritey = makeTextSprite( i, {backgroundColor: {r:58, g:211, b:234, a:1.0}});
       //   spritey.position.x = a.position.x;
@@ -443,7 +442,7 @@ var conferenceLayoutVecs = [
       // 	sprites.add( spritey );
       // }
     }
-    scene.add(clickables);
+    // scene.add(clickables);
   },5000);
 //floor 3 layout
 

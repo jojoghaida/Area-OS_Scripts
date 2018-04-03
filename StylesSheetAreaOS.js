@@ -37,6 +37,7 @@ var metaBasicDesk = {
   metaData: {
     typ: "furniture",
     displayName: "desk",
+    insertionMethod: "back center",
   }
 }
 
@@ -53,6 +54,32 @@ var metaBasicTable = {
     insertionMethod: "center",
   }
 }
+
+var metaWorkStool = {
+  name: "Work Stool",
+  styles: {
+    glyph: document.getElementById('workStoolGlyphy'),
+  },
+  metaData: {
+    typ: "FurnitureSet",
+    displayName: "Work Stool",
+    insertionMethod: "back center",
+  }
+}
+
+
+var metaConferenceTable = {
+  name: "Conference Table",
+  styles: {
+    glyph: document.getElementById('workStoolGlyphy'),
+  },
+  metaData: {
+    typ: "FurnitureSet",
+    displayName: "Conference Table",
+    insertionMethod: "center",
+  }
+}
+
 
 ////////////////////////////////////////////////////
 

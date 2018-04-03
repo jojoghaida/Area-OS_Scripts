@@ -434,6 +434,7 @@ function mouseCasting(){
       rayCatch = rayInter;
     }
 
+    thisSelection = null;
 
     if(rayCatch.object.parent.userData.elementType == "FurnitureSet"){
       thisSelection = rayCatch.object.parent;
@@ -443,23 +444,48 @@ function mouseCasting(){
       thisSelection = rayCatch.object.parent.parent;
       console.log("2");
     }
-    if(thisSelection.userData.status == "occupied"){return}
+    if(thisSelection.userData.status == "occupied"){
+      console.log("occupied");
+      return
+    }
     // paintObjects(thisSelection,userSelectionMaterials);
+
     for(i=0;i<thisSelection.children.length;i++){
       if(thisSelection.children[i].children.length != 0){
         console.log("child has children");
         for(z=0;z<thisSelection.children[i].children.length;z++){
           paintObjects(thisSelection.children[i].children[z],userSelectionMaterials);
         }
-      }else{paintObjects(thisSelection.children[i],userSelectionMaterials);}
+      }else{
+        paintObjects(thisSelection.children[i],userSelectionMaterials);
+      }
     }
     renderer.render(scene,camera);
   }
 }
+
 setTimeout(mouseCasting,3000);
 
-function clickScope(){
-  //
+function clickCommunications(object){
+  console.log("clickCommunications:", object);
+}
+
+
+var clickables = new THREE.Group();
+clickables.name = 'clickables';
+function clickScope(_elementType = 'FurnitureSet'){
+  var addToClick = [];
+  for(i=0;i<scene.children.length;i++){
+    if(scene.children[i].type == 'Group'){
+      if(scene.children[i].userData.typ == _elementType){
+        addToClick.push(scene.children[i]);
+      }
+    }
+  }
+  for(i=0;i<addToClick.length;i++){
+    clickables.add(addToClick[i]);
+  }
+  scene.add(clickables);
 }
 
 function paintObjects(paintChild,style){
@@ -474,7 +500,6 @@ var userSelection = new THREE.Group();
 
 var selBool = 1;
 var selFadeBool = 1;
-
 function liveSelector(){
   current = userSelectionMaterials.mesh.opacity;
   if(selFadeBool==0){
@@ -492,4 +517,4 @@ function liveSelector(){
     selFadeBool = 1;
   }
 }
-liveSelector(1);
+liveSelector();

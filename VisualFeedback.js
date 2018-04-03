@@ -58,3 +58,43 @@ function menuHeaderBasic(){
   titleLeft._renderer.elem.addEventListener('click', function(){location.reload()});
   headerMode = 1;
 }
+
+var runPrompt = null;
+
+function bannerCommunicator(missive = 'write a communication...'){
+  console.log(missive);
+
+  titleTop.translation.x  = vfsw;
+  titleTop.value = missive;
+  titleTop.size = 14;
+  titleTop.alignment = 'left';
+
+  // mask = twoToo.makeRectangle(vfsw/2,vfsh/2,vfsw,vfsh);
+  // clr1 = new Two.Stop(0,'blue',.25);
+  // clr2 = new Two.Stop(.25,'white',.75);
+  // clr3 = new Two.Stop(.75,'red',1);
+  // gradient = twoJS.makeLinearGradient(-vfsw/2,0,0,0,clr1,clr2,clr3);
+  // mask.fill = gradient;
+
+  twoToo.update();
+  if(runPrompt != null){clearInterval(runPrompt);}
+  runPrompt = setInterval(telePrompt,10);
+}
+
+function telePrompt(){
+  x = titleTop.translation.x;
+  y = titleTop.translation.y;
+  if(x< -getTexWidth(titleTop.value, titleTop.size + 'px' + ' Karla')){
+    titleTop.translation.set(vfsw,y);
+  }else{titleTop.translation.set(x-1,y);}
+  twoToo.update();
+}
+
+function getTexWidth(txt, font) {
+  this.element = document.createElement('canvas');
+  this.context = this.element.getContext("2d");
+  this.context.font = font;
+  return this.context.measureText(txt).width;
+}
+
+// bannerCommunicator('Welcome to Area OS!');

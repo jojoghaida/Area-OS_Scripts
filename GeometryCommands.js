@@ -285,7 +285,7 @@ function randomOccupy(object){
       for(t=0;t<object.children.length;t++){
         for(o=0;o<object.children[t].children.length;o++){
           paintObjects(object.children[t].children[o],occupiedMaterials);
-          scene.add(object);
+          // scene.add(object);
         }
       }
     }
@@ -305,6 +305,7 @@ function dropSet(typ,point = new THREE.Vector3(0,0,0),direction = new THREE.Vect
   }
   thisSet.position.copy(point);
   randomOccupy(thisSet); //TEMPORARY
+  scene.add(thisSet);
   return(thisSet);
 }
 

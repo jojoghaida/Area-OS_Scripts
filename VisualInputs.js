@@ -21,7 +21,12 @@ function selectorUI(){
   initMissive.size = 24;
   initMissive.family = 'Karla';
   initMissive.alignment = 'center';
+  initMissive.decoration = 'underline';
   twoJS.update();
+  initMissive._renderer.elem.addEventListener('click', function(){
+    clickScope();
+    bannerCommunicator('Please select elements to rent...');
+  });
 
 }
 
