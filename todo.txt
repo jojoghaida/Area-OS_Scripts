@@ -1,7 +1,7 @@
 to do
 
--banner communicator
+-banner communicator /
 -deselector
--selection interface HUD
+-selection interface HUD @loadSelectionDetails
 -menu Interface
 -progression location>neighborhood>building>level(layout)>groups(maybe)>items

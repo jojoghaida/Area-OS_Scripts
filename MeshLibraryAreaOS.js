@@ -428,11 +428,13 @@ var conferenceLayoutVecs = [
 
   setTimeout(function(){
     for(i=0; i<floor3WorkDesks; i++){
-      dropSet(typWorkBasicGroup,layoutPts[i],layoutVecs[i]);
+      a = dropSet(typWorkBasicGroup,layoutPts[i],layoutVecs[i]);
+      a.name = 'Work Stool';
       // clickables.add(a);
     }
     for(i=0; i<floor3Conference; i++){
-      dropSet(typConferenceGroup,conferenceLayoutPts[i],conferenceLayoutVecs[i]);
+      a = dropSet(typConferenceGroup,conferenceLayoutPts[i],conferenceLayoutVecs[i]);
+      a.name = 'Conference Table';
       // clickables.add(a);
       // if(i<3){
       //   var spritey = makeTextSprite( i, {backgroundColor: {r:58, g:211, b:234, a:1.0}});

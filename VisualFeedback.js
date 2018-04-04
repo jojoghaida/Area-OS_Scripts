@@ -63,23 +63,29 @@ var runPrompt = null;
 
 function bannerCommunicator(missive = 'write a communication...'){
   console.log(missive);
-
+  //need to clear scen and rebuild to avoid overlaying
   titleTop.translation.x  = vfsw;
   titleTop.value = missive;
   titleTop.size = 14;
   titleTop.alignment = 'left';
 
-  // mask = twoToo.makeRectangle(vfsw/2,vfsh/2,vfsw,vfsh);
+  clip = twoToo.makeRectangle(vfsw/2,vfsh/2,vfsw - 150,vfsh);
   // clr1 = new Two.Stop(0,'blue',.25);
   // clr2 = new Two.Stop(.25,'white',.75);
   // clr3 = new Two.Stop(.75,'red',1);
   // gradient = twoJS.makeLinearGradient(-vfsw/2,0,0,0,clr1,clr2,clr3);
-  // mask.fill = gradient;
+  clip.fill = 'red';
+  clip.stroke = 1;
+  clip.opacity = .5;
+  clip.clip = true;
+  group = twoToo.makeGroup(titleTop);
+  group.mask = clip;
 
   twoToo.update();
   if(runPrompt != null){clearInterval(runPrompt);}
   runPrompt = setInterval(telePrompt,10);
 }
+// bannerCommunicator();
 
 function telePrompt(){
   x = titleTop.translation.x;

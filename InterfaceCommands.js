@@ -411,7 +411,7 @@ zoomButtons = function(){
 zoomButtons();
 
 //PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
-
+var selected = [];
 function mouseCasting(){
   console.log("ray live");
   selectorUI();
@@ -460,16 +460,13 @@ function mouseCasting(){
         paintObjects(thisSelection.children[i],userSelectionMaterials);
       }
     }
+    selected.push(thisSelection);
     renderer.render(scene,camera);
+    loadSelectionDetails();
   }
 }
 
 setTimeout(mouseCasting,3000);
-
-function clickCommunications(object){
-  console.log("clickCommunications:", object);
-}
-
 
 var clickables = new THREE.Group();
 clickables.name = 'clickables';

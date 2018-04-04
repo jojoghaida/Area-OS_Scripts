@@ -25,7 +25,7 @@ function selectorUI(){
   twoJS.update();
   initMissive._renderer.elem.addEventListener('click', function(){
     clickScope();
-    bannerCommunicator('Please select elements to rent...');
+    bannerCommunicator('Please select elements on screen to rent...');
   });
 
 }
@@ -240,6 +240,27 @@ function shrinkInput(){
   bottomInput.style.height = "100px";
 }
 
+function loadSelectionDetails(){
+  var selectionDisplay = [];
+  var selectionDisplayNum = [];
+  for(i=0; i<selected.length; i++){
+    console.log(selected[i].userData.displayName);
+    if(selectionDisplay.length != 0){
+      for(x=0;x<selectionDisplay.length;x++){
+        if(selected[i].userData.displayName == selectionDisplay[x]){
+          console.log('here already');
+          selectionDisplayNum[x]++;
+          console.log(selectionDisplayNum);
+          break;
+        }
+      }
+    }else{
+      selectionDisplay.push(selected[i].userData.displayName);
+      selectionDisplayNum.push(1);
+    }
+  }
+  console.log('>>>>' + selectionDisplay + ' ' + selectionDisplayNum);
+}
 
 function loadMenuItems(){
   var list = [];
