@@ -274,18 +274,19 @@ function updateSelView(a,b){
   tray.style.display = 'block';
 
   for(i=0;i<a.length;i++){
-    box = document.createElement('div');
-    box.setAttribute("class","SelItemVis");
-    box.innerHTML += document.createTextNode('X').setAttribute("class","SelectorXbutton");
-
-    tray.appendChild(box);
-    // tray.innerHTML += ;
+    insert = document.getElementById('conferenceTableGlyphy').cloneNode(true);
+    tray.innerHTML += '<div class="selitemvis">' +
+    '<img src="https://uploads-ssl.webflow.com/590f8388928fad05e55a7727/5abda40f8c37ca45e8a4fce2_conferenceTable.svg">' +
+    '<div class="selitemnum">' + b[i] + '</div>' +
+    '<div class="SelectorXbutton" onclick="alert()">X</div>' +
+    '</div>';
 
   }
 
   glyph = a + ' Glyphy';
   console.log(glyph);
 }
+//https://uploads-ssl.webflow.com/590f8388928fad05e55a7727/5abda40f8c37ca45e8a4fce2_conferenceTable.svg
 
 function loadMenuItems(){
   var list = [];
