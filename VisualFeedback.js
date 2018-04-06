@@ -13,6 +13,7 @@ var headerMode = null;
 feedbackTwoScene.addEventListener('mousemove',disableOrbitCam);
 
 function headerStandard(){
+  if(runPrompt != null){clearInterval(runPrompt);}
   twoToo.clear();
 
   titleTop = twoToo.makeText('AREA OS',vfsw/2,vfsh/2+10); //get glyph size to get y-value
@@ -43,13 +44,12 @@ function headerStandard(){
 headerStandard();
 
 function menuHeaderBasic(){
-  console.log("menu header");
+  if(runPrompt != null){clearInterval(runPrompt);}
   titleTop.value = 'Menu';
   titleLeft.value = 'Advanced';
   titleRight.value = 'close';
   twoToo.update();
   titleRight._renderer.elem.addEventListener('click', function(){
-    console.log("closing menu");
     shrinkInput();
     headerStandard();
     sliderInput(basicChairSL);
