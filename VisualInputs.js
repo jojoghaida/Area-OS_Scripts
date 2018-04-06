@@ -244,23 +244,20 @@ function loadSelectionDetails(){
   var selectionDisplay = [];
   var selectionDisplayNum = [];
   for(i=0; i<selected.length; i++){
-    console.log(selected[i].userData.displayName);
     if(selectionDisplay.length != 0){
       for(x=0;x<selectionDisplay.length;x++){
-        if(selected[i].userData.displayName == selectionDisplay[x]){
-          console.log('here already');
+        if(selected[i].userData.glyphID == selectionDisplay[x]){
           selectionDisplayNum[x]++;
-          console.log(selectionDisplayNum);
           break;
         }
         if(x==selectionDisplay.length-1){
-          selectionDisplay.push(selected[i].userData.displayName);
+          selectionDisplay.push(selected[i].userData.glyphID);
           selectionDisplayNum.push(1);
           break;
         }
       }
     }else{
-      selectionDisplay.push(selected[i].userData.displayName);
+      selectionDisplay.push(selected[i].userData.glyphID);
       selectionDisplayNum.push(1);
     }
   }
@@ -268,17 +265,16 @@ function loadSelectionDetails(){
 }
 
 function updateSelView(a,b){
-  console.log(a);
-  console.log(b);
   tray = document.getElementById('SelectedList');
   tray.style.display = 'block';
+  tray.innerHTML = "";
 
   for(i=0;i<a.length;i++){
-    insert = document.getElementById('conferenceTableGlyphy').cloneNode(true);
+    insert = document.getElementById(a[i]).src;
     tray.innerHTML += '<div class="selitemvis">' +
-    '<img src="https://uploads-ssl.webflow.com/590f8388928fad05e55a7727/5abda40f8c37ca45e8a4fce2_conferenceTable.svg">' +
+    '<img src="'+insert+'">' +
     '<div class="selitemnum">' + b[i] + '</div>' +
-    '<div class="SelectorXbutton" onclick="alert()">X</div>' +
+    '<div class="selectorxbutton" onclick="alert()">X</div>' +
     '</div>';
 
   }

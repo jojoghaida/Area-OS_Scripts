@@ -24,6 +24,8 @@ var metaBasicChair = {
   metaData: {
     typ: "furniture",
     displayName: "chair",
+    insertionMethod: "center",
+    glyphID: 'conferenceTableGlyphy',
   }
 }
 
@@ -38,6 +40,7 @@ var metaBasicDesk = {
     typ: "furniture",
     displayName: "desk",
     insertionMethod: "back center",
+    glyphID: 'conferenceTableGlyphy',
   }
 }
 
@@ -52,18 +55,19 @@ var metaBasicTable = {
     typ: "furniture",
     displayName: "table",
     insertionMethod: "center",
+    glyphID: 'conferenceTableGlyphy',
   }
 }
 
 var metaWorkStool = {
   name: "Work Stool",
   styles: {
-    glyph: document.getElementById('workStoolGlyphy'),
   },
   metaData: {
     typ: "FurnitureSet",
     displayName: "Work Stool",
     insertionMethod: "back center",
+    glyphID: 'workStoolGlyphy',
   }
 }
 
@@ -71,12 +75,12 @@ var metaWorkStool = {
 var metaConferenceTable = {
   name: "Conference Table",
   styles: {
-    glyph: document.getElementById('workStoolGlyphy'),
   },
   metaData: {
     typ: "FurnitureSet",
     displayName: "Conference Table",
     insertionMethod: "center",
+    glyphID: 'conferenceTableGlyphy',
   }
 }
 
