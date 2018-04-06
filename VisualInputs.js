@@ -253,13 +253,38 @@ function loadSelectionDetails(){
           console.log(selectionDisplayNum);
           break;
         }
+        if(x==selectionDisplay.length-1){
+          selectionDisplay.push(selected[i].userData.displayName);
+          selectionDisplayNum.push(1);
+          break;
+        }
       }
     }else{
       selectionDisplay.push(selected[i].userData.displayName);
       selectionDisplayNum.push(1);
     }
   }
-  console.log('>>>>' + selectionDisplay + ' ' + selectionDisplayNum);
+  updateSelView(selectionDisplay,selectionDisplayNum);
+}
+
+function updateSelView(a,b){
+  console.log(a);
+  console.log(b);
+  tray = document.getElementById('SelectedList');
+  tray.style.display = 'block';
+
+  for(i=0;i<a.length;i++){
+    box = document.createElement('div');
+    box.setAttribute("class","SelItemVis");
+    box.innerHTML += document.createTextNode('X').setAttribute("class","SelectorXbutton");
+
+    tray.appendChild(box);
+    // tray.innerHTML += ;
+
+  }
+
+  glyph = a + ' Glyphy';
+  console.log(glyph);
 }
 
 function loadMenuItems(){
@@ -269,4 +294,4 @@ function loadMenuItems(){
   }
   // console.log(menuObjects.list[0]);
 }
-loadMenuItems();
+// loadMenuItems();
