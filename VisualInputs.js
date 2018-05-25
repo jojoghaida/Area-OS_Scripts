@@ -30,7 +30,6 @@ function selectorUI(){
 
 }
 
-
 var selectorText = null;
 
 function sliderInput(thisSliderStyle){

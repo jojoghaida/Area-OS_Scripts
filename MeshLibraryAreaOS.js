@@ -164,6 +164,10 @@ siteSlabLoader.load(
   }
 );
 
+var slabLight = new THREE.DirectionalLight( 0xffffff );
+slabLight.position.set( 0, 1, .5 ).normalize();
+scene.add(slabLight);
+
 var siteSlabPhongLoader = new THREE.JSONLoader();
 var siteSlabPhongMesh = null;
 var siteSlabPhongGeo = null;
@@ -171,7 +175,7 @@ siteSlabPhongLoader.load(
   'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/eb383d3afb11d6184d1b9ea9f45a62c2b9a27e04/slabPhong.json',
   function(geometry, materials){
       siteSlabPhongGeo = geometry;
-      var siteSlabPhongMaterial = new THREE.MeshPhongMaterial({color: "white", shininess: 0, reflectivity: 0});
+      var siteSlabPhongMaterial = new THREE.MeshPhongMaterial({color: "white", shininess: 0, reflectivity: 0, side: THREE.DoubleSide});
       siteSlabPhongMesh = new THREE.Mesh(geometry, siteSlabPhongMaterial);
       ///
       siteSlabPhongMesh.geometry.dynamic = true
@@ -202,13 +206,13 @@ siteEgressLoader.load(
 'https://raw.githubusercontent.com/jojoghaida/AREA-OS_JSON/70a73598111b4631a829e5fd735fb8c4d2867c0d/egress.json',
 function ( geometry, materials ) {
  siteEgressGeo = geometry;
- var siteEgressMaterial = new THREE.MeshBasicMaterial({color: 0xFFEB00, wireframe: false, transparent: true, opacity: 1, side: THREE.DoubleSide});
+ var siteEgressMaterial = new THREE.MeshBasicMaterial({color: "white" /*0xFFEB00*/, wireframe: false, transparent: true, opacity: 1, side: THREE.DoubleSide});
  siteEgressMesh = new THREE.Mesh(geometry,siteEgressMaterial);
  thisSite.add(siteEgressMesh);
  var egressOutline = new THREE.Geometry();
  egressOutline.copy(siteEgressGeo);
  egressOutline.mergeVertices();
- thisSite.add(highlightEdges(egressOutline,.1,0xad9f00));
+ thisSite.add(highlightEdges(egressOutline,.1,"black"/*0xad9f00*/));
 }
 );
 
@@ -1284,9 +1288,6 @@ var openPlanGridImport = [
       null]
 
 ]
-
-
-
 
 // openPlanGridImport
 

@@ -92,8 +92,8 @@ function onWindowRotate() {
 
 
 function viewAnim(){
-  requestAnimationFrame(viewAnim);
   controls.update();
+  requestAnimationFrame(viewAnim);
 }
 
 controls.noZoom = true;
