@@ -473,6 +473,7 @@ setTimeout(mouseCasting,3000);
 var clickables = new THREE.Group();
 clickables.name = 'Clickables';
 function clickScope(_elementType = 'FurnitureSet'){
+  if(logAllFunctions == true){console.log("*clickScope()*");};
   var addToClick = [];
   for(i=0;i<scene.children.length;i++){
     if(scene.children[i].type == 'Group'){
@@ -488,6 +489,7 @@ function clickScope(_elementType = 'FurnitureSet'){
 }
 
 function paintObjects(paintChild,style){
+  if(logAllFunctions == true){console.log("*paintObjects()*");};
   if(paintChild.type == "LineSegments"){
     paintChild.material = style.line;
   }else{
@@ -496,20 +498,27 @@ function paintObjects(paintChild,style){
 }
 
 function stripPaint(element){
+  if(logAllFunctions == true){console.log("*stripPaint()*");};
   if(element.userData.typ == "FurnitureSet"){
     for(f=0;f<element.children.length;f++){
       stripFurniture(element.children[f]);
     }
   }else{stripFurniture(element)}
   function stripFurniture(furnitureElement){
-    console.log("furn elem",furnitureElement);
+    if(logAllFunctions == true){console.log("*stripFurniture()*");};
+    thisDefaultStyle = null;
+    for(z=0;z<furnitureStyles.length;z++){
+      if(furnitureElement.name == furnitureStyles[z].name){
+        thisDefaultStyle = furnitureStyles[z];
+        break;
+      }
+      if(z==furnitureStyles.length){console.log("Error: !Could not find default style!");}
+    }
     for(p=0;p<furnitureElement.children.length;p++){
       if(furnitureElement.children[p].type == "LineSegments"){
-        console.log(furnitureElement.children[p].material);
-        furnitureElement.children[p].material = furnitureElement.userData.defaultStyle.line;
-        console.log(furnitureElement.children[p].material);
+        furnitureElement.children[p].material = thisDefaultStyle.styles.line;
       }else{
-        furnitureElement.children[p].material = metaBasicChair.styles.mesh;//furnitureElement.userData.defaultStyle.mesh;
+        furnitureElement.children[p].material = thisDefaultStyle.styles.mesh;//furnitureElement.userData.defaultStyle.mesh;
       }
     }
   }
@@ -521,6 +530,7 @@ var userSelection = new THREE.Group();
 var selBool = 1;
 var selFadeBool = 1;
 function liveSelector(){
+  if(logAllFunctions == true){console.log("*liveSelector()*");};
   current = userSelectionMaterials.mesh.opacity;
   if(selFadeBool==0){
     userSelectionMaterials.mesh.opacity = Number((userSelectionMaterials.mesh.opacity+.01).toFixed(2));
@@ -540,15 +550,13 @@ function liveSelector(){
 liveSelector();
 
 function deselectType(type = "all"){
-  console.log(type);
+  if(logAllFunctions == true){console.log("*deselectType()*");};
   if(type!="all"){
     for(i=0;i<selected.children.length;i++){
-      console.log(i);
       if(selected.children[i].userData.glyphID == type){
         stripPaint(selected.children[i]);
         clickables.add(selected.children[i]);
         i--;
-        console.log(selected.children.length);
       }
     }
   }

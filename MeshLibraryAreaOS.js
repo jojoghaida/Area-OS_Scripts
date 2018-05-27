@@ -25,7 +25,7 @@ var loadFurnitureFamilies = function(){
       lines = highlightEdges(mesh.geometry,.1,style.styles.line.color);
       group.add(mesh,lines);
       group.userData = JSON.parse(JSON.stringify(style.metaData)); //need to clone metaData so as to store style object within element without causing circular paths.
-      group.userData.defaultStyle = style.styles;
+      // group.userData.defaultStyle = style.styles;
       loaderQue--;//
       if(loaderQue!=0){loadFurnitureFamilies();}else{
         setLoadedFurniture();

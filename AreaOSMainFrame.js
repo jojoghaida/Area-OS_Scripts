@@ -1,5 +1,5 @@
 //* Copyright (c) 2016 - 2018 joeghaida / http://joeghaida.com
-
+var logAllFunctions = true;
 
 // SQstuff
 function leaseIgnition(areaRequest){

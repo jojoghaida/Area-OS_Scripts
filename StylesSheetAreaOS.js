@@ -14,6 +14,7 @@ var occupiedMaterials = {
   line: new THREE.LineBasicMaterial({ color: "grey", linewidth: .1 }),
 }
 ////////////////////////////////////////////////////
+
 var metaBasicChair = {
   name: "Chair",
   styles: {
@@ -83,6 +84,8 @@ var metaConferenceTable = {
     glyphID: 'conferenceTableGlyphy',
   }
 }
+
+var furnitureStyles = [metaBasicChair,metaBasicDesk,metaBasicTable,metaWorkStool,metaConferenceTable];
 
 
 ////////////////////////////////////////////////////
