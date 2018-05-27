@@ -411,7 +411,9 @@ zoomButtons = function(){
 zoomButtons();
 
 //PRESSURE FUNCTIONS//////////////////////////////////////////////////////////////
-var selected = [];
+var selected = new THREE.Group();
+selected.name = 'Selected Elements'
+scene.add(selected);
 function mouseCasting(){
   console.log("ray live");
   selectorUI();
@@ -460,7 +462,7 @@ function mouseCasting(){
         paintObjects(thisSelection.children[i],userSelectionMaterials);
       }
     }
-    selected.push(thisSelection);
+    selected.add(thisSelection);
     renderer.render(scene,camera);
     loadSelectionDetails();
   }
@@ -469,7 +471,7 @@ function mouseCasting(){
 setTimeout(mouseCasting,3000);
 
 var clickables = new THREE.Group();
-clickables.name = 'clickables';
+clickables.name = 'Clickables';
 function clickScope(_elementType = 'FurnitureSet'){
   var addToClick = [];
   for(i=0;i<scene.children.length;i++){
@@ -491,6 +493,27 @@ function paintObjects(paintChild,style){
   }else{
     paintChild.material = style.mesh;
   }
+}
+
+function stripPaint(element){
+  if(element.userData.typ == "FurnitureSet"){
+    for(f=0;f<element.children.length;f++){
+      stripFurniture(element.children[f]);
+    }
+  }else{stripFurniture(element)}
+  function stripFurniture(furnitureElement){
+    console.log("furn elem",furnitureElement);
+    for(p=0;p<furnitureElement.children.length;p++){
+      if(furnitureElement.children[p].type == "LineSegments"){
+        console.log(furnitureElement.children[p].material);
+        furnitureElement.children[p].material = furnitureElement.userData.defaultStyle.line;
+        console.log(furnitureElement.children[p].material);
+      }else{
+        furnitureElement.children[p].material = metaBasicChair.styles.mesh;//furnitureElement.userData.defaultStyle.mesh;
+      }
+    }
+  }
+  renderer.render(scene,camera);
 }
 
 var userSelection = new THREE.Group();
@@ -515,3 +538,19 @@ function liveSelector(){
   }
 }
 liveSelector();
+
+function deselectType(type = "all"){
+  console.log(type);
+  if(type!="all"){
+    for(i=0;i<selected.children.length;i++){
+      console.log(i);
+      if(selected.children[i].userData.glyphID == type){
+        stripPaint(selected.children[i]);
+        clickables.add(selected.children[i]);
+        i--;
+        console.log(selected.children.length);
+      }
+    }
+  }
+  loadSelectionDetails();
+}

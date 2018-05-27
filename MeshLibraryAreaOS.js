@@ -24,7 +24,8 @@ var loadFurnitureFamilies = function(){
       mesh = new THREE.Mesh(geometry,style.styles.mesh);
       lines = highlightEdges(mesh.geometry,.1,style.styles.line.color);
       group.add(mesh,lines);
-      group.userData = style.metaData;
+      group.userData = JSON.parse(JSON.stringify(style.metaData)); //need to clone metaData so as to store style object within element without causing circular paths.
+      group.userData.defaultStyle = style.styles;
       loaderQue--;//
       if(loaderQue!=0){loadFurnitureFamilies();}else{
         setLoadedFurniture();
@@ -166,6 +167,7 @@ siteSlabLoader.load(
 
 var slabLight = new THREE.DirectionalLight( 0xffffff );
 slabLight.position.set( 0, 1, .5 ).normalize();
+slabLight.castShadow = true;
 scene.add(slabLight);
 
 var siteSlabPhongLoader = new THREE.JSONLoader();

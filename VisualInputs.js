@@ -242,21 +242,21 @@ function shrinkInput(){
 function loadSelectionDetails(){
   var selectionDisplay = [];
   var selectionDisplayNum = [];
-  for(i=0; i<selected.length; i++){
+  for(i=0; i<selected.children.length; i++){
     if(selectionDisplay.length != 0){
       for(x=0;x<selectionDisplay.length;x++){
-        if(selected[i].userData.glyphID == selectionDisplay[x]){
+        if(selected.children[i].userData.glyphID == selectionDisplay[x]){
           selectionDisplayNum[x]++;
           break;
         }
         if(x==selectionDisplay.length-1){
-          selectionDisplay.push(selected[i].userData.glyphID);
+          selectionDisplay.push(selected.children[i].userData.glyphID);
           selectionDisplayNum.push(1);
           break;
         }
       }
     }else{
-      selectionDisplay.push(selected[i].userData.glyphID);
+      selectionDisplay.push(selected.children[i].userData.glyphID);
       selectionDisplayNum.push(1);
     }
   }
@@ -269,17 +269,21 @@ function updateSelView(a,b){
   tray.innerHTML = "";
 
   for(i=0;i<a.length;i++){
+    console.log(a[i]);
     insert = document.getElementById(a[i]).src;
     tray.innerHTML += '<div class="selitemvis">' +
     '<img src="'+insert+'">' +
     '<div class="selitemnum">' + b[i] + '</div>' +
-    '<div class="selectorxbutton" onclick="alert()">X</div>' +
+    '<div class="selectorxbutton" onclick="deselectType('+"'"+a[i]+"'"+')">X</div>' +
     '</div>';
+    console.log(a[i]);
 
   }
-
-  glyph = a + ' Glyphy';
-  console.log(glyph);
+  if(a.length == 0){
+    console.log("clear");
+    tray.style.display = 'none';
+    selectorUI();
+  }
 }
 //https://uploads-ssl.webflow.com/590f8388928fad05e55a7727/5abda40f8c37ca45e8a4fce2_conferenceTable.svg
 
