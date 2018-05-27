@@ -1,3 +1,6 @@
+var logAllFunctions = true;
+
+
 //Area OS Styles Sheet
 var aOS_ColorStyles = {
   aOS_OSblue: "#0851a4",
