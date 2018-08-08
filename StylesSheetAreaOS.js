@@ -208,5 +208,5 @@ function loadSliderStyles(){
     function: 0,
   }
 }
-setTimeout(loadSliderStyles,4000);
+// setTimeout(loadSliderStyles,4000);
 //SLIDER OBJECTS

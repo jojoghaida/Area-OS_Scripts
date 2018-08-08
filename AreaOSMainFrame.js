@@ -53,9 +53,9 @@ if(areaSQ<requestedSQ){
 ///////////////////newcode
   var cursorBool = 1;
   var cursorFadeBool = 1;
-  var cursor = new THREE.PointLight(0x0092ff, 1, 10000);
+  var cursor = new THREE.PointLight("red" /*0x0092ff*/, 1, 1000000);
   lightLocation = stPt.clone();
-  lightLocation.y = 1;
+  lightLocation.y = .25;
   cursor.position.set(lightLocation.x,lightLocation.y,lightLocation.z);
   scene.add(cursor);
   renderer.render(scene,camera);

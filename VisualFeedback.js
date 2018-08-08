@@ -52,7 +52,7 @@ function menuHeaderBasic(){
   titleRight._renderer.elem.addEventListener('click', function(){
     shrinkInput();
     headerStandard();
-    sliderInput(basicChairSL);
+    // sliderInput(basicChairSL);
     pressureInput();
   });
   titleLeft._renderer.elem.addEventListener('click', function(){location.reload()});

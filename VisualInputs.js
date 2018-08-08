@@ -216,6 +216,14 @@ function removeInputListeners(){
   inputsTwoScene.removeEventListener('touchend', handleTouchEnd, false);
 }
 
+function saveCurrentInput(){
+
+}
+
+function loadLastInput(){
+  
+}
+
 function expandInput(){
   bottomInput.style.height = screen.height - feedbackTwoScene.offsetHeight + "px";
   twoJS.clear();
@@ -236,6 +244,7 @@ function expandInput(){
 
 function shrinkInput(){
   twoJS.clear();
+  twoJS.update();
   bottomInput.style.height = "100px";
 }
 

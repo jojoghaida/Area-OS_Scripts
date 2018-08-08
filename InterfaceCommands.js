@@ -40,7 +40,6 @@ scene = new THREE.Scene();
 scene.background = new THREE.Color(0xf0f0f0); //0x0851a4
 
 camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, -5000, 5000 );
-
 renderer = new THREE.WebGLRenderer({antialias:true, alpha: true, autoClear: false,});
 
 viewport.addEventListener('mousemove',enableOrbitCam);
