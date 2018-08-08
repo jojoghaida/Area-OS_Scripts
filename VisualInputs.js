@@ -15,6 +15,7 @@ var menu = document.getElementById('areaosmenu');
 
 
 function selectorUI(){
+  currentControls = selectorUI;
   console.log('selectorUI init');
   initMissive = twoJS.makeText('Select Items',sW*.5,sH*.5);
   initMissive.fill = 'red';
@@ -32,7 +33,8 @@ function selectorUI(){
 
 var selectorText = null;
 
-function sliderInput(thisSliderStyle){
+function sliderInput(thisSliderStyle){ //slider styles are currently listed in styleSheetAreaOS.js
+  currentControls = sliderInput;
   //if no scene return
   console.log(thisSliderStyle);
   twoJS.clear();
@@ -202,7 +204,6 @@ function submital(){
   editMainCrv = null; // temporary for testing; stops propogation
 }
 
-
 //touch gestures*
 function initInputTouchListeners(){
   inputsTwoScene.addEventListener('touchstart', handleTouchStart, false);
@@ -216,13 +217,8 @@ function removeInputListeners(){
   inputsTwoScene.removeEventListener('touchend', handleTouchEnd, false);
 }
 
-function saveCurrentInput(){
 
-}
-
-function loadLastInput(){
-  
-}
+var currentControls = null; //store current input function here so that it can refresh when menu is accessed
 
 function expandInput(){
   bottomInput.style.height = screen.height - feedbackTwoScene.offsetHeight + "px";
@@ -246,6 +242,7 @@ function shrinkInput(){
   twoJS.clear();
   twoJS.update();
   bottomInput.style.height = "100px";
+  currentControls();
 }
 
 function loadSelectionDetails(){
