@@ -45,4 +45,12 @@ Scripts for Area-OS
 #MeshLibrary 
  //--> What actually loads the building. 
 
+---------
+Sunday - Decemeber 9th 2018 
+ //1. make raw HTML, put ThreeJs scene with cube mesh inside.
+   --> Make cube change color dyynamically. 
+ //2. make twoJS canvas ontop of it, with navbar on bottom. 
+ //3. get orbit controls; implement orbit controls in twoJS to control the cube in threeJS. 
+ 
+
  
