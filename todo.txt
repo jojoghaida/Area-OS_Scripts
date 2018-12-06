@@ -29,4 +29,20 @@ Scripts for Area-OS
 #Geometry Commands 
   //--> Turns ThreeJS into Rhino; geometry functions. 
   //--> All self-written functions. Joe will add comments. 
+
+#StyleSheet 
+  //--> All styling, color schema. Like a material library. 
+  
+#Sprite 
+  //--> HUD 
+  //--> Canvas is rendeirng ontop of ThreeJs; clickEvents hit Canvas which in turn controls ThreeJs. We also have svg elements sitting on top of canvas. Ideally, we want to not have to deal with these layers - we want ThreeJs and TwoJS.  
+
+#VisualInputs 
+  //--> Bottom svg 
+#VisualFeedback
+  //--> Top svg. 
+
+#MeshLibrary 
+ //--> What actually loads the building. 
+
  
