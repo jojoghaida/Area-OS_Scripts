@@ -222,6 +222,7 @@ var currentControls = null; //store current input function here so that it can r
 
 function expandInput(){
   bottomInput.style.height = screen.height - feedbackTwoScene.offsetHeight + "px";
+  
   twoJS.clear();
   twoJS.update();
 
